@@ -56,7 +56,7 @@ h2{font-size:22px;margin:8px 0}
 .lk{display:flex;flex-wrap:wrap;background:var(--pn);border-radius:16px;overflow:hidden}.lk a{flex:1 1 220px;display:flex;gap:12px;align-items:center;padding:14px 16px;color:var(--tx);text-decoration:none;transition:background .2s}.lk a+a{border-left:1px solid #2a3150}.lk a:hover{background:var(--pn2)}.lk a div b{color:var(--c)}.lk span{font-size:30px}.lk small{display:block;color:var(--mu)}@media(max-width:520px){.lk a+a{border-left:0;border-top:1px solid #2a3150}}
 .pop{animation:pop .5s}@keyframes pop{40%{transform:scale(1.25)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-.sp{border-radius:16px;overflow:hidden;background:var(--pn);padding:8px}.sp iframe{display:block}
+
 #fsb{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;border:0;background:linear-gradient(145deg,#a3a9bf,#4b5068);color:#fff;font:800 24px 'Bricolage Grotesque',system-ui,sans-serif;cursor:pointer;z-index:20;box-shadow:0 6px 24px #000a;animation:fsp 2.4s infinite;transition:transform .2s}
 #fsb:hover{transform:scale(1.08)}
 @keyframes fsp{0%{box-shadow:0 0 0 0 #a78bfa99}70%,100%{box-shadow:0 0 0 16px #a78bfa00}}
@@ -102,8 +102,7 @@ h2{font-size:22px;margin:8px 0}
 <div class="sec">Lectures completed</div><div class="rings" id="rings"></div>
 <div class="sec">Badges</div><div class="bd" id="bd"></div>
 <div class="sec">Study media</div>
-<div class="sp"><iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/252aJTAVxntQYqduNmWR0Q?utm_source=generator&theme=0&si=0a418849f2574072" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
-<div class="sp" style="margin-top:10px"><div style="position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden"><iframe style="position:absolute;inset:0;width:100%;height:100%" src="https://www.youtube.com/embed/2k4wtb6_TAY?si=Hmf904LT7ntkWpiQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></div>
+<div class="lk"><a href="https://open.spotify.com/playlist/252aJTAVxntQYqduNmWR0Q" target="_blank" rel="noopener" style="--c:var(--B)"><span>🎧</span><div><b>Study playlist</b><small>Opens in Spotify</small></div></a><a href="https://www.youtube.com/watch?v=2k4wtb6_TAY" target="_blank" rel="noopener" style="--c:var(--C)"><span>▶️</span><div><b>Study video</b><small>Opens on YouTube</small></div></a></div>
 <p style="text-align:center;margin-top:24px"><button class="btn g" id="rs">Reset progress</button></p>
 </div><section id="dtutor" hidden><nav id="nav"></nav><div id="v"></div></section></div><div class="toast" id="ts"></div>
 <button id="fsb" aria-label="Chat with your future self">Y<i id="fsn"></i></button>
