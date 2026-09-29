@@ -126,6 +126,28 @@ html[data-theme=cafe] #dtutor,html[data-theme=minimal] #dtutor{box-shadow:0 1px 
 .sn input{width:100%;margin:3px 0 0}
 .amb input[type=range]{accent-color:var(--xp);cursor:pointer}
 .amb button:focus-visible,.amb input:focus-visible{outline:2px solid var(--xp);outline-offset:2px}
+
+/* ===== Calendar ===== */
+.cal{background:var(--pn);border-radius:18px;padding:12px 12px 10px}
+.calh{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.calh b{flex:1;text-align:center;font:800 18px 'Bricolage Grotesque',system-ui,sans-serif}
+.calh button{width:34px;height:34px;border-radius:50%;border:0;background:var(--pn2);color:var(--tx);font-size:18px;cursor:pointer;transition:transform .15s}
+.calh button:hover:not(:disabled){transform:scale(1.1)}.calh button:disabled{opacity:.3;cursor:default}
+.calg{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.calg>span{text-align:center;color:var(--mu);font-size:11px;font-weight:700;padding:2px 0}
+.cd{position:relative;aspect-ratio:1/1.05;min-height:44px;border:2px solid transparent;border-radius:11px;background:var(--pn2);color:var(--tx);font:inherit;cursor:pointer;padding:3px 2px 5px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;transition:transform .15s,border-color .2s}
+.cd b{font-size:14px;line-height:1.1}
+.cd:hover:not(:disabled){transform:translateY(-2px)}
+.cd:disabled{background:none;opacity:.28;cursor:default}
+.cd.sel{border-color:var(--xp)}.cd.now b{color:var(--S);text-decoration:underline}
+.cd.full{background:var(--fu)}.cd.full:after{content:"⭐";position:absolute;top:-5px;right:-3px;font-size:11px}
+.cd .pb{width:78%;height:4px;border-radius:3px;background:var(--ln2);overflow:hidden}.cd .pb i{display:block;height:100%;background:var(--xp)}
+.cd .tg{position:absolute;left:3px;top:3px;width:7px;height:7px;border-radius:50%}
+.calf{display:flex;flex-wrap:wrap;gap:6px 14px;margin:10px 2px 0;color:var(--mu);font-size:12px;align-items:center}
+.calf i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px}
+.cals{margin-top:10px;background:var(--pn2);border-radius:12px;padding:9px 12px;font-size:13px;line-height:1.45}
+.cals b{color:var(--tx)}.cals span{color:var(--mu)}
+@media(max-width:420px){.calg{gap:3px}.cd b{font-size:13px}}
 </style></head><body><div class="wrap">
 <div class="top"><div class="lvl" id="lvl"><span id="lv">1</span></div>
 <div class="grow"><h1 class="big" id="rank">Rookie</h1><div class="bar"><i id="xb" style="width:0"></i></div><small id="xt" style="color:var(--mu)"></small></div>
@@ -141,6 +163,10 @@ html[data-theme=cafe] #dtutor,html[data-theme=minimal] #dtutor{box-shadow:0 1px 
 
 <div class="days" id="days"></div>
 <h2 id="dh"></h2><div id="list"></div>
+<div class="sec">Calendar</div>
+<div class="cal" id="cal"><div class="calh"><button id="cprev" aria-label="Previous month">‹</button><b id="cttl"></b><button id="cnext" aria-label="Next month">›</button></div><div class="calg" id="cgrid"></div>
+<div class="calf"><span><i style="background:var(--xp)"></i>blocks done</span><span>⭐ perfect day</span><span><i style="background:var(--B)"></i>tutor 80%+</span><span><i style="background:var(--S)"></i>50%+</span><span><i style="background:var(--C)"></i>below 50%</span></div>
+<div class="cals" id="csum"></div></div>
 <div class="sec">Lectures completed</div><div class="rings" id="rings"></div>
 <div class="sec">Badges</div><div class="bd" id="bd"></div>
 <div class="sec">Study media</div>
@@ -740,6 +766,53 @@ if(SOUNDS.some(x=>S.s[x.id].on)){
   SOUNDS.forEach(x=>{if(S.s[x.id].on)play(x.id)})};
  ["pointerdown","keydown"].forEach(t=>addEventListener(t,go,true));
 }
+})();
+
+</script><script>
+/* Calendar: reads saved quest + tutor data; selecting a date reuses the existing day strip */
+(()=>{
+const g=id=>document.getElementById(id);
+const START=new Date(2026,8,30),N=47,DAY=864e5;
+const rd=k=>{try{return JSON.parse(localStorage.getItem(k)||"{}")||{}}catch(e){return{}}};
+const iso=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const idxOf=d=>Math.round((new Date(d.getFullYear(),d.getMonth(),d.getDate())-START)/DAY);
+const first=new Date(2026,8,1),last=new Date(2026,10,1); // Sep–Nov 2026
+const now=new Date(),today=idxOf(now);
+let view=new Date(now.getFullYear(),now.getMonth(),1);
+if(view<first)view=new Date(first);if(view>last)view=new Date(last);
+const per=16;
+const sel=()=>{const b=document.querySelector("#days .day.sel");return b?+b.dataset.i:0};
+function counts(){const done=rd("sq").done||{},c={};for(const k in done)if(done[k]){const i=k.split("-")[0];c[i]=(c[i]||0)+1}return c}
+let lastSel=null;
+function draw(){
+ const c=counts(),tut=rd("daily_tutor_v1").days||{},s=sel();
+ if(s!==lastSel){lastSel=s;const sd=new Date(2026,8,30+s);if(sd.getMonth()!==view.getMonth()||sd.getFullYear()!==view.getFullYear())view=new Date(sd.getFullYear(),sd.getMonth(),1)}
+ g("cttl").textContent=view.toLocaleDateString("en",{month:"long",year:"numeric"});
+ g("cprev").disabled=view<=first;g("cnext").disabled=view>=last;
+ const y=view.getFullYear(),m=view.getMonth(),lead=(new Date(y,m,1).getDay()+6)%7,dim=new Date(y,m+1,0).getDate();
+ let h=["M","T","W","T","F","S","S"].map(x=>`<span>${x}</span>`).join("");
+ for(let i=0;i<lead;i++)h+="<div></div>";
+ for(let d=1;d<=dim;d++){
+  const dt=new Date(y,m,d),i=idxOf(dt),ok=i>=0&&i<N,n=ok?c[i]||0:0,ev=(tut[iso(dt)]||{}).eval,pct=ev?ev.pct:null;
+  const tag=pct==null?"":`<u class="tg" style="background:var(--${pct>=80?"B":pct>=50?"S":"C"})" title="Tutor ${Math.round(pct)}%"></u>`;
+  h+=`<button class="cd${ok&&i===s?" sel":""}${ok&&n>=per?" full":""}${ok&&i===today?" now":""}" data-i="${i}" ${ok?"":"disabled"} aria-label="${dt.toDateString()}${ok?`, ${n} of ${per} blocks done`:""}">${tag}<b>${d}</b>${ok?`<span class="pb"><i style="width:${Math.min(100,n/per*100)}%"></i></span>`:"<span></span>"}</button>`;
+ }
+ g("cgrid").innerHTML=h;
+ summary(s,c,tut);
+}
+function summary(i,c,tut){
+ const dt=new Date(2026,8,30+i),n=c[i]||0,ev=(tut[iso(dt)]||{}).eval;let topics="";
+ try{if(typeof blocks==="function")topics=blocks(i).slice(0,3).map(b=>b.x).join(" · ")}catch(e){}
+ g("csum").innerHTML=`<b>${dt.toLocaleDateString("en",{weekday:"long",day:"numeric",month:"long"})}</b> <span>· Day ${i+1} of ${N}</span><br>${n}/${per} blocks done${ev?` · Tutor score <b>${Math.round(ev.pct)}%</b>`:""}${topics?`<br><span>${topics}</span>`:""}`;
+}
+g("cgrid").addEventListener("click",e=>{const b=e.target.closest(".cd");if(!b||b.disabled)return;
+ const t=document.querySelector(`#days .day[data-i="${b.dataset.i}"]`);if(t)t.click();
+ const dh=g("dh");if(dh)dh.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth",block:"start"})});
+g("cprev").onclick=()=>{view=new Date(view.getFullYear(),view.getMonth()-1,1);draw()};
+g("cnext").onclick=()=>{view=new Date(view.getFullYear(),view.getMonth()+1,1);draw()};
+new MutationObserver(()=>draw()).observe(g("days"),{childList:true,subtree:true});
+document.querySelector(".mode").addEventListener("click",()=>setTimeout(draw,50));
+draw();
 })();
 
 </script></body></html>
