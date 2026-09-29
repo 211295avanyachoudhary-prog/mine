@@ -422,17 +422,32 @@ function bare(text,c){const t=text.toLowerCase().trim();let m;
  if(c.id==="wake"&&(m=t.match(/^\D*(\d{1,2})(?::(\d{2}))?\s*(am|pm)?\D*$/))){let h=+m[1];if(m[3]==="pm"&&h<12)h+=12;return h*60+ +(m[2]||0)}
  if(["water","sleep","exercise"].includes(c.id)&&(m=t.match(/(\d+(?:\.\d+)?)/)))return+m[1];
  if(c.id.startsWith("sub:")||c.id==="am"||c.id==="pm"){if(/^(yes|yeah|yep)/.test(t))return 1;if(/^(no|nope)/.test(t))return 0;return statusOf(t)}}
-function smalltalk(t,day){const s=t.toLowerCase().trim(),v=a=>a[D.chat.length%a.length],
+const POOLS={
+ack:["Good. Get on with your day. I'll be here when you're ready to report.","Noted. Come back when you have something to report.","Right. Focus on the plan, and report to me tonight.","Understood. Do the work first; the report comes after.","Fine. Off you go. I'll be waiting.","Good. No need to report every minute. Just be honest when you do."],
+will:["Good. Then do it, and report it here once it's done.","I'll hold you to that. Report back when there's something to show.","Understood. Actions first, words after. I'll be here.","Alright. Don't tell me what you will do. Tell me what you did.","Fine. I'm not going anywhere. Come back with results."],
+miss1:["I didn't catch anything I can score there. Tell me something concrete: wake-up time, water, subjects, skincare, exercise or sleep.","That doesn't give me anything to score yet. What did you actually do today?","Give me a fact I can score. What time did you wake up, or which subject did you work on?","Nothing scoreable in that. Start small: one thing you actually finished today."],
+miss2:["Be specific. For example: “Woke at 5, drank 6 glasses, finished Physics.”","Numbers and results, please. “Slept 7 hours” or “finished Chemistry” both work.","I can only score what you report. Try one line: “Woke at 6, no exercise yet, Maths done.”","Try it in one sentence. What you did, not how it went."],
+tail:["Start with just one thing. Even “Woke at 6” gives me something to score.","One line is enough to begin. What time did you wake up today?","If nothing is done yet, say “later” and come back tonight. That's allowed.","The template above works as-is. Fill in the blanks and send.","I can wait, but I can't score silence. One real fact is all it takes."]};
+const NUDGE=new Set([...Object.values(POOLS).flat(),"__tmpl"]);
+const tmplText=()=>`Let's make this easy. Copy this, fill in what's true and send it:\n\nWoke at __ · Water __ glasses · ${D.cfg.subjects.map(x=>x+": done / partly / skipped").join(" · ")} · Skincare: morning / night / both · Exercise __ min · Slept __ hours\n\nNot ready yet? Say “later” and come back tonight.`;
+function pick(a){const rec=D.chat.filter(m=>m.r==="t").slice(-6).map(m=>m.text),f=a.filter(x=>!rec.includes(x));return(f.length?f:a)[Math.floor(Math.random()*(f.length||a.length))]}
+function stall(){let n=0;for(let i=D.chat.length-1;i>=0;i--){const m=D.chat[i];if(m.r==="u")continue;if(NUDGE.has(m.text)||m.text.startsWith("Let's make this easy. Copy this"))n++;else break}return n}
+function nudge(pool){const n=stall();
+ if(n<2)return pick(pool);
+ let shown=false;for(let i=D.chat.length-1;i>=0;i--){const m=D.chat[i];if(m.r==="u")continue;if(m.text.startsWith("Let's make this easy. Copy this")){shown=true;break}if(!NUDGE.has(m.text))break}
+ return shown?pick(POOLS.tail):tmplText()}
+function smalltalk(t,day){const s=t.toLowerCase().trim(),v=a=>nudge(a),
  pl=D.cfg.subjects.map(x=>{const p=day.plan.subjects[x];return p&&p.on?`${x}${p.task?": "+p.task:""}`:`${x}: not scheduled`}).join("\n")+(day.plan.rest?"\nExercise: rest day":"");
- if(/^(hi|hello|hey|yo|sup|good (morning|evening|afternoon))\b/.test(s))return`Hello. It's ${fdate(D.active)}. Report when you're ready, or ask me about today's plan.`;
+ if(/^(hi|hello|hey|yo|sup|good (morning|evening|afternoon))\b/.test(s))return pick([`Hello. It's ${fdate(D.active)}. Report when you're ready, or ask me about today's plan.`,`Back again. It's ${fdate(D.active)}. Anything to report yet?`,"Hello. Ready to report, or do you want to go over today's plan first?","Hi. Tell me what you've finished so far, or ask about the plan."]);
  if(/just started|not yet|not done|later|tonight|at night|will (report|tell|update)|\bwait\b|hold on|give me (some )?time|still (studying|working)/.test(s))return`Fair enough. Live your day first, then report honestly once it's done. Here's what is on your plan:\n${pl}`;
- if(/^(ok|okay|k|hmm+|alright|sure|fine|yes|yeah|yep|no|nope|thanks|thank you|ty|got it)\b[\s.!]*$/.test(s))return v(["Good. Get on with your day. I'll be here when you're ready to report.","Noted. Come back when you have something to report.","Right. Focus on the plan, and report to me tonight."]);
+ if(/^(ok|okay|k|hmm+|alright|sure|fine|yes|yeah|yep|no|nope|thanks|thank you|ty|got it)\b[\s.!]*$/.test(s))return v(POOLS.ack);
  if(/score|point|how (does|do)|explain|rule|calculat|why/.test(s))return"Every category is worth 10 points and is scored from what you actually report: your result divided by your target, times 10. Anything not scheduled is N/A and is left out of the total. Once a day is scored, use the “Why did I get this score?” button to see every calculation.";
  if(/plan|schedule|task|what (should|do)|next|today/.test(s))return`Today's plan:\n${pl}\n\nDo the work, then report honestly.`;
  if(/help|what can you|how (to|do i)/.test(s))return"Just tell me about your day in your own words: wake-up time, water, what you finished in each subject, skincare, exercise and sleep. You can report in parts. I'll ask only for what's missing.";
  if(/tired|exhaust|sad|stress|anxious|overwhelm|bad day|demotivat|lazy|can'?t/.test(s))return"That's understandable, and I'm not here to shame you. But I score what actually happened, so report it straight, rough day or not. If you're short on sleep, rest is part of the plan too.";
  if(/\?\s*$/.test(s))return"I'm your scoring tutor, so I can talk about your plan, your scores and how points work. For anything else, tell me what happened today.";
- return v(["I didn't catch anything I can score there. Tell me something concrete: wake-up time, water, subjects, skincare, exercise or sleep.","That doesn't give me anything to score yet. What did you actually do today?","Be specific. For example: “Woke at 5, drank 6 glasses, finished Physics.”"])}
+ if(/\b(i will|i'll|i shall|will do|will give|will send|will tell|going to|gonna|sir|ma'?am)\b/.test(s))return v(POOLS.will);
+ return stall()<1?v(POOLS.miss1):v(POOLS.miss2)}
 function onUser(text){
  D.chat.push({r:"u",text});save();paintChat();
  const d=parseDate(text);if(d)return setDay(d);
