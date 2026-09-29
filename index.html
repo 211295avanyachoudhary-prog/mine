@@ -150,6 +150,13 @@ html[data-theme=cafe] #dtutor,html[data-theme=minimal] #dtutor{box-shadow:0 1px 
 .cals{margin-top:10px;background:var(--pn2);border-radius:12px;padding:9px 12px;font-size:13px;line-height:1.45}
 .cals b{color:var(--tx)}.cals span{color:var(--mu)}
 @media(max-width:420px){.calg{gap:3px}.cd b{font-size:13px}}
+
+/* ===== Books & links ===== */
+.bkt{display:flex;gap:8px;margin:0 0 8px;overflow-x:auto;padding:2px}
+.bkt button{flex:1 0 auto;background:var(--pn);color:var(--mu);border:2px solid transparent;border-radius:14px;padding:9px 12px;font:inherit;font-weight:700;cursor:pointer;white-space:nowrap;transition:.2s}
+.bkt button:hover{color:var(--tx)}.bkt button.on{color:var(--tx);border-color:var(--c);background:var(--pn2)}
+#bkf{display:block;width:100%;height:min(720px,80vh);border:0;border-radius:12px;background:#fff}
+.bkc{margin:6px 4px 0;font-size:12px;color:var(--mu)}.bkc a{color:var(--xp)}
 </style></head><body><div class="wrap">
 <div class="top"><div class="lvl" id="lvl"><span id="lv">1</span></div>
 <div class="grow"><h1 class="big" id="rank">Rookie</h1><div class="bar"><i id="xb" style="width:0"></i></div><small id="xt" style="color:var(--mu)"></small></div>
@@ -174,6 +181,12 @@ html[data-theme=cafe] #dtutor,html[data-theme=minimal] #dtutor{box-shadow:0 1px 
 <div class="sec">Study media</div>
 <div class="sp"><iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/252aJTAVxntQYqduNmWR0Q?utm_source=generator&theme=0&si=0a418849f2574072" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></div>
 <div class="sp" style="margin-top:10px"><div style="position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden"><iframe style="position:absolute;inset:0;width:100%;height:100%" src="https://www.youtube.com/embed/2k4wtb6_TAY?si=Hmf904LT7ntkWpiQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></div>
+<div class="sec">Lectures &amp; motivation</div>
+<div class="lk"><a href="https://www.pw.live/study-v2/study" target="_blank" rel="noopener noreferrer" style="--c:var(--P)"><span>🎓</span><div><b>PW Study</b><small>Lectures · pw.live</small></div></a><a href="https://www.pw.live/study-v2/pi?source=nav_bar" target="_blank" rel="noopener noreferrer" style="--c:var(--B)"><span>🎥</span><div><b>PW Pi</b><small>Lectures · pw.live</small></div></a><a href="https://pin.it/6oKVtviPA" target="_blank" rel="noopener noreferrer" style="--c:var(--C)"><span>🔥</span><div><b>Exam motivation</b><small>Pinterest</small></div></a></div>
+<div class="sec">Books</div>
+<div class="bkt" id="bkt" role="tablist" aria-label="Books"></div>
+<div class="sp"><iframe id="bkf" title="Book viewer" width="100%" height="600" frameborder="0" scrolling="no" allowfullscreen loading="lazy"></iframe></div>
+<div class="bkc" id="bkc"></div>
 <p style="text-align:center;margin-top:24px"><button class="btn g" id="rs">Reset progress</button></p>
 </div><section id="dtutor" hidden><nav id="nav"></nav><div id="v"></div></section></div><div class="toast" id="ts"></div>
 <button id="fsb" aria-label="Chat with your future self">Y<i id="fsn"></i></button>
@@ -815,6 +828,29 @@ g("cnext").onclick=()=>{view=new Date(view.getFullYear(),view.getMonth()+1,1);dr
 new MutationObserver(()=>draw()).observe(g("days"),{childList:true,subtree:true});
 document.querySelector(".mode").addEventListener("click",()=>setTimeout(draw,50));
 draw();
+})();
+
+</script><script>
+/* Book viewer: one lazy Scribd iframe, switched by tab */
+(()=>{
+const g=id=>document.getElementById(id);
+const B=[
+ {id:"phy",n:"⚡ Physics",c:"var(--P)",t:"Arihant Physics PYQ 12th 2025-26, Part 01",d:"990555972",k:"key-SI5H7le96nPICLraLCjE",doc:"https://www.scribd.com/document/990555972/Arihant-Physics-PYQ-12th-2025-26-Part-01-3#from_embed",u:"lakshaybhadana03",uh:"https://www.scribd.com/user/767994170/lakshaybhadana03#from_embed"},
+ {id:"chem",n:"🧪 Chemistry",c:"var(--C)",t:"All in One – Chemistry Class 12",d:"696753681",k:"key-uY9MyY9yBGaGkfD9yuSe",doc:"https://www.scribd.com/document/696753681/All-in-One-Chemistry-Class-12#from_embed",u:"kumarameya10",uh:"https://www.scribd.com/user/715307873/kumarameya10#from_embed"},
+ {id:"eng",n:"📖 English",c:"var(--S)",t:"Arihant English All in One, Class 12",d:"695754450",k:"key-lOVzuH9mAJ9EBD5mTzdT",doc:"https://www.scribd.com/document/695754450/Arihant-English-All-in-One-Class-12-WWW-examSAKHA-in#from_embed",u:"namamichouhan18",uh:"https://www.scribd.com/user/709470323/namamichouhan18#from_embed"}
+];
+const src=b=>`https://www.scribd.com/embeds/${b.d}/content?start_page=1&view_mode=scroll&access_key=${b.k}`;
+let cur=0;try{const i=B.findIndex(b=>b.id===localStorage.getItem("sq_book"));if(i>=0)cur=i}catch(e){}
+const bar=g("bkt");
+bar.innerHTML=B.map((b,i)=>`<button role="tab" data-i="${i}" style="--c:${b.c}">${b.n}</button>`).join("");
+function show(){
+ const b=B[cur],f=g("bkf");
+ bar.querySelectorAll("button").forEach((x,i)=>{x.classList.toggle("on",i===cur);x.setAttribute("aria-selected",i===cur)});
+ if(f.dataset.b!==b.id){f.dataset.b=b.id;f.title=b.t;f.src=src(b)}
+ g("bkc").innerHTML=`${b.t} · <a href="${b.doc}" target="_blank" rel="noopener noreferrer">Open on Scribd ↗</a> · uploaded by <a href="${b.uh}" target="_blank" rel="noopener noreferrer">${b.u}</a>`;
+}
+bar.addEventListener("click",e=>{const x=e.target.closest("button");if(!x)return;cur=+x.dataset.i;try{localStorage.setItem("sq_book",B[cur].id)}catch(err){}show()});
+show();
 })();
 
 </script></body></html>
