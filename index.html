@@ -158,6 +158,53 @@ html[data-theme=cafe] #dtutor,html[data-theme=minimal] #dtutor{box-shadow:0 1px 
 #bkf{display:block;width:100%;height:min(720px,80vh);border:0;border-radius:12px;background:#fff}
 .bkc{margin:6px 4px 0;font-size:12px;color:var(--mu)}.bkc a{color:var(--xp)}
 
+
+/* ===== ✦ Aster ===== */
+@keyframes tw{0%,100%{box-shadow:0 0 14px 2px color-mix(in srgb,var(--xp) 55%,transparent)}50%{box-shadow:0 0 22px 6px color-mix(in srgb,var(--xp) 75%,transparent)}}
+#fsb,.fav{background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--xp) 70%,#fff),var(--xp) 45%,color-mix(in srgb,var(--xp) 40%,#000));color:var(--onx);animation:tw 3.2s ease-in-out infinite}
+#fsb{font-size:26px}.fav{font-size:18px}
+#at{display:flex;gap:4px;padding:6px 10px;background:var(--pn);border-bottom:1px solid var(--ln2)}
+#at button{flex:1;background:none;border:0;color:var(--mu);font:inherit;font-size:13px;font-weight:700;padding:7px;border-radius:10px;cursor:pointer}
+#at button.on{background:var(--pn2);color:var(--tx)}
+#ar,#am{flex:1;overflow-y:auto;padding:10px 12px;display:none}
+#fsp[data-v=r] #ar,#fsp[data-v=m] #am{display:block}
+#fsp[data-v=r] #fsm,#fsp[data-v=r] #fsc,#fsp[data-v=r] .fi,#fsp[data-v=m] #fsm,#fsp[data-v=m] #fsc,#fsp[data-v=m] .fi{display:none!important}
+#ar h4{margin:12px 0 6px;color:var(--mu);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+.ar{display:flex;align-items:center;gap:4px;background:var(--pn2);border-radius:12px;padding:8px 8px 8px 12px;margin-bottom:6px}
+.ar>div{flex:1;min-width:0}.ar b{display:block;font-size:14px;overflow-wrap:anywhere}.ar small{color:var(--mu);font-size:12px;display:block}
+.ar button{background:none;border:0;cursor:pointer;font-size:15px;padding:5px;border-radius:8px;color:var(--tx)}.ar button:hover{background:var(--ln2)}
+.mm b{font-weight:500;font-style:italic}.e{text-align:center;padding:20px 0}
+#am input{width:100%;background:var(--in);border:1px solid var(--ln2);border-radius:12px;color:var(--tx);padding:9px 12px;font-size:15px;margin-bottom:8px;outline:0}
+.anote{font-size:12px;color:var(--mu);display:flex;align-items:center;gap:8px}
+.ab{background:var(--xp);color:var(--onx);border:0;border-radius:10px;padding:6px 11px;font:inherit;font-size:13px;font-weight:700;cursor:pointer;margin-top:6px}
+.fm.cw{background:var(--pn2);border:1px solid var(--xp);align-self:flex-start;padding:8px 12px}.fm.cw+.fm{margin-top:-2px}
+.ac small{display:block;color:var(--xp);font-weight:700}.ac b{display:block;font-size:14px}
+.fi textarea{flex:1;min-width:0;background:var(--in);border:1px solid var(--ln2);border-radius:16px;color:var(--tx);padding:10px 14px;font-size:16px;outline:0;resize:none;max-height:96px;font-family:inherit;line-height:1.3}.fi textarea:focus{border-color:var(--xp)}.fi textarea::placeholder{color:var(--mu)}
+#an{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));right:12px;z-index:60;display:flex;flex-direction:column;gap:8px;width:min(340px,calc(100vw - 24px))}
+.aal{background:var(--pn);border:1px solid var(--xp);border-radius:16px;padding:12px 14px;box-shadow:0 8px 30px #0006;animation:fin .35s}
+.aal small{color:var(--xp);font-weight:700;display:block}.aal b{display:block;font-size:16px;margin:2px 0}.aal span{color:var(--mu);font-size:13px}
+.ar2,.sn{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.ar2 button,.sn button{background:var(--pn2);color:var(--tx);border:1px solid var(--ln2);border-radius:10px;padding:6px 10px;font:inherit;font-size:13px;cursor:pointer}
+.ar2 button:first-child{background:var(--xp);color:var(--onx);border-color:var(--xp);font-weight:700}.sn[hidden]{display:none}
+#adash{background:var(--pn);border-radius:18px;padding:12px 14px}.ash{display:flex;justify-content:space-between;align-items:center}.ash .ab{margin:0}
+.adc{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:6px}.adc small{color:var(--mu);font-weight:700}.adc p,#adash>p{margin:3px 0;font-size:14px}
+.cd.ev:before{content:"";position:absolute;right:4px;top:4px;width:7px;height:7px;border-radius:2px;background:var(--xp)}
+
+/* ===== Study stopwatch & timer ===== */
+.stm{background:var(--pn);border-radius:18px;padding:14px;text-align:center}
+.stt{display:inline-flex;gap:4px;background:var(--pn2);border-radius:14px;padding:4px}
+.stt button{background:none;border:0;color:var(--mu);font:inherit;font-weight:700;padding:7px 16px;border-radius:11px;cursor:pointer;transition:.2s}
+.stt button.on{background:var(--xp);color:var(--onx)}
+.std{font:800 clamp(44px,12vw,64px)/1.1 'Bricolage Grotesque',system-ui,sans-serif;font-variant-numeric:tabular-nums;margin:12px 0 6px;transition:color .3s}
+.std small{font-size:.4em;color:var(--mu)}.stm.run .std{color:var(--xp)}.stm.fin .std{animation:tw 1s ease-in-out infinite;color:var(--S)}
+.stb{height:5px;border-radius:3px;background:var(--ln2);overflow:hidden;margin:0 auto 12px;max-width:320px}.stb i{display:block;height:100%;width:0;background:var(--xp);transition:width .3s linear}
+.stpre{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.stpre button,.tb{background:var(--pn2);color:var(--tx);border:2px solid transparent;border-radius:12px;padding:8px 14px;font:inherit;font-weight:700;cursor:pointer;transition:.2s}
+.stpre button.on{border-color:var(--xp)}.stpre button:disabled,.tb:disabled{opacity:.4;cursor:default}
+.stpre input{width:74px;background:var(--in);border:1px solid var(--ln2);border-radius:12px;color:var(--tx);padding:8px;font:inherit;text-align:center;outline:0}
+.sta{display:flex;gap:8px;justify-content:center}.tb{min-width:88px}.tb.p{background:var(--xp);color:var(--onx)}
+.stl{list-style:none;padding:0;margin:12px auto 0;max-width:320px;text-align:left;font-variant-numeric:tabular-nums;font-size:14px}
+.stl li{display:flex;justify-content:space-between;padding:5px 10px;border-top:1px solid var(--ln2)}.stl li span:first-child{color:var(--mu)}
+.stn{margin-top:10px;color:var(--mu);font-size:13px}.stm[data-m=sw] .stpre,.stm[data-m=sw] .stbw,.stm[data-m=sw] .stb{display:none}.stm[data-m=tm] .stl,.stm[data-m=tm] #tsl{display:none}
 </style></head><body><div class="wrap">
 <div class="top"><div class="lvl" id="lvl"><span id="lv">1</span></div>
 <div class="grow"><h1 class="big" id="rank">Rookie</h1><div class="bar"><i id="xb" style="width:0"></i></div><small id="xt" style="color:var(--mu)"></small></div>
@@ -173,6 +220,13 @@ html[data-theme=cafe] #dtutor,html[data-theme=minimal] #dtutor{box-shadow:0 1px 
 
 <div class="days" id="days"></div>
 <h2 id="dh"></h2><div id="list"></div>
+<div class="sec">Study timer</div>
+<div class="stm" id="stm"><div class="stt" role="tablist" aria-label="Timer mode"><button data-m="sw">⏱ Stopwatch</button><button data-m="tm">⏳ Timer</button></div>
+<div class="std" id="std" role="timer">00:00</div><div class="stb" id="stbw"><i id="stp"></i></div>
+<div class="stpre" id="stpre"><button data-p="15">15</button><button data-p="25">25</button><button data-p="45">45</button><button data-p="60">60</button><input id="stc" type="number" min="1" max="600" placeholder="min" aria-label="Custom minutes"><button id="stcs">Set</button></div>
+<div class="sta"><button class="tb p" id="tsa">Start</button><button class="tb" id="tsl">Lap</button><button class="tb" id="tsr">Reset</button></div>
+<ol class="stl" id="stl"></ol><div class="stn" id="stn"></div></div>
+<div class="sec">Aster</div><div id="adash"></div>
 <div class="sec">Calendar</div>
 <div class="cal" id="cal"><div class="calh"><button id="cprev" aria-label="Previous month">‹</button><b id="cttl"></b><button id="cnext" aria-label="Next month">›</button></div><div class="calg" id="cgrid"></div>
 <div class="calf"><span><i style="background:var(--xp)"></i>blocks done</span><span>⭐ perfect day</span><span><i style="background:var(--B)"></i>tutor 80%+</span><span><i style="background:var(--S)"></i>50%+</span><span><i style="background:var(--C)"></i>below 50%</span></div>
@@ -190,10 +244,11 @@ html[data-theme=cafe] #dtutor,html[data-theme=minimal] #dtutor{box-shadow:0 1px 
 <div class="bkc" id="bkc"></div>
 <p style="text-align:center;margin-top:24px"><button class="btn g" id="rs">Reset progress</button></p>
 </div><section id="dtutor" hidden><nav id="nav"></nav><div id="v"></div></section></div><div class="toast" id="ts"></div>
-<button id="fsb" aria-label="Chat with your future self">Y<i id="fsn"></i></button>
-<div id="fsp" role="dialog" aria-label="Future Self chat"><div class="fh"><div class="fav">Y</div><div><b>Your Future Self</b><small>● waiting at the top</small></div><button id="fcl">Clear</button><button id="fx" aria-label="Close">✕</button></div>
+<button id="fsb" aria-label="Open Aster">✦<i id="fsn"></i></button><div id="an" aria-live="polite"></div>
+<div id="fsp" data-v="c" role="dialog" aria-label="Aster"><div class="fh"><div class="fav">✦</div><div><b>✦ Aster</b><small>● Here whenever you need me</small></div><button id="fcl" title="Clear chat only">Clear chat</button><button id="fx" aria-label="Close">✕</button></div>
+<div id="at"><button class="on" data-v="c">Chat</button><button data-v="r">Reminders</button><button data-v="m">Memories</button></div><div id="ar"></div><div id="am"></div>
 <div id="fsm"></div><div id="fsc"></div>
-<div class="fi"><input id="fin" placeholder="Text your future self..." autocomplete="off"><button id="fse" aria-label="Send">➤</button></div></div>
+<div class="fi"><textarea id="fin" rows="1" placeholder="Talk to Aster..." autocomplete="off"></textarea><button id="fse" aria-label="Send">➤</button></div></div>
 <script>
 // P|C|B|X per day. X prefixed "P "/"C " = subject of extra lecture.
 const D=`EMI L1|Coordination L1|Molecular L1|P EMI L2
@@ -310,62 +365,162 @@ $("cdate").textContent=n.toLocaleDateString("en",{weekday:"short",day:"numeric",
 tick();setInterval(tick,1000);
 const s0=render();say(tutor(s0));
 </script><script>
+/* ✦ Aster: companion chat, reminders, events, memories (localStorage, modular store) */
 (function(){
-const F=["Why are you wasting time? You said you'd change.","Get up. Nobody's coming to save you.","I'm waiting at the top. You coming or not?","This isn't who we wanted to be.","You said you'd never go back to this.","This version of you is temporary. Act like it.","I believed in you. Don't make me regret it."];
-const SAFE="Hey, stepping out of the tough-love act for a second. That sounds really heavy, and you deserve real support right now, not a pep talk. Please talk to someone you trust today, or call Tele-MANAS at 14416 (free, 24/7 in India). You matter more than any exam.";
-const R=[
-[/kill myself|suicid|end my life|want to die|self.?harm|hurt myself|don'?t want to live/i,"safe"],
-[/fail|flunk|bad (score|mark|test|mock|result)|low (score|mark)|fell behind|falling behind|behind|gave up|give up|quit|messed|screwed|ruined|backlog|missed/i,2,["I'm waiting at the top. You coming or not?","progress, not perfection.","trust the process."]],
-[/phone|insta|reel|youtube|scroll|social media|netflix|gaming|game|shorts|whatsapp|snap/i,null,["cut off what drains you.","focus on yourself.","discipline over motivation."]],
-[/sleep|slept|nap\b|insomnia|awake|late night|wake up/i,null,["fix your sleep.","protect your peace.","discipline over motivation."]],
-[/procrastinat|wast(e|ing)|don'?t (want|feel like)|not (studying|in the mood)|can'?t (focus|study|concentrate)|distract|lazy|skip/i,0,["work harder.","discipline over motivation.","focus on yourself."]],
-[/back to (old|my|bad)|old habits?|same mistake|relapse|keep repeating|again and again/i,4,["discipline over motivation.","cut off what drains you."]],
-[/motivat|tired|exhaust|no energy|drained|sleepy|bored|don'?t care|can'?t be bothered/i,1,["discipline over motivation.","romanticize your life.","get your mind right."]],
-[/stuck|no progress|not improving|nothing (changes|works)|same person/i,5,["progress, not perfection.","trust the process."]],
-[/hate myself|useless|worthless|stupid|loser|ashamed|disappoint/i,null,["get your mind right.","progress, not perfection.","make yourself proud.","accept the past."]],
-[/overthink|anxious|anxiety|stress|scared|worr|pressure|panic|nervous|afraid/i,null,["stop overthinking.","protect your peace.","get your mind right.","trust the process."]],
-[/past|regret|used to|last year|old me|mistakes?\b/i,null,["accept the past.","progress, not perfection.","romanticize your life."]],
-[/friend|people|relationship|\bex\b|crush|breakup|gossip|fight|drama|toxic|circle|talk(ing)? (too )?much|vent/i,null,["don't chase people.","avoid drama.","fix your circle.","talk less.","protect your peace.","cut off what drains you."]],
-[/\beat\b|ate\b|food|hungry|junk|diet|skipp(ed|ing) (meal|lunch|breakfast)|water/i,null,["eat well.","fix your sleep.","romanticize your life."]],
-[/compar|others|everyone else|topper|better than me|classmates/i,null,["focus on yourself.","do it for you.","progress, not perfection."]],
-[/can'?t|impossible|won'?t (make|crack|get)|will i|not good enough|doubt|too (late|much|hard)|difficult|hard\b/i,6,["trust the process.","the glow up is coming.","do it for you."]],
-[/goal|neet|rank|dream|future|doctor|aim|why\b/i,null,["be obsessed with your goals.","make yourself proud.","do it for you.","become that girl.","the glow up is coming."]],
-[/studied|finished|completed|\bdone\b|did it|solved|scored|topped|nailed|revised|cleared|good day/i,null,["make yourself proud.","progress, not perfection.","discipline over motivation.","work harder."]],
-[/what (should|do i)|what now|next|plan|schedule|today|help|start/i,"plan"],
-[/^(hi|hey|hello|yo|sup|hii+)\b/i,null,["I've been waiting. What are you avoiding today?","You showed up. Good. What's the plan?"]],
-[/thank|thanks|\bty\b|love you/i,null,["Don't thank me. Go do it.","do it for you."]]
-];
-const FALL=["focus on yourself.","discipline over motivation.","do it for you.","stop overthinking.","work harder.","get your mind right.","progress, not perfection.","protect your peace.","be obsessed with your goals."];
-const $=id=>document.getElementById(id);
-let st={m:[],used:[]},open=false,unread=0,q=Promise.resolve();
-try{st=Object.assign(st,JSON.parse(localStorage.getItem("sqchat")||"{}"))}catch(e){}
-const save=()=>{try{st.m=st.m.slice(-60);localStorage.setItem("sqchat",JSON.stringify(st))}catch(e){}};
-const wait=ms=>new Promise(r=>setTimeout(r,ms));
-function bub(t,f){const d=document.createElement("div");d.className="fm "+(f?"f":"u");d.textContent=t;$("fsm").appendChild(d);$("fsm").scrollTop=1e9;return d}
-function pick(list){const u=list.filter(x=>!st.used.includes(x));const c=u.length?u:list;const p=u.length?u[0]:c[Math.floor(Math.random()*c.length)];st.used.push(p);return p}
-function ladder(pref){let best=-1;F.forEach((x,i)=>{if(!st.used.includes(x)&&(best<0||(i>=pref&&best<pref)||(i>=pref&&i<best)))best=i});
-if(best<0)return null;st.used.push(F[best]);return F[best]}
-function answer(t){for(const r of R){if(!r[0].test(t))continue;
-if(r[1]==="safe")return SAFE;
-if(r[1]==="plan"){try{const n=blocks(S.sel).find(b=>!S.done[b.id]);return n?`Next up: ${n.x} (${n.t}). Go. Now.`:"Everything's cleared for today. Now fix your sleep."}catch(e){return "focus on yourself."}}
-if(typeof r[1]==="number"){const l=ladder(r[1]);if(l)return l}
-return pick(r[2])}
-return pick(FALL)}
-async function reply(t){const ty=document.createElement("div");ty.className="fm f ty";ty.innerHTML="<s></s><s></s><s></s>";$("fsm").appendChild(ty);$("fsm").scrollTop=1e9;
-const a=answer(t);await wait(600+Math.min(1400,a.length*22));ty.remove();bub(a,1);st.m.push({f:1,t:a});save();
-if(!open){unread++;$("fsn").textContent=unread;$("fsn").style.display="block"}}
-function send(t){t=(t||$("fin").value).trim();if(!t)return;$("fin").value="";$("fsc").style.display="none";bub(t,0);st.m.push({f:0,t});save();q=q.then(()=>reply(t))}
-function draw(){$("fsm").innerHTML="";st.m.forEach(x=>bub(x.t,x.f))}
-function toggle(v){open=v;$("fsp").classList.toggle("open",v);if(v){unread=0;$("fsn").style.display="none";$("fsm").scrollTop=1e9;if(innerWidth>700)setTimeout(()=>$("fin").focus(),300)}}
+const $=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const K={r:"aster_reminders",e:"aster_events",m:"aster_memories",c:"aster_chat",x:"aster_meta"};
+const db={get(k,d){try{return JSON.parse(localStorage.getItem(K[k]))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(K[k],JSON.stringify(v))}catch(e){}}};
+let R=db.get("r",[]),E=db.get("e",[]),M=db.get("m",[]),C=db.get("c",[]),X=Object.assign({asked:0,pend:null},db.get("x",{}));
+const sv=()=>{db.set("r",R);db.set("e",E);db.set("m",M);db.set("c",C.slice(-60));db.set("x",X);dispatchEvent(new Event("aster-sync"))};
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const WD=["sunday","monday","tuesday","wednesday","thursday","friday","saturday"],MO="jan feb mar apr may jun jul aug sep oct nov dec".split(" ");
+const MS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],p2=n=>String(n).padStart(2,"0");
+const d0=d=>new Date(d.getFullYear(),d.getMonth(),d.getDate()),addD=(d,k)=>new Date(d.getFullYear(),d.getMonth(),d.getDate()+k);
+const iso=d=>d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate());
+const fT=d=>{const h=d.getHours();return(h%12||12)+":"+p2(d.getMinutes())+" "+(h<12?"AM":"PM")};
+const fD=d=>{const t=d0(new Date()),k=Math.round((d0(d)-t)/864e5);return k==0?"Today":k==1?"Tomorrow":k==-1?"Yesterday":WD[d.getDay()].slice(0,3).replace(/^./,c=>c.toUpperCase())+", "+d.getDate()+" "+MS[d.getMonth()]+(d.getFullYear()!=t.getFullYear()?" "+d.getFullYear():"")};
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1),tc=s=>s.replace(/\b[a-z]/g,c=>c.toUpperCase());
+/* ---- natural-language parsing ---- */
+const PER={morning:[8,0],noon:[12,0],afternoon:[15,0],evening:[18,0],tonight:[20,0],night:[21,0],midnight:[0,0]};
+function pTime(s){let m=s.match(/\b(?:at\s+)?(\d{1,2})(?::(\d{2}))?\s*([ap])\.?m\.?(?![a-z])/i);
+ if(m){let h=+m[1]%12;if(m[3].toLowerCase()=="p")h+=12;return{h,m:+(m[2]||0),rx:m[0]}}
+ m=s.match(/\b(?:at\s+)?(\d{1,2}):(\d{2})\b/)||s.match(/\bat\s+(\d{1,2})()\b/i);
+ if(m){let h=+m[1];if(h<13&&!/:/.test(m[0])&&h<7)h+=12;return{h,m:+(m[2]||0),rx:m[0]}}
+ m=s.match(/\b(?:at\s+)?(noon|midnight)\b/i);if(m)return{h:PER[m[1].toLowerCase()][0],m:0,rx:m[0]};
+ return null}
+function pPer(s){const m=s.match(/\b(tonight|this evening|evening|this morning|morning|afternoon|night)\b/i);if(!m)return null;const k=m[1].toLowerCase().replace("this ","");return{h:PER[k][0],m:0,rx:m[0],guess:1}}
+function pRec(s){let m;
+ if(m=s.match(/\bevery\s+weekday\b/i))return[{k:"wd"},m[0]];
+ if(m=s.match(/\bevery\s+(sun|mon|tue|wed|thu|fri|sat)[a-z]*/i))return[{k:"w",w:WD.findIndex(x=>x.startsWith(m[1].toLowerCase()))},m[0]];
+ if(m=s.match(/\bevery\s+(?:day|night|morning|evening|afternoon)\b|\bdaily\b/i))return[{k:"d"},m[0]];
+ if(m=s.match(/\bevery\s+week\b|\bweekly\b/i))return[{k:"w",w:null},m[0]];return null}
+function pDate(s,n){const t=d0(n);let m;
+ if(m=s.match(/\bday after tomorrow\b/i))return[addD(t,2),m[0]];
+ if(m=s.match(/\b(tomorrow|tmrw)\b/i))return[addD(t,1),m[0]];
+ if(m=s.match(/\b(today|tonight|this (?:morning|afternoon|evening))\b/i))return[t,m[0]];
+ const mo="(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\\.?";
+ let a=s.match(new RegExp("\\b(\\d{1,2})(?:st|nd|rd|th)?\\s+(?:of\\s+)?"+mo+"(?:,?\\s*(\\d{4}))?","i")),d,mi,y;
+ if(a){d=+a[1];mi=MO.indexOf(a[2].toLowerCase());y=a[3];m=a}else if(a=s.match(new RegExp("\\b"+mo+"\\s+(\\d{1,2})(?:st|nd|rd|th)?(?:,?\\s*(\\d{4}))?","i"))){d=+a[3];mi=MO.indexOf(a[1].toLowerCase());y=a[4];m=a}
+ else if(a=s.match(/\b(\d{1,2})[\/\-](\d{1,2})(?:[\/\-](\d{2,4}))?\b/)){d=+a[1];mi=+a[2]-1;y=a[3];m=a}
+ if(m&&d>=1&&d<=31&&mi>=0&&mi<12){let Y=y?(+y<100?2000+ +y:+y):t.getFullYear(),r=new Date(Y,mi,d);if(!y&&r<t)r=new Date(Y+1,mi,d);return[r,m[0]]}
+ if(m=s.match(/\b(next\s+)?(sun|mon|tue|wed|thu|fri|sat)[a-z]*\b/i)){const w=WD.findIndex(x=>x.startsWith(m[2].toLowerCase()));let k=(w-t.getDay()+7)%7||7;if(m[1]&&k<((8-t.getDay())%7||7))k+=7;return[addD(t,k),m[0]]}
+ return null}
+function nextRec(r,from){const f=new Date(from);for(let i=0;i<9;i++){const c=new Date(f.getFullYear(),f.getMonth(),f.getDate()+i,r.h,r.m);const w=c.getDay();
+ if(c>f&&(r.k=="d"||(r.k=="wd"&&w>0&&w<6)||(r.k=="w"&&w==r.w)))return+c}return+f+864e5}
+const recTxt=r=>(r.k=="d"?"every day":r.k=="wd"?"every weekday":"every "+cap(WD[r.w]))+" at "+fT(new Date(2000,0,1,r.h,r.m));
+/* ---- creators ---- */
+const dueOf=r=>r.rec?Math.min(r.snooze||1e18,r.at):(r.snooze||r.at);
+function clean(s,rx){rx.forEach(x=>{if(x)s=s.replace(x,"")});return s.replace(/\s+/g," ").replace(/^[\s,.:;-]*(?:please\s+)?(?:remind me|to|that|about|,)?\s*(?:to|that|about)?\s+/i,"").replace(/\b(?:at|on|by|in|for|to|every|and)\s*[.!?]*$/i,"").replace(/[\s,.!?]+$/,"").trim()}
+function mkRem(title,when,rec,meta){const r={id:uid(),title:cap(title),description:"",at:when,rec:rec||null,done:0,trig:0,created:Date.now(),snooze:0};R.push(r);sv();return r}
+function askNotif(){if(X.asked||!window.Notification||Notification.permission!="default")return;X.asked=1;sv();say("Want desktop notifications for your reminders?",`<button class="ab" data-a="notif">Enable Notifications</button>`)}
+function remind(s,now,pend){let rec=pRec(s),txt=s,rx=[];if(rec)rx.push(rec[1]);
+ const inn=s.match(/\bin\s+(\d+|an?|half an?)\s*(min(?:ute)?s?|hours?|hrs?|h)\b/i);
+ let tm=pTime(txt.replace(rec?rec[1]:"","")),dt=pDate(txt.replace(rec?rec[1]:"",""),now),per=!tm&&pPer(txt);
+ if(pend){tm=tm||pend.tm;dt=dt||pend.dt;rec=rec||(pend.rec&&[pend.rec,""]);if(!pend.title&&!rx.length){}}
+ let title=pend&&pend.title||"";
+ if(!pend){rx.push(tm&&tm.rx,dt&&dt[1],per&&per.rx,inn&&inn[0]);title=clean(s,rx)}
+ if(!title){X.pend={t:"rem",title:"",tm,dt,rec:rec&&rec[0]};sv();return say("Sure! What should I remind you about?")}
+ let when;
+ if(inn){const q=inn[1].startsWith("h")?.5:/^an?$/.test(inn[1])?1:+inn[1],mult=/^h/i.test(inn[2])?60:1;when=+now+q*mult*6e4}
+ else{const T=tm||per;
+  if(!T){X.pend={t:"rem",title,tm:null,dt,rec:rec&&rec[0]};sv();return say(`Sure! What time should I remind you${dt&&!rec?(/^(Today|Tomorrow)$/.test(fD(dt[0]))?" "+fD(dt[0]).toLowerCase():" on "+fD(dt[0])):""}?`)}
+  if(rec){const r=Object.assign({},rec[0],{h:T.h,m:T.m});if(r.k=="w"&&r.w==null)r.w=(dt?dt[0]:now).getDay();const at=nextRec(r,now);const o=mkRem(title,at,r);X.pend=null;sv();askNotif0(o);
+   return say(`Got it! I'll remind you ${recTxt(r)} to ${title.charAt(0).toLowerCase()+title.slice(1)}.`,card("🔁",(r.k=="d"?"Daily":r.k=="wd"?"Weekday":"Weekly")+" recurring reminder",fT(new Date(2000,0,1,r.h,r.m))+" — "+cap(title)+" ("+recTxt(r).replace(/ at .*/,"")+")"))}
+  let day=dt?dt[0]:d0(now);let w=new Date(day.getFullYear(),day.getMonth(),day.getDate(),T.h,T.m);if(!dt&&w<=now)w=addD(w,1);when=+w}
+ if(when<=+now){X.pend=null;sv();return say("That time has already passed. When should I remind you instead?")}
+ const o=mkRem(title,when);X.pend=null;sv();const w=new Date(when);
+ say(`Got it! I'll remind you at ${fT(w)}${fD(w)=="Today"?"":" "+fD(w).toLowerCase().replace(/^./,c=>c)}.`+(per&&per.guess?` (I picked ${fT(w)} for "${per.rx}". Tell me if you'd like another time.)`:""),card("🔔","Reminder created",`${fD(w)} — ${fT(w)}<br>${esc(o.title)}`),1);askNotif0(o)}
+const askNotif0=()=>setTimeout(askNotif,600);
+const card=(i,t,b)=>`<div class="ac"><small>${i} ${t}</small><b>${b}</b></div>`;
+const EVC=[[/birthday|b'?day/i,"Birthday"],[/holiday|closed|off day|vacation|no school|no class/i,"Holiday"],[/diwali|holi\b|eid|christmas|navratri|dussehra|pongal|onam|festival|raksha|ganesh/i,"Festival"],[/exam|test|quiz|mock|paper/i,"Exam"]];
+function mkEvt(text,d,tm,cat,rx){(rx||[]).forEach(x=>{if(x)text=text.replace(x,"")});text=text.replace(/\b(?:this|that|the)\s+date\b/i,"");let t=text.replace(/^\s*(?:remember\s+(?:that\s+)?|this is important[:,]?\s*)/i,"").replace(/\b(?:i|we) (?:have|got|will have)\s+(?:an?\s+)?/i,"").replace(/^my\s+/i,"").replace(/(?:\s*\b(?:is|are|will be|falls|on|at|by|next|this)\b)+\s*[.!?]*$/i,"").replace(/[\s.!?,]+$/,"").trim();
+ if(!t)t=cat||"Event";t=tc(t);const c=cat||(EVC.find(x=>x[0].test(text))||[0,"Event"])[1];
+ const e={id:uid(),title:t,description:"",date:iso(d),time:tm?p2(tm.h)+":"+p2(tm.m):"",category:c,location:"",createdAt:Date.now()};E.push(e);sv();
+ const ic={Birthday:"🎂",Holiday:"🎉",Festival:"🪔",Exam:"📅"}[c]||"📅",dd=d.getDate()+" "+MS[d.getMonth()];
+ say((c=="Holiday"||c=="Festival"||c=="Birthday"?"Saved! ":"Noted. ")+`That's ${fD(d)=="Today"||fD(d)=="Tomorrow"?fD(d).toLowerCase():cap(WD[d.getDay()])+", "+dd}.`,card(ic,(c=="Exam"||c=="Event"?"Event":c)+" saved",esc(t)+" — "+dd+(tm?" · "+fT(new Date(2000,0,1,tm.h,tm.m)):"")),1)}
+function remember(s,now){let t=s.replace(/^\s*(?:please\s+)?(?:remember\s+(?:that\s+)?|this is important[:,]?\s*)/i,"").trim();
+ if(!t)return say("Sure. What should I remember?");
+ const dt=pDate(t,now),tm=pTime(t);if(dt&&!/\b(?:prefer|like|love|hate)\b/i.test(t)){return mkEvt(s,dt[0],tm,/^this is important/i.test(s)?"Important":null,[dt[1],tm&&tm.rx])}
+ const cat=/\b(prefer|like|love|enjoy|better|hate)\b/i.test(t)?(/study|studying/i.test(t)?"Study Preference":"Preference"):/important|due|deadline|exam|test|project/i.test(s)?"Important":"Note";
+ const tags=(t.toLowerCase().match(/\b(chemistry|physics|biology|study|studying|morning|night|music|exam|test|project|notes?|notebook|bag|school)\b/g)||[]).filter((x,i,a)=>a.indexOf(x)==i);
+ M.push({id:uid(),content:cap(t.replace(/[.!]*$/,"."))  ,category:cat,tags,createdAt:Date.now()});sv();say("I'll remember that. ⭐",card("🧠","Memory saved",esc(cap(t)).slice(0,120)),1)}
+/* ---- conversation ---- */
+const SAFE="Hey, I'm setting everything else aside for a second. That sounds really heavy, and you deserve real support right now. Please talk to someone you trust today, or call Tele-MANAS at 14416 (free, 24/7 in India). You matter more than any exam.";
+const pickR=l=>l[Math.floor(Math.random()*l.length)];
+const TALK=[[/procrastinat|can'?t focus|no motivation|lazy|distract/i,["That's okay. Let's get you moving again. Start with one small thing.","It happens. Pick the smallest task on your list and give it ten minutes."]],
+[/tired|exhaust|sleepy|burn/i,["Sounds like your brain needs a breather. Rest for ten minutes, then one small block."]],
+[/stress|anxious|worried|overwhelm|panic/i,["Take a slow breath. You don't have to do everything today, just the next thing."]],
+[/fail|bad (score|mark|mock)|low (score|mark)/i,["One result isn't the whole story. Let's find what went wrong and fix that first."]],
+[/^(hi|hello|hey|yo)\b/i,["Hey! What's on your mind?","Hi there. Want to set a reminder or tell me something to remember?"]],
+[/thank|thanks|thx/i,["Anytime. ✦","Happy to help."]],
+[/who are you|your name/i,["I'm Aster, here to keep track of your reminders, dates and the things you want remembered."]],
+[/what should i do|what'?s next|what now/i,["__plan"]]];
+function say(t,h,isCard){const o={f:1,t,h:h||""};C.push(o);sv();bub(o);if(!open){unread++;$("fsn").textContent=unread;$("fsn").style.display="block"}}
+function bub(m){const f=$("fsm"),d=document.createElement("div");d.className="fm "+(m.f?"f":"u");d.textContent=m.t;f.appendChild(d);if(m.h){const c=document.createElement("div");c.className="fm f cw";c.innerHTML=m.h;f.insertBefore(c,d);}f.scrollTop=1e9}
+function handle(s){const now=new Date(),L=s.toLowerCase();
+ if(/kill myself|suicid|end my life|want to die|self.?harm|hurt myself|don'?t want to live/i.test(s)){X.pend=null;return say(SAFE)}
+ let P=X.pend;if(P&&/\bremind me\b|^\s*(?:please\s+)?remember\b/i.test(s)){X.pend=null;P=null}
+ if(P){X.pend=null;if(P.t=="rem"){if(!P.title&&!/remind/i.test(s)){return remind(s,now,Object.assign({},P,{title:cap(clean(s,[])),tm:P.tm,dt:P.dt}))}
+   const tm=pTime(s)||(/^\s*\d{1,2}\s*$/.test(s)&&{h:+s<7?+s+12:+s,m:0})||pPer(s),dt=pDate(s,now);
+   if(tm||dt){return remind(s,now,{title:P.title,tm:tm||P.tm,dt:dt||P.dt,rec:P.rec})}}
+  if(P.t=="evt"){const dt=pDate(s,now);if(dt)return mkEvt(P.text,dt[0],pTime(s),P.cat)}
+  if(!/remind|remember/i.test(s)&&s.split(" ").length<5){X.pend=P;sv();return say(P.t=="rem"?"I didn't catch the time. Try something like 6 PM or in 30 minutes.":"I didn't catch the date. Try something like 15 October.")}}
+ if(/\bremind me\b/i.test(s))return remind(s,now);
+ if(/^\s*(?:please\s+)?remember\b|^\s*this is important|\bimportant:/i.test(s))return remember(s,now);
+ const dt=pDate(s,now),kw=/exam|test|quiz|birthday|holiday|closed|diwali|holi\b|eid|christmas|festival|deadline|due|submit|submission|off\b|vacation|no school|results?\b/i.test(s);
+ if(kw&&/\b(is|are|on|has|have|closed|due|by)\b/i.test(s)&&!/\?\s*$/.test(s)){
+  if(dt){const t=pTime(s);return mkEvt(s,dt[0],t,null,[dt[1],t&&t.rx])}
+  if(/\b(is|on)\b/i.test(s)){const cat=(EVC.find(x=>x[0].test(s))||[0,""])[1];X.pend={t:"evt",text:s,cat};sv();return say("Sure! What's the exact date?")}}
+ if(/\b(show|open|see|list)\b.*\breminders?\b/i.test(s)){view("r");return say("Here are your reminders.")}
+ if(/\b(show|open|see|list)\b.*\bmemor/i.test(s)){view("m");return say("Here's what I remember.")}
+ for(const r of TALK)if(r[0].test(s)){let a=pickR(r[1]);if(a=="__plan"){try{const n=blocks(S.sel).find(b=>!S.done[b.id]);a=n?`Next up: ${n.x} (${n.t}). One block at a time.`:"Everything's cleared for today. Nice work. Rest well."}catch(e){a="Start with one small thing."}}return say(a)}
+ say(pickR(["I'm here. Tell me what to remind you about, or something you'd like me to remember.","Got it. Want me to turn that into a reminder, or remember it?","I can set reminders, save dates and remember things for you. Just tell me naturally."]))}
+/* ---- reminders engine ---- */
+function native(r,d){if(!window.Notification||Notification.permission!="granted")return;try{const ic=(document.querySelector("link[rel=icon]")||{}).href,n=new Notification("✦ Aster",{body:`🔔 Reminder: ${r.title}\nIt's ${fT(new Date())}. Time!`,tag:"aster-"+r.id+"-"+d,icon:ic,requireInteraction:true});n.onclick=()=>{window.focus();n.close()}}catch(e){}}
+function alertCard(r,d,late){const id="al"+r.id;if($(id))return;const c=document.createElement("div");c.className="aal";c.id=id;
+ c.innerHTML=`<small>🔔 Aster${late?" · You missed a reminder":""}</small><b>${esc(r.title)}</b><span>${late?"Scheduled for "+fT(new Date(d))+(fD(new Date(d))=="Today"?"":" ("+fD(new Date(d))+")"):"It's "+fT(new Date(d))+"."}</span><div class="ar2"><button data-a="done">✓ Done</button><button data-a="snz">${late?"Remind me later":"Snooze"}</button><button data-a="dis">Dismiss</button></div><div class="sn" hidden>${[5,10,30,60].map(m=>`<button data-m="${m}">${m==60?"1 hour":m+" min"}</button>`).join("")}<button data-m="0">Custom</button></div>`;
+ c.onclick=e=>{const b=e.target.closest("button");if(!b)return;const a=b.dataset.a;if(a=="snz"){c.querySelector(".sn").hidden=!c.querySelector(".sn").hidden;return}
+  if(b.dataset.m!=null){let m=+b.dataset.m;if(!m){m=parseInt(prompt("Snooze for how many minutes?","15"));if(!m||m<1)return}snooze(r.id,m);c.remove();return}
+  if(a=="done")finish(r.id);if(a=="dis")finish(r.id,1);c.remove()};$("an").appendChild(c)}
+function finish(id,dis){const r=R.find(x=>x.id==id);if(!r)return;r.snooze=0;if(r.rec){r.at=nextRec(r.rec,Math.max(Date.now(),r.at))}else{r.done=Date.now();r.dis=dis?1:0}sv();render()}
+function snooze(id,m){const r=R.find(x=>x.id==id);if(!r)return;r.snooze=Date.now()+m*6e4;r.trig=0;if(r.done){r.done=0}sv();render()}
+function tick(){R=db.get("r",R);const now=Date.now();let ch=0;R.forEach(r=>{if(r.done)return;const d=dueOf(r);if(d>now||(!r.rec&&r.trig))return;const late=now-d>12e4;
+  if(r.snooze&&d===r.snooze)r.snooze=0;if(r.rec&&d===r.at)r.at=nextRec(r.rec,Math.max(now,d));if(!r.rec)r.trig=1;ch=1;alertCard(r,d,late);if(!late)native(r,d)});if(ch){sv();render()}}
+/* ---- UI ---- */
+let open=false,unread=0,vw="c";
+function toggle(v){open=v;$("fsp").classList.toggle("open",v);if(v){unread=0;$("fsn").style.display="none";$("fsm").scrollTop=1e9}}
+function view(v){vw=v;$("fsp").dataset.v=v;document.querySelectorAll("#at button").forEach(b=>b.classList.toggle("on",b.dataset.v==v));render()}
+const rowR=r=>{const w=new Date(dueOf(r));return`<div class="ar" data-id="${r.id}"><div><b>${esc(r.title)}</b><small>${r.rec?"🔁 "+recTxt(r.rec):fD(w)+" · "+fT(w)}${r.done?" · "+(r.dis?"dismissed":"done"):(!r.rec&&dueOf(r)<Date.now()?" · overdue":"")}${r.snooze?" · snoozed":""}</small></div>${r.done?"":`<button data-a="c" title="Complete">✓</button><button data-a="z" title="Snooze">🕐</button><button data-a="e" title="Edit">✏️</button>`}<button data-a="x" title="Delete">🗑️</button></div>`};
+function render(){const up=R.filter(r=>!r.done&&!r.rec).sort((a,b)=>dueOf(a)-dueOf(b)),rc=R.filter(r=>!r.done&&r.rec),dn=R.filter(r=>r.done).sort((a,b)=>b.done-a.done).slice(0,15),ev=E.filter(e=>e.date>=iso(new Date())).sort((a,b)=>a.date<b.date?-1:1);
+ const sec=(h,l,f)=>l.length?`<h4>${h}</h4>`+l.map(f).join(""):"";
+ const perm=window.Notification?Notification.permission:"unsupported";
+ $("ar").innerHTML=`<div class="anote">${perm=="granted"?"🔔 Desktop notifications are on":perm=="denied"?"🔕 Notifications blocked. Reminders still appear here. Re-enable in your browser's site settings.":perm=="default"?`🔕 Notifications off <button class="ab" data-a="notif">Enable</button>`:"Notifications aren't supported in this browser."}</div>`+
+  (sec("Upcoming",up,rowR)+sec("Recurring",rc,rowR)+sec("Events",ev,e=>`<div class="ar" data-id="${e.id}" data-e="1"><div><b>${esc(e.title)}</b><small>📅 ${fD(new Date(e.date+"T00:00"))}${e.time?" · "+e.time:""} · ${e.category}</small></div><button data-a="x" title="Delete">🗑️</button></div>`)+sec("Completed",dn,rowR)||`<p class="mu e">Nothing yet. Tell Aster: "Remind me at 8 PM to…"</p>`);
+ const q=($("msq")||{}).value||"";$("am").innerHTML=`<input id="msq" placeholder="Search memories..." value="${esc(q)}">`+(M.filter(m=>(m.content+m.category+m.tags.join(" ")).toLowerCase().includes(q.toLowerCase())).reverse().map(m=>`<div class="ar mm" data-id="${m.id}"><div><small>${esc(m.category)}</small><b>“${esc(m.content)}”</b></div><button data-a="x" title="Delete">🗑️</button></div>`).join("")||`<p class="mu e">No memories yet. Say "Remember that…"</p>`);
+ if(q)$("msq").focus();const d=$("adash");if(d){const td=R.filter(r=>!r.done&&iso(new Date(dueOf(r)))==iso(new Date())).sort((a,b)=>dueOf(a)-dueOf(b));
+  d.innerHTML=`<div class="ash"><b>✦ Aster</b><button class="ab" data-a="open">Open</button></div><div class="adc"><div><small>Today's reminders</small>${td.map(r=>`<p>🔔 ${fT(new Date(dueOf(r)))} — ${esc(r.title)}</p>`).join("")||"<p class='mu'>None today</p>"}</div><div><small>Upcoming events</small>${ev.slice(0,3).map(e=>`<p>📅 ${esc(e.title)} — ${new Date(e.date+"T00:00").getDate()} ${MS[new Date(e.date+"T00:00").getMonth()]}</p>`).join("")||"<p class='mu'>None yet</p>"}</div></div><p class="mu">⭐ ${M.length} saved memor${M.length==1?"y":"ies"}</p>`}}
+function act(e){const b=e.target.closest("button");if(!b)return;const a=b.dataset.a,row=b.closest(".ar"),id=row&&row.dataset.id;
+ if(a=="notif"){Notification.requestPermission().then(p=>{say(p=="granted"?"Perfect! I'll let you know when your reminders are due. 🔔":"No problem. Reminders will still show up here.");render()});return}
+ if(a=="open"){toggle(true);view("r");return}
+ if(a=="c")finish(id);if(a=="x"){if(row.classList.contains("mm"))M=M.filter(x=>x.id!=id);else if(row.dataset.e)E=E.filter(x=>x.id!=id);else R=R.filter(x=>x.id!=id);sv();render()}
+ if(a=="z"){const m=parseInt(prompt("Snooze for how many minutes? (5, 10, 30, 60…)","10"));if(m>0)snooze(id,m)}
+ if(a=="e"){const r=R.find(x=>x.id==id),t=prompt("Edit reminder:",r.title);if(t){r.title=cap(t.trim())}const w=prompt('New time? e.g. "tomorrow 6 PM" (leave empty to keep)',"");if(w){const tm=pTime(w)||pPer(w),dt=pDate(w,new Date());if(tm){const D=dt?dt[0]:d0(new Date()),at=new Date(D.getFullYear(),D.getMonth(),D.getDate(),tm.h,tm.m);r.at=+(!dt&&at<=new Date()?addD(at,1):at);r.trig=0;r.snooze=0;if(r.rec){r.rec.h=tm.h;r.rec.m=tm.m;r.at=nextRec(r.rec,Date.now())}}}sv();render()}}
+$("ar").onclick=act;$("am").onclick=act;$("am").oninput=render;$("adash").onclick=act;$("fsm").onclick=act;
 $("fsb").onclick=()=>toggle(!open);$("fx").onclick=()=>toggle(false);
-$("fse").onclick=()=>send();$("fin").onkeydown=e=>{if(e.key==="Enter")send()};
-$("fcl").onclick=()=>{st={m:[],used:[]};save();start()};
-$("fsc").innerHTML=["I'm procrastinating","I'm so tired","I failed my mock","I can't focus","What should I do now?"].map(x=>`<button>${x}</button>`).join("");
-$("fsc").onclick=e=>{if(e.target.tagName==="BUTTON")send(e.target.textContent)};
-function start(){$("fsm").innerHTML="";$("fsc").style.display="flex";
-const a=["hey. it's me, you. from the top.","what's stopping you today?"];
-a.forEach((x,i)=>setTimeout(()=>{bub(x,1);st.m.push({f:1,t:x});save();if(!open&&i==1){unread=1;$("fsn").textContent=1;$("fsn").style.display="block"}},700+i*1100))}
-if(st.m.length){draw();$("fsc").style.display="none"}else start();
+$("at").onclick=e=>{const b=e.target.closest("button");if(b)view(b.dataset.v)};
+function send(t){t=(t||$("fin").value).trim();if(!t)return;$("fin").value="";$("fin").style.height="";$("fsc").style.display="none";const o={f:0,t};C.push(o);bub(o);sv();const ty=document.createElement("div");ty.className="fm f ty";ty.innerHTML="<s></s><s></s><s></s>";$("fsm").appendChild(ty);$("fsm").scrollTop=1e9;
+ setTimeout(()=>{ty.remove();try{handle(t)}catch(e){say("Hmm, I tripped on that one. Could you rephrase it?")}},450)}
+$("fse").onclick=()=>send();$("fin").onkeydown=e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send()}};
+$("fin").oninput=e=>{e.target.style.height="auto";e.target.style.height=Math.min(96,e.target.scrollHeight)+"px"};
+$("fcl").onclick=()=>{C=[];X.pend=null;sv();start()};
+$("fsc").innerHTML=[["🔔 Reminder","Remind me tomorrow at 7 AM to "],["📅 Event","My exam is on "],["🧠 Remember","Remember that "]].map(x=>`<button data-t="${x[1]}">${x[0]}</button>`).join("");
+$("fsc").onclick=e=>{const b=e.target.closest("button");if(b){$("fin").value=b.dataset.t;$("fin").focus()}};
+function start(){$("fsm").innerHTML="";$("fsc").style.display="flex";setTimeout(()=>say("Hi, I'm Aster ✦ Tell me what to remind you about, or something you'd like me to remember."),500)}
+if(C.length){C.forEach(bub);$("fsc").style.display="none"}else start();
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)tick()});addEventListener("focus",tick);
+addEventListener("storage",e=>{if(Object.values(K).includes(e.key)){R=db.get("r",[]);E=db.get("e",[]);M=db.get("m",[]);render()}});
+setInterval(tick,10000);render();tick();
+window.Aster={handle:s=>{send(s)},tick,get:()=>({R,E,M})};
 })();
 </script><script>
 window.sqPlanFor=k=>{const i=Math.round((new Date(k+"T12:00:00")-new Date(2026,8,30,12))/864e5);if(i<0||i>=N)return null;const m={P:"Physics",C:"Chemistry",B:"Biology"},o={};blocks(i).slice(0,4).forEach(b=>{const n=m[b.s];if(n)o[n]=(o[n]?o[n]+" + ":"")+b.x});return o};
@@ -791,7 +946,7 @@ if(SOUNDS.some(x=>S.s[x.id].on)){
 (()=>{
 const g=id=>document.getElementById(id);
 const START=new Date(2026,8,30),N=47,DAY=864e5;
-const rd=k=>{try{return JSON.parse(localStorage.getItem(k)||"{}")||{}}catch(e){return{}}};
+const rd=k=>{try{return JSON.parse(localStorage.getItem(k)||"{}")||{}}catch(e){return{}}};const aev=()=>{try{return JSON.parse(localStorage.getItem("aster_events")||"[]")}catch(e){return[]}};
 const iso=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 const idxOf=d=>Math.round((new Date(d.getFullYear(),d.getMonth(),d.getDate())-START)/DAY);
 const first=new Date(2026,8,1),last=new Date(2026,10,1); // Sep–Nov 2026
@@ -803,7 +958,7 @@ const sel=()=>{const b=document.querySelector("#days .day.sel");return b?+b.data
 function counts(){const done=rd("sq").done||{},c={};for(const k in done)if(done[k]){const i=k.split("-")[0];c[i]=(c[i]||0)+1}return c}
 let lastSel=null;
 function draw(){
- const c=counts(),tut=rd("daily_tutor_v1").days||{},s=sel();
+ const c=counts(),tut=rd("daily_tutor_v1").days||{},s=sel(),ev2=aev();
  if(s!==lastSel){lastSel=s;const sd=new Date(2026,8,30+s);if(sd.getMonth()!==view.getMonth()||sd.getFullYear()!==view.getFullYear())view=new Date(sd.getFullYear(),sd.getMonth(),1)}
  g("cttl").textContent=view.toLocaleDateString("en",{month:"long",year:"numeric"});
  g("cprev").disabled=view<=first;g("cnext").disabled=view>=last;
@@ -813,7 +968,7 @@ function draw(){
  for(let d=1;d<=dim;d++){
   const dt=new Date(y,m,d),i=idxOf(dt),ok=i>=0&&i<N,n=ok?c[i]||0:0,ev=(tut[iso(dt)]||{}).eval,pct=ev?ev.pct:null;
   const tag=pct==null?"":`<u class="tg" style="background:var(--${pct>=80?"B":pct>=50?"S":"C"})" title="Tutor ${Math.round(pct)}%"></u>`;
-  h+=`<button class="cd${ok&&i===s?" sel":""}${ok&&n>=per?" full":""}${ok&&i===today?" now":""}" data-i="${i}" ${ok?"":"disabled"} aria-label="${dt.toDateString()}${ok?`, ${n} of ${per} blocks done`:""}">${tag}<b>${d}</b>${ok?`<span class="pb"><i style="width:${Math.min(100,n/per*100)}%"></i></span>`:"<span></span>"}</button>`;
+  h+=`<button class="cd${ev2.some(e=>e.date===iso(dt))?" ev":""}${ok&&i===s?" sel":""}${ok&&n>=per?" full":""}${ok&&i===today?" now":""}" data-i="${i}" ${ok?"":"disabled"} aria-label="${dt.toDateString()}${ok?`, ${n} of ${per} blocks done`:""}">${tag}<b>${d}</b>${ok?`<span class="pb"><i style="width:${Math.min(100,n/per*100)}%"></i></span>`:"<span></span>"}</button>`;
  }
  g("cgrid").innerHTML=h;
  summary(s,c,tut);
@@ -821,6 +976,7 @@ function draw(){
 function summary(i,c,tut){
  const dt=new Date(2026,8,30+i),n=c[i]||0,ev=(tut[iso(dt)]||{}).eval;let topics="";
  try{if(typeof blocks==="function")topics=blocks(i).slice(0,3).map(b=>b.x).join(" · ")}catch(e){}
+ const ae=aev().filter(e=>e.date===iso(dt)).map(e=>"📌 "+e.title).join(" · ");if(ae)topics=ae+(topics?" · "+topics:"");
  g("csum").innerHTML=`<b>${dt.toLocaleDateString("en",{weekday:"long",day:"numeric",month:"long"})}</b> <span>· Day ${i+1} of ${N}</span><br>${n}/${per} blocks done${ev?` · Tutor score <b>${Math.round(ev.pct)}%</b>`:""}${topics?`<br><span>${topics}</span>`:""}`;
 }
 g("cgrid").addEventListener("click",e=>{const b=e.target.closest(".cd");if(!b||b.disabled)return;
@@ -830,6 +986,7 @@ g("cprev").onclick=()=>{view=new Date(view.getFullYear(),view.getMonth()-1,1);dr
 g("cnext").onclick=()=>{view=new Date(view.getFullYear(),view.getMonth()+1,1);draw()};
 new MutationObserver(()=>draw()).observe(g("days"),{childList:true,subtree:true});
 document.querySelector(".mode").addEventListener("click",()=>setTimeout(draw,50));
+addEventListener("aster-sync",()=>draw());
 draw();
 })();
 
@@ -856,4 +1013,47 @@ bar.addEventListener("click",e=>{const x=e.target.closest("button");if(!x)return
 show();
 })();
 
-</script></body></html>
+</script><script>
+/* Study stopwatch + countdown timer (timestamp-based, survives refresh) */
+(()=>{
+const $=id=>document.getElementById(id),KEY="sq_timer",p2=n=>String(n).padStart(2,"0"),day=()=>new Date().toDateString(),BASE=document.title;
+let S={m:"sw",sw:{run:0,start:0,acc:0,laps:[]},tm:{dur:15e5,run:0,end:0,left:15e5,done:0},day:{d:day(),ms:0},last:Date.now()};
+try{const o=JSON.parse(localStorage.getItem(KEY)||"null");if(o)S=Object.assign(S,o)}catch(e){}
+const now0=Date.now();if(S.day.d!==day())S.day={d:day(),ms:0};
+if(S.sw.run||S.tm.run){const a=(S.sw.run?now0:Math.min(now0,S.tm.end))-S.last;if(a>0&&S.day.d===day())S.day.ms+=a}
+if(S.tm.run&&S.tm.end<=now0){S.tm.run=0;S.tm.left=0;S.tm.done=1}
+const swMs=()=>S.sw.acc+(S.sw.run?Date.now()-S.sw.start:0),tmLeft=()=>S.tm.run?Math.max(0,S.tm.end-Date.now()):S.tm.left;
+const hms=ms=>{const s=Math.floor(ms/1e3),h=Math.floor(s/3600);return(h?h+":":"")+p2(Math.floor(s%3600/60))+":"+p2(s%60)};
+const save=()=>{S.last=Date.now();try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+let ac,lt=Date.now(),sv=0;
+const beep=()=>{try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();[0,.35,.7].forEach(t=>{const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=880;o.connect(g);g.connect(ac.destination);const n=ac.currentTime+t;g.gain.setValueAtTime(.0001,n);g.gain.exponentialRampToValueAtTime(.25,n+.03);g.gain.exponentialRampToValueAtTime(.0001,n+.3);o.start(n);o.stop(n+.32)})}catch(e){}};
+function finish(){S.tm.run=0;S.tm.left=0;S.tm.done=1;save();beep();
+ try{if(window.Notification&&Notification.permission==="granted")new Notification("⏱️ Study timer",{body:"Time's up! Take a short break.",tag:"sq-timer"})}catch(e){}
+ try{toast("⏱️ Time's up!")}catch(e){}document.title="⏱️ Time's up!";draw()}
+function draw(){const sw=S.m=="sw",ms=sw?swMs():tmLeft(),run=sw?S.sw.run:S.tm.run;
+ $("stm").dataset.m=S.m;$("stm").classList.toggle("run",!!run);$("stm").classList.toggle("fin",!sw&&!!S.tm.done);
+ document.querySelectorAll(".stt button").forEach(b=>b.classList.toggle("on",b.dataset.m==S.m));
+ $("std").innerHTML=hms(ms)+(sw?`<small>.${Math.floor(ms%1e3/100)}</small>`:"");
+ $("stp").style.width=sw?0:(S.tm.dur?(100-ms/S.tm.dur*100):0)+"%";
+ $("tsa").textContent=run?"Pause":(sw?(S.sw.acc?"Resume":"Start"):(S.tm.done?"Restart":(S.tm.left<S.tm.dur?"Resume":"Start")));
+ $("tsl").disabled=!S.sw.run;$("tsr").disabled=sw?(!S.sw.acc&&!S.sw.run):(!S.tm.run&&!S.tm.done&&S.tm.left==S.tm.dur);
+ document.querySelectorAll("#stpre button[data-p]").forEach(b=>{b.classList.toggle("on",+b.dataset.p*6e4==S.tm.dur);b.disabled=!!S.tm.run});$("stcs").disabled=!!S.tm.run;
+ const L=S.sw.laps;$("stl").innerHTML=L.slice(0,5).map((l,i)=>`<li><span>Lap ${L.length-i}</span><span>${hms(l.d)} · ${hms(l.t)}</span></li>`).join("");
+ const t=S.day.ms,h=Math.floor(t/36e5),m=Math.floor(t%36e5/6e4);
+ $("stn").textContent=(!sw&&S.tm.done?"✓ Time's up! ":"")+`Studied today: ${h?h+"h ":""}${m}m`;
+ document.title=run?(hms(ms)+" · "+BASE):(S.tm.done&&!sw?"⏱️ Time's up!":BASE)}
+function tick(){const n=Date.now();if(S.sw.run||S.tm.run)S.day.ms+=n-lt;lt=n;if(S.tm.run&&n>=S.tm.end)finish();else draw();if(n-sv>5000){sv=n;save()}}
+$("stm").onclick=e=>{const b=e.target.closest("button");if(!b)return;const n=Date.now();if(b.dataset.m){S.m=b.dataset.m;save();return draw()}
+ if(b.dataset.p){S.tm.dur=+b.dataset.p*6e4;if(!S.tm.run){S.tm.left=S.tm.dur;S.tm.done=0}return save(),draw()}
+ if(b.id=="stcs"){const v=parseFloat($("stc").value);if(v>=1&&v<=600){S.tm.dur=Math.round(v*6e4);S.tm.left=S.tm.dur;S.tm.done=0;$("stc").value="";save();draw()}return}
+ if(b.id=="tsa"){beep.warm=1;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();ac.resume()}catch(e){}
+  if(S.m=="sw"){if(S.sw.run){S.sw.acc=swMs();S.sw.run=0}else{S.sw.start=n;S.sw.run=1}}
+  else{if(S.tm.run){S.tm.left=tmLeft();S.tm.run=0}else{if(S.tm.done||S.tm.left<=0){S.tm.left=S.tm.dur}S.tm.done=0;S.tm.end=n+S.tm.left;S.tm.run=1}}}
+ if(b.id=="tsl"&&S.sw.run){const t=swMs();S.sw.laps.unshift({t,d:t-(S.sw.laps[0]?S.sw.laps[0].t:0)});S.sw.laps=S.sw.laps.slice(0,30)}
+ if(b.id=="tsr"){if(S.m=="sw")S.sw={run:0,start:0,acc:0,laps:[]};else{S.tm.run=0;S.tm.left=S.tm.dur;S.tm.done=0}}
+ lt=n;save();draw()};
+addEventListener("pointerdown",()=>{if(document.title.startsWith("⏱️ Time"))draw()});
+draw();setInterval(tick,100);
+})();
+</script>
+</body></html>
