@@ -260,11 +260,13 @@ return[["7:00–9:00",r[0],"P",lec(r[0])],["9:00–10:45",r[1],"C",lec(r[1])],["
 .map((b,k)=>({id:i+"-"+k,t:b[0],x:b[1],s:b[2],lec:b[3],xp:b[3]?50:35}))
 .concat(SS.map((b,k)=>({id:i+"-s"+k,t:b[0],x:b[1],s:b[2],lec:false,xp:30})))}
 function tutorInfo(){try{const d=JSON.parse(localStorage.getItem("daily_tutor_v1")||"{}").days||{},v=Object.values(d).filter(x=>x.eval);return{xp:v.reduce((a,x)=>a+Math.round(x.eval.pct),0),best:Math.max(0,...v.map(x=>x.eval.pct))}}catch(e){return{xp:0,best:0}}}
-function stats(){let xp=S.focus*20,full=[],cnt={P:[0,0],C:[0,0],B:[0,0]},n=0;
-for(let i=0;i<N;i++){const bl=blocks(i);let all=true;
-bl.forEach(b=>{const d=S.done[b.id];if(b.lec)cnt[b.s][1]++;if(d){xp+=b.xp;n++;if(b.lec)cnt[b.s][0]++}else all=false});
-full[i]=all;if(all)xp+=100}
-let st=0;const end=Math.min(N-1,Math.max(-1,todayIdx));for(let i=end;i>=0;i--){if(full[i])st++;else if(i!==end)break}
+function stats(){let xp=S.focus*20,full=[],act=[],cnt={P:[0,0],C:[0,0],B:[0,0]},n=0;
+for(let i=0;i<N;i++){const bl=blocks(i);let all=true,any=false;
+bl.forEach(b=>{const d=S.done[b.id];if(b.lec)cnt[b.s][1]++;if(d){xp+=b.xp;n++;any=true;if(b.lec)cnt[b.s][0]++}else all=false});
+full[i]=all;act[i]=any;if(all)xp+=100}
+/* a tutor report saved on a date also counts as an active day */
+try{const td=(JSON.parse(localStorage.getItem("daily_tutor_v1")||"{}").days)||{};for(const k in td)if(td[k]&&td[k].eval){const i=Math.round((new Date(k+"T00:00:00")-START)/864e5);if(i>=0&&i<N)act[i]=true}}catch(e){}
+let st=0;const end=Math.min(N-1,Math.max(-1,todayIdx));for(let i=end;i>=0;i--){if(full[i]||act[i])st++;else if(i!==end)break}
 xp+=tutorInfo().xp;return{xp,full,cnt,st,n}}
 function badges(s){return[["🩸","First step",s.n>=1],["🌟","Perfect day",s.full.some(Boolean)],["🔥","3-day streak",s.st>=3],["🚀","7-day streak",s.st>=7],["⚡","Physics 50%",s.cnt.P[0]>=s.cnt.P[1]/2&&s.cnt.P[1]>0&&s.cnt.P[0]>0],["🧪","Chem 50%",s.cnt.C[0]>=s.cnt.C[1]/2&&s.cnt.C[0]>0],["🧬","Bio 50%",s.cnt.B[0]>=s.cnt.B[1]/2&&s.cnt.B[0]>0],["🎯","5 focus runs",S.focus>=5],["👑","Level 5",s.xp>=1600],["📚","Tutor day 80%+",tutorInfo().best>=80]]}
 function toast(t){const e=$("ts");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),2400)}
