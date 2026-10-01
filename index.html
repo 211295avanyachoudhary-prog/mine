@@ -235,8 +235,28 @@ html.locked #lockscr{display:flex}
 .rcp{position:absolute;left:max(14px,calc(50% - 226px));right:max(70px,calc(50% - 170px));bottom:calc(22px + env(safe-area-inset-bottom,0px));color:#fff;text-shadow:0 1px 6px #000;font-weight:700;pointer-events:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rpa{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:64px;color:#fff;opacity:0;pointer-events:none;text-shadow:0 2px 12px #000;transition:opacity .2s}.rs.paused .rpa{opacity:.85}
 .rem{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;padding:24px;color:var(--mu)}.rem h3{margin:0;color:var(--tx);font-size:22px}.rem p{max-width:320px;margin:0}.rem button{background:var(--xp);color:var(--onx);border:0;border-radius:14px;padding:12px 20px;font:inherit;font-weight:800;cursor:pointer}
+
+/* ===== Notes wall (separate full-screen page) ===== */
+#notes{display:none;position:fixed;inset:0;z-index:900;background:var(--bg);flex-direction:column}#notes.open{display:flex}
+.ntb{display:flex;align-items:center;gap:8px;padding:10px 12px;padding-top:calc(10px + env(safe-area-inset-top,0px));background:var(--pn);border-bottom:1px solid var(--ln2)}.ntb b{flex:1;font:800 17px 'Bricolage Grotesque',system-ui,sans-serif;white-space:nowrap}
+.ntb button,.nfm button,.nch button,.nsb button{background:var(--pn2);color:var(--tx);border:2px solid transparent;border-radius:12px;padding:7px 12px;font:inherit;font-weight:700;cursor:pointer;white-space:nowrap}.ntb .rp{background:var(--xp);color:var(--onx)}
+.nsb,.nch,.nfm{display:flex;gap:6px;overflow-x:auto;padding:8px 12px;scrollbar-width:none;align-items:center;border-bottom:1px solid var(--ln2)}.nsb{background:var(--pn)}.nsb button{flex:1}.nsb button.on{border-color:var(--c);background:var(--pn2)}
+.nch button.on{border-color:var(--xp)}.nch .x{padding:7px 9px}.nfm{background:var(--pn);gap:5px}.nfm button{padding:6px 10px;min-width:36px}
+.nfm i{width:1px;height:22px;background:var(--ln2);flex:none}.nfm .sw{width:26px;height:26px;min-width:0;padding:0;border-radius:50%;border:2px solid #fff8;flex:none}.nfm .tt{font-size:12px;color:var(--mu);flex:none}
+#nw{flex:1;min-height:0;overflow:auto;background:var(--bg)}#nwc{display:flex;gap:10px;padding:12px;align-items:flex-start}.nco{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px}
+.nt{position:relative;background:var(--nc);color:#222;border-radius:14px;overflow:hidden}.nt.pic{padding-bottom:2px}
+.nh{display:flex;justify-content:flex-end;gap:2px;padding:4px 6px 0}.nh button{background:none;border:0;cursor:pointer;font-size:14px;opacity:.35;padding:2px 4px;transition:opacity .15s}.nt:hover .nh button,.nt:focus-within .nh button{opacity:.9}@media(hover:none){.nh button{opacity:.7}}
+.ned{padding:2px 12px 12px;outline:0;font-size:15px;line-height:1.5;word-break:break-word;min-height:56px}.ned:empty:before{content:attr(data-ph);opacity:.45}.nt.pic .ned{padding:0 8px 8px}.ned img{width:100%;height:auto;border-radius:8px;display:block;margin:4px 0}
+.nem{flex:1;padding:24px 14px;max-width:360px;color:var(--mu);line-height:1.5}.nem h3{color:var(--tx);margin:0 0 6px}.nem button{background:var(--xp);color:var(--onx);border:0;border-radius:12px;padding:10px 16px;font:inherit;font-weight:800;cursor:pointer;margin-top:8px}
+
+.nmd{position:fixed;inset:0;z-index:9000;background:#000a;display:flex;align-items:center;justify-content:center;padding:16px}.nbx{background:var(--pn);color:var(--tx);border:1px solid var(--ln2);border-radius:16px;padding:16px;width:min(360px,100%)}.nbx p{margin:0 0 10px;font-weight:700}
+.nbx input{width:100%;background:var(--in);border:1px solid var(--ln2);border-radius:12px;color:var(--tx);padding:10px 12px;font-size:16px;margin-bottom:12px;outline:0}.nbx input:focus{border-color:var(--xp)}
+.nbt{display:flex;gap:8px;justify-content:flex-end}.nbt button{background:var(--pn2);color:var(--tx);border:0;border-radius:12px;padding:9px 14px;font:inherit;font-weight:700;cursor:pointer}.nbt .rp{background:var(--xp);color:var(--onx)}
+.nwn{background:color-mix(in srgb,var(--S) 20%,var(--pn));color:var(--tx);font-size:13px;padding:8px 12px;border-bottom:1px solid var(--ln2)}.nwn[hidden]{display:none}
+.ntoast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--pn);color:var(--tx);border:1px solid var(--ln2);padding:10px 16px;border-radius:14px;z-index:9100;opacity:0;transition:opacity .2s;pointer-events:none;font-weight:700;max-width:90vw;text-align:center}
 </style></head><body>
 <div id="lockscr" role="dialog" aria-modal="true" aria-label="Enter PIN"><div class="lkc"><div class="fav lkav" role="img" aria-label="Aster"></div><h2>Study Quest</h2><p id="lkm">Enter your PIN</p><div class="lkd" id="lkd"><i></i><i></i><i></i><i></i></div><div class="lkp" id="lkp"><button>1</button><button>2</button><button>3</button><button>4</button><button>5</button><button>6</button><button>7</button><button>8</button><button>9</button><span></span><button>0</button><button data-k="b" aria-label="Backspace">⌫</button></div></div></div>
+<div id="notes" role="dialog" aria-label="Notes wall"><div class="ntb"><button id="nbk" aria-label="Back">←</button><b>📌 Notes wall</b><button id="nan" class="rp">＋ Note</button><button id="nad" aria-label="Add diagram or photo">🖼 Diagram</button></div><div class="nwn" id="nwn" hidden>⚠ Your browser is blocking saving in this view, so notes will disappear when you close it. Open the file directly in Chrome or Edge to keep them.</div><div class="nsb" id="nsb"></div><div class="nch" id="nch"></div><div class="nfm" id="nfm"></div><div id="nw"><div id="nwc"></div></div><input type="file" id="nfi" accept="image/*" multiple hidden></div>
 <div id="reels" role="dialog" aria-label="Reels corner"><div class="rtb"><button id="rbk" aria-label="Back">←</button><b>🎬 Reels corner</b><span id="rct"></span><button id="rmu" aria-label="Toggle sound">🔊</button><button id="rad" class="rp" aria-label="Add reels">＋ Add</button></div><div id="rfd" tabindex="0"></div><input type="file" id="rfi" accept="video/*,.mp4,.mov,.m4v,.webm" multiple hidden></div>
 <div class="wrap">
 <div class="top"><div class="lvl" id="lvl"><span id="lv">1</span></div>
@@ -244,7 +264,7 @@ html.locked #lockscr{display:flex}
 <div class="stat clk"><b id="clock">--:--:--</b><small id="cdate"></small></div><div class="stat"><b id="st">0🔥</b><small>streak</small></div><div class="stat"><b id="dl">0</b><small>days to go</small></div></div>
 
 <div class="amb" id="amb"><div class="arow"><span class="al">🎨 Theme</span><div class="thm" id="thm" role="group" aria-label="Theme"></div></div>
-<div class="arow" style="margin-top:8px"><button class="btn g" id="ambt" aria-expanded="false" aria-controls="ambp" style="margin:0">🎧 Ambient sounds <span id="ambc"></span></button><button class="btn g" id="rlb" style="margin:0">🎬 Reels</button><button class="btn g" id="lkb" title="Lock now" style="margin:0">🔒 Lock</button><small id="ambh" hidden>Tap anywhere to resume your saved mix</small></div>
+<div class="arow" style="margin-top:8px"><button class="btn g" id="ambt" aria-expanded="false" aria-controls="ambp" style="margin:0">🎧 Ambient sounds <span id="ambc"></span></button><button class="btn g" id="nlb" style="margin:0">📌 Notes</button><button class="btn g" id="rlb" style="margin:0">🎬 Reels</button><button class="btn g" id="lkb" title="Lock now" style="margin:0">🔒 Lock</button><small id="ambh" hidden>Tap anywhere to resume your saved mix</small></div>
 <div id="ambp" hidden><div class="mst"><span class="al">🔊 Master</span><input type="range" min="0" max="100" id="amv" aria-label="Master volume"><button class="btn g" id="ams" style="margin:0">Stop all</button></div><div class="sg" id="sg"></div></div></div>
 
 <div class="mode"><button class="on" data-m="quest">🎯 Quest</button><button data-m="dtutor">📚 Daily Tutor</button></div>
@@ -513,7 +533,7 @@ function native(r,d){if(!window.Notification||Notification.permission!="granted"
 function alertCard(r,d,late){const id="al"+r.id;if($(id))return;const c=document.createElement("div");c.className="aal";c.id=id;
  c.innerHTML=`<small>🔔 Aster${late?" · You missed a reminder":""}</small><b>${esc(r.title)}</b><span>${late?"Scheduled for "+fT(new Date(d))+(fD(new Date(d))=="Today"?"":" ("+fD(new Date(d))+")"):"It's "+fT(new Date(d))+"."}</span><div class="ar2"><button data-a="done">✓ Done</button><button data-a="snz">${late?"Remind me later":"Snooze"}</button><button data-a="dis">Dismiss</button></div><div class="sn" hidden>${[5,10,30,60].map(m=>`<button data-m="${m}">${m==60?"1 hour":m+" min"}</button>`).join("")}<button data-m="0">Custom</button></div>`;
  c.onclick=e=>{const b=e.target.closest("button");if(!b)return;const a=b.dataset.a;if(a=="snz"){c.querySelector(".sn").hidden=!c.querySelector(".sn").hidden;return}
-  if(b.dataset.m!=null){let m=+b.dataset.m;if(!m){m=parseInt(prompt("Snooze for how many minutes?","15"));if(!m||m<1)return}snooze(r.id,m);c.remove();return}
+  if(b.dataset.m!=null){let m=+b.dataset.m;if(!m){window.sqAsk("Snooze for how many minutes?",{input:1,val:"15",ok:"Snooze"}).then(v=>{const q=parseInt(v);if(q>0){snooze(r.id,q);c.remove()}});return}snooze(r.id,m);c.remove();return}
   if(a=="done")finish(r.id);if(a=="dis")finish(r.id,1);c.remove()};$("an").appendChild(c)}
 function finish(id,dis){const r=R.find(x=>x.id==id);if(!r)return;r.snooze=0;if(r.rec){r.at=nextRec(r.rec,Math.max(Date.now(),r.at))}else{r.done=Date.now();r.dis=dis?1:0}sv();render()}
 function snooze(id,m){const r=R.find(x=>x.id==id);if(!r)return;r.snooze=Date.now()+m*6e4;r.trig=0;if(r.done){r.done=0}sv();render()}
@@ -536,8 +556,8 @@ function act(e){const b=e.target.closest("button");if(!b)return;const a=b.datase
  if(a=="notif"){Notification.requestPermission().then(p=>{say(p=="granted"?"Perfect! I'll let you know when your reminders are due. 🔔":"No problem. Reminders will still show up here.");render()});return}
  if(a=="open"){toggle(true);view("r");return}
  if(a=="c")finish(id);if(a=="x"){if(row.classList.contains("mm"))M=M.filter(x=>x.id!=id);else if(row.dataset.e)E=E.filter(x=>x.id!=id);else R=R.filter(x=>x.id!=id);sv();render()}
- if(a=="z"){const m=parseInt(prompt("Snooze for how many minutes? (5, 10, 30, 60…)","10"));if(m>0)snooze(id,m)}
- if(a=="e"){const r=R.find(x=>x.id==id),t=prompt("Edit reminder:",r.title);if(t){r.title=cap(t.trim())}const w=prompt('New time? e.g. "tomorrow 6 PM" (leave empty to keep)',"");if(w){const tm=pTime(w)||pPer(w),dt=pDate(w,new Date());if(tm){const D=dt?dt[0]:d0(new Date()),at=new Date(D.getFullYear(),D.getMonth(),D.getDate(),tm.h,tm.m);r.at=+(!dt&&at<=new Date()?addD(at,1):at);r.trig=0;r.snooze=0;if(r.rec){r.rec.h=tm.h;r.rec.m=tm.m;r.at=nextRec(r.rec,Date.now())}}}sv();render()}}
+ if(a=="z"){window.sqAsk("Snooze for how many minutes?",{input:1,val:"10",ok:"Snooze"}).then(v=>{const m=parseInt(v);if(m>0)snooze(id,m)})}
+ if(a=="e"){const r=R.find(x=>x.id==id);window.sqAsk("Edit reminder",{input:1,val:r.title,ok:"Next"}).then(t=>{if(t===null)return;if(t)r.title=cap(t);return window.sqAsk('New time? e.g. "tomorrow 6 PM" (leave empty to keep)',{input:1,ok:"Save"}).then(w=>{if(w){const tm=pTime(w)||pPer(w),dt=pDate(w,new Date());if(tm){const D=dt?dt[0]:d0(new Date()),at=new Date(D.getFullYear(),D.getMonth(),D.getDate(),tm.h,tm.m);r.at=+(!dt&&at<=new Date()?addD(at,1):at);r.trig=0;r.snooze=0;if(r.rec){r.rec.h=tm.h;r.rec.m=tm.m;r.at=nextRec(r.rec,Date.now())}}}sv();render()})})}}
 $("ar").onclick=act;$("am").onclick=act;$("am").oninput=render;$("adash").onclick=act;$("fsm").onclick=act;
 $("fsb").onclick=()=>toggle(!open);$("fx").onclick=()=>toggle(false);
 $("at").onclick=e=>{const b=e.target.closest("button");if(b)view(b.dataset.v)};
@@ -1130,14 +1150,14 @@ function draw(){nearIO&&nearIO.disconnect();actIO&&actIO.disconnect();V.innerHTM
  reels.forEach((r,i)=>{const s=document.createElement("section");s.className="rs";s.dataset.i=i;
   s.innerHTML=`<video loop playsinline preload="none" ${muted?"muted":""}></video><div class="rpa">▶</div><div class="rsd"><button class="${r.liked?"lk2":""}" data-a="l" aria-label="Like">${r.liked?"❤️":"🤍"}</button><button data-a="d" aria-label="Remove reel">🗑</button></div><div class="rcp">${esc(label(r.name))}</div>`;
   const v=s.querySelector("video");v.muted=muted;v.onclick=()=>v.paused?play(v):v.pause();v.onplay=()=>s.classList.remove("paused");v.onpause=()=>{if(v.src)s.classList.add("paused")};
-  s.querySelector(".rsd").onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.a=="l"){r.liked=r.liked?0:1;tx("readwrite",st=>st.put(r));b.className=r.liked?"lk2":"";b.textContent=r.liked?"❤️":"🤍"}else if(confirm("Remove this reel from your corner?"))tx("readwrite",st=>st.delete(r.id)).then(load)};
+  s.querySelector(".rsd").onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.a=="l"){r.liked=r.liked?0:1;tx("readwrite",st=>st.put(r));b.className=r.liked?"lk2":"";b.textContent=r.liked?"❤️":"🤍"}else window.sqAsk("Remove this reel from your corner?",{ok:"Remove"}).then(y=>{if(y)tx("readwrite",st=>st.delete(r.id)).then(load)})};
   V.appendChild(s);nearIO.observe(s);actIO.observe(s)})}
 function play(v){v.muted=muted;const p=v.play();if(p&&p.catch)p.catch(()=>{if(!v.muted){v.muted=true;muted=true;mu();v.play().catch(()=>{})}})}
 const mu=()=>{$("rmu").textContent=muted?"🔇":"🔊";localStorage.setItem("sq_rmute",muted?"1":"0");V.querySelectorAll("video").forEach(v=>v.muted=muted)};
 $("rmu").onclick=()=>{muted=!muted;mu();if(cur&&!muted)play(cur)};
 $("rad").onclick=()=>$("rfi").click();
 $("rfi").onchange=async e=>{const fs=[...e.target.files].filter(f=>/^video\//.test(f.type)||/\.(mp4|mov|m4v|webm|mkv)$/i.test(f.name)).filter(f=>!reels.some(r=>r.name===f.name&&r.blob.size===f.size));e.target.value="";if(!fs.length)return;
- cnt("Saving "+fs.length+"…");try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist();await tx("readwrite",s=>{fs.forEach(f=>s.add({name:f.name,blob:f,liked:0,added:Date.now()}))})}catch(err){alert("Couldn't save the reels. Your browser may be out of storage space.")}await load()};
+ cnt("Saving "+fs.length+"…");try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist();await tx("readwrite",s=>{fs.forEach(f=>s.add({name:f.name,blob:f,liked:0,added:Date.now()}))})}catch(err){window.sqAsk("Couldn't save the reels. Your browser may be out of storage space or blocking saving.",{ok:"OK"})}await load()};
 function openR(){R.classList.add("open");document.body.style.overflow="hidden";mu();load().then(()=>V.focus())}
 function closeR(){R.classList.remove("open");document.body.style.overflow="";V.querySelectorAll("video").forEach(v=>v.pause())}
 const sync=()=>location.hash==="#reels"?openR():closeR();
@@ -1147,6 +1167,108 @@ addEventListener("hashchange",sync);
 addEventListener("keydown",e=>{if(!R.classList.contains("open")||document.documentElement.classList.contains("locked"))return;const k=e.key;
  if(k==="Escape")$("rbk").click();else if(k==="ArrowDown"||k==="ArrowUp"){e.preventDefault();V.scrollBy({top:(k=="ArrowDown"?1:-1)*V.clientHeight,behavior:"smooth"})}else if(k===" "&&cur){e.preventDefault();cur.paused?play(cur):cur.pause()}else if(k==="m"||k==="M")$("rmu").click()});
 if(location.hash==="#reels")sync();
+})();
+</script>
+<script>
+/* Notes wall: subject > chapter > free-form sticky notes (rich text, photos, pasted diagrams). Stored in IndexedDB. */
+(()=>{
+const $=id=>document.getElementById(id),N=$("notes"),W=$("nw"),CV=$("nwc");
+const SUB=[["bio","🧬 Biology","var(--B)"],["phy","⚡ Physics","var(--P)"],["chem","🧪 Chemistry","var(--C)"]],PAPER=["#f7f08e","#f7a1b8","#bde76f","#ffffff","#bfe6ff","#ffd7a8"];
+const HL=["#fff176","#a5f3a1","#ffb3d1","#9ad7ff","#ffc27a"],TC=["#d32f2f","#1565c0","#2e7d32","#ef6c00","#7b1fa2","#111111"];
+const rd=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}},wr=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+let CH=rd("sq_chaps",{bio:[],phy:[],chem:[]}),ST=rd("sq_nst",{s:"phy",c:{}}),db,notes=[],Z=1,viaBtn=0,pend=null,T={};
+const idb=()=>new Promise((ok,no)=>{if(db)return ok(db);const q=indexedDB.open("sq_notes",1);q.onupgradeneeded=()=>q.result.createObjectStore("n",{keyPath:"id",autoIncrement:true});q.onsuccess=()=>ok(db=q.result);q.onerror=()=>no(q.error)});
+let MEM=[],MID=1,NOSTORE=0;const fake={add:n=>{n.id=MID++;MEM.push(n);return{result:n.id}},put:n=>{const i=MEM.findIndex(x=>x.id==n.id);i<0?MEM.push(n):MEM[i]=n;return{result:n.id}},delete:id=>{MEM=MEM.filter(x=>x.id!=id);return{}},getAll:()=>({result:MEM.slice()})};
+const warn=()=>{$("nwn").hidden=false};
+try{localStorage.setItem("sq_t","1");localStorage.removeItem("sq_t")}catch(e){warn()}
+const tx=async(m,f)=>{if(!NOSTORE){try{const d=await idb();return await new Promise((ok,no)=>{const t=d.transaction("n",m),r=f(t.objectStore("n"));t.oncomplete=()=>ok(r&&r.result);t.onerror=t.onabort=()=>no(t.error)})}catch(e){NOSTORE=1;warn()}}const r=f(fake);return r&&r.result};
+const sv=n=>{clearTimeout(T[n.id]);T[n.id]=setTimeout(()=>tx("readwrite",s=>s.put(n)).catch(()=>{}),400)};
+function ask(msg,o={}){return new Promise(res=>{const m=document.createElement("div");m.className="nmd";m.innerHTML=`<div class="nbx" role="dialog" aria-modal="true"><p></p>${o.input?'<input maxlength="80">':""}<div class="nbt"><button data-v="0">Cancel</button><button class="rp" data-v="1">${o.ok||"OK"}</button></div></div>`;m.querySelector("p").textContent=msg;const inp=m.querySelector("input");if(inp)inp.value=o.val||"";document.body.appendChild(m);(inp||m.querySelector(".rp")).focus();if(inp)inp.select();
+ const done=v=>{m.remove();res(v)};m.onclick=e=>{const b=e.target.closest("button");if(b)done(b.dataset.v=="1"?(inp?inp.value.trim():true):null);else if(e.target===m)done(null)};
+ m.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();done(inp?inp.value.trim():true)}else if(e.key==="Escape"){e.stopPropagation();done(null)}}})}
+window.sqAsk=ask;
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+/* sanitiser: only simple formatting + data: images survive */
+const OK={B:1,I:1,U:1,S:1,STRIKE:1,SPAN:1,DIV:1,BR:1,IMG:1,P:1,FONT:1,STRONG:1,EM:1};
+function clean(h){const d=new DOMParser().parseFromString("<body>"+(h||"")+"</body>","text/html").body;
+ (function w(n){[...n.childNodes].forEach(c=>{if(c.nodeType==3)return;if(c.nodeType!=1||/^(SCRIPT|STYLE|IFRAME|OBJECT|EMBED)$/.test(c.tagName)){c.remove();return}
+  if(!OK[c.tagName]){w(c);c.replaceWith(...c.childNodes);return}
+  [...c.attributes].forEach(a=>{const k=a.name;if(k=="style")c.setAttribute("style",a.value.split(";").filter(x=>/^\s*(color|background-color|font-weight|font-style|text-decoration(-line)?)\s*:\s*[#\w(),.% -]+$/i.test(x)).join(";"));else if(k=="src"&&c.tagName=="IMG"&&/^(data:image\/(png|jpe?g|webp|gif);base64,|https:\/\/)/i.test(a.value)){}else if(k=="color"&&c.tagName=="FONT"&&/^#?\w+$/.test(a.value)){}else c.removeAttribute(k)});
+  if(c.tagName=="IMG"&&!c.getAttribute("src")){c.remove();return}w(c)})})(d);return d.innerHTML}
+const IMG=/\.(png|jpe?g|jfif|gif|webp|bmp|avif|heic|heif)$/i,isImg=f=>/^image\//.test(f.type)||IMG.test(f.name||""),IMGURL=/^https?:\/\/\S+\.(png|jpe?g|gif|webp|avif)(\?\S*)?$/i;
+function say2(m,ms=2600){let t=$("ntoast");if(!t){t=document.createElement("div");t.id="ntoast";t.className="ntoast";document.body.appendChild(t)}t.textContent=m;t.style.opacity=1;clearTimeout(t._t);t._t=setTimeout(()=>t.style.opacity=0,ms)}
+const comp=async f=>{try{let src,w,h,rel=()=>{};
+ if(window.createImageBitmap){try{const bm=await createImageBitmap(f,{imageOrientation:"from-image"});src=bm;w=bm.width;h=bm.height;rel=()=>bm.close&&bm.close()}catch(e){}}
+ if(!src){src=await new Promise((ok,no)=>{const u=URL.createObjectURL(f),i=new Image();i.onload=()=>{URL.revokeObjectURL(u);ok(i)};i.onerror=()=>{URL.revokeObjectURL(u);no()};i.src=u});w=src.naturalWidth;h=src.naturalHeight}
+ const png=f.type=="image/png",k=Math.min(1,1000/Math.max(w,h)),c=document.createElement("canvas");c.width=Math.max(1,Math.round(w*k));c.height=Math.max(1,Math.round(h*k));const x=c.getContext("2d");if(!png){x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height)}x.drawImage(src,0,0,c.width,c.height);rel();return c.toDataURL(png?"image/png":"image/jpeg",.82)}catch(e){return ""}};
+function pk(dt){let files=[...(dt.files||[])].filter(isImg);if(!files.length)files=[...(dt.items||[])].filter(i=>i.kind==="file"&&/^image\//.test(i.type)).map(i=>i.getAsFile()).filter(Boolean);
+ const html=dt.getData?dt.getData("text/html"):"",text=((dt.getData&&(dt.getData("text/plain")||dt.getData("text/uri-list")))||"").trim();let imgs=[];
+ if(!files.length){if(html)imgs=[...new DOMParser().parseFromString(html,"text/html").querySelectorAll("img")].map(i=>i.src).filter(u=>/^(https:|data:image)/i.test(u));if(!imgs.length&&IMGURL.test(text))imgs=[text]}
+ return{files,imgs,text}}
+async function grab(p){const out=[];for(const f of p.files){const u=await comp(f);u?out.push(u):say2("Couldn't read "+(f.name||"that image")+". Try a PNG or JPG.",4000)}
+ for(const u of p.imgs.slice(0,6)){try{const b=await(await fetch(u)).blob();const c=await comp(b);if(c){out.push(c);continue}}catch(e){}out.push(u)}return out}
+function insImg(ed,u,rg){ed.focus();const s=getSelection();let r=rg&&ed.contains(rg.commonAncestorContainer)?rg:null;if(!r){r=document.createRange();r.selectNodeContents(ed);r.collapse(false)}s.removeAllRanges();s.addRange(r);
+ if(!document.execCommand("insertImage",false,u)){const i=document.createElement("img");i.src=u;r.insertNode(i)}ed.querySelectorAll("img").forEach(i=>i.onload=soon);ed.dispatchEvent(new Event("input"))}
+const chap=()=>(CH[ST.s]||[]).find(c=>c.id==ST.c[ST.s]);
+/* ---- header bars ---- */
+function bars(){$("nsb").innerHTML=SUB.map(s=>`<button data-s="${s[0]}" style="--c:${s[2]}" class="${s[0]==ST.s?"on":""}">${s[1]}</button>`).join("");
+ const L=CH[ST.s]||[],cur=chap();$("nch").innerHTML=L.map(c=>`<button data-c="${c.id}" class="${cur&&c.id==cur.id?"on":""}">${esc(c.name)}</button>`).join("")+`<button data-a="add">＋ Chapter</button>`+(cur?`<button class="x" data-a="ren" title="Rename chapter">✏️</button><button class="x" data-a="del" title="Delete chapter">🗑</button>`:"")}
+$("nsb").onclick=e=>{const b=e.target.closest("button");if(!b)return;ST.s=b.dataset.s;wr("sq_nst",ST);if(!chap()&&CH[ST.s].length)ST.c[ST.s]=CH[ST.s][0].id;bars();wall()};
+$("nch").onclick=async e=>{const b=e.target.closest("button");if(!b)return;const a=b.dataset.a;
+ if(b.dataset.c){ST.c[ST.s]=b.dataset.c;wr("sq_nst",ST);bars();return wall()}
+ if(a=="add"){const n=await ask("New chapter name",{input:1,ok:"Add"});if(!n)return;const c={id:Date.now().toString(36),name:n};CH[ST.s].push(c);ST.c[ST.s]=c.id;wr("sq_chaps",CH);wr("sq_nst",ST);bars();wall()}
+ if(a=="ren"){const c=chap(),n=await ask("Rename chapter",{input:1,val:c.name,ok:"Save"});if(n){c.name=n;wr("sq_chaps",CH);bars()}}
+ if(a=="del"){const c=chap(),all=await tx("readonly",s=>s.getAll())||[],mine=all.filter(n=>n.ch==c.id);if(!(await ask(`Delete "${c.name}" and its ${mine.length} note(s)?`,{ok:"Delete"})))return;await tx("readwrite",s=>{mine.forEach(n=>s.delete(n.id))});CH[ST.s]=CH[ST.s].filter(x=>x.id!=c.id);ST.c[ST.s]=(CH[ST.s][0]||{}).id;wr("sq_chaps",CH);wr("sq_nst",ST);bars();wall()}};
+/* ---- formatting toolbar ---- */
+$("nfm").innerHTML=`<span class="tt">Select text →</span><button data-x="bold"><b>B</b></button><button data-x="italic"><i>I</i></button><button data-x="underline"><u>U</u></button><button data-x="strikeThrough"><s>S</s></button><i></i><span class="tt">Highlight</span>`+HL.map(c=>`<button class="sw" data-h="${c}" style="background:${c}" aria-label="Highlight"></button>`).join("")+`<button class="sw" data-h="transparent" style="background:#fff" title="No highlight">✕</button><i></i><span class="tt">Colour</span>`+TC.map(c=>`<button class="sw" data-t="${c}" style="background:${c}" aria-label="Text colour"></button>`).join("")+`<i></i><button data-x="removeFormat" title="Clear formatting">⌫ Clear</button>`;
+$("nfm").onpointerdown=e=>e.preventDefault();$("nfm").onmousedown=e=>e.preventDefault();
+$("nfm").onclick=e=>{const b=e.target.closest("button");if(!b)return;const a=document.activeElement,ed=a&&a.closest&&a.closest(".ned");
+ if(!ed){const t=$("nfm").querySelector(".tt");t.textContent="Click inside a note, select text, then pick →";t.style.color="var(--S)";return}
+ document.execCommand("styleWithCSS",false,true);
+ if(b.dataset.x)document.execCommand(b.dataset.x);if(b.dataset.h)document.execCommand("hiliteColor",false,b.dataset.h);if(b.dataset.t)document.execCommand("foreColor",false,b.dataset.t);
+ ed.dispatchEvent(new Event("input"))};
+/* ---- notes (Pinterest-style masonry: shortest-column placement, newest first) ---- */
+let els=[],tm;
+function layout(){const k=Math.max(2,Math.min(6,Math.floor(W.clientWidth/190)));CV.innerHTML="";const cs=[...Array(k)].map(()=>{const c=document.createElement("div");c.className="nco";CV.appendChild(c);return c});els.forEach(d=>{cs.reduce((a,b)=>b.offsetHeight<a.offsetHeight?b:a).appendChild(d)})}
+const soon=()=>{clearTimeout(tm);tm=setTimeout(()=>{const a=document.activeElement;if(!(a&&a.closest&&a.closest(".ned"))&&els.length)layout()},180)};
+addEventListener("resize",()=>{if(N.classList.contains("open")&&els.length)layout()});
+function mk(n){const d=document.createElement("div");d._n=n;d.className="nt"+(n.kind=="pic"?" pic":"");d.style.setProperty("--nc",n.c);
+ d.innerHTML=`<div class="nh"><button data-a="c" title="Change colour">🎨</button><button data-a="p" title="Add photo">📷</button><button data-a="d" title="Delete note">🗑</button></div><div class="ned" contenteditable="true" spellcheck="true" data-ph="Write something…"></div>`;
+ const ed=d.querySelector(".ned");ed.innerHTML=clean(n.html);ed.querySelectorAll("img").forEach(i=>i.onload=soon);
+ ed.oninput=()=>{n.html=ed.innerHTML;sv(n)};
+ d.querySelector(".nh").onclick=e=>{const b=e.target.closest("button");if(!b)return;const a=b.dataset.a;
+  if(a=="c"){n.c=PAPER[(PAPER.indexOf(n.c)+1)%PAPER.length];d.style.setProperty("--nc",n.c);sv(n)}
+  if(a=="p"){pend=d;$("nfi").click()}
+  if(a=="d")ask("Delete this note?",{ok:"Delete"}).then(y=>{if(y){clearTimeout(T[n.id]);tx("readwrite",s=>s.delete(n.id));els=els.filter(x=>x!==d);notes=notes.filter(x=>x!==n);d.remove();if(els.length)layout();else wall()}})};
+ return d}
+async function wall(){els=[];notes=[];CV.innerHTML="";const c=chap();
+ if(!c){CV.innerHTML=`<div class="nem"><h3>${SUB.find(s=>s[0]==ST.s)[1]}</h3>Add your first chapter to start pinning notes.<br><button>＋ Add chapter</button></div>`;CV.querySelector("button").onclick=()=>$("nch").querySelector('[data-a=add]').click();return}
+ const all=await tx("readonly",s=>s.getAll())||[];notes=all.filter(n=>n.ch==c.id).sort((a,b)=>b.id-a.id);els=notes.map(mk);
+ if(!els.length){CV.innerHTML=`<div class="nem"><h3>${esc(c.name)}</h3>Nothing pinned yet. Tap <b>＋ Note</b>, or paste a diagram or screenshot with Ctrl+V (or drop an image here).</div>`;return}
+ layout();soon()}
+async function add(o){const c=chap();if(!c){$("nch").querySelector('[data-a=add]').click();return}
+ const n={ch:c.id,c:o.c||(o.kind=="pic"?"#ffffff":PAPER[notes.length%3]),html:o.html||"",kind:o.kind||"note"};
+ n.id=await tx("readwrite",s=>s.add(n));notes.push(n);const d=mk(n);els.unshift(d);layout();W.scrollTop=0;if(o.kind!="pic")d.querySelector(".ned").focus();return d}
+async function addUrls(us){for(const u of [...us].reverse())await add({kind:"pic",html:`<img src="${esc(u)}"><div><br></div>`})}
+$("nan").onclick=()=>add({});$("nad").onclick=()=>{pend=null;$("nfi").click()};
+async function place(us,ed,rg){if(!us.length)return;if(ed&&ed.isConnected)us.forEach((u,i)=>insImg(ed,u,i?null:rg));else await addUrls(us);say2(us.length>1?us.length+" images added ✓":"Image added ✓")}
+$("nfi").onchange=async e=>{const all=[...e.target.files],fs=all.filter(isImg);e.target.value="";if(!all.length)return;if(!fs.length){say2("That doesn't look like an image.");return}
+ say2("Adding image…");const us=[];for(const f of fs){const u=await comp(f);u?us.push(u):say2("Couldn't read "+f.name+". Try a PNG or JPG.",4000)}
+ const t=pend&&pend.isConnected?pend.querySelector(".ned"):null;pend=null;await place(us,t)};
+addEventListener("paste",async e=>{if(!N.classList.contains("open"))return;const ed=e.target.closest&&e.target.closest(".ned"),pd=pk(e.clipboardData);
+ if(pd.files.length||pd.imgs.length){e.preventDefault();if(ed&&pd.text&&!pd.files.length&&!/^https?:\/\/\S+$/.test(pd.text))document.execCommand("insertText",false,pd.text);const s=getSelection(),rg=s.rangeCount?s.getRangeAt(0).cloneRange():null;say2("Adding image…");await place(await grab(pd),ed,rg);return}
+ if(ed){e.preventDefault();document.execCommand("insertText",false,e.clipboardData.getData("text/plain"))}});
+W.ondragover=e=>e.preventDefault();W.ondrop=async e=>{const pd=pk(e.dataTransfer);if(!pd.files.length&&!pd.imgs.length)return;e.preventDefault();say2("Adding image…");await place(await grab(pd),null)};
+/* ---- open / close ---- */
+function openN(){N.classList.add("open");document.body.style.overflow="hidden";if(!chap()&&CH[ST.s].length)ST.c[ST.s]=CH[ST.s][0].id;bars();wall()}
+function closeN(){N.classList.remove("open");document.body.style.overflow=""}
+const sync=()=>location.hash==="#notes"?openN():closeN();
+$("nlb").onclick=()=>{viaBtn=1;location.hash="#notes"};
+$("nbk").onclick=()=>{if(viaBtn){viaBtn=0;history.back()}else{history.replaceState(null,"",location.pathname+location.search);closeN()}};
+addEventListener("hashchange",sync);
+addEventListener("keydown",e=>{if(e.key==="Escape"&&N.classList.contains("open")&&!document.documentElement.classList.contains("locked"))$("nbk").click()});
+if(location.hash==="#notes")sync();
+window.SQNotes={clean};
 })();
 </script>
 </body></html>
