@@ -195,7 +195,7 @@ html[data-theme=cafe] #dtutor,html[data-theme=minimal] #dtutor{box-shadow:0 1px 
 .stt{display:inline-flex;gap:4px;background:var(--pn2);border-radius:14px;padding:4px}
 .stt button{background:none;border:0;color:var(--mu);font:inherit;font-weight:700;padding:7px 16px;border-radius:11px;cursor:pointer;transition:.2s}
 .stt button.on{background:var(--xp);color:var(--onx)}
-.std{font:800 clamp(44px,12vw,64px)/1.1 'Bricolage Grotesque',system-ui,sans-serif;font-variant-numeric:tabular-nums;margin:12px 0 6px;transition:color .3s}
+.std{font:800 clamp(34px,8.5vw,60px)/1.1 'Bricolage Grotesque',system-ui,sans-serif;font-variant-numeric:tabular-nums;margin:12px 0 6px;transition:color .3s}
 .std small{font-size:.4em;color:var(--mu)}.stm.run .std{color:var(--xp)}.stm.fin .std{animation:tw 1s ease-in-out infinite;color:var(--S)}
 .stb{height:5px;border-radius:3px;background:var(--ln2);overflow:hidden;margin:0 auto 12px;max-width:320px}.stb i{display:block;height:100%;width:0;background:var(--xp);transition:width .3s linear}
 .stpre{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
@@ -254,6 +254,14 @@ html.locked #lockscr{display:flex}
 .nbt{display:flex;gap:8px;justify-content:flex-end}.nbt button{background:var(--pn2);color:var(--tx);border:0;border-radius:12px;padding:9px 14px;font:inherit;font-weight:700;cursor:pointer}.nbt .rp{background:var(--xp);color:var(--onx)}
 .nwn{background:color-mix(in srgb,var(--S) 20%,var(--pn));color:var(--tx);font-size:13px;padding:8px 12px;border-bottom:1px solid var(--ln2)}.nwn[hidden]{display:none}
 .ntoast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--pn);color:var(--tx);border:1px solid var(--ln2);padding:10px 16px;border-radius:14px;z-index:9100;opacity:0;transition:opacity .2s;pointer-events:none;font-weight:700;max-width:90vw;text-align:center}
+.stg{display:grid;grid-template-columns:118px 1fr;gap:12px;align-items:start}.stmain{min-width:0}
+#sdy{background:var(--pn2);border-radius:14px;padding:12px 8px;text-align:center;display:flex;flex-direction:column;gap:3px;align-items:center;align-self:stretch}#sdy small{color:var(--mu);font-size:11px;line-height:1.3}
+#sdt{font:800 21px/1.15 'Bricolage Grotesque',system-ui,sans-serif;font-variant-numeric:tabular-nums;color:var(--xp)}#sdd{font-style:normal;font-size:12px;color:var(--tx);margin-bottom:6px}
+.sbars{display:flex;gap:3px;align-items:flex-end;height:46px;width:100%;margin-top:auto}.sbars i{flex:1;background:var(--ln2);border-radius:3px;min-height:3px}.sbars i.t{background:var(--xp)}
+.sbl{display:flex;gap:3px;width:100%;margin-bottom:4px}.sbl span{flex:1;font-size:9px;color:var(--mu)}.sbl span.t{color:var(--tx);font-weight:700}
+.stm .stt{display:flex;width:100%}.stm .stt button{flex:1;padding:7px 4px}.stm .sta{gap:6px}.stm .tb{min-width:0;flex:1;padding:8px 4px}.stpre button{padding:7px 10px}.stpre input{width:60px}
+#sdy>small:last-child{font-size:10px}
+@media(max-width:340px){.stg{grid-template-columns:1fr}}
 </style></head><body>
 <div id="lockscr" role="dialog" aria-modal="true" aria-label="Enter PIN"><div class="lkc"><div class="fav lkav" role="img" aria-label="Aster"></div><h2>Study Quest</h2><p id="lkm">Enter your PIN</p><div class="lkd" id="lkd"><i></i><i></i><i></i><i></i></div><div class="lkp" id="lkp"><button>1</button><button>2</button><button>3</button><button>4</button><button>5</button><button>6</button><button>7</button><button>8</button><button>9</button><span></span><button>0</button><button data-k="b" aria-label="Backspace">⌫</button></div></div></div>
 <div id="notes" role="dialog" aria-label="Notes wall"><div class="ntb"><button id="nbk" aria-label="Back">←</button><b>📌 Notes wall</b><button id="nan" class="rp">＋ Note</button><button id="nad" aria-label="Add diagram or photo">🖼 Diagram</button></div><div class="nwn" id="nwn" hidden>⚠ Your browser is blocking saving in this view, so notes will disappear when you close it. Open the file directly in Chrome or Edge to keep them.</div><div class="nsb" id="nsb"></div><div class="nch" id="nch"></div><div class="nfm" id="nfm"></div><div id="nw"><div id="nwc"></div></div><input type="file" id="nfi" accept="image/*" multiple hidden></div>
@@ -274,11 +282,11 @@ html.locked #lockscr{display:flex}
 <div class="days" id="days"></div>
 <h2 id="dh"></h2><div id="list"></div>
 <div class="sec">Study timer</div>
-<div class="stm" id="stm"><div class="stt" role="tablist" aria-label="Timer mode"><button data-m="sw">⏱ Stopwatch</button><button data-m="tm">⏳ Timer</button></div>
+<div class="stm" id="stm"><div class="stg"><aside id="sdy" aria-label="Studied today"><small>Studied today</small><b id="sdt">0m 00s</b><em id="sdd"></em><div class="sbars" id="sbr"></div><div class="sbl" id="sbl"></div><small>12:00 AM – 11:59 PM</small></aside><div class="stmain"><div class="stt" role="tablist" aria-label="Timer mode"><button data-m="sw">⏱ Stopwatch</button><button data-m="tm">⏳ Timer</button></div>
 <div class="std" id="std" role="timer">00:00</div><div class="stb" id="stbw"><i id="stp"></i></div>
 <div class="stpre" id="stpre"><button data-p="15">15</button><button data-p="25">25</button><button data-p="45">45</button><button data-p="60">60</button><input id="stc" type="number" min="1" max="600" placeholder="min" aria-label="Custom minutes"><button id="stcs">Set</button></div>
 <div class="sta"><button class="tb p" id="tsa">Start</button><button class="tb" id="tsl">Lap</button><button class="tb" id="tsr">Reset</button></div>
-<ol class="stl" id="stl"></ol><div class="stn" id="stn"></div></div>
+<ol class="stl" id="stl"></ol><div class="stn" id="stn"></div></div></div></div>
 <div class="sec">Aster</div><div id="adash"></div>
 <div class="sec">Calendar</div>
 <div class="cal" id="cal"><div class="calh"><button id="cprev" aria-label="Previous month">‹</button><b id="cttl"></b><button id="cnext" aria-label="Next month">›</button></div><div class="calg" id="cgrid"></div>
@@ -359,7 +367,7 @@ let S={done:{},focus:0,sel:null},lastLv=0,seen={};
 try{S=Object.assign(S,JSON.parse(localStorage.getItem("sq")||"{}"))}catch(e){}
 const save=()=>{try{localStorage.setItem("sq",JSON.stringify(S))}catch(e){}};
 const dt=i=>new Date(2026,8,30+i);
-const todayIdx=Math.floor((new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate())-START)/864e5);
+let todayIdx=Math.floor((new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate())-START)/864e5);
 const cur=Math.min(N-1,Math.max(0,todayIdx));
 if(S.sel==null)S.sel=cur;
 function blocks(i){const r=D[i],x=r[3],xs=/^[PC] /.test(x)?x[0]:"S",xt=/^[PC] /.test(x)?x.slice(2):x;
@@ -374,7 +382,15 @@ bl.forEach(b=>{const d=S.done[b.id];if(b.lec)cnt[b.s][1]++;if(d){xp+=b.xp;n++;an
 full[i]=all;act[i]=any;if(all)xp+=100}
 /* a tutor report saved on a date also counts as an active day */
 try{const td=(JSON.parse(localStorage.getItem("daily_tutor_v1")||"{}").days)||{};for(const k in td)if(td[k]&&td[k].eval){const i=Math.round((new Date(k+"T00:00:00")-START)/864e5);if(i>=0&&i<N)act[i]=true}}catch(e){}
-let st=0;const end=Math.min(N-1,Math.max(-1,todayIdx));for(let i=end;i>=0;i--){if(full[i]||act[i])st++;else if(i!==end)break}
+/* streak = consecutive real calendar days with study activity, ending today (today is forgiven until it ends).
+   A day counts if you ticked a block / finished a focus run / ran the timer 1+ min on it, or saved a tutor report for it.
+   Progress from before this log started (A.s) is credited by plan day, so existing streaks are kept. */
+const dk=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+let A={};try{A=JSON.parse(localStorage.getItem("sq_act")||"{}")||{}}catch(e){}A.d=A.d||{};if(!A.s)A.s=dk(new Date());
+if(A.n!=null&&(n>A.n||S.focus>(A.f||0)))A.d[dk(new Date())]=1;
+if(A.n==null||n!==A.n||S.focus!==A.f){A.n=n;A.f=S.focus;try{localStorage.setItem("sq_act",JSON.stringify(A))}catch(e){}}
+let st=0;const nw=new Date(),ti=Math.floor((new Date(nw.getFullYear(),nw.getMonth(),nw.getDate())-START)/864e5);
+for(let k=0;k<400;k++){const d=new Date(nw.getFullYear(),nw.getMonth(),nw.getDate()-k),i=ti-k;const key=dk(d),on=A.d[key]||(key<A.s&&i>=0&&i<N&&(full[i]||act[i]));if(on)st++;else if(k>0)break}
 xp+=tutorInfo().xp;return{xp,full,cnt,st,n}}
 function badges(s){return[["🩸","First step",s.n>=1],["🌟","Perfect day",s.full.some(Boolean)],["🔥","3-day streak",s.st>=3],["🚀","7-day streak",s.st>=7],["⚡","Physics 50%",s.cnt.P[0]>=s.cnt.P[1]/2&&s.cnt.P[1]>0&&s.cnt.P[0]>0],["🧪","Chem 50%",s.cnt.C[0]>=s.cnt.C[1]/2&&s.cnt.C[0]>0],["🧬","Bio 50%",s.cnt.B[0]>=s.cnt.B[1]/2&&s.cnt.B[0]>0],["🎯","5 focus runs",S.focus>=5],["👑","Level 5",s.xp>=1600],["📚","Tutor day 80%+",tutorInfo().best>=80]]}
 function toast(t){const e=$("ts");e.textContent=t;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),2400)}
@@ -1069,15 +1085,17 @@ show();
 </script><script>
 /* Study stopwatch + countdown timer (timestamp-based, survives refresh) */
 (()=>{
-const $=id=>document.getElementById(id),KEY="sq_timer",p2=n=>String(n).padStart(2,"0"),day=()=>new Date().toDateString(),BASE=document.title;
-let S={m:"sw",sw:{run:0,start:0,acc:0,laps:[]},tm:{dur:15e5,run:0,end:0,left:15e5,done:0},day:{d:day(),ms:0},last:Date.now()};
+const $=id=>document.getElementById(id),KEY="sq_timer",p2=n=>String(n).padStart(2,"0"),day=()=>new Date().toDateString(),iso=(d=new Date())=>d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate()),BASE=document.title;
+let S={m:"sw",sw:{run:0,start:0,acc:0,laps:[]},tm:{dur:15e5,run:0,end:0,left:15e5,done:0},day:{d:day(),k:iso(),ms:0},hist:{},last:Date.now()};
 try{const o=JSON.parse(localStorage.getItem(KEY)||"null");if(o)S=Object.assign(S,o)}catch(e){}
-const now0=Date.now();if(S.day.d!==day())S.day={d:day(),ms:0};
-if(S.sw.run||S.tm.run){const a=(S.sw.run?now0:Math.min(now0,S.tm.end))-S.last;if(a>0&&S.day.d===day())S.day.ms+=a}
+const now0=Date.now();S.hist=S.hist||{};if(!S.day.k)S.day.k=iso(new Date(S.day.d));
+if(S.day.d!==day()){S.hist[S.day.k]=S.day.ms;S.day={d:day(),k:iso(),ms:0}}
+if(S.sw.run||S.tm.run){/* credit time while the page was closed, split at each midnight */let c=S.last;const e=S.sw.run?now0:Math.min(now0,S.tm.end);while(c<e){const dd=new Date(c),mid=+new Date(dd.getFullYear(),dd.getMonth(),dd.getDate()+1),seg=Math.min(e,mid)-c,k=iso(dd);if(k===S.day.k)S.day.ms+=seg;else S.hist[k]=(S.hist[k]||0)+seg;c+=seg}}
 if(S.tm.run&&S.tm.end<=now0){S.tm.run=0;S.tm.left=0;S.tm.done=1}
 const swMs=()=>S.sw.acc+(S.sw.run?Date.now()-S.sw.start:0),tmLeft=()=>S.tm.run?Math.max(0,S.tm.end-Date.now()):S.tm.left;
 const hms=ms=>{const s=Math.floor(ms/1e3),h=Math.floor(s/3600);return(h?h+":":"")+p2(Math.floor(s%3600/60))+":"+p2(s%60)};
-const save=()=>{S.last=Date.now();try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const save=()=>{S.last=Date.now();S.hist[S.day.k]=S.day.ms;{const ks=Object.keys(S.hist).sort();while(ks.length>60)delete S.hist[ks.shift()]}try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}
+ if(S.day.ms>=6e4){try{const A=JSON.parse(localStorage.getItem("sq_act")||"{}")||{},d=new Date(),k=d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate());A.d=A.d||{};if(!A.d[k]){A.d[k]=1;localStorage.setItem("sq_act",JSON.stringify(A));if(typeof render==="function")render()}}catch(e){}}};
 let ac,lt=Date.now(),sv=0;
 const beep=()=>{try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();[0,.35,.7].forEach(t=>{const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=880;o.connect(g);g.connect(ac.destination);const n=ac.currentTime+t;g.gain.setValueAtTime(.0001,n);g.gain.exponentialRampToValueAtTime(.25,n+.03);g.gain.exponentialRampToValueAtTime(.0001,n+.3);o.start(n);o.stop(n+.32)})}catch(e){}};
 function finish(){S.tm.run=0;S.tm.left=0;S.tm.done=1;save();beep();
@@ -1092,10 +1110,14 @@ function draw(){const sw=S.m=="sw",ms=sw?swMs():tmLeft(),run=sw?S.sw.run:S.tm.ru
  $("tsl").disabled=!S.sw.run;$("tsr").disabled=sw?(!S.sw.acc&&!S.sw.run):(!S.tm.run&&!S.tm.done&&S.tm.left==S.tm.dur);
  document.querySelectorAll("#stpre button[data-p]").forEach(b=>{b.classList.toggle("on",+b.dataset.p*6e4==S.tm.dur);b.disabled=!!S.tm.run});$("stcs").disabled=!!S.tm.run;
  const L=S.sw.laps;$("stl").innerHTML=L.slice(0,5).map((l,i)=>`<li><span>Lap ${L.length-i}</span><span>${hms(l.d)} · ${hms(l.t)}</span></li>`).join("");
- const t=S.day.ms,h=Math.floor(t/36e5),m=Math.floor(t%36e5/6e4);
- $("stn").textContent=(!sw&&S.tm.done?"✓ Time's up! ":"")+`Studied today: ${h?h+"h ":""}${m}m`;
+ $("stn").textContent=!sw&&S.tm.done?"✓ Time's up!":"";
+ const t=S.day.ms,h=Math.floor(t/36e5),m=Math.floor(t%36e5/6e4),sc=Math.floor(t%6e4/1e3);
+ $("sdt").textContent=h?`${h}h ${p2(m)}m`:`${m}m ${p2(sc)}s`;$("sdd").textContent=new Date().toLocaleDateString("en",{weekday:"short",day:"numeric",month:"short"});
+ const now=new Date(),vs=[];for(let i=6;i>=0;i--){const d=new Date(now.getFullYear(),now.getMonth(),now.getDate()-i);vs.push({v:i?S.hist[iso(d)]||0:t,w:"SMTWTFS"[d.getDay()],t:!i,n:d.toDateString()})}
+ const mx=Math.max(36e5,...vs.map(x=>x.v)),sig=vs.map(x=>Math.round(x.v/6e4)).join();
+ if($("sbr").dataset.s!==sig){$("sbr").dataset.s=sig;$("sbr").innerHTML=vs.map(x=>`<i class="${x.t?"t":""}" style="height:${Math.max(3,x.v/mx*46)}px" title="${x.n}: ${Math.floor(x.v/36e5)}h ${Math.floor(x.v%36e5/6e4)}m"></i>`).join("");$("sbl").innerHTML=vs.map(x=>`<span class="${x.t?"t":""}">${x.w}</span>`).join("")}
  document.title=run?(hms(ms)+" · "+BASE):(S.tm.done&&!sw?"⏱️ Time's up!":BASE)}
-function tick(){const n=Date.now();if(S.sw.run||S.tm.run)S.day.ms+=n-lt;lt=n;if(S.tm.run&&n>=S.tm.end)finish();else draw();if(n-sv>5000){sv=n;save()}}
+function tick(){const n=Date.now();if(S.day.d!==day()){S.hist[S.day.k]=S.day.ms;S.day={d:day(),k:iso(),ms:0};save()}if(S.sw.run||S.tm.run)S.day.ms+=n-lt;lt=n;if(S.tm.run&&n>=S.tm.end)finish();else draw();if(n-sv>5000){sv=n;save()}}
 $("stm").onclick=e=>{const b=e.target.closest("button");if(!b)return;const n=Date.now();if(b.dataset.m){S.m=b.dataset.m;save();return draw()}
  if(b.dataset.p){S.tm.dur=+b.dataset.p*6e4;if(!S.tm.run){S.tm.left=S.tm.dur;S.tm.done=0}return save(),draw()}
  if(b.id=="stcs"){const v=parseFloat($("stc").value);if(v>=1&&v<=600){S.tm.dur=Math.round(v*6e4);S.tm.left=S.tm.dur;S.tm.done=0;$("stc").value="";save();draw()}return}
@@ -1271,4 +1293,8 @@ if(location.hash==="#notes")sync();
 window.SQNotes={clean};
 })();
 </script>
-</body></html>
+<script>
+/* keep "today" fresh if the tab stays open past midnight */
+(()=>{let d=new Date().toDateString();const chk=()=>{const n=new Date().toDateString();if(n!==d){d=n;try{const t=new Date();todayIdx=Math.floor((new Date(t.getFullYear(),t.getMonth(),t.getDate())-START)/864e5);render()}catch(e){}}};
+setInterval(chk,30000);document.addEventListener("visibilitychange",chk);addEventListener("focus",chk)})();
+</script></body></html>
