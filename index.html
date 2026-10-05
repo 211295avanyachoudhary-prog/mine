@@ -292,18 +292,27 @@ html[data-theme=noir] .badge.on{background:linear-gradient(rgba(0,0,0,.5),rgba(0
 html[data-theme=noir] :is(.btn:not(.g),.tb.p,.ab,.rp,#fse,.mode button.on,.stt button.on){background:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)),var(--n-neb) center/cover;color:#fff;border:1px solid #6a6a78;text-shadow:0 1px 3px #000}
 html[data-theme=noir] :is(.tutor,.amb,.card,.day,.sp,.lk,.sec){border:1px solid var(--ln2)}
 html[data-theme=noir] .lkav{background:var(--n-spider) center/cover}
+#lpt{position:fixed;z-index:60;top:calc(10px + env(safe-area-inset-top,0px));left:10px;background:var(--pn);color:var(--tx);border:1px solid var(--ln2);border-radius:999px;padding:9px 14px;font:inherit;font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 2px 10px #0005}
+#lps{position:fixed;inset:0;z-index:70;background:#0009;opacity:0;pointer-events:none;transition:opacity .25s}
+#lpn{position:fixed;z-index:80;top:0;left:0;bottom:0;width:min(340px,88vw);background:var(--pn);border-right:1px solid var(--ln2);padding:calc(14px + env(safe-area-inset-top,0px)) 14px 20px;overflow-y:auto;transform:translateX(-102%);transition:transform .28s;visibility:hidden}
+#lpn.open{transform:none;visibility:visible}#lps.open{opacity:1;pointer-events:auto}
+#lpn .lph{display:flex;align-items:center;margin-bottom:12px}#lpn .lph b{flex:1;font-size:17px}#lpn .lph button{background:var(--pn2);color:var(--tx);border:0;border-radius:10px;width:34px;height:34px;font-size:16px;cursor:pointer}
+#lpn .amb{background:none;border:0;padding:0;margin:0}#lpn .arow{flex-direction:column;align-items:stretch;gap:8px}
+#lpn .thm{flex-direction:column;overflow:visible;padding:0}#lpn .thm button{width:100%}#lpn .arow .btn{width:100%;text-align:left}
+.wrap{padding-top:calc(58px + env(safe-area-inset-top,0px))}
 </style></head><body>
 <div id="lockscr" role="dialog" aria-modal="true" aria-label="Enter PIN"><div class="lkc"><div class="fav lkav" role="img" aria-label="Aster"></div><h2>Study Quest</h2><p id="lkm">Enter your PIN</p><div class="lkd" id="lkd"><i></i><i></i><i></i><i></i></div><div class="lkp" id="lkp"><button>1</button><button>2</button><button>3</button><button>4</button><button>5</button><button>6</button><button>7</button><button>8</button><button>9</button><span></span><button>0</button><button data-k="b" aria-label="Backspace">⌫</button></div></div></div>
 <div id="notes" role="dialog" aria-label="Notes wall"><div class="ntb"><button id="nbk" aria-label="Back">←</button><b>📌 Notes wall</b><button id="nan" class="rp">＋ Note</button><button id="nad" aria-label="Add diagram or photo">🖼 Diagram</button></div><div class="nwn" id="nwn" hidden>⚠ Your browser is blocking saving in this view, so notes will disappear when you close it. Open the file directly in Chrome or Edge to keep them.</div><div class="nsb" id="nsb"></div><div class="nch" id="nch"></div><div class="nfm" id="nfm"></div><div id="nw"><div id="nwc"></div></div><input type="file" id="nfi" accept="image/*" multiple hidden></div>
-<div id="reels" role="dialog" aria-label="Reels corner"><div class="rtb"><button id="rbk" aria-label="Back">←</button><b>🎬 Reels corner</b><span id="rct"></span><button id="rmu" aria-label="Toggle sound">🔊</button><button id="rad" class="rp" aria-label="Add reels">＋ Add</button></div><div id="rfd" tabindex="0"></div><input type="file" id="rfi" accept="video/*,.mp4,.mov,.m4v,.webm" multiple hidden></div>
+<div id="reels" role="dialog" aria-label="Reels corner"><div class="rtb"><button id="rbk" aria-label="Back">←</button><b>🎬 Reels corner</b><span id="rct"></span><button id="rau" class="rp" title="Autoplay: when a reel ends, go to the next one" aria-label="Autoplay next reel" aria-pressed="true">⏭ Auto</button><button id="rmu" aria-label="Toggle sound">🔊</button><button id="rad" class="rp" aria-label="Add reels">＋ Add</button></div><div id="rfd" tabindex="0"></div><input type="file" id="rfi" accept="video/*,.mp4,.mov,.m4v,.webm" multiple hidden></div>
+<button id="lpt" aria-label="Open menu" aria-expanded="false" aria-controls="lpn">☰ Menu</button><div id="lps"></div><aside id="lpn" aria-label="Themes and tools"><div class="lph"><b>🎨 Themes &amp; tools</b><button id="lpx" aria-label="Close menu">✕</button></div><div class="amb" id="amb"><div class="arow"><span class="al">🎨 Theme</span><div class="thm" id="thm" role="group" aria-label="Theme"></div></div>
+<div class="arow" style="margin-top:8px"><button class="btn g" id="ambt" aria-expanded="false" aria-controls="ambp" style="margin:0">🎧 Ambient sounds <span id="ambc"></span></button><button class="btn g" id="nlb" style="margin:0">📌 Notes</button><button class="btn g" id="rlb" style="margin:0">🎬 Reels</button><button class="btn g" id="lkb" title="Lock now" style="margin:0">🔒 Lock</button><small id="ambh" hidden>Tap anywhere to resume your saved mix</small></div>
+<div id="ambp" hidden><div class="mst"><span class="al">🔊 Master</span><input type="range" min="0" max="100" id="amv" aria-label="Master volume"><button class="btn g" id="ams" style="margin:0">Stop all</button></div><div class="sg" id="sg"></div></div></div></aside>
 <div class="wrap">
 <div class="top"><div class="lvl" id="lvl"><span id="lv">1</span></div>
 <div class="grow"><h1 class="big" id="rank">Rookie</h1><div class="bar"><i id="xb" style="width:0"></i></div><small id="xt" style="color:var(--mu)"></small></div>
 <div class="stat clk"><b id="clock">--:--:--</b><small id="cdate"></small></div><div class="stat"><b id="st">0🔥</b><small>streak</small></div><div class="stat"><b id="dl">0</b><small>days to go</small></div></div>
 
-<div class="amb" id="amb"><div class="arow"><span class="al">🎨 Theme</span><div class="thm" id="thm" role="group" aria-label="Theme"></div></div>
-<div class="arow" style="margin-top:8px"><button class="btn g" id="ambt" aria-expanded="false" aria-controls="ambp" style="margin:0">🎧 Ambient sounds <span id="ambc"></span></button><button class="btn g" id="nlb" style="margin:0">📌 Notes</button><button class="btn g" id="rlb" style="margin:0">🎬 Reels</button><button class="btn g" id="lkb" title="Lock now" style="margin:0">🔒 Lock</button><small id="ambh" hidden>Tap anywhere to resume your saved mix</small></div>
-<div id="ambp" hidden><div class="mst"><span class="al">🔊 Master</span><input type="range" min="0" max="100" id="amv" aria-label="Master volume"><button class="btn g" id="ams" style="margin:0">Stop all</button></div><div class="sg" id="sg"></div></div></div>
+
 
 <div class="mode"><button class="on" data-m="quest">🎯 Quest</button><button data-m="dtutor">📚 Daily Tutor</button></div>
 <div id="quest"><div class="tutor"><div class="bot">🤖</div><div class="grow"><div class="say" id="say"></div>
@@ -634,9 +643,9 @@ document.querySelectorAll(".mode button").forEach(b=>b.onclick=()=>{document.que
 
 /* ===== 1. STORAGE (swap for Firebase later: replace load/save with Firestore doc get/set, e.g. users/{uid}) ===== */
 const Store={key:"daily_tutor_v1",load(){try{return JSON.parse(localStorage.getItem(this.key))}catch(e){return null}},save(d){try{localStorage.setItem(this.key,JSON.stringify(d))}catch(e){}window.dispatchEvent(new Event("tutor-saved"))}};
-const DEF={cfg:{tutor:"Mr. Hale",level:2,wake:"04:00",wakePen:1,sleep:8,water:10,ex:30,steps:{am:3,pm:3},subjects:["Physics","Chemistry","Biology"],off:{},met:0.8},days:{},chat:[],active:null};
+const DEF={cfg:{tutor:"Mr. Hale",level:2,wake:"04:00",wakePen:1,sleep:8,water:10,ex:30,steps:{am:3,pm:3},subjects:["Physics","Chemistry","Biology"],off:{},met:0.8,qn:{Physics:50,Chemistry:50,Biology:50}},days:{},chat:[],active:null};
 const clone=o=>JSON.parse(JSON.stringify(o));
-let D=Object.assign(clone(DEF),Store.load()||{});D.cfg=Object.assign(clone(DEF.cfg),D.cfg);
+let D=Object.assign(clone(DEF),Store.load()||{});D.cfg=Object.assign(clone(DEF.cfg),D.cfg);D.cfg.qn=Object.assign({Physics:50,Chemistry:50,Biology:50},D.cfg.qn||{});
 const save=()=>Store.save(D);
 
 /* ===== 2. HELPERS ===== */
@@ -648,9 +657,9 @@ const hm=s=>{const[a,b]=s.split(":");return +a*60+ +b},tstr=m=>{m=Math.round(m);
 
 //#ENGINE
 /* ===== 3. SCORING ENGINE (pure, deterministic) ===== */
-function defs(cfg){return[["wake","🌅","Wake-up"],["water","💧","Water"],...cfg.subjects.map(s=>["sub:"+s,"📖",s]),["am","🧴","Morning skincare"],["pm","🌙","Night skincare"],["exercise","🏃","Exercise"],["sleep","😴","Sleep"]].filter(c=>!cfg.off[c[0]]).map(([id,ic,name])=>({id,ic,name}))}
-const getF=(f,id)=>id.startsWith("sub:")?(f.sub||{})[id.slice(4)]:f[id];
-const isNA=(c,plan)=>c.id.startsWith("sub:")?!((plan.subjects||{})[c.name]||{}).on:(c.id==="exercise"&&!!plan.rest);
+function defs(cfg){return[["wake","🌅","Wake-up"],["water","💧","Water"],...cfg.subjects.flatMap(s=>[["sub:"+s,"📖",s],...(cfg.qn?[["q:"+s,"🧮",s+" questions"]]:[])]),["am","🧴","Morning skincare"],["pm","🌙","Night skincare"],["exercise","🏃","Exercise"],["sleep","😴","Sleep"]].filter(c=>!cfg.off[c[0]]).map(([id,ic,name])=>({id,ic,name}))}
+const getF=(f,id)=>id.startsWith("q:")?(f.q||{})[id.slice(2)]:id.startsWith("sub:")?(f.sub||{})[id.slice(4)]:f[id];
+const isNA=(c,plan)=>c.id.startsWith("q:")?!((plan.subjects||{})[c.id.slice(2)]||{}).on:c.id.startsWith("sub:")?!((plan.subjects||{})[c.name]||{}).on:(c.id==="exercise"&&!!plan.rest);
 function scoreCat(c,f,plan,cfg){
  if(isNA(c,plan))return{...c,na:true,t:"",a:"",reason:c.id==="exercise"?"Rest day, so nothing was required.":"No task was scheduled today.",calc:"Not applicable: removed from the total and the maximum."};
  const v=getF(f,c.id);let s,t,a,r,k;
@@ -659,6 +668,7 @@ function scoreCat(c,f,plan,cfg){
  else if(c.id==="exercise"){s=clamp(Math.min(v,cfg.ex)/cfg.ex*10);t=cfg.ex+" min";a=v+" min";r=`${n2(Math.min(v,cfg.ex)/cfg.ex*100)}% of your target.`;k=`${Math.min(v,cfg.ex)} ÷ ${cfg.ex} × 10 = ${n2(s)} (capped at 10)`}
  else if(c.id==="sleep"){s=clamp(Math.min(v,cfg.sleep)/cfg.sleep*10);t=cfg.sleep+" h";a=v+" h";r=v>=cfg.sleep?"Target met.":`${n2(v/cfg.sleep*100)}% of your sleep target.`;k=`${Math.min(v,cfg.sleep)} ÷ ${cfg.sleep} × 10 = ${n2(s)}`}
  else if(c.id==="am"||c.id==="pm"){const S=f[c.id+"S"];s=clamp(v*10);t="Full routine";a=S?`${S[0]} of ${S[1]} steps`:Math.round(v*100)+"% done";r=S?`${S[0]} of ${S[1]} steps completed.`:(v===1?"Routine completed.":v===0?"Routine not done.":`${Math.round(v*100)}% of the routine completed.`);k=S?`${S[0]} ÷ ${S[1]} × 10 = ${n2(s)}`:`${n2(v)} × 10 = ${n2(s)}`}
+ else if(c.id.startsWith("q:")){const tg=+((cfg.qn||{})[c.id.slice(2)])||50;s=clamp(Math.min(v,tg)/tg*10);t=tg+" questions";a=v+" questions";r=`${v} of ${tg} questions solved (${n2(Math.min(v,tg)/tg*100)}% of your target).`;k=`${Math.min(v,tg)} ÷ ${tg} × 10 = ${n2(s)} (capped at 10)`}
  else{const p=plan.subjects[c.name];s=clamp(v*10);t=p.task||"Planned work";a=v===1?"Completed":v===0?"Not done":Math.round(v*100)+"% completed";r=`${Math.round(v*100)}% of the planned work was completed.`;k=`${n2(v)} × 10 = ${n2(s)}`}
  return{...c,na:false,score:n2(s),t,a,reason:r,calc:k};
 }
@@ -679,8 +689,10 @@ const aRe=s=>new RegExp("\\b"+alias(s)+"\\b"),naRe=s=>new RegExp(`\\bno\\s+${ali
 const WAKE=/(?:woke(?:\s+up)?|wake[\s-]*up|waking(?:\s+up)?|got\s+up|get\s+up)\s*(?:time\s*)?(?:was\s*|at\s*|around\s*|by\s*|about\s*|@\s*)*(\d{1,2})(?::(\d{2}))?\s*(am|pm)?/,EX=/exercis|workout|work out|worked out|\bgym\b|\bran\b|\brun\b|jog|yoga|cardio|\bwalk/,OTH=/skin|routine|water|glass|sleep|slept|exercis|workout|gym|woke|wake|\bran\b|yoga/;
 function parse(text,cfg){
  const W={one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,eleven:11,twelve:12};
- const T=text.toLowerCase().replace(/\b(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)\b/g,m=>W[m]);
- const f={sub:{}},conf=new Set();
+ let T=text.toLowerCase().replace(/\b(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)\b/g,m=>W[m]);
+ const f={sub:{},q:{}},conf=new Set();
+ cfg.subjects.forEach(s=>{const a=alias(s),U="(?:questions?|qs?|mcqs?|problems?|pyqs?)",res=[new RegExp("(\\d+)\\s*(?:\\/|of|out of)\\s*\\d+\\s*"+U+"\\s*(?:of|in|from|for|on)?\\s*"+a+"\\b"),new RegExp("(\\d+)\\s*(?:\\/|of|out of)\\s*\\d+\\s*"+a+"\\s*"+U),new RegExp("(\\d+)\\s*"+a+"\\s*"+U),new RegExp("(\\d+)\\s*"+U+"\\s*(?:of|in|from|for|on)?\\s*"+a+"\\b"),new RegExp("\\b"+a+"\\b\\s*"+U+"?\\s*(?:[:=\\-]|was|were|is)?\\s*(\\d+)\\s*"+U),new RegExp("\\b"+a+"\\b\\s*"+U+"\\s*(?:[:=\\-]|was|were|is)?\\s*(\\d+)"),new RegExp("\\b"+a+"\\b[^.,;\\d]{0,20}?(?:solved|did|done|attempted)\\s*(\\d+)")];
+  for(const re of res){const m=T.match(re);if(m){f.q[s]=+m[1];T=T.replace(m[0]," ");break}}});
  const set=(k,v)=>{if(k.startsWith("sub:")){const s=k.slice(4);if(f.sub[s]!==undefined&&f.sub[s]!==v)conf.add(s);else f.sub[s]=v}else if(f[k]!==undefined&&f[k]!==v)conf.add(k);else f[k]=v};
  const segs=T.split(/[.;\n!?]|,|\band\b|\bbut\b|\bthen\b/).map(s=>s.trim()).filter(Boolean);let pend=[];
  for(const sg of segs){let m;
@@ -711,7 +723,7 @@ function parseDate(t){const M="jan feb mar apr may jun jul aug sep oct nov dec".
 
 /* ===== 5. TUTOR (chat logic) ===== */
 const LAB={wake:"wake-up time",water:"glasses of water",am:"morning skincare",pm:"night skincare",exercise:"exercise minutes (or say it was a rest day)",sleep:"sleep hours"};
-const lab=c=>c.id.startsWith("sub:")?c.name+" (done, partial or skipped?)":LAB[c.id];
+const lab=c=>c.id.startsWith("q:")?`how many ${c.id.slice(2)} questions you solved (target ${+((D.cfg.qn||{})[c.id.slice(2)])||50})`:c.id.startsWith("sub:")?c.name+" (done, partial or skipped?)":LAB[c.id];
 const getDay=d=>{const x=D.days[d]=D.days[d]||{f:{sub:{}},plan:null,claim:{}};x.f.sub=x.f.sub||{};x.claim=x.claim||{};ensurePlan(x,d);return x};
 function ensurePlan(x,d){x.plan=x.plan||{subjects:{},rest:false,set:false};if(!x.eval){const pre=(window.sqPlanFor&&d&&window.sqPlanFor(d))||{};D.cfg.subjects.forEach(s=>{const p=x.plan.subjects[s]=x.plan.subjects[s]||{on:true,task:""};if(!p.task&&!x.plan.set&&pre[s])p.task=pre[s]})}}
 function say(text,o={}){D.chat.push({r:"t",text,...o});D.chat=D.chat.slice(-150);save();paintChat()}
@@ -719,7 +731,7 @@ function tutorSays(text,o){say(text,o)}
 function setDay(d){D.active=d;const day=getDay(d);save();
  if(day.eval)return say(`${fdate(d)}. You already have a report for this day: ${day.eval.total}/${day.eval.max} (${day.eval.pct}%). Send corrections and I'll recalculate the whole day.`);
  const pl=D.cfg.subjects.map(s=>day.plan.subjects[s].on?`${s}${day.plan.subjects[s].task?" ("+day.plan.subjects[s].task+")":""}`:`${s}: not scheduled`).join("; ");
- say(`${fdate(d)}. Alright. Give me today's report. Tell me honestly what you completed, what you missed, and what happened.\n\nOn your plan: ${pl}${day.plan.rest?"; exercise: rest day":""}.`)}
+ say(`${fdate(d)}. Alright. Give me today's report. Tell me honestly what you completed, what you missed, and what happened.\n\nOn your plan: ${pl}${day.plan.rest?"; exercise: rest day":""}.\n\nAlso tell me how many questions you solved in each subject. Targets: ${D.cfg.subjects.map(x=>x+" "+(+((D.cfg.qn||{})[x])||50)).join(", ")}.`)}
 function bare(text,c){const t=text.toLowerCase().trim();let m;
  if(c.id==="wake"&&(m=t.match(/^\D*(\d{1,2})(?::(\d{2}))?\s*(am|pm)?\D*$/))){let h=+m[1];if(m[3]==="pm"&&h<12)h+=12;return h*60+ +(m[2]||0)}
  if(["water","sleep","exercise"].includes(c.id)&&(m=t.match(/(\d+(?:\.\d+)?)/)))return+m[1];
@@ -755,7 +767,8 @@ function onUser(text){
  const d=parseDate(text);if(d)return setDay(d);
  if(!D.active)return say("Give me the date first, for example “30 September 2026”, or use the date picker above.",{chips:[{l:"Use today: "+fdate(iso(new Date())),a:"date:"+iso(new Date())}]});
  const day=getDay(D.active),P=parse(text,D.cfg),F=P.f,notes=[];let rec=[];
- for(const k in F){if(k==="sub"||k==="rest"||k==="amb")continue;day.f[k]=F[k];rec.push(k)}
+ for(const s in (F.q||{})){(day.f.q=day.f.q||{})[s]=F.q[s];rec.push("q:"+s)}
+ for(const k in F){if(k==="sub"||k==="q"||k==="rest"||k==="amb")continue;day.f[k]=F[k];rec.push(k)}
  if(F.rest){day.plan.rest=true;day.plan.set=true;rec.push("rest day");delete day.f.exercise}
  else if(F.exercise>0)day.plan.rest=false;
  for(const s in F.sub){const v=F.sub[s];
@@ -764,15 +777,17 @@ function onUser(text){
  P.conf.forEach(k=>{if(D.cfg.subjects.includes(k))delete day.f.sub[k];else delete day.f[k]});
  if(F.amb!==undefined)day.amb=F.amb;
  if(P.conf.length)return say(`You gave me two different answers for ${P.conf.map(k=>LAB[k]||k).join(" and ")}. Which one is correct?`);
- if(!rec.length&&F.amb===undefined){const ex=missing(day,D.cfg)[0];if(ex&&day.expect===ex.id){const b=bare(text,ex);if(b!==undefined){if(ex.id.startsWith("sub:"))day.f.sub[ex.name]=b;else day.f[ex.id]=b;rec.push(ex.id)}}}
+ if(!rec.length&&F.amb===undefined){const cf=day.cfgSnap||D.cfg,ex=missing(day,cf)[0];if(day.expect&&day.expect.startsWith("q:")){const qm=missing(day,cf).filter(c=>c.id.startsWith("q:"));let hit=0;qm.forEach(c=>{const s=c.id.slice(2),m=text.toLowerCase().match(new RegExp("\\b"+alias(s)+"\\b\\W*(\\d+)"));if(m){(day.f.q=day.f.q||{})[s]=+m[1];rec.push(c.id);hit++}});if(!hit){const nums=(text.match(/\d+/g)||[]).map(Number);if(nums.length&&nums.length<=qm.length)nums.forEach((n,i)=>{(day.f.q=day.f.q||{})[qm[i].id.slice(2)]=n;rec.push(qm[i].id)})}}if(!rec.length&&ex&&day.expect===ex.id){const b=bare(text,ex);if(b!==undefined){if(ex.id.startsWith("sub:"))day.f.sub[ex.name]=b;else day.f[ex.id]=b;rec.push(ex.id)}}}
  if(!rec.length&&F.amb===undefined)return say(smalltalk(text,day));
  advance(D.active,notes,rec)}
 function advance(d,notes=[],rec=[]){const day=getDay(d);save();
  const cl=Object.keys(day.claim)[0];
  if(cl)return say(`Your plan lists ${cl} as scheduled today${day.plan.subjects[cl].task?" ("+day.plan.subjects[cl].task+")":""}. Was it actually not scheduled?`,{chips:[{l:`Yes, mark ${cl} N/A`,a:"na:"+cl},{l:"No, I skipped it",a:"skip:"+cl}]});
  if(day.amb!==undefined&&day.f.am===undefined&&day.f.pm===undefined)return say("Was that your morning routine or your night routine?",{chips:[{l:"Morning",a:"amb:am"},{l:"Night",a:"amb:pm"},{l:"Both",a:"amb:both"}]});
- const ms=missing(day,D.cfg),pre=[...(rec.length?["Recorded: "+[...new Set(rec.map(k=>k.startsWith("sub:")?k.slice(4):(LAB[k]||k).replace(/ \(.*/,"")))].join(", ")+"."]:[]),...notes.map(x=>x+".")].join(" ");
- if(ms.length){day.expect=ms[0].id;save();return say(`${pre} I still need: ${ms.map(lab).join("; ")}.`.trim())}
+ const ms=missing(day,day.cfgSnap||D.cfg),pre=[...(rec.length?["Recorded: "+[...new Set(rec.map(k=>k.startsWith("sub:")?k.slice(4):k.startsWith("q:")?k.slice(2)+" questions":(LAB[k]||k).replace(/ \(.*/,"")))].join(", ")+"."]:[]),...notes.map(x=>x+".")].join(" ");
+ if(ms.length){day.expect=ms[0].id;save();const qs=ms.filter(c=>c.id.startsWith("q:"));
+  if(qs.length===ms.length)return say(`${pre} How many questions did you solve in each subject today? ${qs.map(c=>c.id.slice(2)+" (target "+(+((D.cfg.qn||{})[c.id.slice(2)])||50)+")").join(", ")}.\n\nExample: “Physics 50, Chemistry 40, Biology 30”.`.trim());
+  return say(`${pre} I still need: ${ms.map(lab).join("; ")}.`.trim())}
  const upd=!!day.eval;day.cfgSnap=day.cfgSnap||clone(D.cfg);day.eval=evalDay(day,day.cfgSnap);day.expect=null;save();
  say(upd?"Updated. I recalculated the whole day.":pre,{ev:clone(day.eval),date:d});
  say(comment(day.eval,day.cfgSnap))}
@@ -813,7 +828,7 @@ function vChat(){const m=$("#v");m.className="chat";
  <div id="inp"><textarea id="ta" placeholder="Report your day honestly..." rows="1"></textarea><button class="p" type="button" id="tsend">Send</button></div>`;
  if(!D.chat.length)say(`Good morning. Enter today's date so we can begin. Then report your day honestly.`,{chips:[{l:"Use today: "+fdate(iso(new Date())),a:"date:"+iso(new Date())}]});else paintChat();
  const ta=$("#ta"),sendIt=()=>{const t=ta.value.trim();if(t){ta.value="";onUser(t)}};$("#tsend").onclick=sendIt;ta.onkeydown=e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendIt()}}}
-function vToday(){const d=D.active||iso(new Date()),day=getDay(d),ds=defs(D.cfg),ev=day.eval,rep=ds.filter(c=>!isNA(c,day.plan)&&getF(day.f,c.id)!==undefined).map(c=>scoreCat(c,day.f,day.plan,day.cfgSnap||D.cfg)),tot=n2(rep.reduce((a,r)=>a+r.score,0)),pct=ev?ev.pct:rep.length?Math.round(tot/(rep.length*10)*100):0,rem=missing(day,D.cfg);
+function vToday(){const d=D.active||iso(new Date()),day=getDay(d),ds=defs(day.cfgSnap||D.cfg),ev=day.eval,rep=ds.filter(c=>!isNA(c,day.plan)&&getF(day.f,c.id)!==undefined).map(c=>scoreCat(c,day.f,day.plan,day.cfgSnap||D.cfg)),tot=n2(rep.reduce((a,r)=>a+r.score,0)),pct=ev?ev.pct:rep.length?Math.round(tot/(rep.length*10)*100):0,rem=missing(day,day.cfgSnap||D.cfg);
  return`<div class="card"><h2>${fdate(d)}</h2><div class="ch"><div class="rg" style="--p:${pct}"><b class="serif">${pct}%</b></div><div><div class="serif" style="font-size:26px">${ev?ev.total+" / "+ev.max:tot+" / "+rep.length*10}</div><div class="mu">${ev?"Final score for the day":"Score so far (reported categories)"}</div></div></div></div>
  <div class="card"><h2>Today's plan</h2><div class="mu" style="font-size:13px">Untick a subject when nothing is scheduled: it becomes N/A, never 0.</div>
  ${D.cfg.subjects.map(s=>{const p=day.plan.subjects[s]||{on:true,task:""};return`<div class="pl"><label><input type="checkbox" data-pl="on" data-s="${esc(s)}" ${p.on?"checked":""}> ${esc(s)}</label><input data-pl="task" data-s="${esc(s)}" value="${esc(p.task)}" placeholder="${p.on?"e.g. Lecture + 30 PYQs":"Not scheduled (N/A)"}"></div>`}).join("")}
@@ -834,7 +849,7 @@ function vStats(){const ds=evDays();if(!ds.length)return`<div class="card"><h2>A
  <div class="card"><h2>Streaks</h2><div class="two">${Object.entries(ST).map(([n,p])=>`<div><span class="serif" style="font-size:30px;color:var(--go)">${streak(p)}</span> <span class="mu">${n} streak</span></div>`).join("")}</div><div class="mu" style="font-size:13px">N/A days never break a streak; a missed report day does.</div></div>`}
 function vSet(){const c=D.cfg,I=(k,l,t,v,x="")=>`<label class="f">${l}<input type="${t}" data-c="${k}" value="${esc(v)}" ${x}></label>`;
  return`<div class="card"><h2>Tutor</h2>${I("tutor","Tutor name","text",c.tutor)}<label class="f">Personality<select data-c="level">${["Gentle","Balanced","Strict"].map((x,i)=>`<option value="${i+1}" ${c.level==i+1?"selected":""}>${x}</option>`).join("")}</select></label></div>
- <div class="card"><h2>Targets</h2>${I("wake","Wake-up target","time",c.wake)}${I("wakePen","Points lost per 30 min late","number",c.wakePen,'step="0.25" min="0"')}${I("sleep","Sleep target (hours)","number",c.sleep,'step="0.5" min="1"')}${I("water","Water target (glasses)","number",c.water,'min="1"')}${I("ex","Exercise target (min)","number",c.ex,'min="1"')}${I("steps.am","Morning skincare steps","number",c.steps.am,'min="1"')}${I("steps.pm","Night skincare steps","number",c.steps.pm,'min="1"')}${I("met","Streak / consistency threshold (0-1)","number",c.met,'step="0.05" min="0" max="1"')}</div>
+ <div class="card"><h2>Targets</h2>${I("wake","Wake-up target","time",c.wake)}${I("wakePen","Points lost per 30 min late","number",c.wakePen,'step="0.25" min="0"')}${I("sleep","Sleep target (hours)","number",c.sleep,'step="0.5" min="1"')}${I("water","Water target (glasses)","number",c.water,'min="1"')}${I("ex","Exercise target (min)","number",c.ex,'min="1"')}${I("steps.am","Morning skincare steps","number",c.steps.am,'min="1"')}${I("steps.pm","Night skincare steps","number",c.steps.pm,'min="1"')}${I("met","Streak / consistency threshold (0-1)","number",c.met,'step="0.05" min="0" max="1"')}${c.subjects.map(s=>I("qn."+s,"Questions per day: "+s,"number",+((c.qn||{})[s])||50,'min="1"')).join("")}</div>
  <div class="card"><h2>Subjects &amp; categories</h2>${I("subjects","Subjects (comma separated)","text",c.subjects.join(", "))}<div class="mu" style="font-size:13px;margin:6px 0">Active categories:</div>${defs({...c,off:{}}).map(x=>`<label class="f">${x.ic} ${esc(x.name)}<input type="checkbox" data-off="${esc(x.id)}" ${c.off[x.id]?"":"checked"}></label>`).join("")}</div>
  <div class="card"><h2>Data</h2><p class="mu" style="font-size:13px">Changing targets never alters past scores. Use the button below only if you want history rescored with today's rules.</p><button class="g" data-act="recalc">Recalculate history</button> <button class="g" data-act="reset">Reset all data</button>
  <p class="mu" style="font-size:13px">Backup (copy this text) / restore (paste, then Import):</p><textarea id="bk" rows="4" style="width:100%">${esc(JSON.stringify(D))}</textarea><button class="g" data-act="import" style="margin-top:6px">Import</button></div>`}
@@ -857,7 +872,7 @@ document.addEventListener("change",e=>{const t=e.target;
  if(t.dataset.off){D.cfg.off[t.dataset.off]=!t.checked;save();return}
  if(t.dataset.c){const k=t.dataset.c;let v=t.value;
   if(k==="subjects")v=v.split(",").map(s=>s.trim()).filter(Boolean);else if(t.type==="number"||k==="level")v=+v;
-  if(k.startsWith("steps."))D.cfg.steps[k.slice(6)]=v;else D.cfg[k]=v;save()}});
+  if(k.startsWith("steps."))D.cfg.steps[k.slice(6)]=v;else if(k.startsWith("qn."))(D.cfg.qn=D.cfg.qn||{})[k.slice(3)]=v;else D.cfg[k]=v;save()}});
 setInterval(()=>{const t=iso(new Date());if(D.lastSeen&&D.lastSeen!==t&&D.active===D.lastSeen){say(`It's now ${fdate(t)}. Yesterday's report is saved. Set the new date when you're ready.`,{chips:[{l:"Start "+fdate(t),a:"date:"+t}]})}D.lastSeen=t},30000);
 D.lastSeen=iso(new Date());go("chat");
 
@@ -1209,7 +1224,7 @@ if(H.classList.contains("locked")){kids().forEach(e=>e.inert=true);lockUI()}
 /* Reels corner: videos you add are stored in this browser (IndexedDB), so you add them once. */
 (()=>{
 const $=id=>document.getElementById(id),V=$("rfd"),R=$("reels");
-let db,reels=[],muted=localStorage.getItem("sq_rmute")==="1",cur=null,viaBtn=0,nearIO,actIO;
+let db,reels=[],muted=localStorage.getItem("sq_rmute")==="1",cur=null,auto=localStorage.getItem("sq_rauto")!=="0",viaBtn=0,nearIO,actIO;
 const idb=()=>new Promise((ok,no)=>{if(db)return ok(db);const q=indexedDB.open("sq_reels",1);q.onupgradeneeded=()=>q.result.createObjectStore("r",{keyPath:"id",autoIncrement:true});q.onsuccess=()=>ok(db=q.result);q.onerror=()=>no(q.error)});
 const tx=async(m,f)=>{const d=await idb();return new Promise((ok,no)=>{const t=d.transaction("r",m),r=f(t.objectStore("r"));t.oncomplete=()=>ok(r&&r.result);t.onerror=t.onabort=()=>no(t.error)})};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -1222,13 +1237,14 @@ function draw(){nearIO&&nearIO.disconnect();actIO&&actIO.disconnect();V.innerHTM
   if(e.isIntersecting){if(!v.src){v.src=URL.createObjectURL(r.blob)}}else if(v.src){v.pause();const u=v.src;v.removeAttribute("src");v.load();URL.revokeObjectURL(u)}}),{root:V,rootMargin:"100% 0px"});
  actIO=new IntersectionObserver(es=>es.forEach(e=>{const s=e.target,v=s.querySelector("video");if(e.isIntersecting){cur=v;cnt(`${+s.dataset.i+1} / ${reels.length}`);if(R.classList.contains("open"))play(v)}else v.pause()}),{root:V,threshold:.65});
  reels.forEach((r,i)=>{const s=document.createElement("section");s.className="rs";s.dataset.i=i;
-  s.innerHTML=`<video loop playsinline preload="none" ${muted?"muted":""}></video><div class="rpa">▶</div><div class="rsd"><button class="${r.liked?"lk2":""}" data-a="l" aria-label="Like">${r.liked?"❤️":"🤍"}</button><button data-a="d" aria-label="Remove reel">🗑</button></div><div class="rcp">${esc(label(r.name))}</div>`;
-  const v=s.querySelector("video");v.muted=muted;v.onclick=()=>v.paused?play(v):v.pause();v.onplay=()=>s.classList.remove("paused");v.onpause=()=>{if(v.src)s.classList.add("paused")};
+  s.innerHTML=`<video playsinline preload="none" ${muted?"muted":""}></video><div class="rpa">▶</div><div class="rsd"><button class="${r.liked?"lk2":""}" data-a="l" aria-label="Like">${r.liked?"❤️":"🤍"}</button><button data-a="d" aria-label="Remove reel">🗑</button></div><div class="rcp">${esc(label(r.name))}</div>`;
+  const v=s.querySelector("video");v.muted=muted;v.loop=!auto;v.onended=()=>{if(!auto)return;const n=s.nextElementSibling;if(n)n.scrollIntoView({behavior:"smooth"});else V.scrollTo({top:0,behavior:"smooth"})};v.onclick=()=>v.paused?play(v):v.pause();v.onplay=()=>s.classList.remove("paused");v.onpause=()=>{if(v.src)s.classList.add("paused")};
   s.querySelector(".rsd").onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.a=="l"){r.liked=r.liked?0:1;tx("readwrite",st=>st.put(r));b.className=r.liked?"lk2":"";b.textContent=r.liked?"❤️":"🤍"}else window.sqAsk("Remove this reel from your corner?",{ok:"Remove"}).then(y=>{if(y)tx("readwrite",st=>st.delete(r.id)).then(load)})};
   V.appendChild(s);nearIO.observe(s);actIO.observe(s)})}
 function play(v){v.muted=muted;const p=v.play();if(p&&p.catch)p.catch(()=>{if(!v.muted){v.muted=true;muted=true;mu();v.play().catch(()=>{})}})}
 const mu=()=>{$("rmu").textContent=muted?"🔇":"🔊";localStorage.setItem("sq_rmute",muted?"1":"0");V.querySelectorAll("video").forEach(v=>v.muted=muted)};
 $("rmu").onclick=()=>{muted=!muted;mu();if(cur&&!muted)play(cur)};
+const au=()=>{$("rau").classList.toggle("rp",auto);$("rau").setAttribute("aria-pressed",auto);localStorage.setItem("sq_rauto",auto?"1":"0");V.querySelectorAll("video").forEach(v=>v.loop=!auto)};$("rau").onclick=()=>{auto=!auto;au();if(auto&&cur&&cur.ended)play(cur)};au();
 $("rad").onclick=()=>$("rfi").click();
 $("rfi").onchange=async e=>{const fs=[...e.target.files].filter(f=>/^video\//.test(f.type)||/\.(mp4|mov|m4v|webm|mkv)$/i.test(f.name)).filter(f=>!reels.some(r=>r.name===f.name&&r.blob.size===f.size));e.target.value="";if(!fs.length)return;
  cnt("Saving "+fs.length+"…");try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist();await tx("readwrite",s=>{fs.forEach(f=>s.add({name:f.name,blob:f,liked:0,added:Date.now()}))})}catch(err){window.sqAsk("Couldn't save the reels. Your browser may be out of storage space or blocking saving.",{ok:"OK"})}await load()};
@@ -1349,4 +1365,5 @@ window.SQNotes={clean};
 /* keep "today" fresh if the tab stays open past midnight */
 (()=>{let d=new Date().toDateString();const chk=()=>{const n=new Date().toDateString();if(n!==d){d=n;try{const t=new Date();todayIdx=Math.floor((new Date(t.getFullYear(),t.getMonth(),t.getDate())-START)/864e5);render()}catch(e){}}};
 setInterval(chk,30000);document.addEventListener("visibilitychange",chk);addEventListener("focus",chk)})();
-</script></body></html>
+</script><script>(function(){var n=document.getElementById("lpn"),sc=document.getElementById("lps"),t=document.getElementById("lpt");function o(v){n.classList.toggle("open",v);sc.classList.toggle("open",v);t.setAttribute("aria-expanded",v)}t.onclick=function(){o(!n.classList.contains("open"))};sc.onclick=document.getElementById("lpx").onclick=function(){o(false)};addEventListener("keydown",function(e){if(e.key==="Escape")o(false)});["nlb","rlb","lkb"].forEach(function(i){var b=document.getElementById(i);b&&b.addEventListener("click",function(){o(false)})})})();</script>
+</body></html>
