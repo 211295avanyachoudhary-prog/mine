@@ -420,7 +420,7 @@ function tutorInfo(){try{const d=JSON.parse(localStorage.getItem("daily_tutor_v1
 const nl=t=>{let n=0;(t.match(/L\d+(?:–\d+)?/g)||[]).forEach(m=>{const r=m.match(/L(\d+)(?:–(\d+))?/);n+=r[2]?+r[2]-+r[1]+1:1});return n||1};
 function stats(){let xp=S.focus*20,full=[],act=[],cnt={P:[0,0],C:[0,0],B:[0,0]},n=0;
 for(let i=0;i<N;i++){const bl=blocks(i);let all=true,any=false;
-bl.forEach(b=>{const d=S.done[b.id];if(b.lec)cnt[b.s][1]+=nl(b.x);if(d){xp+=b.xp;n++;any=true;if(b.lec)cnt[b.s][0]+=nl(b.x)}else all=false});
+bl.forEach(b=>{const d=S.done[b.id],cl=b.lec&&!(b.s==="P"&&i>=2&&i<6)/* old EMI L4-9 slots (2-5 Oct) were re-planned from 6 Oct, so they are not counted twice */;if(cl)cnt[b.s][1]+=nl(b.x);if(d){xp+=b.xp;n++;any=true;if(cl)cnt[b.s][0]+=nl(b.x)}else all=false});
 full[i]=all;act[i]=any;if(all)xp+=100}
 /* a tutor report saved on a date also counts as an active day */
 try{const td=(JSON.parse(localStorage.getItem("daily_tutor_v1")||"{}").days)||{};for(const k in td)if(td[k]&&td[k].eval){const i=Math.round((new Date(k+"T00:00:00")-START)/864e5);if(i>=0&&i<N)act[i]=true}}catch(e){}
