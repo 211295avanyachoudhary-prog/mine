@@ -398,6 +398,69 @@ html[data-theme=blue] .lkq{display:block;width:min(320px,76vw);max-height:30vh;o
 #zn .zn-ch button.on{background:var(--xp);color:var(--onx);border-color:var(--xp)}
 #zn .zn-ld{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:18px;pointer-events:none;opacity:.7}
 @media(max-width:700px){#zn .zn-top{flex-wrap:wrap}#zn .zn-t{font-size:16px}}
+
+/* ===== Bhajan Zone ===== */
+#bzbg{position:fixed;inset:0;z-index:-1;display:none;background-size:cover;background-position:center;overflow:hidden}
+html.bz-on #bzbg.has{display:block}
+#bzbg::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.3)}
+#bzbg iframe{position:absolute;left:50%;top:50%;width:max(100vw,177.78vh);height:max(100vh,56.25vw);transform:translate(-50%,-50%);border:0;pointer-events:none}
+#bhajan{margin-top:14px}
+.bz-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 6px}.bz-bar .bz-l{color:var(--mu);font-size:13px;font-weight:700;margin-right:2px}
+.bz-chip{border:2px solid var(--ln2);background:var(--pn2);color:var(--mu);border-radius:999px;padding:6px 13px;font:inherit;font-weight:700;cursor:pointer}
+.bz-chip.on{color:var(--tx);border-color:var(--xp)}.bz-chip:hover{color:var(--tx)}
+.bz-sw{width:13px;height:13px;border-radius:50%;display:inline-block;vertical-align:-2px;margin-right:6px;border:1px solid #fff6}
+.bz-bgrow{display:flex;gap:8px;margin:8px 0 0}.bz-bgrow[hidden]{display:none}
+.bz-bgrow input,.bz-card input{flex:1;min-width:0;background:var(--in,var(--pn2));color:var(--tx);border:1px solid var(--ln2);border-radius:12px;padding:10px 12px;font:inherit}
+.bz-bgrow .btn,.bz-card .btn{margin-top:0}
+.bz-msg{min-height:18px;margin:4px 0 12px;font-size:13px;color:var(--mu)}.bz-msg.err{color:#ff8a9b}
+.bz-card{background:color-mix(in srgb,var(--pn) 88%,transparent);border:1px solid var(--ln2);border-radius:18px;padding:14px;backdrop-filter:blur(8px)}
+.bz-card h3{margin:0 0 10px;font-size:16px}
+.bz-music{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.bz-music iframe{width:100%;border:0;border-radius:12px;display:block}
+.bz-pl{position:relative;margin-bottom:12px}.bz-pl:last-child{margin-bottom:0}
+.bz-pl .bz-rm{position:absolute;top:-8px;right:-8px;z-index:2;width:26px;height:26px;border-radius:50%;border:1px solid var(--ln2);background:var(--pn);color:var(--tx);cursor:pointer}
+.bz-add{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.bz-add input{flex:1 1 150px}
+.bz-vid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:14px;margin-top:14px;align-items:start}
+.bz-vp{position:relative;aspect-ratio:16/9;background:#000;border-radius:14px;overflow:hidden}
+.bz-vp iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.bz-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#9fb0d6;text-align:center;padding:16px;line-height:1.5}
+.bz-vl{display:flex;flex-direction:column;gap:8px;margin-top:12px;max-height:280px;overflow:auto}
+.bz-vi{display:flex;align-items:center;gap:6px;background:var(--pn2);border:1px solid var(--ln2);border-radius:12px;padding:6px 8px}.bz-vi.on{border-color:var(--xp)}
+.bz-vi .bz-pn{flex:1;text-align:left;background:none;border:0;color:var(--tx);font:inherit;font-weight:700;cursor:pointer;padding:4px 2px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bz-vi .bz-x{background:none;border:0;color:var(--mu);cursor:pointer;font-size:15px;padding:4px 6px}
+.bz-fsb{margin-top:8px;background:var(--pn2);color:var(--tx);border:1px solid var(--ln2);border-radius:12px;padding:7px 12px;font:inherit;font-weight:700;cursor:pointer}
+.bz-tip{margin-top:12px;color:var(--mu);font-size:13px;line-height:1.6}
+@media(max-width:700px){.mode{overflow-x:auto;scrollbar-width:none}.mode::-webkit-scrollbar{display:none}.mode button{flex:1 0 auto;white-space:nowrap;padding-left:14px;padding-right:14px}}
+.bz-vid .bz-add{flex-direction:column;align-items:stretch}.bz-vid .bz-add input{flex:none}.bz-vid .bz-add .btn{align-self:flex-start}
+@media(max-width:900px){.bz-music,.bz-vid{grid-template-columns:1fr}}
+
+/* ===== Bhajan: playlists left, deity picture right ===== */
+.bz-main{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:14px;align-items:stretch}
+.bz-left{display:flex;flex-direction:column;gap:14px;min-width:0}.bz-left iframe{width:100%;border:0;border-radius:12px;display:block}
+.bz-god{display:flex;flex-direction:column;gap:10px;min-width:0}
+.bz-gf{position:relative;flex:1;min-height:440px;border-radius:16px;overflow:hidden;border:1px solid var(--ln2);background:linear-gradient(160deg,#1a1030,#3a1d4a 60%,#6b3a1f);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:box-shadow .3s,border-color .3s}
+.bz-gf:hover,.bz-gf:focus-visible,.bz-gf.drag{border-color:#f4c76a;box-shadow:0 0 28px #f4c76a44}
+.bz-gf.has{border-color:#f4c76a88;box-shadow:0 0 34px #f4c76a33}
+.bz-gbg{position:absolute;inset:0;background-size:cover;background-position:center;filter:blur(28px) brightness(.75) saturate(1.15);transform:scale(1.25);display:none}
+.bz-gf.has .bz-gbg{display:block}
+.bz-gf img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 6px 22px #000a)}
+.bz-gf img[hidden]{display:none}
+.bz-gph{position:relative;text-align:center;padding:20px;line-height:1.6;color:#f6dca8}
+.bz-gph .bz-om{font-size:58px;line-height:1;margin-bottom:10px;text-shadow:0 0 24px #f4a64088}
+.bz-gph b{display:block;font-size:19px}.bz-gph span{font-size:13px;opacity:.8}
+.bz-gf.has .bz-gph{display:none}
+.bz-gcap{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.bz-gcap input{flex:1 1 200px;min-width:0;background:var(--in,var(--pn2));color:var(--tx);border:1px solid var(--ln2);border-radius:12px;padding:10px 12px;font:inherit;text-align:center;font-weight:700}
+.bz-gcap .bz-fsb{margin-top:0}.bz-gcap [hidden]{display:none}
+@media(max-width:900px){.bz-main{grid-template-columns:1fr}.bz-god{order:-1}.bz-gf{min-height:340px}}
+
+/* ===== Spiritual videos from the computer ===== */
+.bz-vp video{position:absolute;inset:0;width:100%;height:100%;background:#000;object-fit:contain}.bz-vp video[hidden],.bz-ph[hidden]{display:none}
+.bz-vact{display:flex;gap:10px;align-items:center;margin-top:8px}.bz-vact .bz-fsb{margin-top:0}.bz-nowp{color:var(--mu);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.bz-vhint{color:var(--mu);font-size:12.5px;line-height:1.5;margin-top:10px}
+.bz-vi small{color:var(--mu);font-size:11.5px;white-space:nowrap}
+.bz-vi .bz-ed{background:none;border:0;color:var(--mu);cursor:pointer;font-size:14px;padding:4px 5px}
+#bzVcard.drag{outline:2px dashed #f4c76a;outline-offset:-6px}
 </style></head><body>
 <div id="lockscr" role="dialog" aria-modal="true" aria-label="Enter PIN"><div class="lkc"><img class="lkq" alt=""><div class="fav lkav" role="img" aria-label="Aster"></div><h2>Study Quest</h2><p id="lkm">Enter your PIN</p><div class="lkd" id="lkd"><i></i><i></i><i></i><i></i></div><div class="lkp" id="lkp"><button>1</button><button>2</button><button>3</button><button>4</button><button>5</button><button>6</button><button>7</button><button>8</button><button>9</button><span></span><button>0</button><button data-k="b" aria-label="Backspace">⌫</button></div></div></div>
 <div id="notes" role="dialog" aria-label="Notes wall"><div class="ntb"><button id="nbk" aria-label="Back">←</button><b>📌 Notes wall</b><button id="nan" class="rp">＋ Note</button><button id="nad" aria-label="Add diagram or photo">🖼 Diagram</button></div><div class="nwn" id="nwn" hidden>⚠ Your browser is blocking saving in this view, so notes will disappear when you close it. Open the file directly in Chrome or Edge to keep them.</div><div class="nsb" id="nsb"></div><div class="nch" id="nch"></div><div class="nfm" id="nfm"></div><div id="nw"><div id="nwc"></div></div><input type="file" id="nfi" accept="image/*" multiple hidden></div>
@@ -412,7 +475,7 @@ html[data-theme=blue] .lkq{display:block;width:min(320px,76vw);max-height:30vh;o
 
 
 
-<div class="mode"><button class="on" data-m="quest">🎯 Quest</button><button data-m="dtutor">📚 Daily Tutor</button><button data-m="workout">💪 Workout</button><button data-m="zone">🌿 Zone</button></div>
+<div class="mode"><button class="on" data-m="quest">🎯 Quest</button><button data-m="dtutor">📚 Daily Tutor</button><button data-m="workout">💪 Workout</button><button data-m="zone">🌿 Zone</button><button data-m="bhajan">🕉️ Bhajan</button></div>
 <div id="quest"><div class="tutor"><div class="bot">🤖</div><div class="grow"><div class="say" id="say"></div>
 <button class="btn" id="fb">Start 25-min focus (+20 XP)</button> <button class="btn g" id="tp">Tip please</button></div></div>
 
@@ -443,7 +506,22 @@ html[data-theme=blue] .lkq{display:block;width:min(320px,76vw);max-height:30vh;o
 <div class="sp"><iframe id="bkf" title="Book viewer" width="100%" height="600" frameborder="0" scrolling="no" allowfullscreen loading="lazy"></iframe></div>
 <div class="bkc" id="bkc"></div>
 <p style="text-align:center;margin-top:24px"><button class="btn g" id="rs">Reset progress</button></p>
-</div><section id="dtutor" hidden><nav id="nav"></nav><div id="v"></div></section><div id="zone" hidden>
+</div><section id="dtutor" hidden><nav id="nav"></nav><div id="v"></div></section><div id="bhajan" hidden>
+<h2 class="zn-h">🕉️ Bhajan Zone</h2><p class="zn-sub">Bhajans to study to, a background of your choice, and your own spiritual videos. The music keeps playing if you switch to another tab.</p>
+<div class="bz-bar" id="bzBar"><span class="bz-l">Background</span></div>
+<div class="bz-bgrow" id="bzVrow" hidden><input id="bzVlk" placeholder="Paste a YouTube link for a looping, muted video background" aria-label="Background video link"><button class="btn" id="bzVset">Set</button></div>
+<input type="file" id="bzFile" accept="image/*" hidden>
+<div class="bz-msg" id="bzMsg"></div>
+<div class="bz-main"><div class="bz-left"><div class="bz-card"><h3>🎶 Bhajan playlist</h3><iframe id="bzP1" title="Bhajan playlist" style="border-radius:12px" height="352" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" src="https://open.spotify.com/embed/playlist/7wIgyVdOD4s0whN4kmDPVB?utm_source=generator"></iframe></div><div class="bz-card"><h3>🪔 Playlist 2</h3><div class="bz-pl"><iframe id="bzP2" title="Playlist 2" style="border-radius:12px" height="152" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" src="https://open.spotify.com/embed/playlist/5wBq9rDViaLzV5f5ABI5Le?utm_source=generator"></iframe></div><div id="bzPls"></div>
+  <div class="bz-add"><input id="bzPn" maxlength="28" placeholder="Name (optional)" aria-label="Playlist name"><input id="bzPl" placeholder="Paste a Spotify link or embed code" aria-label="Spotify link"><button class="btn" id="bzPadd">Add</button></div><div class="bz-msg" id="bzPmsg"></div></div></div><div class="bz-card bz-god"><h3>🙏 My God</h3>
+<div class="bz-gf" id="bzGf" tabindex="0" role="button" aria-label="Add or change the picture"><div class="bz-gbg" id="bzGbg"></div><img id="bzGi" alt="" hidden><div class="bz-gph"><div class="bz-om">🕉️</div><b>Place your God's picture here</b><span>Click to choose a picture, or drag one in</span></div></div>
+<div class="bz-gcap"><input id="bzGn" maxlength="48" placeholder="Name or a short prayer (optional)" aria-label="Caption"><button class="bz-fsb" id="bzGch" type="button">🖼️ Choose picture</button><button class="bz-fsb" id="bzGrm" type="button" hidden>🗑 Remove</button></div>
+<div class="bz-msg" id="bzGmsg" style="margin:0"></div><input type="file" id="bzGfile" accept="image/*" hidden></div></div>
+<div class="bz-card bz-vid" id="bzVcard" style="display:grid"><div><div class="bz-vp" id="bzVp"><video id="bzVid" controls playsinline preload="metadata" hidden></video><div class="bz-ph" id="bzPh">🙏 Add a video from your computer<br>then click it in the list to play</div></div><div class="bz-vact"><button class="bz-fsb" id="bzVf" type="button">⛶ Full screen</button><span class="bz-nowp" id="bzNow"></span></div><div class="bz-msg" id="bzVmsg"></div></div>
+ <div><h3>🙏 Spiritual videos</h3><button class="btn" id="bzVpick" type="button">➕ Add videos from my computer</button><input type="file" id="bzVfile" accept="video/*,.mp4,.m4v,.webm,.mov,.mkv,.ogv" multiple hidden><div class="bz-vhint">You can also drag video files onto this card. They are kept in this browser, so they're still here next time. The next video plays automatically.</div><div class="bz-vl" id="bzVl2"></div><div class="bz-vhint" id="bzUse"></div></div></div>
+<div class="bz-tip">Tip: use this tab together with a 🌿 Zone scene. Mute the scene video (press <b>M</b>) and let the bhajans play.</div>
+</div>
+<div id="zone" hidden>
 <h2 class="zn-h">🌿 Study Zone</h2><p class="zn-sub">Pick a place and the whole screen turns into it. Move the mouse to show the controls, press <b>F</b> for full screen.</p>
 <div class="zn-grid" id="znGrid"></div>
 <div class="zn-add"><b>➕ Add your own place</b><div class="zn-r"><input id="znNm" maxlength="28" placeholder="Name (e.g. 🌊 Ocean)" aria-label="Scene name"><input id="znLk" class="zn-lk" placeholder="Paste a YouTube link or the whole embed code" aria-label="YouTube link or embed code"><button class="btn" id="znAdd">Add</button></div><div class="zn-msg" id="znMsg"></div></div>
@@ -751,7 +829,7 @@ window.Aster={handle:s=>{send(s)},tick,get:()=>({R,E,M})};
 </script><script>
 window.sqPlanFor=k=>{const i=Math.round((new Date(k+"T12:00:00")-new Date(2026,8,30,12))/864e5);if(i<0||i>=N)return null;const m={P:"Physics",C:"Chemistry",B:"Biology"},o={};blocks(i).slice(0,4).forEach(b=>{const n=m[b.s];if(n)o[n]=(o[n]?o[n]+" + ":"")+b.x});return o};
 window.addEventListener("tutor-saved",()=>{try{render()}catch(e){}});
-document.querySelectorAll(".mode button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".mode button").forEach(x=>x.classList.toggle("on",x===b));document.getElementById("quest").hidden=b.dataset.m!=="quest";document.getElementById("dtutor").hidden=b.dataset.m!=="dtutor";document.getElementById("wkout").hidden=b.dataset.m!=="workout";document.getElementById("zone").hidden=b.dataset.m!=="zone"});
+document.querySelectorAll(".mode button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".mode button").forEach(x=>x.classList.toggle("on",x===b));document.getElementById("quest").hidden=b.dataset.m!=="quest";document.getElementById("dtutor").hidden=b.dataset.m!=="dtutor";document.getElementById("wkout").hidden=b.dataset.m!=="workout";document.getElementById("zone").hidden=b.dataset.m!=="zone";document.getElementById("bhajan").hidden=b.dataset.m!=="bhajan"});
 </script><script>
 (function(){
 
@@ -1604,6 +1682,101 @@ g("znSh").onclick=()=>{wake()};
 document.addEventListener("keydown",e=>{if(zn.hidden)return;if(/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))return;
  const k=e.key.toLowerCase();if(k==="escape")exit();else if(k==="f")fs();else if(k==="m")mu();else if(k===" "){e.preventDefault();pp()}else if(k==="arrowright")load(cur+1);else if(k==="arrowleft")load(cur-1);else return;wake()});
 grid();
+})();
+</script>
+<script>
+(function(){
+const g=id=>document.getElementById(id);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const ld=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}};
+const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}};
+const ytid=t=>{t=String(t||"").trim();let m=t.match(/src\s*=\s*["']([^"']+)["']/i);if(m)t=m[1];m=t.match(/(?:youtube(?:-nocookie)?\.com\/(?:embed|shorts|live|v)\/|youtu\.be\/|[?&]v=)([A-Za-z0-9_-]{11})/);return m?m[1]:(/^[A-Za-z0-9_-]{11}$/.test(t)?t:null)};
+const spot=t=>{t=String(t||"").trim();let m=t.match(/src\s*=\s*["']([^"']+)["']/i);if(m)t=m[1];m=t.match(/(?:open\.spotify\.com\/(?:embed\/)?|spotify:)(playlist|album|track|artist|episode|show)[\/:]([A-Za-z0-9]{22})/);return m?{t:m[1],id:m[2]}:null};
+const say=(el,t,err)=>{g(el).textContent=t;g(el).className="bz-msg"+(err?" err":"")};
+/* ---------- background ---------- */
+const GR=[["Dawn","linear-gradient(160deg,#3b1d5e 0%,#c0492b 55%,#f4a640 100%)"],["Temple night","radial-gradient(circle at 50% 0%,#5b3a12,#140b05 72%)"],["Lotus","linear-gradient(160deg,#1b2a52,#6b3f86 60%,#e58fb3)"],["Ganga","linear-gradient(160deg,#04202e,#0a5a6e 60%,#7fd1c7)"]];
+let bg=ld("sq_bz_bg",{t:"none"}),on=false;
+const bgEl=document.createElement("div");bgEl.id="bzbg";document.body.insertBefore(bgEl,document.body.firstChild);
+function bar(){const b=g("bzBar");b.querySelectorAll(".bz-chip").forEach(x=>x.remove());
+ const mk=(h,cls,k)=>{const e=document.createElement("button");e.type="button";e.className="bz-chip"+(cls?" on":"");e.innerHTML=h;e.dataset.k=k;b.appendChild(e)};
+ mk("Default",bg.t==="none","none");GR.forEach((x,i)=>mk('<span class="bz-sw" style="background:'+x[1]+'"></span>'+x[0],bg.t==="grad"&&bg.v===x[1],"g"+i));
+ mk("🖼️ My image",bg.t==="img","img");mk("🎥 Video",bg.t==="video","vid")}
+function paint(){bgEl.className=bg.t==="none"?"":"has";bgEl.style.background="";bgEl.querySelectorAll("iframe").forEach(x=>x.remove());
+ if(bg.t==="grad")bgEl.style.background=bg.v;else if(bg.t==="img")bgEl.style.background='center/cover no-repeat url("'+bg.v+'")';
+ else if(bg.t==="video"&&on){const f=document.createElement("iframe");f.title="Background video";f.setAttribute("allow","autoplay; encrypted-media");f.setAttribute("referrerpolicy","strict-origin-when-cross-origin");
+  f.src="https://www.youtube.com/embed/"+bg.v+"?autoplay=1&mute=1&controls=0&rel=0&modestbranding=1&playsinline=1&loop=1&playlist="+bg.v+"&iv_load_policy=3&disablekb=1&fs=0";bgEl.appendChild(f)}
+ bar()}
+function setBg(o){bg=o;if(!sv("sq_bz_bg",o))say("bzMsg","Couldn't save that background (storage is full), but it works until you close the page.",1);else say("bzMsg","");paint()}
+g("bzBar").onclick=e=>{const b=e.target.closest("[data-k]");if(!b)return;const k=b.dataset.k;g("bzVrow").hidden=k!=="vid";
+ if(k==="none")setBg({t:"none"});else if(k[0]==="g")setBg({t:"grad",v:GR[+k.slice(1)][1]});
+ else if(k==="img"){if(bg.t==="img"){paint()}g("bzFile").click()}else if(k==="vid"){if(bg.t==="video"){paint()}g("bzVlk").focus()}};
+g("bzFile").onchange=e=>{const f=e.target.files&&e.target.files[0];e.target.value="";if(!f)return;if(!/^image\//.test(f.type))return say("bzMsg","Please choose an image file.",1);
+ const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const s=Math.min(1,1600/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext("2d").drawImage(im,0,0,c.width,c.height);setBg({t:"img",v:c.toDataURL("image/jpeg",.82)})};im.onerror=()=>say("bzMsg","That image couldn't be read.",1);im.src=r.result};r.readAsDataURL(f)};
+g("bzVset").onclick=()=>{const id=ytid(g("bzVlk").value);if(!id)return say("bzMsg","I couldn't find a YouTube video in that link.",1);setBg({t:"video",v:id});g("bzVlk").value=""};
+const mode=document.querySelector(".mode");
+mode.addEventListener("click",e=>{const b=e.target.closest("button[data-m]");if(!b)return;on=b.dataset.m==="bhajan";document.documentElement.classList.toggle("bz-on",on);paint()});
+/* ---------- extra Spotify playlists ---------- */
+let pls=ld("sq_bz_pls",[]);
+function drawPls(){g("bzPls").innerHTML=pls.map((p,i)=>'<div class="bz-pl">'+(p.n?'<div class="bz-sp-n" style="font-weight:700;margin:0 0 6px">'+esc(p.n)+'</div>':"")+'<iframe title="'+esc(p.n||"Spotify")+'" style="border-radius:12px" height="152" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" src="https://open.spotify.com/embed/'+p.t+'/'+p.id+'?utm_source=generator"></iframe><button class="bz-rm" data-i="'+i+'" aria-label="Remove" title="Remove">✕</button></div>').join("")}
+g("bzPls").onclick=e=>{const b=e.target.closest("[data-i]");if(!b)return;pls.splice(+b.dataset.i,1);sv("sq_bz_pls",pls);drawPls()};
+g("bzPadd").onclick=()=>{const s=spot(g("bzPl").value);if(!s)return say("bzPmsg","I couldn't find a Spotify playlist, album or track in that.",1);
+ if(["7wIgyVdOD4s0whN4kmDPVB","5wBq9rDViaLzV5f5ABI5Le"].concat(pls.map(p=>p.id)).includes(s.id))return say("bzPmsg","That one is already here.",1);
+ pls.push({t:s.t,id:s.id,n:g("bzPn").value.trim()});sv("sq_bz_pls",pls);g("bzPn").value="";g("bzPl").value="";say("bzPmsg","Added.");drawPls()};
+bar();drawPls();paint();
+})();
+</script>
+<script>
+(function(){
+const g=id=>document.getElementById(id);
+let god=null;try{god=JSON.parse(localStorage.getItem("sq_bz_god"))}catch(e){}
+const say=(t,err)=>{const m=g("bzGmsg");m.textContent=t;m.className="bz-msg"+(err?" err":"")};
+function save(){try{localStorage.setItem("sq_bz_god",JSON.stringify(god));return true}catch(e){return false}}
+function paint(){const has=!!(god&&god.src);g("bzGf").classList.toggle("has",has);const im=g("bzGi");im.hidden=!has;if(has){im.src=god.src;g("bzGbg").style.backgroundImage='url("'+god.src+'")'}else{im.removeAttribute("src");g("bzGbg").style.backgroundImage=""}
+ im.alt=has?(god.cap||"My God"):"";g("bzGn").value=has?(god.cap||""):g("bzGn").value;g("bzGrm").hidden=!has;g("bzGch").textContent=has?"🖼️ Change picture":"🖼️ Choose picture"}
+function take(f){if(!f)return;if(!/^image\//.test(f.type))return say("Please choose a picture file.",1);const r=new FileReader();
+ r.onload=()=>{const im=new Image();im.onload=()=>{const s=Math.min(1,1400/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext("2d").drawImage(im,0,0,c.width,c.height);
+  god={src:c.toDataURL("image/jpeg",.86),cap:(god&&god.cap)||g("bzGn").value.trim()};say(save()?"":"Couldn't save the picture (storage is full), but it stays until you close the page.",!save());paint()};im.onerror=()=>say("That picture couldn't be read.",1);im.src=r.result};r.readAsDataURL(f)}
+const pick=()=>g("bzGfile").click();
+g("bzGf").onclick=pick;g("bzGch").onclick=pick;g("bzGf").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();pick()}};
+g("bzGfile").onchange=e=>{const f=e.target.files&&e.target.files[0];e.target.value="";take(f)};
+["dragenter","dragover"].forEach(ev=>g("bzGf").addEventListener(ev,e=>{e.preventDefault();g("bzGf").classList.add("drag")}));
+["dragleave","drop"].forEach(ev=>g("bzGf").addEventListener(ev,e=>{e.preventDefault();g("bzGf").classList.remove("drag");if(ev==="drop")take(e.dataTransfer&&e.dataTransfer.files[0])}));
+g("bzGn").onchange=()=>{if(!god)god={src:"",cap:""};god.cap=g("bzGn").value.trim();save();if(god.src)g("bzGi").alt=god.cap||"My God"};
+g("bzGrm").onclick=()=>{god=null;try{localStorage.removeItem("sq_bz_god")}catch(e){}g("bzGn").value="";say("");paint()};
+paint();
+})();
+</script>
+<script>
+(function(){
+const g=id=>document.getElementById(id);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const say=(t,err)=>{const m=g("bzVmsg");m.textContent=t;m.className="bz-msg"+(err?" err":"")};
+const sz=n=>n>=1073741824?(n/1073741824).toFixed(1)+" GB":n>=1048576?Math.round(n/1048576)+" MB":Math.max(1,Math.round(n/1024))+" KB";
+const isVid=f=>/^video\//.test(f.type)||/\.(mp4|m4v|webm|mov|mkv|ogv)$/i.test(f.name);
+const DB="sq_bz_videos",ST="videos";let db=null,items=[],cur="",url="";
+function open(){return new Promise(res=>{try{const r=indexedDB.open(DB,1);r.onupgradeneeded=()=>r.result.createObjectStore(ST,{keyPath:"id"});r.onsuccess=()=>res(r.result);r.onerror=()=>res(null);r.onblocked=()=>res(null)}catch(e){res(null)}})}
+const write=fn=>new Promise(res=>{if(!db)return res(false);try{const t=db.transaction(ST,"readwrite");fn(t.objectStore(ST));t.oncomplete=()=>res(true);t.onerror=t.onabort=()=>res(false)}catch(e){res(false)}});
+const readAll=()=>new Promise(res=>{if(!db)return res([]);try{const r=db.transaction(ST).objectStore(ST).getAll();r.onsuccess=()=>res(r.result||[]);r.onerror=()=>res([])}catch(e){res([])}});
+function usage(){const u=g("bzUse");if(navigator.storage&&navigator.storage.estimate)navigator.storage.estimate().then(e=>{const t=items.reduce((a,i)=>a+i.size,0);u.textContent=items.length?"Videos here: "+sz(t)+(e.quota?" · browser space left: "+sz(Math.max(0,e.quota-e.usage)):""):""}).catch(()=>{});else u.textContent=""}
+function draw(){g("bzVl2").innerHTML=items.length?items.map(i=>'<div class="bz-vi'+(i.id===cur?" on":"")+'"><button class="bz-pn" data-p="'+i.id+'" title="'+esc(i.name)+'">▶ '+esc(i.name)+(i.tmp?" (not saved)":"")+'</button><small>'+sz(i.size)+'</small><button class="bz-ed" data-e="'+i.id+'" aria-label="Rename" title="Rename">✎</button><button class="bz-x" data-r="'+i.id+'" aria-label="Remove '+esc(i.name)+'" title="Remove">✕</button></div>').join(""):'<div class="bz-vhint" style="margin:0">No videos yet. Choose files from your computer (MP4 works best).</div>';usage()}
+function stop(){const v=g("bzVid");v.pause();v.removeAttribute("src");v.load();v.hidden=true;g("bzPh").hidden=false;g("bzNow").textContent="";if(url){URL.revokeObjectURL(url);url=""}cur=""}
+function play(id){const it=items.find(x=>x.id===id);if(!it)return;const v=g("bzVid");if(url)URL.revokeObjectURL(url);url=URL.createObjectURL(it.blob);cur=id;v.src=url;v.hidden=false;g("bzPh").hidden=true;g("bzNow").textContent="Now playing: "+it.name;say("");v.play().catch(()=>{});draw()}
+g("bzVid").addEventListener("ended",()=>{const i=items.findIndex(x=>x.id===cur);if(i>=0&&i<items.length-1)play(items[i+1].id)});
+g("bzVid").addEventListener("error",()=>say("This browser can't play that file. MP4 (H.264) or WebM works best.",1));
+async function add(files){files=[...files];const ok=files.filter(isVid);if(!ok.length){if(files.length)say("Please choose video files (MP4, WebM, MOV, MKV…).",1);return}
+ let bad=0,first="";for(const f of ok){const it={id:"v"+Date.now().toString(36)+Math.random().toString(36).slice(2,6),name:f.name.replace(/\.[^.]+$/,"")||"Video",size:f.size,type:f.type,at:Date.now(),blob:f};
+  const saved=await write(s=>s.put(it));if(!saved){it.tmp=true;bad++}items.push(it);if(!first)first=it.id}
+ say(bad?"Added, but "+bad+" couldn't be saved (browser storage is full or blocked). It plays until you close the page.":"Added "+ok.length+(ok.length>1?" videos.":" video."),!!bad);
+ try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}draw();if(!cur)play(first)}
+g("bzVpick").onclick=()=>g("bzVfile").click();
+g("bzVfile").onchange=e=>{const f=e.target.files;if(f&&f.length)add(f);e.target.value=""};
+const card=g("bzVcard");["dragenter","dragover"].forEach(ev=>card.addEventListener(ev,e=>{e.preventDefault();card.classList.add("drag")}));
+["dragleave","drop"].forEach(ev=>card.addEventListener(ev,e=>{e.preventDefault();card.classList.remove("drag");if(ev==="drop"&&e.dataTransfer&&e.dataTransfer.files.length)add(e.dataTransfer.files)}));
+g("bzVl2").onclick=async e=>{const r=e.target.closest("[data-r]");if(r){const id=r.dataset.r;if(id===cur)stop();items=items.filter(x=>x.id!==id);await write(s=>s.delete(id));draw();return}
+ const ed=e.target.closest("[data-e]");if(ed){const it=items.find(x=>x.id===ed.dataset.e);if(!it)return;const n=prompt("Name for this video",it.name);if(n&&n.trim()){it.name=n.trim().slice(0,60);await write(s=>s.put(it));if(it.id===cur)g("bzNow").textContent="Now playing: "+it.name;draw()}return}
+ const p=e.target.closest("[data-p]");if(p)play(p.dataset.p)};
+g("bzVf").onclick=()=>{const p=g("bzVp");try{if(document.fullscreenElement)document.exitFullscreen();else (p.requestFullscreen||p.webkitRequestFullscreen).call(p)}catch(e){}};
+open().then(async d=>{db=d;if(!db)say("Your browser is blocking saved videos here, so videos you add will play only until you close the page.",1);items=(await readAll()).sort((a,b)=>a.at-b.at);draw()});
 })();
 </script>
 </body></html>
