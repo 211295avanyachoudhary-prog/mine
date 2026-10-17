@@ -461,6 +461,24 @@ html.bz-on #bzbg.has{display:block}
 .bz-vi small{color:var(--mu);font-size:11.5px;white-space:nowrap}
 .bz-vi .bz-ed{background:none;border:0;color:var(--mu);cursor:pointer;font-size:14px;padding:4px 5px}
 #bzVcard.drag{outline:2px dashed #f4c76a;outline-offset:-6px}
+
+/* ===== To-do list beside the study timer ===== */
+.trow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 14px;align-items:stretch}
+.tcol{min-width:0;display:flex;flex-direction:column}.tcol>.stm{flex:1}.tcol>.sec{align-self:flex-start}
+.tdo{flex:1;min-height:250px;max-height:340px;display:flex;flex-direction:column;background:var(--pn);border:1px solid var(--ln2);border-radius:18px;padding:12px}
+.td-add{display:flex;gap:8px}.td-add input{flex:1;min-width:0;background:var(--in,var(--pn2));color:var(--tx);border:1px solid var(--ln2);border-radius:12px;padding:10px 12px;font:inherit}
+.td-add .btn{margin-top:0;width:auto;text-align:center}
+.td-l{flex:1;min-height:0;overflow:auto;margin:10px 0 8px;display:flex;flex-direction:column;gap:6px}
+.td-i{display:flex;align-items:center;gap:10px;padding:7px 8px;border-radius:12px;background:var(--pn2);border:1px solid transparent}
+.td-ck{flex:none;width:22px;height:22px;border-radius:50%;border:2px solid var(--xp);background:none;color:var(--onx);cursor:pointer;font-size:13px;line-height:1;padding:0;display:flex;align-items:center;justify-content:center}
+.td-i.done .td-ck{background:var(--xp)}
+.td-t{flex:1;min-width:0;overflow-wrap:anywhere;line-height:1.35}
+.td-i.done{opacity:.7}.td-i.done .td-t{text-decoration:line-through;color:var(--mu)}
+.td-x{background:none;border:0;color:var(--mu);cursor:pointer;font-size:15px;padding:2px 6px}.td-x:hover{color:var(--tx)}
+.td-e{color:var(--mu);font-size:13.5px;line-height:1.6;padding:6px 4px}
+.td-f{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--mu)}
+.td-f button{background:none;border:0;color:var(--mu);text-decoration:underline;cursor:pointer;font:inherit;padding:0}
+@media(max-width:760px){.trow{grid-template-columns:1fr}.tdo{max-height:none}}
 </style></head><body>
 <div id="lockscr" role="dialog" aria-modal="true" aria-label="Enter PIN"><div class="lkc"><img class="lkq" alt=""><div class="fav lkav" role="img" aria-label="Aster"></div><h2>Study Quest</h2><p id="lkm">Enter your PIN</p><div class="lkd" id="lkd"><i></i><i></i><i></i><i></i></div><div class="lkp" id="lkp"><button>1</button><button>2</button><button>3</button><button>4</button><button>5</button><button>6</button><button>7</button><button>8</button><button>9</button><span></span><button>0</button><button data-k="b" aria-label="Backspace">⌫</button></div></div></div>
 <div id="notes" role="dialog" aria-label="Notes wall"><div class="ntb"><button id="nbk" aria-label="Back">←</button><b>📌 Notes wall</b><button id="nan" class="rp">＋ Note</button><button id="nad" aria-label="Add diagram or photo">🖼 Diagram</button></div><div class="nwn" id="nwn" hidden>⚠ Your browser is blocking saving in this view, so notes will disappear when you close it. Open the file directly in Chrome or Edge to keep them.</div><div class="nsb" id="nsb"></div><div class="nch" id="nch"></div><div class="nfm" id="nfm"></div><div id="nw"><div id="nwc"></div></div><input type="file" id="nfi" accept="image/*" multiple hidden></div>
@@ -481,12 +499,12 @@ html.bz-on #bzbg.has{display:block}
 
 <div class="days" id="days"></div>
 <h2 id="dh"></h2><div id="list"></div>
-<div class="sec">Study timer</div>
+<div class="trow"><div class="tcol"><div class="sec">To-do list</div><div class="tdo" id="tdo"><div class="td-add"><input id="tdIn" maxlength="120" placeholder="Add a task and press Enter" aria-label="New task" autocomplete="off"><button class="btn" id="tdAdd" type="button">Add</button></div><div class="td-l" id="tdL"></div><div class="td-f"><span id="tdC"></span><button id="tdClr" type="button">Clear done</button></div></div></div><div class="tcol"><div class="sec">Study timer</div>
 <div class="stm" id="stm"><div class="stg"><aside id="sdy" role="button" tabindex="0" aria-label="Studied today. Open study log" title="Tap to see all days"><small>Studied today</small><b id="sdt">0m 00s</b><em id="sdd"></em><div class="sbars" id="sbr"></div><div class="sbl" id="sbl"></div><small>12:00 AM – 11:59 PM</small><small class="sh">See all days ›</small></aside><div class="stmain"><div class="stt" role="tablist" aria-label="Timer mode"><button data-m="sw">⏱ Stopwatch</button><button data-m="tm">⏳ Timer</button></div>
 <div class="std" id="std" role="timer">00:00</div><div class="stb" id="stbw"><i id="stp"></i></div>
 <div class="stpre" id="stpre"><button data-p="15">15</button><button data-p="25">25</button><button data-p="45">45</button><button data-p="60">60</button><input id="stc" type="number" min="1" max="600" placeholder="min" aria-label="Custom minutes"><button id="stcs">Set</button></div>
 <div class="sta"><button class="tb p" id="tsa">Start</button><button class="tb" id="tsl">Lap</button><button class="tb" id="tsr">Reset</button></div>
-<ol class="stl" id="stl"></ol><div class="stn" id="stn"></div></div></div></div>
+<ol class="stl" id="stl"></ol><div class="stn" id="stn"></div></div></div></div></div></div>
 <div class="sec">Aster</div><div id="adash"></div>
 <div class="sec">Calendar</div>
 <div class="cal" id="cal"><div class="calh"><button id="cprev" aria-label="Previous month">‹</button><b id="cttl"></b><button id="cnext" aria-label="Next month">›</button></div><div class="calg" id="cgrid"></div>
@@ -1777,6 +1795,23 @@ g("bzVl2").onclick=async e=>{const r=e.target.closest("[data-r]");if(r){const id
  const p=e.target.closest("[data-p]");if(p)play(p.dataset.p)};
 g("bzVf").onclick=()=>{const p=g("bzVp");try{if(document.fullscreenElement)document.exitFullscreen();else (p.requestFullscreen||p.webkitRequestFullscreen).call(p)}catch(e){}};
 open().then(async d=>{db=d;if(!db)say("Your browser is blocking saved videos here, so videos you add will play only until you close the page.",1);items=(await readAll()).sort((a,b)=>a.at-b.at);draw()});
+})();
+</script>
+<script>
+(function(){
+const g=id=>document.getElementById(id);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let L=[];try{L=JSON.parse(localStorage.getItem("sq_todo")||"[]").filter(x=>x&&typeof x.t==="string")}catch(e){}
+const save=()=>{try{localStorage.setItem("sq_todo",JSON.stringify(L))}catch(e){}};
+function draw(){const rows=L.filter(x=>!x.d).concat(L.filter(x=>x.d));
+ g("tdL").innerHTML=rows.length?rows.map(x=>'<div class="td-i'+(x.d?" done":"")+'"><button class="td-ck" data-k="'+x.id+'" role="checkbox" aria-checked="'+(!!x.d)+'" aria-label="Mark done: '+esc(x.t)+'">'+(x.d?"✓":"")+'</button><span class="td-t">'+esc(x.t)+'</span><button class="td-x" data-x="'+x.id+'" aria-label="Delete task" title="Delete">✕</button></div>').join(""):'<div class="td-e">Nothing here yet. Add your first task ✨</div>';
+ const dn=L.filter(x=>x.d).length;g("tdC").textContent=L.length?dn+" of "+L.length+" done":"";g("tdClr").hidden=!dn}
+function add(){const i=g("tdIn"),t=i.value.trim();if(!t)return;L.push({id:"t"+Date.now().toString(36)+Math.random().toString(36).slice(2,5),t,d:0});i.value="";save();draw();i.focus()}
+g("tdAdd").onclick=add;g("tdIn").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();add()}});
+g("tdL").onclick=e=>{const k=e.target.closest("[data-k]");if(k){const x=L.find(y=>y.id===k.dataset.k);if(x){x.d=x.d?0:1;save();draw()}return}
+ const r=e.target.closest("[data-x]");if(r){L=L.filter(y=>y.id!==r.dataset.x);save();draw()}};
+g("tdClr").onclick=()=>{L=L.filter(x=>!x.d);save();draw()};
+draw();
 })();
 </script>
 </body></html>
