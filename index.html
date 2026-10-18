@@ -1978,10 +1978,13 @@ const mic=g("vmic");
 /* ---------- feedback ---------- */
 let btm=null;
 function say(heard,reply,bad){bub.innerHTML=(heard?'<div class="h">'+esc(heard)+'</div>':"")+(reply?'<div class="r'+(bad?" bad":"")+'">'+esc(reply)+'</div>':"");bub.classList.add("show");clearTimeout(btm);btm=setTimeout(()=>bub.classList.remove("show"),reply?4500:2500)}
-let speaking=false,spId=0,spT=null,bctx=null;
-function spDone(id){if(id!==spId)return;clearTimeout(spT);speaking=false;if(wantOn&&cfg.hf)setTimeout(start,300)}
-function speak(t){if(!cfg.tts||!window.speechSynthesis)return;
- try{const id=++spId;clearTimeout(spT);speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang=cfg.lang==="hi-IN"?"en-IN":cfg.lang;u.rate=1.02;speaking=true;if(listening&&cfg.hf){try{rec.stop()}catch(e){}}u.onend=u.onerror=()=>spDone(id);spT=setTimeout(()=>spDone(id),2000+String(t).length*90);speechSynthesis.speak(u)}catch(e){speaking=false}}
+let speaking=false,spId=0,spT=null,bctx=null,lastSp=new Set(),spEnd=0;
+const nk=x=>dv(String(x).toLowerCase()).replace(/[^a-z0-9\u0900-\u097f]+/g," ").trim();
+function echo(x){const w=nk(x).split(" ").filter(Boolean);if(!w.length)return false;let h=0;w.forEach(a=>{if(lastSp.has(a))h++});return h/w.length>=.6}
+function spDone(id){if(id!==spId)return;clearTimeout(spT);speaking=false;spEnd=Date.now();if(wantOn&&cfg.hf)setTimeout(start,300)}
+function speak(t){if(!cfg.tts||!window.speechSynthesis)return;t=String(t);
+ if(cfg.hf&&t.length>80)t=(t.match(/^.{20,80}?[.!?](?:\s|$)/)||[t.slice(0,80)])[0];
+ try{const id=++spId;clearTimeout(spT);speechSynthesis.cancel();lastSp=new Set(nk(t).split(" "));const u=new SpeechSynthesisUtterance(t);u.lang=cfg.lang==="hi-IN"?"en-IN":cfg.lang;u.rate=1.08;speaking=true;if(listening&&!cfg.hf){try{rec.stop()}catch(e){}}u.onend=u.onerror=()=>spDone(id);spT=setTimeout(()=>spDone(id),1500+t.length*80);speechSynthesis.speak(u)}catch(e){speaking=false}}
 function reply(text,bad,sp){say(lastHeard,text,bad);if(!bad)speak(sp||text);return text}
 /* ---------- helpers for the app ---------- */
 const click=el=>{if(el){el.click();return true}return false};
@@ -2114,7 +2117,7 @@ I(/\stheme\s+(?:change|next)\s|\s(?:next|change|switch)\s+theme\s|\schange\s+(?:
 I(/\s(?:switch to|use|set|change to|apply)\s+(?:the\s+)?(.+?)\s+theme\s|\s(.+?)\s+theme\s+(?:on|lagao|lagado)\s/,(m)=>{const q=tokens(m[1]||m[2]).join(" ");const b=[...document.querySelectorAll("#thm button")].find(x=>{const n=x.textContent.toLowerCase();return q&&(n.includes(q)||q.split(" ").every(w=>n.includes(w)))});if(!b)return reply("I couldn't find a theme called “"+q+"”.",true);click(b);return reply("Theme: "+b.textContent.trim()+".")});
 /* ---------- engine ---------- */
 let lastHeard="",awakeUntil=0;
-const WAKE=/^\s*(?:(?:hey|hi|hello|ok|okay|yo|oye|arre|are|suno|sun|हे|हेलो|हैलो|हाय|ओके|अरे|सुनो|सुन|ओए)[\s,.!-]+){0,2}(?:draco|drako|dracko|drako|drago|ड्रेको|ड्रैको|ड्राको|ड्रेकों|ड्रैगो)(?:[\s,]+(?:malfoy|malfoi|malfoye|malfoi|मालफॉय|माल्फॉय|मैलफॉय|मेलफॉय|मालफोय|माल्फोय))?(?=[\s,.:;!?-]|$)[\s,.:;!?-]*/i;
+const WAKE=/^\s*(?:\S+[\s,.!-]+){0,3}?(?:dr[aeiou]+[ckg]+[ouy]+|dr[aeiou]+cula|drake|tr[aeiou]+[ckg]+o|dhr[aeiou]+[ckg]+o|[दड]्र[ाेैअ]?[कग][ोौ]|ड[ेैा]?[कग][ोौ]|ड्रेको|ड्रैको|ड्राको|ड्रैगो)(?:[\s,]+(?:malfoy|malfoi|malfoye|malfoi|मालफॉय|माल्फॉय|मैलफॉय|मेलफॉय|मालफोय|माल्फोय))?(?=[\s,.:;!?-]|$)[\s,.:;!?-]*/i;
 /* Devanagari words -> Latin Hinglish (nukta dots are stripped before lookup) */
 const DV={"मेरे":"mere","मेरी":"meri","मेरा":"mera","मुझे":"mujhe","लिए":"liye","लिये":"liye","का":"ka","की":"ki","के":"ke","को":"ko","में":"mein","मैं":"main","पर":"par","से":"se","टू":"to","डू":"do","दो":"do","दे":"de","दीजिए":"dijiye","लो":"lo","करो":"karo","कर":"kar","कीजिए":"kijiye","करिए":"kariye","करना":"karna","लिस्ट":"list","सूची":"list","टास्क":"task","टास्क्स":"tasks","काम":"kaam","कामों":"kaamon","लिख":"likh","लिखो":"likho","लिखना":"likhna","लिखिए":"likhiye","बनाओ":"banao","बना":"bana","जोडो":"jodo","जोड":"jod","डालो":"daalo","डाल":"daal","रखो":"rakho","नोट":"note","और":"aur","फिर":"phir","भी":"bhi","ये":"ye","यह":"ye","है":"hai","हैं":"hai","हो":"ho","गया":"gaya","गई":"gayi","गयी":"gayi","लिया":"liya","दिया":"diya","खत्म":"khatam","पूरा":"pura","क्या":"kya","कितना":"kitna","कितने":"kitne","कितनी":"kitni","पढा":"padha","पढना":"padhna","पढाई":"padhai","पढो":"padho","सुनाओ":"sunao","बताओ":"batao","बोलो":"bolo","आज":"aaj","बचे":"bache","बाकी":"baaki","दिन":"din","कब":"kab","समय":"samay","बजे":"baje","अगला":"agla","अगली":"agli","अगले":"agle","पिछला":"pichla","पिछली":"pichli","पिछले":"pichle","आगे":"aage","पीछे":"peeche","वापस":"wapas","खोलो":"kholo","खोलिए":"kholiye","खोल":"khol","दिखाओ":"dikhao","दिखा":"dikha","जाओ":"jao","चलो":"chalo","चालू":"chalu","चलाओ":"chalao","चला":"chala","शुरू":"shuru","शुरु":"shuru","लगाओ":"lagao","लगा":"laga","बंद":"band","रुको":"ruko","रुक":"ruk","रोको":"roko","रोक":"rok","बदलो":"badlo","बदल":"badal","टाइमर":"timer","स्टॉपवॉच":"stopwatch","फोकस":"focus","रील्स":"reels","रील":"reels","नोट्स":"notes","वर्कआउट":"workout","एक्सरसाइज":"workout","कसरत":"workout","जिम":"gym","जोन":"zone","स्टडी":"study","भजन":"bhajan","क्वेस्ट":"quest","होम":"home","डेली":"daily","ट्यूटर":"tutor","चैट":"chat","हिस्ट्री":"history","एनालिटिक्स":"analytics","स्टैट्स":"stats","सेटिंग्स":"settings","सेटिंग":"settings","मेन्यू":"menu","मेनू":"menu","लॉक":"lock","थीम":"theme","विद":"with","मी":"me","मिनट":"minutes","मिनिट":"minutes","घंटे":"hours","घंटा":"hours","स्टार्ट":"start","स्टॉप":"stop","पॉज":"pause","रीसेट":"reset","नेक्स्ट":"next","प्रीवियस":"previous","प्ले":"play","म्यूट":"mute","फुल":"full","स्क्रीन":"screen","लैप":"lap","हेल्प":"help","मदद":"help","सेट":"set","प्लान":"plan","शेड्यूल":"schedule","टाइम":"time","कृपया":"please","एक":"ek","तीन":"teen","चार":"char","पांच":"paanch","पाँच":"paanch","छह":"chhe","सात":"saat","आठ":"aath","नौ":"nau","दस":"das","ग्यारह":"gyarah","बारह":"barah","पंद्रह":"pandrah","बीस":"bees","पच्चीस":"pachchis","तीस":"tees","पैंतीस":"paintees","चालीस":"chalis","पैंतालीस":"paitalis","पचास":"pachas","आधा":"aadha","डेढ":"dedh","ढाई":"dhai","जल्दी":"jaldi","अभी":"abhi","जरा":"zara","यार":"yaar","भाई":"bhai","जी":"ji","ना":"na","पिनट्रेस्ट":"pinterest","पिंटरेस्ट":"pinterest","पीडब्ल्यू":"pw","पीडब्लू":"pw","लाइव":"live","फिजिक्स":"physics","वाला":"wala","वाली":"wali","वाले":"wale"};
 const dvw=w=>{const k=w.normalize("NFD").replace(/\u093c/g,"").normalize("NFC");return DV[k]||DV[w]||w};
@@ -2149,18 +2152,19 @@ const PRE=/\s(notes?|reels?|workout|zone|bhajan|quest|home|menu|theme|settings?|
 function canon(t){CANON.forEach(c=>{t=t.replace(c[0],c[1])});t=t.replace(HNR,(m,w)=>" "+HN[w]+" ").replace(LRE," $1").replace(PRE," $1").replace(FRE,"");t=t.replace(/^\s(?:(?:can|could|would|will)\s+(?:you|u)\s+)+/," ");return t.replace(/\s+/g," ")}
 function normalize(x){x=dv(String(x).toLowerCase().replace(/[’']/g,"").replace(/[\u0966-\u096f]/g,d=>d.charCodeAt(0)-2406)).replace(/pw\.live|\bp\.?\s*w\.?\s*(?:dot\s*)?(?:live|life)\b|physics\s*wal+ah?\b/g,"pwlive").replace(/to-do/g,"to do").replace(/[^a-z0-9\u0900-\u097f\s]/g," ").replace(/\s+/g," ").trim();return canon(" "+x+" ")}
 /* ---- "write me a to-do list ..." in English / Hindi / Hinglish ---- */
-const TDN=/^(?:todos?|todolist|lists?|tasks?|tasklist|reminders?|checklist|kaam|kaamon)$/;
-const TDV=/^(?:write|wrote|make|create|prepare|build|add|note|jot|put|insert|save|record|type|likh|likho|likhna|likhiye|likhdo|likhlo|banao|bana|banado|banalo|jodo|jod|jodna|daalo|daal|dalo|dal|rakho|rakh)$/;
+const TDN=/^(?:todos?|todolist|todu|tudu|lists?|tasks?|tasklist|reminders?|checklist|kaam|kaamon)$/;
+const TDV=/^(?:write|wrote|right|rite|make|create|prepare|build|add|note|jot|put|insert|save|record|type|likh|likho|likhna|likhiye|likhdo|likhlo|likhe|likhen|likhta|likhte|likhwa|likhni|likhdijiye|likhdena|banao|bana|banado|banalo|banani|banana|banwa|banwao|banaiye|banaye|jodo|jod|jodna|jodiye|daalo|daal|dalo|dal|daalna|dalna|rakho|rakh|rakhna|rakhdo)$/;
 const TDL=/^(?:do|de|dijiye|dena|lo|karo|kar|kardo|kijiye|kariye)$/;
 const TDP=/^(?:mein|me|par|pe|ke|ki|ka|ko|se|liye|wala|wali|wale)$/;
 const TDM=/^(?:is|are|hai|hain|ye|yeh|yah|this|these|that|following|follows|as|like|here|its|tha|kuch|isme|jisme|jo)$/;
-const TDF=/^(?:please|pls|plz|kindly|kripya|can|could|would|will|you|u|i|we|hey|ok|okay|so|just|now|abhi|zara|jara|ek|baar|yaar|bhai|ji|na|and|aur|then|phir|fir|also|bhi|mujhe|mere|meri|mera|apna|apni|for|me|my|the|a|an|one|new|naya|nayi|nai|want|wanna|need|lets|let|us|go|ahead|chahiye|jaldi|quickly|to)$/;
+const TDF=/^(?:please|pls|plz|kindly|kripya|can|could|would|will|you|u|i|we|hey|ok|okay|so|just|now|abhi|zara|jara|ek|baar|yaar|bhai|ji|na|and|aur|then|phir|fir|also|bhi|mujhe|mere|meri|mera|apna|apni|for|me|my|the|a|an|one|new|naya|nayi|nai|want|wanna|need|lets|let|us|go|ahead|chahiye|jaldi|quickly|to|hai|hain|hi|toh|main|mai|mujhko|mereko|chahta|chahti|hoon|hun|ya|bro|bhaiya|didi|sir|mam|thoda|ready|uh|um|hmm|acha|accha|haan|han|chalo)$/;
+const TDJ=w=>{w=dv(w.toLowerCase()).replace(/[^a-z0-9]/g,"");return !w||TDN.test(w)||TDV.test(w)||TDL.test(w)||TDP.test(w)||TDM.test(w)||TDF.test(w)||/^(?:tu|du|doo|2|two|too|todo|okay|ok)$/.test(w)};
 function tdToks(raw){const a=[];raw.split(/\s+/).filter(Boolean).forEach((w,i)=>{const e=w.toLowerCase().replace(/^[^a-z0-9\u0900-\u097f]+|[^a-z0-9\u0900-\u097f]+$/g,"");a.push({i,n:dv(e).replace(/[^a-z0-9]/g,"")||"~"})});
- const m=[];for(let k=0;k<a.length;k++){const x=a[k];if(x.n==="to"&&a[k+1]&&a[k+1].n==="do"){const z=a[k+2]?a[k+2].n:"";if(!z||/^(?:lists?|checklist)$/.test(z)||TDV.test(z)||TDP.test(z)||TDM.test(z)){m.push({i:x.i,n:"todo"});k++;continue}}m.push(x)}return m}
+ const m=[];for(let k=0;k<a.length;k++){const x=a[k];if(/^(?:to|tu|too|two|2)$/.test(x.n)&&a[k+1]&&/^(?:do|du|doo|dew|dou)$/.test(a[k+1].n)){const z=a[k+2]?a[k+2].n:"";if(!z||/^(?:lists?|checklist)$/.test(z)||TDV.test(z)||TDP.test(z)||TDM.test(z)){m.push({i:x.i,n:"todo"});k++;continue}}m.push(x)}return m}
 function tdItems(s){s=String(s||"").replace(/[\u2018\u2019]/g,"'").replace(/\s+(?:full stop|new line|next line|comma|semicolon)\s+/gi,", ");
  const parts=s.split(/\s*[,;\n]+\s*|\s+(?:and then|then|phir|fir|aur phir|uske baad|after that|next item|next one|next|agla|agli|also|plus|aur ek|ek aur|secondly|second|thirdly|third|fourth|fifth|dusra|doosra|teesra|chautha|number (?:one|two|three|four|five|\d+)|फिर|उसके बाद|अगला|अगली|दूसरा|तीसरा|चौथा|और एक|एक और)\s+/i),out=[];
  parts.forEach(p=>{const q=p.split(/\s+(?:and|aur|और)\s+/i);if(q.length>1&&q.every(x=>x.trim().split(/\s+/).length>=2))q.forEach(x=>out.push(x));else out.push(p)});
- return out.map(x=>x.replace(/^[\s:;,.\-–]+/,"").replace(/^(?:and|aur|और|then|phir|फिर|also|firstly|first|1st|pehla|पहला)\s+/i,"").replace(/\s+(?:bas|that'?s (?:it|all)|thats (?:it|all)|done|ho gaya|thanks?|thank you|please|बस|हो गया)$/i,"").replace(/[.!?।]+$/,"").trim()).filter(x=>x.length>1)}
+ return out.map(x=>x.replace(/^[\s:;,.\-–]+/,"").replace(/^(?:and|aur|और|then|phir|फिर|also|firstly|first|1st|pehla|पहला)\s+/i,"").replace(/\s+(?:bas|that'?s (?:it|all)|thats (?:it|all)|done|ho gaya|thanks?|thank you|please|बस|हो गया)$/i,"").replace(/[.!?।]+$/,"").trim()).filter(x=>x.length>1&&x.split(/\s+/).some(w=>!TDJ(w)))}
 function parseTodo(raw){const m=tdToks(raw),tk=raw.split(/\s+/).filter(Boolean);
  let k=0,N=false,V=false,p="";
  for(;k<m.length;k++){const x=m[k].n,c=TDN.test(x)?"N":TDV.test(x)?"V":TDL.test(x)&&(p==="V"||p==="L")?"L":TDP.test(x)&&(N||p==="F")?"P":TDM.test(x)&&N?"M":TDF.test(x)?"F":"";if(!c)break;if(c==="N")N=true;if(c==="V")V=true;p=c}
@@ -2169,16 +2173,19 @@ function parseTodo(raw){const m=tdToks(raw),tk=raw.split(/\s+/).filter(Boolean);
  for(;j>=0;j--){const x=m[j].n,l=j>0?m[j-1].n:"",c=TDN.test(x)?"N":TDV.test(x)?"V":TDL.test(x)&&(TDV.test(l)||TDL.test(l))?"L":(TDP.test(x)||TDM.test(x)||TDF.test(x))?"P":"";if(!c)break;if(c==="N")N=true;if(c==="V")V=true}
  if(N&&V&&j>=0)return{items:tdItems(tk.slice(0,m[j+1].i).join(" "))};
  return null}
-function addTasks(items){goTab("quest");const i=g("tdIn");if(!i)return reply("I couldn't find the to-do list.",true);const d=[];items.forEach(x=>{x=x.charAt(0).toUpperCase()+x.slice(1);i.value=x;click(g("tdAdd"));d.push(x)});
- const hi=/[\u0900-\u097f]/.test(d.join(""));
- return d.length>1?reply("Added "+d.length+" tasks: "+d.slice(0,5).join(", ")+(d.length>5?", and more.":"."),0,"Added "+d.length+" tasks to your to-do list."):reply("Added task: "+d[0]+".",0,hi?"Added to your to-do list.":null)}
+const recentAdds={};
+function addTasks(items){goTab("quest");const i=g("tdIn");if(!i)return reply("I couldn't find the to-do list.",true);const d=[],now=Date.now();
+ items.forEach(x=>{x=x.charAt(0).toUpperCase()+x.slice(1);const k=nk(x);if(recentAdds[k]&&now-recentAdds[k]<12000)return;recentAdds[k]=now;i.value=x;click(g("tdAdd"));d.push(x)});
+ if(!d.length)return true;
+ const hi=/[\u0900-\u097f]/.test(d.join("")),tail=cfg.hf?" Say the next one, or “done”.":"";
+ return d.length>1?reply("Added "+d.length+" tasks: "+d.slice(0,5).join(", ")+(d.length>5?", and more.":".")+tail,0,cfg.hf?"Added.":"Added "+d.length+" tasks to your to-do list."):reply("Added task: "+d[0]+"."+tail,0,cfg.hf||hi?"Added.":null)}
 /* dictation: "write a to-do list" -> keep listening for items until "done" */
 const dict={on:false};let dictT=null;
 function reopen(f,n){n=n||0;setTimeout(()=>{if(n>12||!f()||cfg.hf)return;if(speaking||listening)return reopen(f,n+1);start()},n?500:700)}
-function dictBump(){clearTimeout(dictT);dictT=setTimeout(()=>{if(dict.on){dict.on=false;say("","Closed the list.")}},30000)}
+function dictBump(){clearTimeout(dictT);dictT=setTimeout(()=>{if(dict.on){dict.on=false;say("","List closed. Say “Draco …” for a new command.")}},cfg.hf?15000:30000)}
 function dictStart(){dict.on=true;dictBump();reopen(()=>dict.on)}
 const DEND=/^\s*(?:(?:ok|okay|haan|han|theek hai|thik hai|bas|that'?s|it'?s|ye|so|now|आप|ठीक है|हाँ)[\s,]+)*(?:done|finish(?:ed)?|that'?s (?:it|all)|thats (?:it|all)|stop|cancel|never ?mind|bas|bas karo|ho gaya|ho gya|khatam|rehne do|rahne do|nahi|no|बस|बस करो|हो गया|खत्म|ख़त्म|रहने दो|नहीं)[\s.!]*$/i;
-function dictFeed(raw){if(DEND.test(raw)){dict.on=false;clearTimeout(dictT);return !!reply("Okay, your list is saved.")}
+function dictFeed(raw){if(DEND.test(raw)){dict.on=false;clearTimeout(dictT);return !!reply("Okay, saved.",0,"Okay.")}
  const it=tdItems(raw);if(it.length){dictBump();addTasks(it)}reopen(()=>dict.on);return true}
 function beep(){try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return;bctx=bctx||new C();if(bctx.state==="suspended")bctx.resume();const o=bctx.createOscillator(),gn=bctx.createGain();o.frequency.value=880;gn.gain.value=.04;o.connect(gn);gn.connect(bctx.destination);o.start();o.stop(bctx.currentTime+.1)}catch(e){}}
 function ack(){awakeUntil=Date.now()+12000;beep();say(lastHeard,"Yes? Say your command…");if(!cfg.hf)reopen(()=>true)}
@@ -2189,7 +2196,7 @@ function run(text,opts){opts=opts||{};let raw=String(text||"").trim();if(!raw)re
  if(!raw){ack();return true}
  dict.on=false;clearTimeout(dictT);
  const td=parseTodo(raw);
- if(td){if(td.items.length){addTasks(td.items);return true}goTab("quest");dictStart();reply("Sure. What should be on the list? Say the items, and “done” when you finish.");return true}
+ if(td){if(td.items.length){addTasks(td.items);dictStart();return true}goTab("quest");dictStart();reply("Okay, tell me the items. Say “done” when finished.",0,"Okay, tell me the items.");return true}
  const t=normalize(raw);
  const z=zoneByName(t);if(z){click(z.c);return !!reply("Entering "+z.nm.replace(/\b\w/g,c=>c.toUpperCase())+".")}
  for(const [re,fn] of intents){const m=t.match(re);if(!m)continue;const r=fn(m,raw,t);if(r)return true}
@@ -2197,32 +2204,42 @@ function run(text,opts){opts=opts||{};let raw=String(text||"").trim();if(!raw)re
  if(!opts.quiet)reply("Sorry, I didn't get “"+raw+"”. Say “help” to see what I can do.",true);return false}
 function tryAlts(list,opts){for(const a of list){if(run(a,Object.assign({quiet:true},opts||{})))return true}return false}
 /* ---------- recognition ---------- */
-let rec=null,listening=false,wantOn=false,errCount=0,lastT=0,lastTxt="",lastErr="",rT=null,t0=0,hfHint=false;
+let rec=null,listening=false,wantOn=false,errCount=0,lastT=0,lastTxt="",lastErr="",rT=null,t0=0,hfHint=false,eT=null,earlyAt=0;
 const syncMic=()=>{mic.classList.toggle("on",listening);mic.classList.toggle("hf",!!cfg.hf);mic.classList.toggle("off",!SR);mic.textContent=listening?"🎙️":"🎤"};
 function later(ms){clearTimeout(rT);rT=setTimeout(()=>{rT=null;if(wantOn&&cfg.hf)start()},ms)}
 function mk(){const r=new SR();r.lang=cfg.lang;r.interimResults=true;r.continuous=!!cfg.hf;r.maxAlternatives=3;
  r.onstart=()=>{if(r!==rec)return;listening=true;t0=Date.now();syncMic();if(!cfg.hf)say("","Listening…");else if(!hfHint){hfHint=true;say("","Hands-free is on. Say “Hey Draco …”")}};
+ r.onaudiostart=()=>{if(r===rec)say("","🎙️ Mic is open. Speak now…")};
+ r.onsoundstart=()=>{if(r===rec)say("","🔊 Hearing sound…")};
+ r.onspeechstart=()=>{if(r===rec)say("","🗣️ Hearing speech…")};
+ r.onnomatch=()=>{if(r===rec)say("","I heard something but couldn't turn it into words. Try again, closer to the mic.",true)};
  r.onresult=e=>{if(r!==rec)return;errCount=0;let interim="";
   for(let i=e.resultIndex;i<e.results.length;i++){const res=e.results[i];if(!res.isFinal){interim+=res[0].transcript;continue}
    const alts=[];for(let k=0;k<res.length;k++)alts.push(res[k].transcript);
-   const key=alts[0].trim().toLowerCase();if(key===lastTxt&&Date.now()-lastT<2500)continue;lastTxt=key;lastT=Date.now();
+   clearTimeout(eT);const key=nk(alts[0]);if(!key)continue;
+   if((speaking||Date.now()-spEnd<2500)&&echo(alts[0]))continue;
+   if(key===lastTxt&&Date.now()-lastT<8000)continue;lastTxt=key;lastT=Date.now();
    lastHeard="“"+alts[0].trim()+"”";
-   if(cfg.hf){const w=alts.find(a=>WAKE.test(a));if(!w&&!dict.on&&Date.now()>awakeUntil)continue;
+   if(cfg.hf){const w=alts.find(a=>WAKE.test(a));if(!w&&!dict.on&&Date.now()>awakeUntil){say(lastHeard,"Heard you, but no wake word. Start with “Draco …”",true);continue}
     const L=w?[w].concat(alts.filter(a=>a!==w)):alts,nw=!dict.on;
-    if(tryAlts(L,{needWake:nw})||run(L[0],{needWake:nw}))awakeUntil=Math.max(awakeUntil,Date.now()+6000)}
+    if(tryAlts(L,{needWake:nw})||run(L[0],{needWake:nw}))awakeUntil=Math.max(awakeUntil,Date.now()+10000)}
    else{let done=false;for(const a of alts){if(matches(a)){run(a);done=true;break}}if(!done)run(alts[0]);wantOn=false;try{r.stop()}catch(x){}}}
-  if(interim&&(!cfg.hf||dict.on||Date.now()<awakeUntil||WAKE.test(interim)))say("Listening…",interim.trim())};
+  if(interim){say("Listening…",interim.trim());
+   if(cfg.hf){clearTimeout(eT);const it=interim.trim();
+    if(WAKE.test(it)||dict.on||Date.now()<awakeUntil)eT=setTimeout(()=>{const k=nk(it);if(!k||k===lastTxt||Date.now()-earlyAt<3000)return;if((speaking||Date.now()-spEnd<2500)&&echo(it))return;lastHeard="“"+it+"”";
+     if(tryAlts([it],{needWake:!dict.on})){earlyAt=Date.now();lastTxt=k;lastT=Date.now();awakeUntil=Math.max(awakeUntil,Date.now()+10000)}},900)}}};
  r.onerror=e=>{if(r!==rec)return;const c=e.error;if(c==="no-speech"||c==="aborted")return;errCount++;
   if(c==="not-allowed"||c==="service-not-allowed"){wantOn=false;lastErr=c;say("","The microphone didn't work. I opened the fix-it panel.",true);openPan();diag()}
   else if(c==="audio-capture"){wantOn=false;say("","I can't find a microphone.",true)}
   else if(c==="language-not-supported"){cfg.lang="en-IN";saveCfg();rec=null;say("","That language isn't supported here. Switched to English (India).",true)}
   else if(errCount>=8){wantOn=false;say("","Voice stopped: "+(c==="network"?"no internet connection":c)+". Tap the mic to try again.",true)}
-  else if(!cfg.hf){wantOn=false;say("",c==="network"?"Voice needs an internet connection.":"Voice problem: "+c,true)}};
+  else if(!cfg.hf){wantOn=false;say("",c==="network"?"Voice needs an internet connection.":"Voice problem: "+c,true)}
+  else say("","Mic hiccup ("+c+"), retrying…",true)};
  r.onend=()=>{if(r!==rec)return;listening=false;syncMic();if(wantOn&&cfg.hf){if(Date.now()-t0<1500)errCount++;later(Math.min(6000,300*Math.pow(2,Math.min(errCount,5))))}};return r}
 function matches(a){const s=a.replace(WAKE,"").trim(),t=normalize(s);if(zoneByName(t))return true;try{if(parseTodo(s))return true}catch(e){}return intents.some(([re])=>re.test(t))}
 function start(){if(!SR){openPan();return}if(listening||speaking)return;try{if(!rec||rec.lang!==cfg.lang||rec.continuous!==!!cfg.hf){try{rec&&rec.abort()}catch(e){}listening=false;rec=mk()}rec.start();wantOn=true}catch(e){if(/already/i.test(String(e&&e.message))){listening=true;wantOn=true}}}
 function stopRec(){wantOn=false;clearTimeout(rT);rT=null;try{rec&&rec.stop()}catch(e){}listening=false;syncMic()}
-const toggle=()=>{if(!SR){openPan();return}if(listening||wantOn){stopRec();bub.classList.remove("show")}else{errCount=0;start()}};
+const toggle=()=>{if(!SR){openPan();return}if(location.protocol==="file:"&&!listening&&!wantOn)say("","This page is open as a local file. Chrome often blocks voice on files. Run it from http://localhost (see ⚙ → Test microphone).",true);if(listening||wantOn){stopRec();bub.classList.remove("show")}else{errCount=0;start()}};
 mic.onclick=toggle;
 document.addEventListener("keydown",e=>{if(e.ctrlKey||e.metaKey||e.altKey)return;const a=document.activeElement,tg=a&&a.tagName;if(/INPUT|TEXTAREA|SELECT/.test(tg)||(a&&a.isContentEditable))return;
  if(e.key==="v"||e.key==="V"){e.preventDefault();toggle()}});
@@ -2246,12 +2263,19 @@ async function diag(){const d=g("vdg"),out=[];d.className="vs";d.textContent="Ch
  out.push("Page: "+(proto==="file:"?"opened from a file on your computer":proto==="https:"?"secure web page":(location.hostname==="localhost"||location.hostname==="127.0.0.1")?"local server (localhost)":"plain web page ("+proto.replace(":","")+")"));
  out.push("Permission: "+(state==="granted"?"allowed":state==="denied"?"blocked for this page":state==="prompt"?"not asked yet":"unknown"));
  if(framed)out.push("⚠ This page is inside another page (like a preview). Browsers usually block the microphone there. Open the file in its own browser tab.");
- let ok=false,name="";
- try{if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw {name:"Unsupported"};const s=await navigator.mediaDevices.getUserMedia({audio:true});s.getTracks().forEach(t=>t.stop());ok=true}catch(e){name=(e&&e.name)||"Error"}
- if(ok){out.push("✅ The microphone works for this page.");
+ let ok=false,name="",lvl=0;
+ try{if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw {name:"Unsupported"};const s=await Promise.race([navigator.mediaDevices.getUserMedia({audio:true}),new Promise((_,j)=>setTimeout(()=>j({name:"Timeout"}),8000))]);
+  d.textContent="Speak now… measuring for 3 seconds";
+  try{const C=window.AudioContext||window.webkitAudioContext,c=new C(),src=c.createMediaStreamSource(s),an=c.createAnalyser();an.fftSize=512;src.connect(an);const buf=new Uint8Array(an.fftSize),t1=Date.now();
+   while(Date.now()-t1<3000){await new Promise(r=>setTimeout(r,80));an.getByteTimeDomainData(buf);let m=0;for(const v of buf)m=Math.max(m,Math.abs(v-128));lvl=Math.max(lvl,m)}c.close()}catch(e){lvl=-1}
+  s.getTracks().forEach(t=>t.stop());ok=true}catch(e){name=(e&&e.name)||"Error"}
+ if(ok){out.push("✅ The browser can open the microphone.");
+  if(lvl>=0&&lvl<4)out.push("❌ But it picked up NO sound. The wrong microphone is selected or it is muted. Check Windows/Mac sound input settings, the mic's mute switch, and Chrome → Settings → Privacy → Site settings → Microphone (choose the right device).");
+  else if(lvl>=4)out.push("✅ It hears your voice (level "+lvl+"). If commands still don't work, the browser's speech service is the problem: use Chrome or Edge, with internet on, and not Brave.");
   if(lastErr==="not-allowed"||lastErr==="service-not-allowed")out.push("But the browser's speech service refused to start. This usually means: the page was opened straight from a file, or the browser is not Chrome/Edge (Brave and some Chromium builds have no speech service). Try Chrome or Edge, and if it still fails, open the page from http://localhost or a web address.");
   else out.push("Tap the 🎤 button (or press V) and speak.")}
  else if(name==="NotAllowedError"||name==="SecurityError"||name==="PermissionDeniedError"){out.push("❌ The browser blocked the microphone for this page.\n1. Click the icon at the left of the address bar (a lock, “File” or “i”) → Site settings (or Permissions) → Microphone → Allow. Then reload the page.\n2. Check your computer's own setting. Windows: Settings → Privacy & security → Microphone. Mac: System Settings → Privacy & Security → Microphone. Make sure your browser is switched on.\n3. If you opened the file from a folder and the choice doesn't stick, the browser may not remember permissions for files.")}
+ else if(name==="Timeout")out.push("❌ The browser is waiting for you to allow the microphone. Look for a prompt near the address bar and click Allow.");
  else if(name==="NotFoundError"||name==="DevicesNotFoundError")out.push("❌ No microphone was found. Plug one in or check your sound settings.");
  else if(name==="NotReadableError"||name==="TrackStartError")out.push("❌ The microphone is busy. Close other apps that use it (calls, recorders) and try again.");
  else if(name==="Unsupported")out.push("❌ This browser can't use the microphone on this page.");
