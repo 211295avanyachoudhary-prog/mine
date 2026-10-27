@@ -674,27 +674,27 @@ Ray Optics L10|Haloalkanes L7|Microbes L4|C Haloalkanes L8
 Ray Optics L11|Haloalkanes L9|Biotech Applications L1|P Ray Optics L12
 Ray Optics L13|Haloalkanes L10|Biotech Applications L2|C Haloalkanes L11
 Ray Optics L14|Haloalkanes L12|Biotech L3|P Wave Optics L1
-Wave Optics L2|Haloalkanes L13|Biotech L4|C Haloalkanes L14
-Wave Optics L3|Alcohols L1|Biotech L5|P Wave Optics L4
-Wave Optics L5|Alcohols L2|Biotech L6|C Alcohols L3
-Wave Optics L6|Alcohols L5|Org. & Populations L1|P Dual Nature L1
-Dual Nature L2|Alcohols L6|O&P L2|C Alcohols L7
-Dual Nature L3|Alcohols L8|O&P L3|P Dual Nature L4
-Atoms L1|Alcohols L9|O&P L4|C Alcohols L10
-Atoms L2|Aldehydes L1|O&P L5|P Atoms L3
-Nuclei L1|Aldehydes L2|O&P L6|C Aldehydes L3
-Nuclei L2|Aldehydes L4|Ecosystem L1|P Nuclei L3
-Nuclei L4|Aldehydes L5|Biodiversity L1|C Aldehydes L6
-Semiconductors L1|Aldehydes L7|Biodiversity L2|P Semiconductors L2
-Semiconductors L3|Aldehydes L8|Biodiversity L3|C Amines L1
-Semiconductors L4|Amines L2|Bio revision|P Semiconductors L5
-🔄 Physics revision + PYQs|Amines L3|Bio NCERT|C Amines L4
-Physics revision|Biomolecules L1|Bio PYQs|C Biomolecules L2
-PYQs|Purification L1|Bio NCERT|C Organic revision
-Full Physics revision|Chemistry revision|Biology revision|Weak-topic catch-up
-Physics mock/PYQs|Chemistry mock/PYQs|Biology mock/PYQs|Analysis
-Final revision|Final revision|Final NCERT revision|No new lectures`.split("\n").map(r=>r.split("|"));
-const SS=[["3:30–4:45","Biology NCERT / active recall","B"],["4:45–5:15","Exercise 🏃","S"],["5:15–7:00","Physics PYQs / DPP","P"],["7:30–8:45","Chemistry NCERT & reactions","C"],["8:45–9:30","Active recall + mistake book","S"],["9:30–10:00","Prep tomorrow + wind down","S"]];
+Electrostatic Potential L18; Current Electricity L16; Ray Optics L10|Haloalkanes L19|Biotechnology Applications L1|Doubts + revision
+Ray Optics L11|Haloalkanes L20–22|Biotechnology Applications L2|Doubts + revision
+Ray Optics L12–14|Optical Isomerism L1|Biotechnology Applications L3|Doubts + revision
+Ray Optics L15|Optical Isomerism L2–4|Biotechnology Applications L4|Doubts + revision
+Ray Optics L16–17; AC L4|Optical Isomerism L5|Biotechnology Applications L5|Doubts + revision
+AC L5|Optical Isomerism L6–8|Biotechnology Applications L6|Doubts + revision
+AC L6–8|Optical Isomerism L9|Evolution L2|Doubts + revision
+EM Waves L1|Optical Isomerism L10; Alcohols, Phenols and Ethers L1–2|Evolution L3|Doubts + revision
+EM Waves L2–3; Wave Optics L1|Alcohols, Phenols and Ethers L3|Evolution L4|Doubts + revision
+Wave Optics L2|Alcohols, Phenols and Ethers L4–6|Evolution L5|Doubts + revision
+Wave Optics L3–5|Alcohols, Phenols and Ethers L7|Evolution L6|Doubts + revision
+Wave Optics L6|Alcohols, Phenols and Ethers L8–9; Aldehydes, Ketones and Carboxylic Acids L1|Evolution L7|Doubts + revision
+Dual Nature L1–3|Aldehydes, Ketones and Carboxylic Acids L2|Evolution L8|Doubts + revision
+Dual Nature L4|Aldehydes, Ketones and Carboxylic Acids L3–5|Biotechnology + Evolution NCERT recall|Doubts + revision
+Dual Nature L5–6; Atoms L1|Aldehydes, Ketones and Carboxylic Acids L6|Biotechnology + Evolution MCQs|Doubts + revision
+Atoms L2|Aldehydes, Ketones and Carboxylic Acids L7–8; Amines L1|Human Health and Disease revision|Doubts + revision
+Atoms L3; Nuclei L1–2|Amines L2|Reproduction chapters revision|Doubts + revision
+Nuclei L3–4; Semiconductors L1|Amines L3|Genetics chapters revision|Doubts + revision
+Semiconductors L2–3|Biomolecules L1–2|Biotechnology NCERT + MCQs|Doubts + revision
+Semiconductors L4–5|Biomolecules L3–4|Full Biology recall + weak topics|Doubts + revision`.split("\n").map(r=>r.split("|"));
+const SS=[["3:30–4:45","Biology: 50 questions + NCERT recall","B"],["4:45–5:15","Exercise 🏃","S"],["5:15–7:00","Physics: 50 questions (PYQs / DPP)","P"],["7:30–8:45","Chemistry: 50 questions + NCERT & reactions","C"],["8:45–9:30","Active recall + mistake book","S"],["9:30–10:00","Prep tomorrow + wind down","S"]];
 const COL={P:"var(--P)",C:"var(--C)",B:"var(--B)",S:"var(--S)"},ICO={P:"⚡",C:"🧪",B:"🧬",S:"⭐"};
 const RANKS=["Rookie","Apprentice","Scholar","Topper","Rank Hunter","NEET Warrior","AIR 1 Energy"];
 const START=new Date(2026,8,30),N=47,$=id=>document.getElementById(id);
@@ -706,10 +706,17 @@ let todayIdx=Math.floor((new Date(new Date().getFullYear(),new Date().getMonth()
 const cur=Math.min(N-1,Math.max(0,todayIdx));
 if(S.sel==null)S.sel=cur;
 function blocks(i){const r=D[i],x=r[3],xs=/^[PC] /.test(x)?x[0]:"S",xt=/^[PC] /.test(x)?x.slice(2):x;
-const rev=i>=42,lec=t=>!rev&&/ L\d/.test(t);
+const rev=false,lec=t=>!rev&&/ L\d/.test(t);
 return[["7:00–9:00",r[0],"P",lec(r[0])],["9:00–10:45",r[1],"C",lec(r[1])],["10:45–12:30",r[2],"B",lec(r[2])],["1:15–3:00",xt,xs,!rev&&/ L\d/.test(xt)]]
-.map((b,k)=>({id:i+"-"+k,t:b[0],x:b[1],s:b[2],lec:b[3],xp:b[3]?50:35}))
-.concat(SS.map((b,k)=>({id:i+"-s"+k,t:b[0],x:b[1],s:b[2],lec:false,xp:30})))}
+.flatMap((b,k)=>{const ls=b[3]?splitLec(b[1]):[b[1]],n=ls.length,m=slotMin(b[0]);
+return ls.map((x,j)=>({id:i+"-"+k+(j?"_"+j:""),t:n>1&&m?fmtMin(m[0]+Math.round(m[1]*j/n/5)*5)+"–"+fmtMin(m[0]+Math.round(m[1]*(j+1)/n/5)*5):b[0],x,s:b[2],lec:b[3],xp:b[3]?50:35,slot:k,g:b[1],first:j==0}))})
+.concat(SS.map((b,k)=>({id:i+"-s"+k,t:b[0],x:b[1],s:b[2],lec:false,xp:30,slot:4+k,g:b[1],first:true})))}
+/* Each lecture is its own block with its own XP. "Ray Optics L12–14" becomes L12, L13, L14; "A L1; B L2" becomes two blocks. */
+function splitLec(t){const o=[];t.split(";").forEach(p=>{p=p.trim();const m=p.match(/^(.*?)\s*L(\d+)(?:–(\d+))?$/);if(!m){o.push(p);return}const a=+m[2],b=m[3]?+m[3]:a;for(let n=a;n<=b;n++)o.push(m[1]+" L"+n)});return o}
+function slotMin(t){const m=t.match(/^(\d+):(\d+)–(\d+):(\d+)$/);if(!m)return null;const a=+m[1]*60+ +m[2];let e=+m[3]*60+ +m[4];while(e<=a)e+=720;return[a,e-a]}
+function fmtMin(v){const h=Math.floor(v/60)%12||12,mm=v%60;return h+":"+String(mm).padStart(2,"0")}
+/* one-time migration: a ticked combined block (old id i-k) also ticks the lectures that were merged into it */
+try{if(!S.splitV){for(let i=0;i<N;i++)for(let k=0;k<4;k++)if(S.done[i+"-"+k])blocks(i).filter(b=>b.slot===k).forEach(b=>{S.done[b.id]=1});S.splitV=1;save()}}catch(e){}
 function tutorInfo(){try{const d=JSON.parse(localStorage.getItem("daily_tutor_v1")||"{}").days||{},v=Object.values(d).filter(x=>x.eval);return{xp:v.reduce((a,x)=>a+Math.round(x.eval.pct),0),best:Math.max(0,...v.map(x=>x.eval.pct))}}catch(e){return{xp:0,best:0}}}
 const nl=t=>{let n=0;(t.match(/L\d+(?:–\d+)?/g)||[]).forEach(m=>{const r=m.match(/L(\d+)(?:–(\d+))?/);n+=r[2]?+r[2]-+r[1]+1:1});return n||1};
 function stats(){let xp=S.focus*20,full=[],act=[],cnt={P:[0,0],C:[0,0],B:[0,0]},n=0;
@@ -747,7 +754,7 @@ if(lastLv&&lv>lastLv){toast("LEVEL UP! You are now "+RANKS[Math.min(6,lv-1)]);$(
 $("days").innerHTML=Array.from({length:N},(_,i)=>{const d=dt(i);return`<button class="day${i==S.sel?" sel":""}${s.full[i]?" full":""}${i==cur&&todayIdx>=0?" now":""}" data-i="${i}"><small>${d.toLocaleDateString("en",{weekday:"short"})}</small><b>${d.getDate()}</b><small>${d.toLocaleDateString("en",{month:"short"})}</small></button>`}).join("");
 const sd=$("days").querySelector(".sel");if(sd&&!render.o){sd.scrollIntoView({inline:"center",block:"nearest"});render.o=1}
 $("dh").textContent=dt(S.sel).toLocaleDateString("en",{weekday:"long",day:"numeric",month:"long"});
-const bl=blocks(S.sel);let h="";bl.forEach((b,k)=>{if(k==4)h+=`<div class="sec">After 3 PM: self-study only, no lectures</div>`;
+const bl=blocks(S.sel);let h="";bl.forEach((b,k)=>{if(b.slot===4)h+=`<div class="sec">After 3 PM: self-study only, no lectures</div>`;
 h+=`<button class="blk${S.done[b.id]?" done":""}" data-id="${b.id}" data-s="${b.s}" style="--c:${COL[b.s]}"><div class="ck">${S.done[b.id]?"✓":ICO[b.s]}</div><div><div class="tm">${b.t}</div><div class="tt">${b.x}</div></div><div class="xpv">+${b.xp} XP</div></button>`});
 $("list").innerHTML=h;
 $("rings").innerHTML=[["P","Physics"],["C","Chemistry"],["B","Biology"]].map(([k,n])=>{const[a,b]=s.cnt[k],f=b?a/b:0;return`<div class="ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="32" stroke="var(--ln2)"/><circle class="fg" cx="40" cy="40" r="32" stroke="${COL[k]}" stroke-dasharray="201" stroke-dashoffset="${201*(1-f)}"/></svg><div><b>${n}</b></div><small style="color:var(--mu)">${a}/${b}</small></div>`}).join("");
@@ -930,7 +937,7 @@ setInterval(tick,10000);render();tick();
 window.Aster={handle:s=>{send(s)},tick,get:()=>({R,E,M})};
 })();
 </script><script>
-window.sqPlanFor=k=>{const i=Math.round((new Date(k+"T12:00:00")-new Date(2026,8,30,12))/864e5);if(i<0||i>=N)return null;const m={P:"Physics",C:"Chemistry",B:"Biology"},o={};blocks(i).slice(0,4).forEach(b=>{const n=m[b.s];if(n)o[n]=(o[n]?o[n]+" + ":"")+b.x});return o};
+window.sqPlanFor=k=>{const i=Math.round((new Date(k+"T12:00:00")-new Date(2026,8,30,12))/864e5);if(i<0||i>=N)return null;const m={P:"Physics",C:"Chemistry",B:"Biology"},o={};blocks(i).filter(b=>b.slot<4&&b.first).forEach(b=>{const n=m[b.s];if(n)o[n]=(o[n]?o[n]+" + ":"")+b.g});return o};
 window.addEventListener("tutor-saved",()=>{try{render()}catch(e){}});
 document.querySelectorAll(".mode button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".mode button").forEach(x=>x.classList.toggle("on",x===b));document.getElementById("quest").hidden=b.dataset.m!=="quest";document.getElementById("dtutor").hidden=b.dataset.m!=="dtutor";document.getElementById("wkout").hidden=b.dataset.m!=="workout";document.getElementById("zone").hidden=b.dataset.m!=="zone";document.getElementById("bhajan").hidden=b.dataset.m!=="bhajan"});
 </script><script>
@@ -1366,7 +1373,7 @@ const first=new Date(2026,8,1),last=new Date(2026,10,1); // Sep–Nov 2026
 const now=new Date(),today=idxOf(now);
 let view=new Date(now.getFullYear(),now.getMonth(),1);
 if(view<first)view=new Date(first);if(view>last)view=new Date(last);
-const per=16;
+const per=16,perOf=i=>{try{return blocks(i).length}catch(e){return per}};
 const sel=()=>{const b=document.querySelector("#days .day.sel");return b?+b.dataset.i:0};
 function counts(){const done=rd("sq").done||{},c={};for(const k in done)if(done[k]){const i=k.split("-")[0];c[i]=(c[i]||0)+1}return c}
 let lastSel=null;
@@ -1381,16 +1388,16 @@ function draw(){
  for(let d=1;d<=dim;d++){
   const dt=new Date(y,m,d),i=idxOf(dt),ok=i>=0&&i<N,n=ok?c[i]||0:0,ev=(tut[iso(dt)]||{}).eval,pct=ev?ev.pct:null;
   const tag=pct==null?"":`<u class="tg" style="background:var(--${pct>=80?"B":pct>=50?"S":"C"})" title="Tutor ${Math.round(pct)}%"></u>`;
-  h+=`<button class="cd${ev2.some(e=>e.date===iso(dt))?" ev":""}${ok&&i===s?" sel":""}${ok&&n>=per?" full":""}${ok&&i===today?" now":""}" data-i="${i}" ${ok?"":"disabled"} aria-label="${dt.toDateString()}${ok?`, ${n} of ${per} blocks done`:""}">${tag}<b>${d}</b>${ok?`<span class="pb"><i style="width:${Math.min(100,n/per*100)}%"></i></span>`:"<span></span>"}</button>`;
+  h+=`<button class="cd${ev2.some(e=>e.date===iso(dt))?" ev":""}${ok&&i===s?" sel":""}${ok&&n>=perOf(i)?" full":""}${ok&&i===today?" now":""}" data-i="${i}" ${ok?"":"disabled"} aria-label="${dt.toDateString()}${ok?`, ${n} of ${per} blocks done`:""}">${tag}<b>${d}</b>${ok?`<span class="pb"><i style="width:${Math.min(100,n/perOf(i)*100)}%"></i></span>`:"<span></span>"}</button>`;
  }
  g("cgrid").innerHTML=h;
  summary(s,c,tut);
 }
 function summary(i,c,tut){
  const dt=new Date(2026,8,30+i),n=c[i]||0,ev=(tut[iso(dt)]||{}).eval;let topics="";
- try{if(typeof blocks==="function")topics=blocks(i).slice(0,3).map(b=>b.x).join(" · ")}catch(e){}
+ try{if(typeof blocks==="function")topics=blocks(i).filter(b=>b.slot<3&&b.first).map(b=>b.g).join(" · ")}catch(e){}
  const ae=aev().filter(e=>e.date===iso(dt)).map(e=>"📌 "+e.title).join(" · ");if(ae)topics=ae+(topics?" · "+topics:"");
- g("csum").innerHTML=`<b>${dt.toLocaleDateString("en",{weekday:"long",day:"numeric",month:"long"})}</b> <span>· Day ${i+1} of ${N}</span><br>${n}/${per} blocks done${ev?` · Tutor score <b>${Math.round(ev.pct)}%</b>`:""}${topics?`<br><span>${topics}</span>`:""}`;
+ g("csum").innerHTML=`<b>${dt.toLocaleDateString("en",{weekday:"long",day:"numeric",month:"long"})}</b> <span>· Day ${i+1} of ${N}</span><br>${n}/${perOf(i)} blocks done${ev?` · Tutor score <b>${Math.round(ev.pct)}%</b>`:""}${topics?`<br><span>${topics}</span>`:""}`;
 }
 g("cgrid").addEventListener("click",e=>{const b=e.target.closest(".cd");if(!b||b.disabled)return;
  const t=document.querySelector(`#days .day[data-i="${b.dataset.i}"]`);if(t)t.click();
