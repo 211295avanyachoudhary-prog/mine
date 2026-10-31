@@ -678,28 +678,31 @@ Electrostatic Potential L18; Current Electricity L16; Ray Optics L10|Haloalkanes
 Ray Optics L11|Haloalkanes L20–22|Biotechnology Applications L2|Doubts + revision
 Ray Optics L12–14|Optical Isomerism L1|Biotechnology Applications L3|Doubts + revision
 Ray Optics L15|Optical Isomerism L2–4|Biotechnology Applications L4|Doubts + revision
-Ray Optics L16–17; AC L4|Optical Isomerism L5|Biotechnology and its Applications L1|Doubts + revision
-AC L5|Optical Isomerism L6–8|Biotechnology and its Applications L2|Doubts + revision
-AC L6–8|Optical Isomerism L9|Biotechnology and its Applications L3|Doubts + revision
-EM Waves L1|Optical Isomerism L10; Alcohols, Phenols and Ethers L1–2|Biotechnology and its Applications L4|Doubts + revision
-EM Waves L2–3; Wave Optics L1|Alcohols, Phenols and Ethers L3|Biotechnology and its Applications L5|Doubts + revision
-Wave Optics L2|Alcohols, Phenols and Ethers L4–6|Biotechnology and its Applications L6|Doubts + revision
-Wave Optics L3–5|Alcohols, Phenols and Ethers L7|Evolution L1|Doubts + revision
-Wave Optics L6|Alcohols, Phenols and Ethers L8–9; Aldehydes, Ketones and Carboxylic Acids L1|Evolution L2–3|Doubts + revision
-Dual Nature L1–3|Aldehydes, Ketones and Carboxylic Acids L2|Evolution L4|Doubts + revision
-Dual Nature L4|Aldehydes, Ketones and Carboxylic Acids L3–5|Evolution L5–6|Doubts + revision
-Dual Nature L5–6; Atoms L1|Aldehydes, Ketones and Carboxylic Acids L6|Evolution L7|Doubts + revision
-Atoms L2|Aldehydes, Ketones and Carboxylic Acids L7–8; Amines L1|Evolution L8–9|Doubts + revision
-Atoms L3; Nuclei L1–2|Amines L2|Evolution L10|Doubts + revision
-Nuclei L3–4; Semiconductors L1|Amines L3|Organisms and Populations L1–2|Doubts + revision
-Semiconductors L2–3|Biomolecules L1–2|Organisms and Populations L3–4|Doubts + revision
-Semiconductors L4–5|Biomolecules L3–4|Organisms and Populations L5–6|Doubts + revision
-Physics revision + PYQs|Chemistry revision + PYQs|Ecosystem L1|Doubts + revision
-Physics revision + PYQs|Chemistry revision + PYQs|Biodiversity and Conservation L1–3|Doubts + revision`.split("\n").map(r=>r.split("|"));
+Electrostatic Potential L18; Current Electricity L16|Haloalkanes L19–20|Biotechnology Applications L1|Doubts + revision
+Ray Optics L15–16|Haloalkanes L21–22|Biotechnology Applications L2|Doubts + revision
+Ray Optics L17; AC L4|Optical Isomerism L1–2|Biotechnology Applications L3|Doubts + revision
+AC L5–6|Optical Isomerism L3–4|Biotechnology Applications L4|Doubts + revision
+AC L7–8|Optical Isomerism L5–6|Biotechnology Applications L5|Doubts + revision
+EM Waves L1–2|Optical Isomerism L7–8|Biotechnology Applications L6|Doubts + revision
+EM Waves L3; Wave Optics L1|Optical Isomerism L9–10|Evolution L1|Doubts + revision
+Wave Optics L2–3|Alcohols L1–2|Evolution L2–3|Doubts + revision
+Wave Optics L4–5|Alcohols L3–4|Evolution L4|Doubts + revision
+Wave Optics L6; Dual Nature L1|Alcohols L5–6|Evolution L5–6|Doubts + revision
+Dual Nature L2–3|Alcohols L7–8|Evolution L7|Doubts + revision
+Dual Nature L4–5|Alcohols L9; Aldehydes L1|Evolution L8–9|Doubts + revision
+Dual Nature L6; Atoms L1|Aldehydes L2–3|Evolution L10|Doubts + revision
+Atoms L2–3|Aldehydes L4–5|Organisms & Populations L1–2|Doubts + revision
+Nuclei L1–2|Aldehydes L6–7|Organisms & Populations L3–4|Doubts + revision
+Nuclei L3–4|Aldehydes L8; Amines L1|Organisms & Populations L5–6|Doubts + revision
+Semiconductors L1–2|Amines L2–3|Ecosystem L1|Doubts + revision
+Semiconductors L3–4|Biomolecules L1–2|Biodiversity L1–3|Doubts + revision
+Semiconductors L5; Physics revision|Biomolecules L3–4|Biology NCERT revision|Doubts + revision
+Physics revision + PYQs|Organic Chemistry revision|Biology NCERT revision|Doubts + revision
+Full Physics revision|Full Chemistry revision|Biology MCQs + NCERT revision|Doubts + revision`.split("\n").map(r=>r.split("|"));
 const SS=[["3:30–4:45","Biology: 50 questions + NCERT recall","B"],["4:45–5:15","Exercise 🏃","S"],["5:15–7:00","Physics: 50 questions (PYQs / DPP)","P"],["7:30–8:45","Chemistry: 50 questions + NCERT & reactions","C"],["8:45–9:30","Active recall + mistake book","S"],["9:30–10:00","Prep tomorrow + wind down","S"]];
 const COL={P:"var(--P)",C:"var(--C)",B:"var(--B)",S:"var(--S)"},ICO={P:"⚡",C:"🧪",B:"🧬",S:"⭐"};
 const RANKS=["Rookie","Apprentice","Scholar","Topper","Rank Hunter","NEET Warrior","AIR 1 Energy"];
-const START=new Date(2026,8,30),N=49,$=id=>document.getElementById(id);
+const START=new Date(2026,8,30),N=52,$=id=>document.getElementById(id);
 let S={done:{},focus:0,sel:null},lastLv=0,seen={};
 try{S=Object.assign(S,JSON.parse(localStorage.getItem("sq")||"{}"))}catch(e){}
 const save=()=>{try{localStorage.setItem("sq",JSON.stringify(S))}catch(e){}};
@@ -711,7 +714,7 @@ function blocks(i){const r=D[i],x=r[3],xs=/^[PC] /.test(x)?x[0]:"S",xt=/^[PC] /.
 const rev=false,lec=t=>!rev&&/ L\d/.test(t);
 return[["7:00–9:00",r[0],"P",lec(r[0])],["9:00–10:45",r[1],"C",lec(r[1])],["10:45–12:30",r[2],"B",lec(r[2])],["1:15–3:00",xt,xs,!rev&&/ L\d/.test(xt)]]
 .flatMap((b,k)=>{const ls=b[3]?splitLec(b[1]):[b[1]],n=ls.length,m=slotMin(b[0]);
-return ls.map((x,j)=>({id:i+"-"+k+(j?"_"+j:""),t:n>1&&m?fmtMin(m[0]+Math.round(m[1]*j/n/5)*5)+"–"+fmtMin(m[0]+Math.round(m[1]*(j+1)/n/5)*5):b[0],x,s:b[2],lec:b[3],xp:b[3]?50:35,slot:k,g:b[1],first:j==0}))})
+return ls.map((x,j)=>({id:i+"-"+k+(j?"_"+j:""),t:n>1&&m?fmtMin(m[0]+Math.round(m[1]*j/n/5)*5)+"–"+fmtMin(m[0]+Math.round(m[1]*(j+1)/n/5)*5):b[0],x,s:b[2],lec:b[3]&&/ L\d/.test(x),xp:b[3]&&/ L\d/.test(x)?50:35,slot:k,g:b[1],first:j==0}))})
 .concat(SS.map((b,k)=>({id:i+"-s"+k,t:b[0],x:b[1],s:b[2],lec:false,xp:30,slot:4+k,g:b[1],first:true})))}
 /* Each lecture is its own block with its own XP. "Ray Optics L12–14" becomes L12, L13, L14; "A L1; B L2" becomes two blocks. */
 function splitLec(t){const o=[];t.split(";").forEach(p=>{p=p.trim();const m=p.match(/^(.*?)\s*L(\d+)(?:–(\d+))?$/);if(!m){o.push(p);return}const a=+m[2],b=m[3]?+m[3]:a;for(let n=a;n<=b;n++)o.push(m[1]+" L"+n)});return o}
@@ -1367,7 +1370,7 @@ if(SOUNDS.some(x=>S.s[x.id].on)){
 /* Calendar: reads saved quest + tutor data; selecting a date reuses the existing day strip */
 (()=>{
 const g=id=>document.getElementById(id);
-const START=new Date(2026,8,30),N=49,DAY=864e5;
+const START=new Date(2026,8,30),N=52,DAY=864e5;
 const rd=k=>{try{return JSON.parse(localStorage.getItem(k)||"{}")||{}}catch(e){return{}}};const aev=()=>{try{return JSON.parse(localStorage.getItem("aster_events")||"[]")}catch(e){return[]}};
 const iso=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 const idxOf=d=>Math.round((new Date(d.getFullYear(),d.getMonth(),d.getDate())-START)/DAY);
