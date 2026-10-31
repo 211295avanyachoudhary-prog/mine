@@ -678,26 +678,28 @@ Electrostatic Potential L18; Current Electricity L16; Ray Optics L10|Haloalkanes
 Ray Optics L11|Haloalkanes L20–22|Biotechnology Applications L2|Doubts + revision
 Ray Optics L12–14|Optical Isomerism L1|Biotechnology Applications L3|Doubts + revision
 Ray Optics L15|Optical Isomerism L2–4|Biotechnology Applications L4|Doubts + revision
-Ray Optics L16–17; AC L4|Optical Isomerism L5|Biotechnology Applications L5|Doubts + revision
-AC L5|Optical Isomerism L6–8|Biotechnology Applications L6|Doubts + revision
-AC L6–8|Optical Isomerism L9|Evolution L2|Doubts + revision
-EM Waves L1|Optical Isomerism L10; Alcohols, Phenols and Ethers L1–2|Evolution L3|Doubts + revision
-EM Waves L2–3; Wave Optics L1|Alcohols, Phenols and Ethers L3|Evolution L4|Doubts + revision
-Wave Optics L2|Alcohols, Phenols and Ethers L4–6|Evolution L5|Doubts + revision
-Wave Optics L3–5|Alcohols, Phenols and Ethers L7|Evolution L6|Doubts + revision
-Wave Optics L6|Alcohols, Phenols and Ethers L8–9; Aldehydes, Ketones and Carboxylic Acids L1|Evolution L7|Doubts + revision
-Dual Nature L1–3|Aldehydes, Ketones and Carboxylic Acids L2|Evolution L8|Doubts + revision
-Dual Nature L4|Aldehydes, Ketones and Carboxylic Acids L3–5|Biotechnology + Evolution NCERT recall|Doubts + revision
-Dual Nature L5–6; Atoms L1|Aldehydes, Ketones and Carboxylic Acids L6|Biotechnology + Evolution MCQs|Doubts + revision
-Atoms L2|Aldehydes, Ketones and Carboxylic Acids L7–8; Amines L1|Human Health and Disease revision|Doubts + revision
-Atoms L3; Nuclei L1–2|Amines L2|Reproduction chapters revision|Doubts + revision
-Nuclei L3–4; Semiconductors L1|Amines L3|Genetics chapters revision|Doubts + revision
-Semiconductors L2–3|Biomolecules L1–2|Biotechnology NCERT + MCQs|Doubts + revision
-Semiconductors L4–5|Biomolecules L3–4|Full Biology recall + weak topics|Doubts + revision`.split("\n").map(r=>r.split("|"));
+Ray Optics L16–17; AC L4|Optical Isomerism L5|Biotechnology and its Applications L1|Doubts + revision
+AC L5|Optical Isomerism L6–8|Biotechnology and its Applications L2|Doubts + revision
+AC L6–8|Optical Isomerism L9|Biotechnology and its Applications L3|Doubts + revision
+EM Waves L1|Optical Isomerism L10; Alcohols, Phenols and Ethers L1–2|Biotechnology and its Applications L4|Doubts + revision
+EM Waves L2–3; Wave Optics L1|Alcohols, Phenols and Ethers L3|Biotechnology and its Applications L5|Doubts + revision
+Wave Optics L2|Alcohols, Phenols and Ethers L4–6|Biotechnology and its Applications L6|Doubts + revision
+Wave Optics L3–5|Alcohols, Phenols and Ethers L7|Evolution L1|Doubts + revision
+Wave Optics L6|Alcohols, Phenols and Ethers L8–9; Aldehydes, Ketones and Carboxylic Acids L1|Evolution L2–3|Doubts + revision
+Dual Nature L1–3|Aldehydes, Ketones and Carboxylic Acids L2|Evolution L4|Doubts + revision
+Dual Nature L4|Aldehydes, Ketones and Carboxylic Acids L3–5|Evolution L5–6|Doubts + revision
+Dual Nature L5–6; Atoms L1|Aldehydes, Ketones and Carboxylic Acids L6|Evolution L7|Doubts + revision
+Atoms L2|Aldehydes, Ketones and Carboxylic Acids L7–8; Amines L1|Evolution L8–9|Doubts + revision
+Atoms L3; Nuclei L1–2|Amines L2|Evolution L10|Doubts + revision
+Nuclei L3–4; Semiconductors L1|Amines L3|Organisms and Populations L1–2|Doubts + revision
+Semiconductors L2–3|Biomolecules L1–2|Organisms and Populations L3–4|Doubts + revision
+Semiconductors L4–5|Biomolecules L3–4|Organisms and Populations L5–6|Doubts + revision
+Physics revision + PYQs|Chemistry revision + PYQs|Ecosystem L1|Doubts + revision
+Physics revision + PYQs|Chemistry revision + PYQs|Biodiversity and Conservation L1–3|Doubts + revision`.split("\n").map(r=>r.split("|"));
 const SS=[["3:30–4:45","Biology: 50 questions + NCERT recall","B"],["4:45–5:15","Exercise 🏃","S"],["5:15–7:00","Physics: 50 questions (PYQs / DPP)","P"],["7:30–8:45","Chemistry: 50 questions + NCERT & reactions","C"],["8:45–9:30","Active recall + mistake book","S"],["9:30–10:00","Prep tomorrow + wind down","S"]];
 const COL={P:"var(--P)",C:"var(--C)",B:"var(--B)",S:"var(--S)"},ICO={P:"⚡",C:"🧪",B:"🧬",S:"⭐"};
 const RANKS=["Rookie","Apprentice","Scholar","Topper","Rank Hunter","NEET Warrior","AIR 1 Energy"];
-const START=new Date(2026,8,30),N=47,$=id=>document.getElementById(id);
+const START=new Date(2026,8,30),N=49,$=id=>document.getElementById(id);
 let S={done:{},focus:0,sel:null},lastLv=0,seen={};
 try{S=Object.assign(S,JSON.parse(localStorage.getItem("sq")||"{}"))}catch(e){}
 const save=()=>{try{localStorage.setItem("sq",JSON.stringify(S))}catch(e){}};
@@ -1365,7 +1367,7 @@ if(SOUNDS.some(x=>S.s[x.id].on)){
 /* Calendar: reads saved quest + tutor data; selecting a date reuses the existing day strip */
 (()=>{
 const g=id=>document.getElementById(id);
-const START=new Date(2026,8,30),N=47,DAY=864e5;
+const START=new Date(2026,8,30),N=49,DAY=864e5;
 const rd=k=>{try{return JSON.parse(localStorage.getItem(k)||"{}")||{}}catch(e){return{}}};const aev=()=>{try{return JSON.parse(localStorage.getItem("aster_events")||"[]")}catch(e){return[]}};
 const iso=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 const idxOf=d=>Math.round((new Date(d.getFullYear(),d.getMonth(),d.getDate())-START)/DAY);
