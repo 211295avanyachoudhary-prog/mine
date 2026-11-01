@@ -578,7 +578,7 @@ html.bz-on #bzbg.has{display:block}
 
 
 <div class="sz-snake" aria-hidden="true"><svg viewBox="0 0 800 28" preserveAspectRatio="none"><defs><linearGradient id="szg" x1="0" x2="1"><stop offset="0" stop-color="#0b6b3a"/><stop offset=".7" stop-color="#2fd47c"/><stop offset="1" stop-color="#e9fff3"/></linearGradient></defs><path class="b" pathLength="300" d="M0 14 Q25 0 50 14 T100 14 T150 14 T200 14 T250 14 T300 14 T350 14 T400 14 T450 14 T500 14 T550 14 T600 14 T650 14 T700 14 T750 14 T800 14"/><path class="m" pathLength="300" d="M0 14 Q25 0 50 14 T100 14 T150 14 T200 14 T250 14 T300 14 T350 14 T400 14 T450 14 T500 14 T550 14 T600 14 T650 14 T700 14 T750 14 T800 14"/></svg></div>
-<div class="mode"><button class="on" data-m="quest">🎯 Quest</button><button data-m="dtutor">📚 Daily Tutor</button><button data-m="workout">💪 Workout</button><button data-m="zone">🌿 Zone</button><button data-m="bhajan">🕉️ Bhajan</button></div>
+<div class="mode"><button class="on" data-m="quest">🎯 Quest</button><button data-m="dtutor">📚 Daily Tutor</button><button data-m="workout">💪 Workout</button><button data-m="zone">🌿 Zone</button><button data-m="alarm">⏰ Alarms</button><button data-m="bhajan">🕉️ Bhajan</button></div>
 <div id="quest"><div class="tutor"><div class="bot">🤖</div><div class="grow"><div class="say" id="say"></div>
 <button class="btn" id="fb">Start 25-min focus (+20 XP)</button> <button class="btn g" id="tp">Tip please</button></div></div>
 
@@ -623,6 +623,216 @@ html.bz-on #bzbg.has{display:block}
 <div class="bz-card bz-vid" id="bzVcard" style="display:grid"><div><div class="bz-vp" id="bzVp"><video id="bzVid" controls playsinline preload="metadata" hidden></video><div class="bz-ph" id="bzPh">🙏 Add a video from your computer<br>then click it in the list to play</div></div><div class="bz-vact"><button class="bz-fsb" id="bzVf" type="button">⛶ Full screen</button><span class="bz-nowp" id="bzNow"></span></div><div class="bz-msg" id="bzVmsg"></div></div>
  <div><h3>🙏 Spiritual videos</h3><button class="btn" id="bzVpick" type="button">➕ Add videos from my computer</button><input type="file" id="bzVfile" accept="video/*,.mp4,.m4v,.webm,.mov,.mkv,.ogv" multiple hidden><div class="bz-vhint">You can also drag video files onto this card. They are kept in this browser, so they're still here next time. The next video plays automatically.</div><div class="bz-vl" id="bzVl2"></div><div class="bz-vhint" id="bzUse"></div></div></div>
 <div class="bz-tip">Tip: use this tab together with a 🌿 Zone scene. Mute the scene video (press <b>M</b>) and let the bhajans play.</div>
+</div>
+<div id="alarm" hidden>
+<style>
+#alarm{margin-top:14px}
+#alarm .al-h{margin:0 0 4px}#alarm .al-sub{color:var(--mu);font-size:13px;line-height:1.55;margin:0 0 10px}
+#alarm .al-card{background:var(--pn);border:1px solid var(--ln2);border-radius:14px;padding:14px;margin:10px 0}
+#alarm .al-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+#alarm .al-big{font-size:26px;font-weight:800}#alarm .al-m{color:var(--mu);font-size:13px}
+#alarm .al-warn{color:var(--S);font-weight:700}
+#alarm .al-it{display:grid;grid-template-columns:96px 112px 1fr 84px 38px;gap:6px;align-items:center;margin:6px 0}
+#alarm .al-it input,#alarm .al-it select,#alarm .al-lk input{background:var(--in,var(--pn2));color:var(--tx);border:1px solid var(--ln2);border-radius:9px;padding:7px 8px;font:inherit;min-width:0;width:100%}
+#alarm .al-it.ro{opacity:.9}#alarm .al-it.ro span{padding:7px 4px}
+#alarm .al-hd{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.06em}
+#alarm .al-x{background:transparent;border:1px solid var(--ln2);color:var(--tx);border-radius:9px;cursor:pointer;padding:6px}
+#alarm .al-lk{display:flex;gap:8px;align-items:center;margin-top:8px;flex-wrap:wrap}#alarm .al-lk input{width:90px}
+@media(max-width:700px){#alarm .al-it{grid-template-columns:90px 1fr 36px}#alarm .al-it .al-ty,#alarm .al-it .al-du{display:none}}
+.alo{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:auto;padding:24px;font-family:inherit}
+.alo[hidden]{display:none}
+html.locked body>#alOv:not([hidden]){visibility:visible!important;pointer-events:auto!important}
+.alo.s{background:#b3121a;animation:alf .9s steps(2,jump-none) infinite}.alo.w{background:#0b5fd1;animation:alw 1.2s ease-in-out infinite}.alo.ok{background:#0d4a2e;animation:none}
+@keyframes alf{0%{background:#b3121a}50%{background:#ff2b2b}100%{background:#b3121a}}@keyframes alw{50%{background:#2f8cff}}
+@media(prefers-reduced-motion:reduce){.alo.s,.alo.w{animation:none}}
+.alo-in{max-width:980px;width:100%}.alo-ic{font-size:clamp(46px,9vw,110px);line-height:1}
+.alo h1{font-size:clamp(44px,11vw,150px);margin:6px 0;letter-spacing:.04em;font-weight:900;line-height:1.02;text-shadow:0 4px 24px rgba(0,0,0,.35)}
+.alo p{font-size:clamp(18px,2.6vw,32px);margin:6px 0 14px;font-weight:600}
+.alo .ao-cd{font-size:clamp(48px,10vw,120px);font-weight:900;font-variant-numeric:tabular-nums;margin:6px 0}
+.alo video{width:min(560px,90vw);aspect-ratio:16/9;background:#000;border-radius:14px;border:3px solid rgba(255,255,255,.7);transform:scaleX(-1);object-fit:cover;margin:6px 0}
+.alo video[hidden]{display:none}
+.alo label{display:inline-flex;align-items:center;gap:8px;font-size:clamp(16px,2vw,24px);font-weight:700;margin:6px 14px;cursor:pointer}
+.alo input[type=checkbox]{width:24px;height:24px}
+.alo .ab2{background:#fff;color:#111;border:0;border-radius:14px;padding:14px 26px;font:inherit;font-size:clamp(17px,2.2vw,26px);font-weight:800;cursor:pointer;margin:8px}
+.alo .ab2:disabled{opacity:.45;cursor:not-allowed}
+.alo .ao-sk{background:transparent;color:rgba(255,255,255,.75);border:0;text-decoration:underline;cursor:pointer;font:inherit;font-size:14px;margin-top:18px}
+.alo .ao-msg{min-height:1.4em;font-size:clamp(15px,1.8vw,22px);font-weight:600}
+</style>
+<h2 class="al-h">⏰ Study Alarms</h2>
+<p class="al-sub">Loud full-screen alarms for every study session, for the end of each break or activity, and for drinking water. The study alarm only goes quiet once your camera is on and your pen and notebook are ready, and then you have to study for the lock-in time to clear it. Keep this tab open on your laptop, plugged in, with the volume up.</p>
+<div class="al-card" id="alStat"></div>
+<div class="al-row"><button class="btn" id="alArm" type="button">🔔 Arm alarms</button><button class="btn g" id="alTs" type="button">Test study alarm</button><button class="btn g" id="alTw" type="button">Test water alarm</button></div>
+<div class="al-card"><b>Daily schedule</b><div class="al-m" id="alLock" style="margin:4px 0 8px"></div><div id="alList"></div><div id="alEd"></div></div>
+<div class="al-card" id="acCard"><b>👩 Accountability partner (Mom)</b>
+<div class="al-m" style="margin:4px 0 8px">At every alarm in your schedule, a notification goes to your mom's phone with ✅ and ❌ buttons. Examples: “Physics lecture. It's time to study. Is she at the table studying?” and “Has she drunk water?” When she taps ❌ the alarm rings again on your laptop. At the end of the day she gets a summary. It uses the free <b>ntfy</b> app, which needs <b>no account and no phone number</b>, so your mom can use it on the same number.</div>
+<details id="acHow"><summary><b>Set up (about 2 minutes, once)</b></summary><ol class="al-m" style="line-height:1.7;margin:6px 0 8px 18px">
+<li>Type your name below and tap <b>Create Mom's channel</b>.</li>
+<li>On your mom's phone: install the free <b>ntfy</b> app (Play Store or App Store), tap <b>+</b>, type the topic name shown below exactly, and tap <b>Subscribe</b>. Allow notifications. Tip: use the WhatsApp link below to send her these steps.</li>
+<li>Tap <b>Send test</b> here. When she taps ✅ or ❌ on her phone, this card shows “Mom's phone is connected”.</li></ol></details>
+<div class="al-lk" style="margin-top:4px"><span>Your name in the messages</span><input id="acN" type="text" maxlength="30" placeholder="e.g. Aanya" style="width:170px"></div>
+<div class="al-row" style="margin-top:8px"><button class="btn g" id="acMk" type="button">Create Mom's channel</button><button class="btn g" id="acTest" type="button">Send test</button><label class="al-m" style="display:inline-flex;gap:6px;align-items:center"><input type="checkbox" id="acOn"> Send alarms to Mom</label><button class="btn g" id="acDis" type="button">Disconnect</button></div>
+<div class="al-m" id="acInfo" style="margin-top:8px;line-height:1.7"></div>
+<div class="al-m" id="acSt" style="margin-top:8px"></div>
+<div id="acLog" class="al-m" style="margin-top:8px;line-height:1.7"></div>
+<div class="al-m" style="margin-top:8px">Keep this page open on your laptop: it sends the notifications and listens for her taps. The topic name works like a password, so share it only with your mom. Once the channel exists, you can switch this off or disconnect only between 10:30 PM and 12:00 AM. Messages travel through the public ntfy.sh service.</div></div>
+<script>
+(function(){
+const g=id=>document.getElementById(id);
+const KEY="sq_alarm_v1",DKEY="sq_alarm_day",EDIT_FROM=22*60+30,EDIT_TO=24*60;
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let n0=0;const it=(t,k,n,d)=>({id:"a"+(n0++),t,k,n,d:d||0});
+const DEF=()=>{n0=0;return{lock:10,items:[
+it("04:00","study","Morning study. Be at your table with the laptop open"),it("05:30","water","Drink water"),
+it("07:00","study","Physics lecture"),it("08:00","water","Drink water"),it("09:00","study","Chemistry lecture"),
+it("10:30","water","Drink water"),it("10:45","study","Biology lecture"),
+it("12:30","break","Lunch + rest",45),it("13:15","study","Doubts + revision"),it("13:30","water","Drink water"),
+it("15:00","break","Short break",30),it("15:30","study","Biology: 50 questions + NCERT recall"),
+it("16:00","water","Drink water"),it("16:45","break","Exercise",30),it("17:15","study","Physics: 50 questions"),
+it("18:00","water","Drink water"),it("19:00","break","Dinner",30),it("19:30","study","Chemistry: 50 questions + NCERT"),
+it("20:00","water","Drink water"),it("20:45","study","Active recall + mistake book"),it("21:30","study","Prep tomorrow"),
+it("22:00","break","Wind down and sleep")]}};
+let S=null;try{S=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
+if(!S||!Array.isArray(S.items))S=DEF();
+n0=S.items.reduce((m,x)=>Math.max(m,+String(x.id).replace(/\D/g,"")||0),0)+1;
+const dk=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+let D=null;try{D=JSON.parse(localStorage.getItem(DKEY)||"null")}catch(e){}
+const freshDay=()=>({d:dk(),f:{},ok:0,miss:0,water:0});
+if(!D||D.d!==dk())D=freshDay();
+const saveS=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const saveD=()=>{try{localStorage.setItem(DKEY,JSON.stringify(D))}catch(e){}};
+const mm=t=>{const m=/^(\d{1,2}):(\d{2})$/.exec(t||"");return m?(+m[1])*60+(+m[2]):null};
+const hm=m=>{m=((m%1440)+1440)%1440;const h=Math.floor(m/60);return(h%12||12)+":"+String(m%60).padStart(2,"0")+" "+(h<12?"AM":"PM")};
+const dur=s=>{s=Math.max(0,Math.round(s));const h=Math.floor(s/3600),m=Math.floor(s/60)%60;return(h?h+"h ":"")+m+"m "+String(s%60).padStart(2,"0")+"s"};
+const canEdit=()=>{const d=new Date(),m=d.getHours()*60+d.getMinutes();return m>=EDIT_FROM&&m<EDIT_TO};
+/* sound */
+let ac=null,mg=null,sndT=null,spkT=null,armed=false,wl=null;
+function ctx(){try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();if(ac.state==="suspended")ac.resume()}catch(e){}return ac}
+document.addEventListener("click",()=>{if(ac&&ac.state==="suspended")ac.resume()},true);
+function startSound(kind){stopSound();const c=ctx();if(!c)return;mg=c.createGain();mg.gain.value=1;mg.connect(c.destination);
+ const burst=()=>{const t=c.currentTime;
+  if(kind==="study"){for(let i=0;i<4;i++){const o=c.createOscillator(),gn=c.createGain();o.type="sawtooth";o.frequency.setValueAtTime(i%2?620:1040,t+i*.3);gn.gain.setValueAtTime(.9,t+i*.3);gn.gain.setValueAtTime(0,t+i*.3+.27);o.connect(gn);gn.connect(mg);o.start(t+i*.3);o.stop(t+i*.3+.3)}}
+  else{for(let i=0;i<3;i++){const o=c.createOscillator(),gn=c.createGain();o.type="square";o.frequency.value=1320;gn.gain.setValueAtTime(.8,t+i*.4);gn.gain.setValueAtTime(0,t+i*.4+.2);o.connect(gn);gn.connect(mg);o.start(t+i*.4);o.stop(t+i*.4+.25)}}};
+ burst();sndT=setInterval(burst,1200);
+ const say=()=>{try{const u=new SpeechSynthesisUtterance(kind==="study"?"Study time. Come back to your table and start studying now.":"Time to drink water. Drink a glass of water now.");u.volume=1;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}};
+ setTimeout(say,2600);spkT=setInterval(say,22000)}
+function stopSound(){clearInterval(sndT);clearInterval(spkT);sndT=spkT=null;try{speechSynthesis.cancel()}catch(e){}if(mg){try{mg.gain.setValueAtTime(0,ac.currentTime);mg.disconnect()}catch(e){}mg=null}}
+function soft(msg){try{const c=ctx(),o=c.createOscillator(),gn=c.createGain();o.frequency.value=660;gn.gain.setValueAtTime(.25,c.currentTime);gn.gain.exponentialRampToValueAtTime(.001,c.currentTime+.8);o.connect(gn);gn.connect(c.destination);o.start();o.stop(c.currentTime+.85)}catch(e){}
+ try{const t=g("ts");if(t){t.textContent=msg;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),6000)}}catch(e){}
+ try{if(window.Notification&&Notification.permission==="granted")new Notification("⏰ "+msg,{tag:"sq-soft"})}catch(e){}}
+/* overlay */
+const ov=document.createElement("div");ov.id="alOv";ov.className="alo s";ov.hidden=true;ov.setAttribute("role","alertdialog");ov.setAttribute("aria-live","assertive");document.body.appendChild(ov);
+let cur=null,q=[],cam=null,stage="",lockLeft=0,lockT=null,enT=null;
+const live=()=>!!(cam&&cam.getVideoTracks().some(t=>t.readyState==="live"));
+function raise(a){if(cur){if(!q.some(x=>x.sub===a.sub&&x.kind===a.kind))q.push(a);return}cur=a;openOv()}
+function openOv(){const a=cur,w=a.kind==="water";ov.className="alo "+(w?"w":"s");ov.hidden=false;
+ try{if(window.Notification&&Notification.permission==="granted")new Notification(a.title,{body:a.sub,requireInteraction:true,tag:"sq-alarm"})}catch(e){}
+ if(w){ov.innerHTML='<div class="alo-in"><div class="alo-ic">💧</div><h1>DRINK WATER</h1><p>'+esc(a.sub)+'</p><div class="ao-msg" id="aoM"></div><button class="ab2" id="aoDr" disabled>💧 I drank a glass</button></div>';
+  stage="ring";startSound("water");let c=5;const b=g("aoDr"),m=g("aoM");m.textContent="Go and get your water. The button unlocks in "+c+"s";
+  enT=setInterval(()=>{c--;if(c<=0){clearInterval(enT);b.disabled=false;m.textContent="Drink it, then tap the button."}else m.textContent="Go and get your water. The button unlocks in "+c+"s"},1000);
+  b.onclick=()=>finish(true)}
+ else{ov.innerHTML='<div class="alo-in"><div class="alo-ic" id="aoI">📚</div><h1 id="aoT">'+esc(a.title)+'</h1><p>'+esc(a.sub)+'</p><video id="aoV" autoplay muted playsinline hidden></video><div class="ao-cd" id="aoC" hidden></div><div class="ao-msg" id="aoM"></div><div id="aoCk"><label><input type="checkbox" id="aoP"> ✏️ Pen in hand</label><label><input type="checkbox" id="aoN"> 📓 Notebook open</label></div><button class="ab2" id="aoCam">📷 Open camera and start</button><br><button class="ao-sk" id="aoSk">I can\'t study right now</button></div>';
+  stage="";lockLeft=Math.round((+S.lock||10)*60);evalStudy();
+  g("aoCam").onclick=openCam;g("aoP").onchange=evalStudy;g("aoN").onchange=evalStudy;
+  g("aoSk").onclick=()=>{const v=prompt("Type SKIP to dismiss this alarm. It will be counted as a missed session.");if(v&&v.trim().toUpperCase()==="SKIP")finish(false)}}}
+async function openCam(){const m=g("aoM");try{try{ov.requestFullscreen&&ov.requestFullscreen()}catch(e){}
+ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error("This browser can't open the camera here.");
+ cam=await navigator.mediaDevices.getUserMedia({video:{width:1280,height:720},audio:false});const v=g("aoV");v.srcObject=cam;v.hidden=false;
+ cam.getVideoTracks().forEach(t=>t.addEventListener("ended",evalStudy));g("aoCam").hidden=true;evalStudy()}catch(e){if(m)m.textContent="Camera didn't open ("+(e&&e.name||"error")+"). Allow the camera for this page and try again."}}
+function evalStudy(){if(!cur||cur.kind==="water")return;const m=g("aoM");if(!m)return;const L=live(),ok=L&&g("aoP").checked&&g("aoN").checked;
+ g("aoCk").hidden=!L;if(ok){if(stage!=="lock"){stage="lock";stopSound();ov.className="alo ok";g("aoI").textContent="✅";g("aoT").textContent="KEEP STUDYING";g("aoC").hidden=false;g("aoSk").hidden=true;tickLock();lockT=setInterval(tickLock,1000)}}
+ else{if(stage!=="ring"){stage="ring";clearInterval(lockT);ov.className="alo s";g("aoI").textContent="📚";g("aoT").textContent=cur.title;g("aoC").hidden=true;g("aoSk").hidden=false;startSound("study")}
+  m.textContent=!L?"Open your camera so I can see your table.":"Tick both boxes: pen in hand and notebook open."}}
+function tickLock(){if(!live()){evalStudy();return}const c=g("aoC"),m=g("aoM");if(!c)return;lockLeft--;c.textContent=String(Math.floor(Math.max(0,lockLeft)/60)).padStart(2,"0")+":"+String(Math.max(0,lockLeft)%60).padStart(2,"0");
+ m.textContent="Study with the camera on and your notebook open. The alarm clears when this reaches 00:00.";if(lockLeft<=0)finish(true)}
+function finish(ok){stopSound();clearInterval(lockT);clearInterval(enT);if(cam){cam.getTracks().forEach(t=>t.stop());cam=null}try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}
+ ov.hidden=true;ov.innerHTML="";const a=cur;cur=null;stage="";
+ if(a&&!a.test){if(a.kind==="water"){if(ok)D.water++}else if(ok)D.ok++;else D.miss++;saveD()}
+ try{const t=g("ts");if(t&&ok){t.textContent=a&&a.kind==="water"?"💧 Glass logged":"✅ Study alarm cleared";t.classList.add("on");setTimeout(()=>t.classList.remove("on"),4000)}}catch(e){}
+ draw();if(q.length)setTimeout(()=>raise(q.shift()),600)}
+/* scheduler */
+function events(){const o=[];S.items.forEach(x=>{const s=mm(x.t);if(s===null)return;
+ if(x.k==="study"){o.push({id:x.id,ph:"p",s:s*60-60,x,pre:1});o.push({id:x.id,ph:"s",s:s*60,x})}
+ else if(x.k==="water")o.push({id:x.id,ph:"s",s:s*60,x});
+ else{o.push({id:x.id,ph:"s",s:s*60,x,brk:1});if(+x.d>0)o.push({id:x.id,ph:"e",s:(s+ +x.d)*60,x})}});return o}
+function tick(){if(D.d!==dk()){D=freshDay();saveD()}const d=new Date(),sod=d.getHours()*3600+d.getMinutes()*60+d.getSeconds();
+ events().forEach(e=>{const k=e.id+"|"+e.ph;if(D.f[k])return;if(sod<e.s||sod>=e.s+300)return;D.f[k]=1;saveD();const x=e.x;try{tell(e)}catch(e2){}
+  if(e.pre)soft("Study starts in 1 minute. Sit at your table, open the laptop, get your pen and notebook.");
+  else if(x.k==="study")raise({kind:"study",title:"STUDY TIME",sub:x.n});
+  else if(x.k==="water")raise({kind:"water",title:"DRINK WATER",sub:x.n||"Drink a glass of water"});
+  else if(e.brk)soft(x.n+" now"+(+x.d>0?". Back to study at "+hm(mm(x.t)+ +x.d):"."));
+  else raise({kind:"study",title:"BREAK OVER. BACK TO STUDY",sub:"Finished: "+x.n})});draw()}
+function nextEv(){const d=new Date(),sod=d.getHours()*3600+d.getMinutes()*60+d.getSeconds();let b=null;
+ events().forEach(e=>{if(e.pre)return;if(e.x.k==="break"&&e.ph==="s")return;let t=e.s;if(t<=sod)t+=86400;if(!b||t<b.t)b={t,e}});return b?{in:b.t-sod,e:b.e}:null}
+/* ui */
+function draw(){const st=g("alStat");if(!st)return;const nx=nextEv(),ce=canEdit();
+ const lab=nx?(nx.e.x.k==="water"?"💧 ":nx.e.x.k==="break"?"▶ ":"📚 ")+(nx.e.x.k==="break"?"Back to study after "+nx.e.x.n:nx.e.x.n):"No alarms set";
+ st.innerHTML='<div class="al-m">Next alarm</div><div class="al-big">'+esc(lab)+'</div><div class="al-m">'+(nx?"in "+dur(nx.in)+" · at "+hm(Math.floor(((nx.e.s%86400)/60))):"")+'</div>'
+  +'<div class="al-m" style="margin-top:8px">'+(armed?"🔔 Armed. Sound is on for this page.":'<span class="al-warn">⚠️ Not armed yet.</span> Tap “Arm alarms” once after you open this page, so the browser lets the alarm make sound.')+'</div>'
+  +'<div class="al-m" style="margin-top:6px">Today: ✅ '+D.ok+' study alarms cleared · ⏭ '+D.miss+' skipped · 💧 '+D.water+' glasses logged</div>';
+ const lk=g("alLock");lk.textContent=ce?"✏️ Editing is open now (10:30 PM to 12:00 AM). Changes apply from the next alarm.":"🔒 Locked. You can change the schedule only between 10:30 PM and 12:00 AM. It opens in "+dur(((EDIT_FROM*60-(new Date().getHours()*3600+new Date().getMinutes()*60+new Date().getSeconds()))+86400)%86400)+".";
+ const sig=JSON.stringify([ce,S]);if(draw.sig===sig&&!ce)return;if(ce&&draw.sig===sig)return;draw.sig=sig;list(ce)}
+const TY={study:"📚 Study",water:"💧 Water",break:"☕ Break / activity"};
+function list(ce){const L=g("alList"),E=g("alEd"),items=S.items.slice().sort((a,b)=>(mm(a.t)||0)-(mm(b.t)||0));
+ if(!ce){L.innerHTML=items.map(x=>'<div class="al-it ro"><span><b>'+hm(mm(x.t)||0)+'</b></span><span class="al-ty">'+TY[x.k]+'</span><span>'+esc(x.n)+'</span><span class="al-du">'+(x.k==="break"&&+x.d>0?x.d+" min":"")+'</span><span></span></div>').join("");E.innerHTML='<div class="al-m" style="margin-top:8px">Lock-in time to clear a study alarm: <b>'+(+S.lock||10)+' min</b></div>';return}
+ L.innerHTML='<div class="al-it al-hd"><span>Time</span><span class="al-ty">Type</span><span>What</span><span class="al-du">Break min</span><span></span></div>'+items.map(x=>'<div class="al-it" data-id="'+x.id+'"><input type="time" data-f="t" value="'+esc(x.t)+'"><select class="al-ty" data-f="k">'+Object.keys(TY).map(k=>'<option value="'+k+'"'+(k===x.k?" selected":"")+'>'+TY[k]+'</option>').join("")+'</select><input type="text" data-f="n" maxlength="60" value="'+esc(x.n)+'"><input class="al-du" type="number" data-f="d" min="0" max="240" value="'+(+x.d||0)+'"><button class="al-x" data-del="'+x.id+'" aria-label="Delete">✕</button></div>').join("");
+ E.innerHTML='<div class="al-row" style="margin-top:8px"><button class="btn g" id="alAdd" type="button">＋ Add alarm</button><button class="btn g" id="alRs" type="button">Reset to default</button></div><div class="al-lk">Lock-in time to clear a study alarm <input id="alLm" type="number" min="1" max="120" step="1" value="'+(+S.lock||10)+'"> minutes</div>'}
+g("alList").addEventListener("change",e=>{const r=e.target.closest("[data-id]");if(!r||!canEdit())return;const x=S.items.find(i=>i.id===r.dataset.id);if(!x)return;const f=e.target.dataset.f;if(!f)return;x[f]=f==="d"?Math.max(0,+e.target.value||0):e.target.value;if(f==="t"&&mm(x.t)===null)return;saveS();draw.sig=null;draw()});
+g("alList").addEventListener("click",e=>{const b=e.target.closest("[data-del]");if(!b||!canEdit())return;S.items=S.items.filter(i=>i.id!==b.dataset.del);saveS();draw.sig=null;draw()});
+g("alEd").addEventListener("click",e=>{if(!canEdit())return;if(e.target.id==="alAdd"){S.items.push({id:"a"+(n0++),t:"12:00",k:"study",n:"New session",d:0});saveS();draw.sig=null;draw()}
+ else if(e.target.id==="alRs"&&confirm("Reset the whole alarm schedule to the default?")){S=DEF();saveS();draw.sig=null;draw()}});
+g("alEd").addEventListener("change",e=>{if(e.target.id==="alLm"&&canEdit()){S.lock=Math.max(1,Math.min(120,+e.target.value||10));saveS()}});
+g("alArm").onclick=async()=>{ctx();armed=true;try{if(window.Notification&&Notification.permission==="default")await Notification.requestPermission()}catch(e){}
+ try{if(navigator.wakeLock){wl=await navigator.wakeLock.request("screen")}}catch(e){}soft("Alarms armed. Keep this tab open and the volume up.");draw()};
+document.addEventListener("visibilitychange",async()=>{if(!document.hidden&&armed){try{if(navigator.wakeLock&&(!wl||wl.released))wl=await navigator.wakeLock.request("screen")}catch(e){}}});
+g("alTs").onclick=()=>{ctx();raise({kind:"study",title:"STUDY TIME",sub:"Test alarm. Nothing is counted.",test:1})};
+g("alTw").onclick=()=>{ctx();raise({kind:"water",title:"DRINK WATER",sub:"Test alarm. Nothing is counted.",test:1})};
+/* accountability partner (ntfy: no account, no phone number) */
+const AK="sq_acct_v2",NT="https://ntfy.sh";let A=null;try{A=JSON.parse(localStorage.getItem(AK)||"null")}catch(e){}
+if(!A||typeof A!=="object")A={topic:"",rtopic:"",name:"",on:false,since:"",ok:0,log:[]};if(!Array.isArray(A.log))A.log=[];
+const saveA=()=>{try{localStorage.setItem(AK,JSON.stringify(A))}catch(e){}};
+const acLocked=()=>!!A.topic&&!canEdit();
+const nm=()=>(A.name||"").trim()||"your child";
+const rnd=()=>{const a=new Uint8Array(14);crypto.getRandomValues(a);return Array.from(a,b=>(b%36).toString(36)).join("")};
+const hhmm=ts=>{const d=new Date(ts);return hm(d.getHours()*60+d.getMinutes())};
+let acMsg="";const setSt=t=>{acMsg=t;acDraw()};
+async function send(text,key,label,kind,buttons,title){if(!A.topic)return;
+ const b={topic:A.topic,title:title||"Study Quest",message:text,priority:buttons?5:3,tags:[kind==="water"?"droplet":"books"]};
+ if(buttons)b.actions=[{action:"http",label:"✅ Yes",url:NT+"/"+A.rtopic,method:"POST",body:key+"|1",clear:true},{action:"http",label:"❌ No",url:NT+"/"+A.rtopic,method:"POST",body:key+"|0",clear:true}];
+ try{const r=await fetch(NT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(b)});if(!r.ok)throw new Error("HTTP "+r.status);
+  if(buttons){A.log.push({k:key,d:dk(),l:label,kind,t:Date.now(),r:null});A.log=A.log.slice(-200)}saveA();if(/Couldn't send/.test(acMsg))acMsg="";acDraw()}
+ catch(e){setSt("⚠️ Couldn't send to Mom: "+e.message)}}
+function summary(){const t=A.log.filter(x=>x.d===dk()&&x.kind!=="test"),ok=t.filter(x=>x.r===1).length,no=t.filter(x=>x.r===0),nr=t.filter(x=>x.r===null);
+ return"✅ Yes: "+ok+"\n❌ No: "+no.length+(no.length?" ("+no.map(x=>x.l).join(", ")+")":"")+"\n⏳ No reply: "+nr.length+"\nStudy alarms cleared on the laptop: "+D.ok+"\nWater glasses logged: "+D.water}
+function tell(e){if(!A.on||!A.topic||e.pre)return;const x=e.x,key=dk().slice(5).replace("-","")+"-"+e.id+"-"+e.ph,N=nm();
+ if(x.k==="study")send("It's time for "+N+" to study.\nIs "+N+" at the table and studying now?",key,x.n,"study",1,"📚 "+x.n);
+ else if(x.k==="water")send("Has "+N+" drunk a glass of water?",key,"Water","water",1,"💧 Water check");
+ else if(e.brk)send(N+" is on a break: "+x.n+(+x.d>0?". Back to study at "+hm(mm(x.t)+ +x.d)+".":"."),key,x.n,"break",0,"☕ Break");
+ else send("Is "+N+" back at the table and studying?\nFinished: "+x.n,key,"Back to study after "+x.n,"study",1,"⏰ Break is over");
+ const last=S.items.filter(i=>i.k!=="water").sort((a,b)=>(mm(a.t)||0)-(mm(b.t)||0)).pop();if(last&&last.id===x.id&&e.ph==="s")setTimeout(()=>send(summary(),"","","report",0,"📋 Today's report for "+N),60000)}
+let es=null,esKey="";const seen=new Set();
+function onReply(txt){const p=txt.split("|"),r=p[1]==="1"?1:p[1]==="0"?0:null;if(r===null)return;const en=A.log.find(x=>x.k===p[0]);if(!en||en.r!==null)return;
+ en.r=r;en.at=Date.now();A.ok=A.ok||Date.now();saveA();acDraw();
+ if(r===0&&en.kind!=="test")raise({kind:en.kind==="water"?"water":"study",title:"MOM SAYS NO ❌",sub:en.kind==="water"?"Mom marked: no water yet. Go drink a glass.":"Mom marked: not studying. "+en.l})}
+function listen(){const want=A.on&&A.rtopic?A.rtopic:"";if(want===esKey)return;if(es){es.close();es=null}esKey=want;if(!want)return;
+ try{es=new EventSource(NT+"/"+want+"/sse?since="+encodeURIComponent(A.since||"2h"));
+  es.onmessage=ev=>{try{const m=JSON.parse(ev.data);if(m.event!=="message"||seen.has(m.id))return;seen.add(m.id);A.since=m.id;saveA();onReply(String(m.message||"").trim())}catch(e){}};
+  es.onerror=()=>{if(!acMsg)setSt("⚠️ Reconnecting to the message service…")};es.onopen=()=>{if(/Reconnecting/.test(acMsg))setSt("")}}catch(e){setSt("⚠️ Can't listen for replies: "+e.message)}}
+function acDraw(){const st=g("acSt");if(!st)return;const lk=acLocked();
+ st.textContent=acMsg||(A.topic?(A.ok?"✅ Mom's phone is connected. ":"Waiting for Mom's first tap. ")+(A.on?"Messages are ON.":"Messages are OFF."):"No channel yet.");
+ g("acN").disabled=lk;g("acMk").disabled=lk;g("acOn").disabled=lk&&!!A.on;g("acOn").checked=!!A.on;g("acDis").disabled=lk||!A.topic;
+ const steps="Hi Mom! Please install the free app “ntfy” (Play Store or App Store). Open it, tap +, type this topic name exactly: "+A.topic+" and tap Subscribe. Allow notifications. You will get my study check-ins with ✅ and ❌ buttons.";
+ g("acInfo").innerHTML=A.topic?'Topic name for Mom: <b style="user-select:all;word-break:break-all">'+esc(A.topic)+'</b> · <a href="https://wa.me/?text='+encodeURIComponent(steps)+'" target="_blank" rel="noopener noreferrer">Send these steps to Mom on WhatsApp</a>':"";
+ g("acLog").innerHTML=A.log.filter(x=>x.d===dk()).slice(-8).reverse().map(x=>(x.r===1?"✅":x.r===0?"❌":(Date.now()-x.t>9e5?"⏳":"…"))+" "+esc(x.l)+" · sent "+hhmm(x.t)+(x.at?" · answered "+hhmm(x.at):"")).join("<br>");listen()}
+g("acN").value=A.name||"";
+g("acN").addEventListener("change",e=>{if(acLocked())return;A.name=e.target.value.trim();saveA()});
+g("acMk").onclick=()=>{if(acLocked())return;if(A.topic&&!confirm("Create a new channel? Mom will need to subscribe to the new topic name."))return;A.topic="sq-"+rnd();A.rtopic="sq-r-"+rnd();A.on=true;A.since="";A.ok=0;A.log=[];seen.clear();saveA();setSt("");acDraw()};
+g("acTest").onclick=()=>{if(!A.topic)return setSt("Create Mom's channel first.");send("This is a test.\nHas "+nm()+" drunk a glass of water?","test"+Date.now()%1e6,"Test","test",1,"🧪 Test message")};
+g("acOn").onchange=e=>{if(acLocked()&&!e.target.checked){e.target.checked=!!A.on;setSt("🔒 You can switch this off only between 10:30 PM and 12:00 AM.");return}A.on=e.target.checked;saveA();acDraw()};
+g("acDis").onclick=()=>{if(acLocked()||!A.topic)return;if(!confirm("Disconnect Mom? She will stop getting notifications."))return;A.topic="";A.rtopic="";A.on=false;A.ok=0;saveA();setSt("")};
+setInterval(acDraw,5000);acDraw();
+setInterval(tick,1000);tick();draw();
+})();
+</script>
 </div>
 <div id="zone" hidden>
 <h2 class="zn-h">🌿 Study Zone</h2><p class="zn-sub">Pick a place and the whole screen turns into it. Move the mouse to show the controls, press <b>F</b> for full screen.</p>
@@ -680,23 +890,23 @@ Ray Optics L12–14|Optical Isomerism L1|Biotechnology Applications L3|Doubts + 
 Ray Optics L15|Optical Isomerism L2–4|Biotechnology Applications L4|Doubts + revision
 Electrostatic Potential L18; Current Electricity L16|Haloalkanes L19–20|Biotechnology Applications L1|Doubts + revision
 Ray Optics L15–16|Haloalkanes L21–22|Biotechnology Applications L2|Doubts + revision
-Ray Optics L17; AC L4|Optical Isomerism L1–2|Biotechnology Applications L3|Doubts + revision
-AC L5–6|Optical Isomerism L3–4|Biotechnology Applications L4|Doubts + revision
-AC L7–8|Optical Isomerism L5–6|Biotechnology Applications L5|Doubts + revision
-EM Waves L1–2|Optical Isomerism L7–8|Biotechnology Applications L6|Doubts + revision
-EM Waves L3; Wave Optics L1|Optical Isomerism L9–10|Evolution L1|Doubts + revision
-Wave Optics L2–3|Alcohols L1–2|Evolution L2–3|Doubts + revision
-Wave Optics L4–5|Alcohols L3–4|Evolution L4|Doubts + revision
-Wave Optics L6; Dual Nature L1|Alcohols L5–6|Evolution L5–6|Doubts + revision
-Dual Nature L2–3|Alcohols L7–8|Evolution L7|Doubts + revision
-Dual Nature L4–5|Alcohols L9; Aldehydes L1|Evolution L8–9|Doubts + revision
-Dual Nature L6; Atoms L1|Aldehydes L2–3|Evolution L10|Doubts + revision
-Atoms L2–3|Aldehydes L4–5|Organisms & Populations L1–2|Doubts + revision
-Nuclei L1–2|Aldehydes L6–7|Organisms & Populations L3–4|Doubts + revision
-Nuclei L3–4|Aldehydes L8; Amines L1|Organisms & Populations L5–6|Doubts + revision
-Semiconductors L1–2|Amines L2–3|Ecosystem L1|Doubts + revision
-Semiconductors L3–4|Biomolecules L1–2|Biodiversity L1–3|Doubts + revision
-Semiconductors L5; Physics revision|Biomolecules L3–4|Biology NCERT revision|Doubts + revision
+Ray Optics L17; AC L4|Alcohols L1–2|Biotechnology Applications L3|Doubts + revision
+AC L5–6|Alcohols L3–4|Biotechnology Applications L4|Doubts + revision
+AC L7–8|Alcohols L5–6|Biotechnology Applications L5|Doubts + revision
+EM Waves L1–2|Alcohols L7–8|Biotechnology Applications L6|Doubts + revision
+EM Waves L3; Wave Optics L1|Alcohols L9; Aldehydes L1|Evolution L1|Doubts + revision
+Wave Optics L2–3|Aldehydes L2–3|Evolution L2–3|Doubts + revision
+Wave Optics L4–5|Aldehydes L4–5|Evolution L4|Doubts + revision
+Wave Optics L6; Dual Nature L1|Aldehydes L6–7|Evolution L5–6|Doubts + revision
+Dual Nature L2–3|Aldehydes L8; Amines L1|Evolution L7|Doubts + revision
+Dual Nature L4–5|Amines L2–3|Evolution L8–9|Doubts + revision
+Dual Nature L6; Atoms L1|Biomolecules L1–2|Evolution L10|Doubts + revision
+Atoms L2–3|Biomolecules L3–4|Organisms & Populations L1–2|Doubts + revision
+Nuclei L1–2|Chemistry revision + PYQs|Organisms & Populations L3–4|Doubts + revision
+Nuclei L3–4|Chemistry revision + PYQs|Organisms & Populations L5–6|Doubts + revision
+Semiconductors L1–2|Chemistry revision + PYQs|Ecosystem L1|Doubts + revision
+Semiconductors L3–4|Chemistry revision + PYQs|Biodiversity L1–3|Doubts + revision
+Semiconductors L5; Physics revision|Chemistry revision + PYQs|Biology NCERT revision|Doubts + revision
 Physics revision + PYQs|Organic Chemistry revision|Biology NCERT revision|Doubts + revision
 Full Physics revision|Full Chemistry revision|Biology MCQs + NCERT revision|Doubts + revision`.split("\n").map(r=>r.split("|"));
 const SS=[["3:30–4:45","Biology: 50 questions + NCERT recall","B"],["4:45–5:15","Exercise 🏃","S"],["5:15–7:00","Physics: 50 questions (PYQs / DPP)","P"],["7:30–8:45","Chemistry: 50 questions + NCERT & reactions","C"],["8:45–9:30","Active recall + mistake book","S"],["9:30–10:00","Prep tomorrow + wind down","S"]];
@@ -944,7 +1154,7 @@ window.Aster={handle:s=>{send(s)},tick,get:()=>({R,E,M})};
 </script><script>
 window.sqPlanFor=k=>{const i=Math.round((new Date(k+"T12:00:00")-new Date(2026,8,30,12))/864e5);if(i<0||i>=N)return null;const m={P:"Physics",C:"Chemistry",B:"Biology"},o={};blocks(i).filter(b=>b.slot<4&&b.first).forEach(b=>{const n=m[b.s];if(n)o[n]=(o[n]?o[n]+" + ":"")+b.g});return o};
 window.addEventListener("tutor-saved",()=>{try{render()}catch(e){}});
-document.querySelectorAll(".mode button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".mode button").forEach(x=>x.classList.toggle("on",x===b));document.getElementById("quest").hidden=b.dataset.m!=="quest";document.getElementById("dtutor").hidden=b.dataset.m!=="dtutor";document.getElementById("wkout").hidden=b.dataset.m!=="workout";document.getElementById("zone").hidden=b.dataset.m!=="zone";document.getElementById("bhajan").hidden=b.dataset.m!=="bhajan"});
+document.querySelectorAll(".mode button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".mode button").forEach(x=>x.classList.toggle("on",x===b));document.getElementById("quest").hidden=b.dataset.m!=="quest";document.getElementById("dtutor").hidden=b.dataset.m!=="dtutor";document.getElementById("wkout").hidden=b.dataset.m!=="workout";document.getElementById("zone").hidden=b.dataset.m!=="zone";document.getElementById("alarm").hidden=b.dataset.m!=="alarm";document.getElementById("bhajan").hidden=b.dataset.m!=="bhajan"});
 </script><script>
 (function(){
 
