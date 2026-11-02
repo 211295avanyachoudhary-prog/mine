@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#06120d"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Study Quest">
 <script>try{if(!sessionStorage.getItem("sq_unlocked"))document.documentElement.classList.add("locked")}catch(e){document.documentElement.classList.add("locked")}</script>
 <script>try{var t=localStorage.getItem("sq_theme");if(!localStorage.getItem("sq_ns")){localStorage.setItem("sq_ns","1");localStorage.setItem("sq_nr","1");t="slytherin";localStorage.setItem("sq_theme",t)}document.documentElement.dataset.theme=t||"slytherin"}catch(e){document.documentElement.dataset.theme="slytherin"}</script>
 <title>Study Quest · Slytherin: 30 Sep – 15 Nov</title>
@@ -563,7 +564,50 @@ html.bz-on #bzbg.has{display:block}
 #vpan .vf{margin-top:8px;font-size:12px;color:var(--mu);line-height:1.5}
 @media(max-width:700px){#vbub{right:78px}#vpan{right:4vw}}
 #vpan .vtb{background:var(--pn2);color:var(--tx);border:1px solid var(--ln2);border-radius:10px;padding:7px 12px;font:inherit;font-weight:700;cursor:pointer;margin:0 0 8px}#vdg{white-space:pre-line}#vdg:empty{display:none}
-</style><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap"></head><body>
+</style><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap"><style id="sqAppCss">
+/* ===== phone app layer ===== */
+#sqNav{display:none}
+#alarm .al-seg{display:flex;gap:6px;background:var(--pn);border:1px solid var(--ln2);border-radius:16px;padding:5px;margin:10px 0 4px}
+#alarm .al-seg button{flex:1;background:transparent;border:0;color:var(--mu);font:inherit;font-weight:700;padding:11px 6px;border-radius:12px;cursor:pointer;position:relative;min-height:44px}
+#alarm .al-seg button.on{background:var(--pn2);color:var(--tx);box-shadow:0 1px 8px rgba(0,0,0,.3),inset 0 0 0 1.5px var(--xp)}
+#alarm .al-seg button.dot::after{content:"";position:absolute;top:8px;right:14px;width:9px;height:9px;border-radius:50%;background:#ff5d73}
+@media(max-width:820px){
+ .mode{display:none!important}
+ #sqNav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:70;gap:2px;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--pn) 88%,transparent);backdrop-filter:blur(16px) saturate(1.3);-webkit-backdrop-filter:blur(16px) saturate(1.3);border-top:1px solid var(--ln2);box-shadow:0 -6px 24px rgba(0,0,0,.35)}
+ #sqNav button{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;background:transparent;border:0;color:var(--mu);font:inherit;font-size:10.5px;font-weight:700;padding:6px 0 4px;border-radius:14px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .2s,color .2s,transform .12s}
+ #sqNav button i{font-style:normal;font-size:22px;line-height:1.1;filter:grayscale(.55);transition:filter .2s,transform .2s}
+ #sqNav button:active{transform:scale(.93)}
+ #sqNav button.on{color:var(--tx);background:var(--pn2);box-shadow:inset 0 0 0 1.5px var(--xp)}
+ #sqNav button.on i{filter:none;transform:translateY(-1px) scale(1.08)}
+ .wrap{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))!important}
+ #fsb{bottom:calc(82px + env(safe-area-inset-bottom,0px))!important}
+ #fsp{bottom:calc(150px + env(safe-area-inset-bottom,0px))!important;height:min(540px,calc(100dvh - 200px))!important}
+ #vdock{bottom:calc(150px + env(safe-area-inset-bottom,0px))!important}
+ input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea{font-size:16px!important}
+ .btn,button.btn{min-height:44px}
+ html{-webkit-text-size-adjust:100%}
+ body{-webkit-tap-highlight-color:transparent}
+ #alarm .al-btns{display:grid;grid-template-columns:1fr 1fr}#alarm .al-btns #alArm{grid-column:1/-1}
+ #alarm .al-card{padding:14px 14px;border-radius:18px}
+ #alarm .ck-b{min-height:36px}
+ #alarm .al-hd{display:none!important}
+ /* schedule rows */
+ #alarm .al-it.ro{grid-template-columns:76px 26px 1fr auto;gap:6px;padding:8px 0;border-bottom:1px solid var(--ln2);margin:0}
+ #alarm .al-it.ro .al-ty{display:block!important;overflow:hidden;white-space:nowrap;width:26px;padding:7px 0}
+ #alarm .al-it.ro .al-du{display:block!important;font-size:12px;opacity:.8;padding:7px 0}
+ #alarm .al-it.ro>span:last-child{display:none}
+ #alarm .al-it:not(.ro){grid-template-columns:1fr 1.2fr 46px;grid-template-areas:"t k x" "n n n" "d d d";gap:8px;padding:10px;margin:8px 0;background:var(--pn2);border-radius:14px}
+ #alarm .al-it:not(.ro)>:nth-child(1){grid-area:t}#alarm .al-it:not(.ro)>:nth-child(2){grid-area:k;display:block!important}
+ #alarm .al-it:not(.ro)>:nth-child(3){grid-area:n}#alarm .al-it:not(.ro)>:nth-child(4){grid-area:d;display:block!important}
+ #alarm .al-it:not(.ro)>:nth-child(5){grid-area:x;min-height:44px}
+ #alarm .al-it:not(.ro) input,#alarm .al-it:not(.ro) select{min-height:44px}
+ #alarm #alList{max-height:none}
+ #alHelp{padding:0;align-items:flex-end}
+ #alHelp .hp{width:100%;max-height:92dvh;border-radius:22px 22px 0 0}
+}
+</style>
+
+</head><body>
 <div id="lockscr" role="dialog" aria-modal="true" aria-label="Enter PIN"><div class="lkc"><img class="lkq" alt=""><div class="fav lkav" role="img" aria-label="Aster"></div><h2>Study Quest</h2><p id="lkm">Enter your PIN</p><div class="lkd" id="lkd"><i></i><i></i><i></i><i></i></div><div class="lkp" id="lkp"><button>1</button><button>2</button><button>3</button><button>4</button><button>5</button><button>6</button><button>7</button><button>8</button><button>9</button><span></span><button>0</button><button data-k="b" aria-label="Backspace">⌫</button></div></div></div>
 <div id="notes" role="dialog" aria-label="Notes wall"><div class="ntb"><button id="nbk" aria-label="Back">←</button><b>📌 Notes wall</b><button id="nan" class="rp">＋ Note</button><button id="nad" aria-label="Add diagram or photo">🖼 Diagram</button></div><div class="nwn" id="nwn" hidden>⚠ Your browser is blocking saving in this view, so notes will disappear when you close it. Open the file directly in Chrome or Edge to keep them.</div><div class="nsb" id="nsb"></div><div class="nch" id="nch"></div><div class="nfm" id="nfm"></div><div id="nw"><div id="nwc"></div></div><input type="file" id="nfi" accept="image/*" multiple hidden></div>
 <div id="reels" role="dialog" aria-label="Reels corner"><div class="rtb"><button id="rbk" aria-label="Back">←</button><b>🎬 Reels corner</b><span id="rct"></span><button id="rau" class="rp" title="Autoplay: when a reel ends, go to the next one" aria-label="Autoplay next reel" aria-pressed="true">⏭ Auto</button><button id="rmu" aria-label="Toggle sound">🔊</button><button id="rad" class="rp" aria-label="Add reels">＋ Add</button></div><div id="rfd" tabindex="0"></div><input type="file" id="rfi" accept="video/*,.mp4,.mov,.m4v,.webm" multiple hidden></div>
@@ -696,9 +740,10 @@ html.locked body>#alOv:not([hidden]){visibility:visible!important;pointer-events
 </style>
 <div class="al-top"><h2 class="al-h">⏰ Study Alarms</h2><button class="al-q" id="alQ" type="button" aria-label="Help: how everything works" title="How everything works">?</button></div>
 <p class="al-sub">Loud alarms for study time, water and breaks, plus check-ins on your mom's phone. Tap the <b>?</b> buttons any time to see how each part works.</p>
+<div class="al-seg" id="alSeg"><button type="button" data-pg="home" class="on">🏠 Today</button><button type="button" data-pg="sched">📅 Schedule</button><button type="button" data-pg="mom">👩 Mom</button></div>
 <div class="al-card" id="alCk"></div>
 <div class="al-card" id="alStat"></div>
-<div class="al-row al-btns"><button class="btn" id="alArm" type="button">🔔 Arm alarms</button><button class="btn g" id="alTs" type="button">▶ Test study alarm</button><button class="btn g" id="alTw" type="button">▶ Test water alarm</button></div>
+<div class="al-row al-btns" id="alBt"><button class="btn" id="alArm" type="button">🔔 Arm alarms</button><button class="btn g" id="alTs" type="button">▶ Test study alarm</button><button class="btn g" id="alTw" type="button">▶ Test water alarm</button></div>
 <div class="al-card" id="alSch"><div class="al-ch"><b>📅 Daily schedule</b><button class="al-q s" data-h="schedule" type="button" aria-label="Help: daily schedule">?</button></div><div class="al-m" id="alLock" style="margin:2px 0 8px"></div><div id="alList"></div><div id="alEd"></div></div>
 <div class="al-card" id="acCard"><div class="al-ch"><b>👩 Mom's check-ins</b><button class="al-q s" data-h="mom" type="button" aria-label="Help: Mom's check-ins">?</button></div>
 <div class="al-m" style="margin-bottom:10px">Your mom gets a notification at every study time, water time, wake-up and bedtime, with ✅ and ❌ buttons. No account or phone number needed.</div>
@@ -718,20 +763,21 @@ const g=id=>document.getElementById(id);
 const KEY="sq_alarm_v1",DKEY="sq_alarm_day",EDIT_FROM=22*60+30,EDIT_TO=24*60;
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let n0=0;const it=(t,k,n,d)=>({id:"a"+(n0++),t,k,n,d:d||0});
-const DEF=()=>{n0=0;return{v:3,lock:10,items:[
-it("04:00","wake","Wake up at 4 AM"),it("04:00","study","Morning study. Be at your table with the laptop open"),it("05:30","water","Drink water"),
-it("06:50","break","Short break",10),it("07:00","study","Physics lecture"),it("08:00","water","Drink water"),
-it("08:50","break","Short break",10),it("09:00","study","Chemistry lecture"),it("10:30","water","Drink water"),
-it("10:35","break","Short break",10),it("10:45","study","Biology lecture"),
-it("12:30","break","Lunch + rest",45),it("13:15","study","Doubts + revision"),it("13:30","water","Drink water"),
-it("15:00","break","Short break",30),it("15:30","study","Biology: 50 questions + NCERT recall"),
-it("16:00","water","Drink water"),it("16:45","break","Exercise",30),it("17:15","study","Physics: 50 questions"),
-it("18:00","water","Drink water"),it("19:00","break","Dinner",30),it("19:30","study","Chemistry: 50 questions + NCERT"),
-it("20:00","water","Drink water"),it("20:35","break","Short break",10),it("20:45","study","Active recall + mistake book"),
-it("21:20","break","Short break",10),it("21:30","study","Prep tomorrow"),
-it("22:00","break","Wind down"),it("23:00","sleep","Sleep at 11 PM")]}};
+const DEF=()=>{n0=0;return{v:6,lock:10,items:[
+it("04:00","wake","Wake up at 4 AM"),it("04:00","study","Physics Lecture 1. Be at your table with the laptop open"),
+it("04:45","water","Drink 1 glass of water"),it("06:00","study","Biology (first half)"),
+it("06:45","water","Drink 1 glass of water"),it("07:00","break","Bath + breakfast break",60),
+it("08:00","study","Biology (second half)"),it("08:45","water","Drink 1 glass of water"),
+it("09:00","study","Physics Lecture 2"),it("10:45","water","Drink 1 glass of water"),
+it("11:00","study","Chemistry Lecture 1"),it("12:45","water","Drink 1 glass of water"),
+it("13:00","study","Chemistry Lecture 2"),it("15:00","break","Rest",60),
+it("15:30","water","Drink 1 glass of water"),it("16:00","study","Physics question practice"),
+it("17:30","water","Drink 1 glass of water"),it("18:00","study","Chemistry question practice"),
+it("19:00","break","Dinner + break",60),it("19:45","water","Drink 1 glass of water"),
+it("20:00","study","Biology NCERT"),it("21:00","study","Revision + active recall"),
+it("22:00","sleep","Sleep at 10 PM")]}};
 let S=null;try{S=JSON.parse(localStorage.getItem(KEY)||"null")}catch(e){}
-if(!S||!Array.isArray(S.items)||S.v!==3){S=DEF();try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+if(!S||!Array.isArray(S.items)||S.v!==6){S=DEF();try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 n0=S.items.reduce((m,x)=>Math.max(m,+String(x.id).replace(/\D/g,"")||0),0)+1;
 const dk=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
 let D=null;try{D=JSON.parse(localStorage.getItem(DKEY)||"null")}catch(e){}
@@ -792,14 +838,14 @@ function finish(ok){stopSound();clearInterval(lockT);clearInterval(enT);if(cam){
 function events(){const o=[];S.items.forEach(x=>{const s=mm(x.t);if(s===null)return;
  if(x.k==="study"){o.push({id:x.id,ph:"p",s:s*60-60,x,pre:1});o.push({id:x.id,ph:"s",s:s*60,x})}
  else if(x.k==="water"||x.k==="wake"||x.k==="sleep")o.push({id:x.id,ph:"s",s:s*60,x});
- else{o.push({id:x.id,ph:"s",s:s*60,x,brk:1});if(+x.d>0&&!S.items.some(y=>y.k==="study"&&mm(y.t)===s+ +x.d))o.push({id:x.id,ph:"e",s:(s+ +x.d)*60,x})}});return o}
+ else{o.push({id:x.id,ph:"s",s:s*60,x,brk:1});if(+x.d>0&&!S.items.some(y=>y.k==="study"&&mm(y.t)===s+ +x.d))o.push({id:x.id,ph:"e",s:(s+ +x.d)*60,x})}});return o.sort((a,b)=>a.s-b.s||(a.x.k==="water"?0:1)-(b.x.k==="water"?0:1))}
 function tick(){if(D.d!==dk()){D=freshDay();saveD()}const d=new Date(),sod=d.getHours()*3600+d.getMinutes()*60+d.getSeconds();
  events().forEach(e=>{const k=e.id+"|"+e.ph;if(D.f[k])return;if(sod<e.s||sod>=e.s+300)return;D.f[k]=1;saveD();const x=e.x;try{tell(e)}catch(e2){}
   if(e.pre)soft("Study starts in 1 minute. Sit at your table, open the laptop, get your pen and notebook.");
   else if(x.k==="study")raise({kind:"study",title:"STUDY TIME",sub:x.n});
   else if(x.k==="water")raise({kind:"water",title:"DRINK WATER",sub:x.n||"Drink a glass of water"});
   else if(x.k==="wake")soft("Good morning! Mom has been asked if you are awake.");
-  else if(x.k==="sleep")raise({kind:"say",icon:"🌙",title:"TIME TO SLEEP",sub:"It is 11 PM. Close the laptop and go to bed now.",btn:"🌙 I am going to sleep"});
+  else if(x.k==="sleep")raise({kind:"say",icon:"🌙",title:"TIME TO SLEEP",sub:"It is "+hm(mm(x.t))+". Close the laptop and go to bed now.",btn:"🌙 I am going to sleep"});
   else if(e.brk)soft(x.n+" now"+(+x.d>0?". Back to study at "+hm(mm(x.t)+ +x.d):"."));
   else raise({kind:"study",title:"BREAK OVER. BACK TO STUDY",sub:"Finished: "+x.n})});draw()}
 function nextEv(){const d=new Date(),sod=d.getHours()*3600+d.getMinutes()*60+d.getSeconds();let b=null;
@@ -886,7 +932,11 @@ setInterval(acDraw,5000);acDraw();
 let tested=false;try{tested=localStorage.getItem("sq_alarm_tested")==="1"}catch(e){}
 const markTested=()=>{tested=true;try{localStorage.setItem("sq_alarm_tested","1")}catch(e){}uiDraw()};
 g("alTs").addEventListener("click",markTested);g("alTw").addEventListener("click",markTested);
-function goTo(id){const el=g(id);if(el)el.scrollIntoView({behavior:"smooth",block:"center"})}
+const PG={home:["alCk","alStat","alBt"],sched:["alSch"],mom:["acCard","acChat"]};
+function setPg(k){Object.keys(PG).forEach(q=>PG[q].forEach(id=>{const e=g(id);if(e)e.style.display=q===k?"":"none"}));document.querySelectorAll("#alSeg button").forEach(b=>b.classList.toggle("on",b.dataset.pg===k))}
+g("alSeg").addEventListener("click",e=>{const b=e.target.closest("[data-pg]");if(!b)return;setPg(b.dataset.pg);try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}g("alarm").scrollIntoView({block:"start"})});
+function goTo(id){const el=g(id);if(!el)return;const k=Object.keys(PG).find(q=>PG[q].some(x=>g(x)&&g(x).contains(el)));if(k)setPg(k);setTimeout(()=>el.scrollIntoView({behavior:"smooth",block:"center"}),60)}
+setPg("home");
 function uiDraw(){const ck=g("alCk");if(!ck)return;
  const it=[
   {ok:armed,t:"Arm the alarms (needed once every time you open this page)",b:"Arm now",f:()=>g("alArm").click()},
@@ -897,7 +947,7 @@ function uiDraw(){const ck=g("alCk");if(!ck)return;
  ck.innerHTML='<div class="al-ch"><b>'+(n===4?"✅ All set up":"🚀 Quick setup")+'</b><span class="al-m">'+n+' of 4 done</span></div><div class="al-bar"><i style="width:'+(n*25)+'%"></i></div>'
   +it.map((x,i)=>'<div class="ck-row'+(x.ok?" ok":"")+'"><span class="ck-i">'+(x.ok?"✅":"⬜")+'</span><span class="ck-t">'+esc(x.t)+'</span>'+(x.ok?"":'<button type="button" class="btn g ck-b" data-ck="'+i+'">'+x.b+'</button>')+'</div>').join("");
  ck._it=it;
- g("stp1").classList.toggle("ok",!!A.topic);g("stp2").classList.toggle("ok",!!A.ok);g("stp3").classList.toggle("ok",!!A.ok)}
+ const md=document.querySelector("#alSeg [data-pg=mom]");if(md)md.classList.toggle("dot",!A.ok);g("stp1").classList.toggle("ok",!!A.topic);g("stp2").classList.toggle("ok",!!A.ok);g("stp3").classList.toggle("ok",!!A.ok)}
 g("alCk").addEventListener("click",e=>{const b=e.target.closest("[data-ck]");if(b){const it=g("alCk")._it;if(it&&it[+b.dataset.ck])it[+b.dataset.ck].f()}});
 document.addEventListener("click",e=>{const c=e.target.closest("[data-copy]");if(!c||!A.topic)return;try{navigator.clipboard.writeText(A.topic).then(()=>{c.textContent="Copied ✓";setTimeout(()=>c.textContent="Copy",1800)},()=>prompt("Copy this topic name:",A.topic))}catch(x){prompt("Copy this topic name:",A.topic)}});
 /* help */
@@ -906,7 +956,7 @@ const HELP=[
  ["study","⏰ Study alarm","<p>At every study time in your schedule the screen turns red with a siren and a big <b>STUDY TIME</b>.</p><ol><li>Tap <b>Open camera and start</b> and allow the camera.</li><li>Tick <b>Pen in hand</b> and <b>Notebook open</b>. The siren stops.</li><li>Study with the camera on until the 10:00 countdown ends. Then the alarm clears.</li></ol><div class='tip'>If the camera turns off, the siren starts again. “I can't study right now” asks you to type SKIP and counts as a skipped session. The camera is only for you and your table. Nothing is recorded or sent anywhere.</div>"],
  ["water","💧 Water alarm","<p>A blue full-screen alarm with a beeping sound and a voice. Go and drink a glass, then tap <b>I drank a glass</b> (it unlocks after 5 seconds). Each glass is counted for today.</p>"],
  ["breaks","☕ Breaks","<p>Breaks are part of the schedule. At the start of a break you get a soft chime and a banner with the time you're due back. When the break ends, the loud <b>BREAK OVER. BACK TO STUDY</b> alarm rings. If a study session begins exactly when the break ends, you get just one alarm.</p>"],
- ["wake","🌅 Wake-up and 🌙 sleep checks","<p>At <b>4:00 AM</b> your mom is asked “Has she woken up?”. At <b>11:00 PM</b> a TIME TO SLEEP alarm covers your laptop and your mom is asked “Has she gone to sleep?”. If she taps ❌, a full-screen alarm tells you to get up or go to sleep.</p>"],
+ ["wake","🌅 Wake-up and 🌙 sleep checks","<p>At <b>4:00 AM</b> your mom is asked “Has she woken up?”. At <b>10:00 PM</b> (your sleep time in the schedule) a TIME TO SLEEP alarm covers your laptop and your mom is asked “Has she gone to sleep?”. If she taps ❌, a full-screen alarm tells you to get up or go to sleep.</p>"],
  ["schedule","📅 Daily schedule and the edit window","<p>The list shows every alarm for the day: study, water, breaks, wake-up and sleep.</p><ul><li>You can <b>change, add or delete</b> alarms only between <b>10:30 PM and 12:00 AM</b>. At any other time the list is locked, and the card shows when it opens.</li><li>Pick a time and a type, write what it's for, and for breaks set how many minutes it lasts.</li><li><b>Lock-in time</b> is how long you must study with the camera on to clear a study alarm (10 minutes by default).</li><li>Changes apply from the next alarm. <b>Reset to default</b> restores the original schedule.</li></ul>"],
  ["mom","👩 Mom's check-ins","<p>Your mom gets a notification on her phone at each alarm, with <b>✅ Yes</b> and <b>❌ No</b> buttons: “Physics lecture. It's time for you to study. Are you at the table studying?”, “Have you drunk water?”, and so on. When she taps ❌, your laptop rings again. At the end of the day she gets a short report.</p><ol><li><b>Create her channel:</b> type your name and tap Create Mom's channel.</li><li><b>Set up her phone:</b> she installs the free <b>ntfy</b> app, taps +, types the topic name exactly, and subscribes. Use the WhatsApp link to send her the steps.</li><li><b>Send a test:</b> when she taps ✅ or ❌, step 2 and 3 turn green.</li></ol><div class='tip'>No account or phone number is needed, so it works even if you share a number. The topic name works like a password: share it only with your mom. Once the channel exists, switching it off or disconnecting is allowed only between 10:30 PM and 12:00 AM.</div>"],
  ["chat","💬 Chat with Mom","<p>Type a message and tap <b>Send to Mom</b>. She gets a notification with three buttons: <b>💬 Reply</b> (opens a page where she can type), <b>👍 OK</b> and <b>📞 Call me</b>. Her answers appear in the chat on your laptop. Chat never affects the ✅/❌ checks.</p>"],
@@ -2617,6 +2667,21 @@ async function diag(){const d=g("vdg"),out=[];d.className="vs";d.textContent="Ch
 g("vtest").onclick=diag;
 syncPan();syncMic();
 window.__voice={run,matches,cfg,intents:intents.length,start,stop:stopRec,state:()=>({listening,wantOn,speaking})};
+})();
+</script>
+<script>
+(function(){
+const modes=[...document.querySelectorAll(".mode button[data-m]")];if(!modes.length)return;
+const nav=document.createElement("nav");nav.id="sqNav";nav.setAttribute("aria-label","Main navigation");
+const short={quest:"Quest",dtutor:"Tutor",workout:"Workout",zone:"Zone",alarm:"Alarms",bhajan:"Bhajan"};
+modes.forEach(b=>{const t=b.textContent.trim(),sp=t.search(/\s/),ic=sp>0?t.slice(0,sp):"•",lb=short[b.dataset.m]||t.slice(sp+1);
+ const n=document.createElement("button");n.type="button";n.dataset.m=b.dataset.m;n.setAttribute("aria-label",lb);n.innerHTML="<i>"+ic+"</i><span>"+lb+"</span>";
+ n.onclick=()=>{try{navigator.vibrate&&navigator.vibrate(8)}catch(e){}b.click();window.scrollTo({top:0,behavior:"smooth"})};nav.appendChild(n)});
+document.body.appendChild(nav);
+const sync=()=>{modes.forEach(b=>{const n=nav.querySelector('[data-m="'+b.dataset.m+'"]');if(n){n.classList.toggle("on",b.classList.contains("on"));n.setAttribute("aria-current",b.classList.contains("on")?"page":"false")}})};
+const mo=new MutationObserver(sync);modes.forEach(b=>mo.observe(b,{attributes:true,attributeFilter:["class"]}));sync();
+const tc=document.querySelector('meta[name="theme-color"]'),upd=()=>{try{const c=getComputedStyle(document.body).backgroundColor;if(tc&&c&&c!=="rgba(0, 0, 0, 0)")tc.content=c}catch(e){}};
+upd();new MutationObserver(upd).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
 })();
 </script>
 </body></html>
