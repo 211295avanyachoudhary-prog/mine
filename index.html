@@ -567,6 +567,10 @@ html.bz-on #bzbg.has{display:block}
 </style><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap"><style id="sqAppCss">
 /* ===== phone app layer ===== */
 #sqNav{display:none}
+#alarm{scroll-margin-top:64px}
+#alarm .al-it[data-k]:not([data-k=break]) .al-du{visibility:hidden}
+#alarm .al-du span{display:none}
+#alarm label.al-du{display:flex;align-items:center;gap:8px}
 #alarm .al-seg{display:flex;gap:6px;background:var(--pn);border:1px solid var(--ln2);border-radius:16px;padding:5px;margin:10px 0 4px}
 #alarm .al-seg button{flex:1;background:transparent;border:0;color:var(--mu);font:inherit;font-weight:700;padding:11px 6px;border-radius:12px;cursor:pointer;position:relative;min-height:44px}
 #alarm .al-seg button.on{background:var(--pn2);color:var(--tx);box-shadow:0 1px 8px rgba(0,0,0,.3),inset 0 0 0 1.5px var(--xp)}
@@ -596,7 +600,9 @@ html.bz-on #bzbg.has{display:block}
  #alarm .al-it.ro .al-ty{display:block!important;overflow:hidden;white-space:nowrap;width:26px;padding:7px 0}
  #alarm .al-it.ro .al-du{display:block!important;font-size:12px;opacity:.8;padding:7px 0}
  #alarm .al-it.ro>span:last-child{display:none}
- #alarm .al-it:not(.ro){grid-template-columns:1fr 1.2fr 46px;grid-template-areas:"t k x" "n n n" "d d d";gap:8px;padding:10px;margin:8px 0;background:var(--pn2);border-radius:14px}
+ #alarm .al-it[data-k]:not([data-k=break]) .al-du{display:none!important}
+ #alarm .al-du span{display:inline;font-size:13px;opacity:.85}
+ #alarm .al-it:not(.ro){grid-template-columns:minmax(124px,1fr) 1.2fr 46px;grid-template-areas:"t k x" "n n n" "d d d";gap:8px;padding:10px;margin:8px 0;background:var(--pn2);border-radius:14px}
  #alarm .al-it:not(.ro)>:nth-child(1){grid-area:t}#alarm .al-it:not(.ro)>:nth-child(2){grid-area:k;display:block!important}
  #alarm .al-it:not(.ro)>:nth-child(3){grid-area:n}#alarm .al-it:not(.ro)>:nth-child(4){grid-area:d;display:block!important}
  #alarm .al-it:not(.ro)>:nth-child(5){grid-area:x;min-height:44px}
@@ -605,6 +611,65 @@ html.bz-on #bzbg.has{display:block}
  #alHelp{padding:0;align-items:flex-end}
  #alHelp .hp{width:100%;max-height:92dvh;border-radius:22px 22px 0 0}
 }
+</style>
+
+<style id="sqLockCss">
+#lkCard[data-md=straight] .lk-pm,#lkCard[data-md=straight] #lkPre,#lkCard[data-md=pomo] #lkPreS{display:none}
+#lkCard[data-md=straight] .lk-g{grid-template-columns:1fr}
+.lk-seg{display:flex;gap:6px;background:var(--pn2);border:1px solid var(--ln2);border-radius:14px;padding:4px;margin-bottom:8px}
+.lk-seg button{flex:1;background:transparent;border:0;color:var(--mu);font:inherit;font-weight:700;padding:10px 6px;border-radius:10px;cursor:pointer;min-height:42px}
+.lk-seg button.on{background:var(--pn);color:var(--tx);box-shadow:inset 0 0 0 1.5px var(--xp)}
+.lk-modeh{font-size:13px;color:var(--mu);margin-bottom:10px;line-height:1.5}
+.lkc{margin-top:8px;text-align:left;width:100%;max-width:none;box-sizing:border-box;align-self:stretch;flex:none}
+.lkc .lk-h{display:flex;align-items:center;justify-content:space-between;font-size:17px;margin-bottom:8px}
+.lk-q{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--ln2);background:var(--pn2);color:var(--tx);font:700 14px/1 inherit;cursor:pointer}
+.lk-q:hover,.lk-q:focus-visible{background:var(--xp);color:var(--onx,#04140b);outline:none}
+.lk-g{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:end}
+.lk-g label{display:flex;flex-direction:column;gap:5px;font-size:12.5px;color:var(--mu);font-weight:600}
+.lk-g input{background:var(--pn2);color:var(--tx);border:1px solid var(--ln2);border-radius:12px;padding:10px;font:inherit;font-size:18px;font-weight:700;width:100%;box-sizing:border-box;min-height:46px;text-align:center}
+.lk-pre{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 2px}
+.lk-pre button{background:var(--pn2);color:var(--tx);border:1px solid var(--ln2);border-radius:999px;padding:7px 12px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.lk-pre button.on{border-color:var(--xp);box-shadow:inset 0 0 0 1px var(--xp)}
+.lk-plan{margin:10px 0;font-size:14px;line-height:1.55}
+.lk-bar{display:flex;gap:2px;height:14px;border-radius:7px;overflow:hidden;margin:8px 0}
+.lk-bar i{display:block;background:var(--xp);min-width:2px}.lk-bar i.b{background:rgba(255,255,255,.28)}
+.lk-msg{min-height:1.3em;font-size:13.5px;font-weight:600;color:#ff8a8a;margin-bottom:6px}
+.lk-go{width:100%;min-height:50px;font-size:17px;font-weight:800}
+.lk-rule{font-size:12.5px;color:var(--mu);margin-top:8px;line-height:1.5}
+.lk-hist{font-size:13px;color:var(--mu);margin-top:10px;line-height:1.7}
+#lkRun{padding:4px 0}
+#lkRun .lk-st{font-size:22px;font-weight:800;margin:4px 0}
+#lkRun .lk-sub{color:var(--mu);font-size:14px;line-height:1.6}
+.lk-prog{height:10px;border-radius:6px;background:rgba(255,255,255,.14);overflow:hidden;margin:10px 0}.lk-prog i{display:block;height:100%;background:var(--xp);transition:width .5s}
+#lkOv{position:fixed;inset:0;z-index:2147482500;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;padding:24px;overflow:auto;background:radial-gradient(ellipse at 50% 0,#14452f 0,#06120d 70%)}
+#lkOv[hidden]{display:none}
+#lkOv.brk{background:radial-gradient(ellipse at 50% 0,#164a57 0,#071a22 72%)}
+#lkOv.done{background:radial-gradient(ellipse at 50% 0,#5a4a12 0,#1a1405 72%)}
+#lkOv .lo{max-width:560px;width:100%}
+#lkOv .lo-t{font-size:15px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;font-weight:700}
+#lkOv .lo-ring{position:relative;width:min(300px,72vw);aspect-ratio:1;margin:14px auto}
+#lkOv .lo-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+#lkOv .lo-ring circle{fill:none;stroke-width:9;stroke-linecap:round}
+#lkOv .lo-ring .tr{stroke:rgba(255,255,255,.14)}#lkOv .lo-ring .pr{stroke:#2fd47c;transition:stroke-dashoffset .5s linear}
+#lkOv.brk .lo-ring .pr{stroke:#5cc8ff}#lkOv.done .lo-ring .pr{stroke:#ffd45c}
+#lkOv .lo-c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#lkOv .lo-time{font-size:clamp(48px,15vw,76px);font-weight:900;font-variant-numeric:tabular-nums;line-height:1}
+#lkOv .lo-lbl{font-size:15px;opacity:.85;margin-top:6px}
+#lkOv .lo-dots{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin:6px 0 12px}
+#lkOv .lo-dots i{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.22);display:block}
+#lkOv .lo-dots i.d{background:#2fd47c}#lkOv .lo-dots i.c{background:#fff;box-shadow:0 0 0 3px rgba(47,212,124,.5)}
+#lkOv .lo-all{height:8px;border-radius:5px;background:rgba(255,255,255,.16);overflow:hidden;margin:8px 0 4px}#lkOv .lo-all i{display:block;height:100%;background:#2fd47c}
+#lkOv .lo-s{font-size:14px;opacity:.85;line-height:1.6}
+#lkOv .lo-b{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:14px;padding:12px 18px;font:inherit;font-weight:700;cursor:pointer;margin:6px 4px;min-height:46px}
+#lkOv .lo-b.p{background:#fff;color:#111;border:0}
+#lkOv .lo-ask{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.2);border-radius:16px;padding:12px;margin-top:12px;text-align:left}
+#lkOv .lo-ask textarea{width:100%;box-sizing:border-box;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:8px;font:inherit;font-size:16px;margin-top:6px}
+#lkOv .lo-ask [data-r]{padding:7px 12px;min-height:0;font-size:13px}#lkOv .lo-ask [data-r].on{background:#fff;color:#111}
+#lkOv .lo-m{min-height:1.4em;font-weight:600;margin-top:8px}
+#lkPill{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(86px + env(safe-area-inset-bottom,0px));z-index:2147482400;background:#164a57;color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:11px 18px;font:inherit;font-weight:700;box-shadow:0 8px 28px rgba(0,0,0,.5);cursor:pointer}
+#lkPill[hidden]{display:none}
+@media(min-width:821px){#lkPill{bottom:24px}}
+@media(max-width:420px){.lk-g{gap:6px}.lk-g label{font-size:11.5px}}
 </style>
 
 </head><body>
@@ -634,6 +699,27 @@ html.bz-on #bzbg.has{display:block}
 <div class="stpre" id="stpre"><button data-p="15">15</button><button data-p="25">25</button><button data-p="45">45</button><button data-p="60">60</button><input id="stc" type="number" min="1" max="600" placeholder="min" aria-label="Custom minutes"><button id="stcs">Set</button></div>
 <div class="sta"><button class="tb p" id="tsa">Start</button><button class="tb" id="tsl">Lap</button><button class="tb" id="tsr">Reset</button></div>
 <ol class="stl" id="stl"></ol><div class="stn" id="stn"></div><div class="stn" id="brk"></div><ol id="brkl"></ol></div></div></div></div></div>
+<div class="sec">🔒 Lock-in</div>
+<div class="stm lkc" id="lkCard">
+<div class="lk-h"><b>Lock in and finish</b><button class="lk-q" id="lkQ" type="button" aria-label="How lock-in works" title="How lock-in works">?</button></div>
+<div id="lkSet">
+<div class="lk-seg" id="lkMode"><button type="button" data-md="pomo" class="on">🍅 Pomodoro</button><button type="button" data-md="straight">⏱ Straight hours</button></div>
+<div class="lk-modeh" id="lkModeH"></div>
+<div class="lk-g">
+<label>Hours<input id="lkH" type="number" inputmode="decimal" min="0.5" max="12" step="0.5" value="4"></label>
+<label class="lk-pm">Sessions<input id="lkN" type="number" inputmode="numeric" min="1" max="16" step="1" value="8"></label>
+<label class="lk-pm">Break (min)<input id="lkB" type="number" inputmode="numeric" min="1" max="30" step="1" value="5"></label>
+</div>
+<div class="lk-pre" id="lkPreS"><button type="button" data-h="1">1 h</button><button type="button" data-h="2">2 h</button><button type="button" data-h="3">3 h</button><button type="button" data-h="4">4 h</button><button type="button" data-h="6">6 h</button></div>
+<div class="lk-pre" id="lkPre"><button type="button" data-h="2" data-n="4" data-b="5">2 h · 4 sessions</button><button type="button" data-h="3" data-n="6" data-b="5">3 h · 6 sessions</button><button type="button" data-h="4" data-n="8" data-b="5">4 h · 8 sessions</button><button type="button" data-h="6" data-n="10" data-b="10">6 h · 10 sessions</button></div>
+<div class="lk-plan" id="lkPlan"></div>
+<div class="lk-msg" id="lkMsg"></div>
+<button class="btn lk-go" id="lkGo" type="button">🔒 Start lock-in</button>
+<div class="lk-rule" id="lkRule">Once it starts you can't pause or stop it. Breaks come only at the Pomodoro times you set. It ends by itself when the hours are done, or earlier only if your mom allows it from her phone.</div>
+</div>
+<div id="lkRun" hidden></div>
+<div class="lk-hist" id="lkHist"></div>
+</div>
 <div class="sec">Aster</div><div id="adash"></div>
 <div class="sec">Calendar</div>
 <div class="cal" id="cal"><div class="calh"><button id="cprev" aria-label="Previous month">‹</button><b id="cttl"></b><button id="cnext" aria-label="Next month">›</button></div><div class="calg" id="cgrid"></div>
@@ -842,12 +928,12 @@ function events(){const o=[];S.items.forEach(x=>{const s=mm(x.t);if(s===null)ret
 function tick(){if(D.d!==dk()){D=freshDay();saveD()}const d=new Date(),sod=d.getHours()*3600+d.getMinutes()*60+d.getSeconds();
  events().forEach(e=>{const k=e.id+"|"+e.ph;if(D.f[k])return;if(sod<e.s||sod>=e.s+300)return;D.f[k]=1;saveD();const x=e.x;try{tell(e)}catch(e2){}
   if(e.pre)soft("Study starts in 1 minute. Sit at your table, open the laptop, get your pen and notebook.");
-  else if(x.k==="study")raise({kind:"study",title:"STUDY TIME",sub:x.n});
+  else if(x.k==="study"){if(!(window.__sqLockFocus&&window.__sqLockFocus()))raise({kind:"study",title:"STUDY TIME",sub:x.n})}
   else if(x.k==="water")raise({kind:"water",title:"DRINK WATER",sub:x.n||"Drink a glass of water"});
   else if(x.k==="wake")soft("Good morning! Mom has been asked if you are awake.");
   else if(x.k==="sleep")raise({kind:"say",icon:"🌙",title:"TIME TO SLEEP",sub:"It is "+hm(mm(x.t))+". Close the laptop and go to bed now.",btn:"🌙 I am going to sleep"});
   else if(e.brk)soft(x.n+" now"+(+x.d>0?". Back to study at "+hm(mm(x.t)+ +x.d):"."));
-  else raise({kind:"study",title:"BREAK OVER. BACK TO STUDY",sub:"Finished: "+x.n})});draw()}
+  else if(!(window.__sqLockFocus&&window.__sqLockFocus()))raise({kind:"study",title:"BREAK OVER. BACK TO STUDY",sub:"Finished: "+x.n})});draw()}
 function nextEv(){const d=new Date(),sod=d.getHours()*3600+d.getMinutes()*60+d.getSeconds();let b=null;
  events().forEach(e=>{if(e.pre)return;if(e.x.k==="break"&&e.ph==="s")return;let t=e.s;if(t<=sod)t+=86400;if(!b||t<b.t)b={t,e}});return b?{in:b.t-sod,e:b.e}:null}
 /* ui */
@@ -861,7 +947,7 @@ function draw(){const st=g("alStat");if(!st)return;const nx=nextEv(),ce=canEdit(
 const TY={study:"📚 Study",water:"💧 Water",break:"☕ Break",wake:"🌅 Wake-up check",sleep:"🌙 Sleep check"};
 function list(ce){const L=g("alList"),E=g("alEd"),items=S.items.slice().sort((a,b)=>(mm(a.t)||0)-(mm(b.t)||0));
  if(!ce){L.innerHTML=items.map(x=>'<div class="al-it ro"><span><b>'+hm(mm(x.t)||0)+'</b></span><span class="al-ty">'+TY[x.k]+'</span><span>'+esc(x.n)+'</span><span class="al-du">'+(x.k==="break"&&+x.d>0?x.d+" min":"")+'</span><span></span></div>').join("");E.innerHTML='<div class="al-m" style="margin-top:8px">Lock-in time to clear a study alarm: <b>'+(+S.lock||10)+' min</b></div>';return}
- L.innerHTML='<div class="al-it al-hd"><span>Time</span><span class="al-ty">Type</span><span>What</span><span class="al-du">Break min</span><span></span></div>'+items.map(x=>'<div class="al-it" data-id="'+x.id+'"><input type="time" data-f="t" value="'+esc(x.t)+'"><select class="al-ty" data-f="k">'+Object.keys(TY).map(k=>'<option value="'+k+'"'+(k===x.k?" selected":"")+'>'+TY[k]+'</option>').join("")+'</select><input type="text" data-f="n" maxlength="60" value="'+esc(x.n)+'"><input class="al-du" type="number" data-f="d" min="0" max="240" value="'+(+x.d||0)+'"><button class="al-x" data-del="'+x.id+'" aria-label="Delete">✕</button></div>').join("");
+ L.innerHTML='<div class="al-it al-hd"><span>Time</span><span class="al-ty">Type</span><span>What</span><span class="al-du">Break min</span><span></span></div>'+items.map(x=>'<div class="al-it" data-k="'+x.k+'" data-id="'+x.id+'"><input type="time" data-f="t" value="'+esc(x.t)+'"><select class="al-ty" data-f="k">'+Object.keys(TY).map(k=>'<option value="'+k+'"'+(k===x.k?" selected":"")+'>'+TY[k]+'</option>').join("")+'</select><input type="text" data-f="n" maxlength="60" value="'+esc(x.n)+'"><label class="al-du"><span>Break length (minutes)</span><input type="number" inputmode="numeric" aria-label="Break length in minutes" data-f="d" min="0" max="240" value="'+(+x.d||0)+'"></label><button class="al-x" data-del="'+x.id+'" aria-label="Delete">✕</button></div>').join("");
  E.innerHTML='<div class="al-row" style="margin-top:8px"><button class="btn g" id="alAdd" type="button">＋ Add alarm</button><button class="btn g" id="alRs" type="button">Reset to default</button></div><div class="al-lk">Lock-in time to clear a study alarm <input id="alLm" type="number" min="1" max="120" step="1" value="'+(+S.lock||10)+'"> minutes</div>'}
 g("alList").addEventListener("change",e=>{const r=e.target.closest("[data-id]");if(!r||!canEdit())return;const x=S.items.find(i=>i.id===r.dataset.id);if(!x)return;const f=e.target.dataset.f;if(!f)return;x[f]=f==="d"?Math.max(0,+e.target.value||0):e.target.value;if(f==="t"&&mm(x.t)===null)return;saveS();draw.sig=null;draw()});
 g("alList").addEventListener("click",e=>{const b=e.target.closest("[data-del]");if(!b||!canEdit())return;S.items=S.items.filter(i=>i.id!==b.dataset.del);saveS();draw.sig=null;draw()});
@@ -900,7 +986,8 @@ function tell(e){if(!A.on||!A.topic||e.pre)return;const x=e.x,key=dk().slice(5).
  else send("Is "+N+" back at the table and studying?\nFinished: "+x.n,key,"Back to study after "+x.n,"study",1,"⏰ Break is over");
  const last=S.items.filter(i=>i.k!=="water").sort((a,b)=>(mm(a.t)||0)-(mm(b.t)||0)).pop();if(last&&last.id===x.id&&e.ph==="s")setTimeout(()=>send(summary(),"","","report",0,"📋 Today's report for "+N),60000)}
 let es=null,esKey="";const seen=new Set();
-function onReply(txt){const p=txt.split("|"),r=p.length===2&&/^[\w-]{3,40}$/.test(p[0])?(p[1]==="1"?1:p[1]==="0"?0:null):null;if(r===null){if(txt){addChat("mom",txt.slice(0,500));soft("💬 Mom: "+txt.slice(0,80))}return}const en=A.log.find(x=>x.k===p[0]);if(!en||en.r!==null)return;
+function onReply(txt){const p=txt.split("|"),r=p.length===2&&/^[\w-]{3,40}$/.test(p[0])?(p[1]==="1"?1:p[1]==="0"?0:null):null;if(r===null){if(txt){addChat("mom",txt.slice(0,500));soft("💬 Mom: "+txt.slice(0,80))}return}if(/^lk[\w-]+$/.test(p[0])){try{window.__sqLockReply&&window.__sqLockReply(p[0],r)}catch(e){}return}
+ const en=A.log.find(x=>x.k===p[0]);if(!en||en.r!==null)return;
  en.r=r;en.at=Date.now();A.ok=A.ok||Date.now();saveA();acDraw();
  if(r===0&&en.kind!=="test")raise(en.kind==="wake"?{kind:"say",icon:"🌅",title:"MOM SAYS NO ❌",sub:"Mom marked: not awake yet. Get up and go to your table.",btn:"🌅 I am up"}:en.kind==="sleep"?{kind:"say",icon:"🌙",title:"MOM SAYS NO ❌",sub:"Mom marked: not asleep yet. Close the laptop and go to sleep.",btn:"🌙 I am going to sleep"}:{kind:en.kind==="water"?"water":"study",title:"MOM SAYS NO ❌",sub:en.kind==="water"?"Mom marked: no water yet. Go drink a glass.":"Mom marked: not studying. "+en.l})}
 function listen(){const want=A.topic&&A.rtopic?A.rtopic:"";if(want===esKey)return;if(es){es.close();es=null}esKey=want;if(!want)return;
@@ -927,6 +1014,7 @@ g("acMs").onclick=async()=>{const t=g("acMt").value.trim(),r=g("acMr");if(!A.top
 g("acMt").addEventListener("keydown",e=>{if(e.key==="Enter"&&(e.ctrlKey||e.metaKey)){e.preventDefault();g("acMs").click()}});
 g("acOn").onchange=e=>{if(acLocked()&&!e.target.checked){e.target.checked=!!A.on;setSt("🔒 You can switch this off only between 10:30 PM and 12:00 AM.");return}A.on=e.target.checked;saveA();acDraw()};
 g("acDis").onclick=()=>{if(acLocked()||!A.topic)return;if(!confirm("Disconnect Mom? She will stop getting notifications."))return;A.topic="";A.rtopic="";A.on=false;A.ok=0;saveA();setSt("")};
+window.__sqMom={ok:()=>!!(A.topic&&A.rtopic&&A.ok),name:nm,url:()=>NT+"/"+A.rtopic,send:send};
 setInterval(acDraw,5000);acDraw();
 /* ---- polish: checklist, step ticks, help ---- */
 let tested=false;try{tested=localStorage.getItem("sq_alarm_tested")==="1"}catch(e){}
@@ -960,6 +1048,7 @@ const HELP=[
  ["schedule","📅 Daily schedule and the edit window","<p>The list shows every alarm for the day: study, water, breaks, wake-up and sleep.</p><ul><li>You can <b>change, add or delete</b> alarms only between <b>10:30 PM and 12:00 AM</b>. At any other time the list is locked, and the card shows when it opens.</li><li>Pick a time and a type, write what it's for, and for breaks set how many minutes it lasts.</li><li><b>Lock-in time</b> is how long you must study with the camera on to clear a study alarm (10 minutes by default).</li><li>Changes apply from the next alarm. <b>Reset to default</b> restores the original schedule.</li></ul>"],
  ["mom","👩 Mom's check-ins","<p>Your mom gets a notification on her phone at each alarm, with <b>✅ Yes</b> and <b>❌ No</b> buttons: “Physics lecture. It's time for you to study. Are you at the table studying?”, “Have you drunk water?”, and so on. When she taps ❌, your laptop rings again. At the end of the day she gets a short report.</p><ol><li><b>Create her channel:</b> type your name and tap Create Mom's channel.</li><li><b>Set up her phone:</b> she installs the free <b>ntfy</b> app, taps +, types the topic name exactly, and subscribes. Use the WhatsApp link to send her the steps.</li><li><b>Send a test:</b> when she taps ✅ or ❌, step 2 and 3 turn green.</li></ol><div class='tip'>No account or phone number is needed, so it works even if you share a number. The topic name works like a password: share it only with your mom. Once the channel exists, switching it off or disconnecting is allowed only between 10:30 PM and 12:00 AM.</div>"],
  ["chat","💬 Chat with Mom","<p>Type a message and tap <b>Send to Mom</b>. She gets a notification with three buttons: <b>💬 Reply</b> (opens a page where she can type), <b>👍 OK</b> and <b>📞 Call me</b>. Her answers appear in the chat on your laptop. Chat never affects the ✅/❌ checks.</p>"],
+ ["lockin","🔒 Lock-in","<p>Lock-in is a committed study block in the <b>Quest</b> tab, under the stopwatch and timer.</p><ol><li>Pick a mode. <b>🍅 Pomodoro</b>: enter the hours, how many sessions and the break length, and the card works out the focus length. <b>⏱ Straight hours</b>: enter just the hours, for one unbroken block with no breaks.</li><li>Tap <b>Start lock-in</b>. A full-screen lock screen shows the current session. The study stopwatch runs by itself during focus and pauses during breaks.</li><li>Breaks come only at the planned times, with a beep and a voice. The lock screen returns when the break ends.</li><li>It ends by itself when the time is up.</li></ol><div class='tip'>You can stop early only with your mom's permission. Tap <b>Ask Mom to stop</b>, give a reason, and she gets a notification with <b>✅ Allow stop</b> and <b>❌ Keep going</b>. If she allows it, the lock-in ends automatically. She can also end it from the first notification she received. Mom's phone must be connected before you can start.</div><p>While you are locked in, the study alarms stay quiet but water alarms still ring.</p>"],
  ["fix","🛠 Something isn't working?","<ul><li><b>No sound:</b> tap Arm alarms, check your laptop volume, and make sure the tab isn't muted.</li><li><b>Camera won't open:</b> allow the camera for this page in your browser's address bar, then try again.</li><li><b>Mom gets nothing:</b> check her ntfy app is subscribed to the exact topic name, her phone's notifications are allowed for ntfy, and this page is open with “Send alarms to Mom” ticked.</li><li><b>“Reconnecting…” message:</b> it's your internet. It reconnects by itself.</li><li><b>Alarm missed:</b> the page was closed or the laptop was asleep at that time.</li></ul>"]];
 const hp=document.createElement("div");hp.id="alHelp";hp.hidden=true;hp.setAttribute("role","dialog");hp.setAttribute("aria-modal","true");hp.setAttribute("aria-label","How the alarms work");
 hp.innerHTML='<div class="hp"><div class="hh"><span>❓ How everything works</span><button class="hx" type="button" id="alHx">Close ✕</button></div><div class="hn">'+HELP.map(h=>'<button type="button" data-j="'+h[0]+'">'+h[1]+'</button>').join("")+'</div><div class="hb">'+HELP.map(h=>'<section id="hp-'+h[0]+'"><h3>'+h[1]+'</h3>'+h[2]+'</section>').join("")+'</div></div>';
@@ -968,7 +1057,7 @@ function openHelp(k){hp.hidden=false;const b=hp.querySelector(".hb");const sec=k
 const closeHelp=()=>{hp.hidden=true};
 hp.addEventListener("click",e=>{if(e.target===hp||e.target.id==="alHx")closeHelp();const j=e.target.closest("[data-j]");if(j)openHelp(j.dataset.j)});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!hp.hidden)closeHelp()});
-g("alQ").onclick=()=>openHelp("start");
+g("alQ").onclick=()=>openHelp("start");window.__sqHelp=openHelp;
 g("alarm").addEventListener("click",e=>{const q=e.target.closest("[data-h]");if(q)openHelp(q.dataset.h)});
 setInterval(uiDraw,2000);uiDraw();
 setInterval(tick,1000);tick();draw();
@@ -2682,6 +2771,124 @@ const sync=()=>{modes.forEach(b=>{const n=nav.querySelector('[data-m="'+b.datase
 const mo=new MutationObserver(sync);modes.forEach(b=>mo.observe(b,{attributes:true,attributeFilter:["class"]}));sync();
 const tc=document.querySelector('meta[name="theme-color"]'),upd=()=>{try{const c=getComputedStyle(document.body).backgroundColor;if(tc&&c&&c!=="rgba(0, 0, 0, 0)")tc.content=c}catch(e){}};
 upd();new MutationObserver(upd).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+})();
+</script>
+<script>
+/* Lock-in: hours + Pomodoro plan; ends only when finished or when Mom allows it from her phone */
+(function(){
+const $=id=>document.getElementById(id),KEY="sq_lockin_v1",p2=n=>String(n).padStart(2,"0");
+if(!$("lkCard"))return;
+const mmss=ms=>{ms=Math.max(0,Math.ceil(ms/1000));const h=Math.floor(ms/3600),m=Math.floor(ms%3600/60),s=ms%60;return(h?h+":"+p2(m):p2(m))+":"+p2(s)};
+const hmin=ms=>{const m=Math.round(ms/60000),h=Math.floor(m/60);return(h?h+"h ":"")+(m%60)+"m"};
+const clk=ts=>new Date(ts).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"});
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const cap=s=>{s=String(s||"");return s.charAt(0).toUpperCase()+s.slice(1)};
+let L={cur:null,hist:[],pref:{h:4,n:8,b:5,md:"pomo"}};
+try{const o=JSON.parse(localStorage.getItem(KEY)||"null");if(o&&typeof o==="object")L=Object.assign(L,o)}catch(e){}
+L.hist=Array.isArray(L.hist)?L.hist:[];L.pref=Object.assign({h:4,n:8,b:5,md:"pomo"},L.pref||{});
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(L))}catch(e){}};
+const mom=()=>window.__sqMom||null;
+const toast=t=>{try{if(typeof window.toast==="function")window.toast(t);else{const e=$("ts");if(e){e.textContent=t;e.classList.add("on");setTimeout(()=>e.classList.remove("on"),4500)}}}catch(e){}};
+/* plan */
+function plan(h,n,b,md){h=+h;n=Math.round(+n);b=Math.round(+b);
+ if(md==="straight"){if(!(h>=.5&&h<=12))return{err:"Hours must be between 0.5 and 12."};const t=Math.round(h*60);return{mode:"straight",h,n:1,b:0,f:t,extra:0,total:t,ph:[{k:"f",ms:t*6e4}]}}
+ if(!(h>=.5&&h<=12))return{err:"Hours must be between 0.5 and 12."};if(!(n>=1&&n<=16))return{err:"Sessions must be between 1 and 16."};
+ if(n>1&&!(b>=1&&b<=30))return{err:"Breaks must be between 1 and 30 minutes."};
+ const bb=n>1?b:0,total=Math.round(h*60),f=Math.floor((total-(n-1)*bb)/n);
+ if(f<10)return{err:"Each focus session would be only "+Math.max(0,f)+" min. Use fewer sessions, shorter breaks or more hours."};
+ if(f>180)return{err:"Each focus session would be "+f+" min. Add more sessions so each one is 180 min or less."};
+ const extra=total-n*f-(n-1)*bb,ph=[];for(let i=0;i<n;i++){ph.push({k:"f",ms:(f+(i===n-1?extra:0))*6e4});if(i<n-1)ph.push({k:"b",ms:bb*6e4})}
+ return{h,n,b:bb,f,extra,total,ph}}
+function where(c,now){const e=now-c.start;if(e>=c.total)return{done:1};let acc=0;for(let i=0;i<c.ph.length;i++){const p=c.ph[i];if(e<acc+p.ms)return{i,p,left:acc+p.ms-e,into:e-acc,e,sess:c.ph.slice(0,i+1).filter(x=>x.k==="f").length};acc+=p.ms}return{done:1}}
+/* sound / voice / notifications */
+let ac=null;
+function beep(fr){try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();ac.resume();const t=ac.currentTime;fr.forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=f;o.connect(g);g.connect(ac.destination);const n=t+i*.28;g.gain.setValueAtTime(.0001,n);g.gain.exponentialRampToValueAtTime(.35,n+.03);g.gain.exponentialRampToValueAtTime(.0001,n+.25);o.start(n);o.stop(n+.27)})}catch(e){}}
+function speak(t){try{const u=new SpeechSynthesisUtterance(t);speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+function note(t,b){try{if(window.Notification&&Notification.permission==="granted")new Notification(t,{body:b,tag:"sq-lock"})}catch(e){}}
+/* keep the existing study stopwatch running while focusing and paused on breaks */
+let lastDrive=0;
+function drive(focus,force){const n=Date.now();if(!force&&n-lastDrive<1500)return;lastDrive=n;const stm=$("stm");if(!stm)return;
+ const a=$("tsa");if(!a)return;
+ if(focus){if(stm.dataset.m!=="sw"){const b=document.querySelector('.stt button[data-m="sw"]');if(b)b.click()}
+  if(stm.dataset.m==="sw"&&!stm.classList.contains("run"))a.click()}
+ else if(stm.dataset.m==="sw"&&stm.classList.contains("run"))a.click()}
+/* setup card */
+const val=()=>({h:$("lkH").value,n:$("lkN").value,b:$("lkB").value,md:L.pref.md==="straight"?"straight":"pomo"});
+function drawPlan(){const v=val(),pl=plan(v.h,v.n,v.b,v.md),P=$("lkPlan"),G=$("lkGo");
+ $("lkCard").dataset.md=v.md;document.querySelectorAll("#lkMode button").forEach(b=>b.classList.toggle("on",b.dataset.md===v.md));
+ $("lkRule").textContent=v.md==="straight"?"Once it starts you can't pause or stop it, and there are no breaks. It ends by itself when the hours are done, or earlier only if your mom allows it from her phone.":"Once it starts you can't pause or stop it. Breaks come only at the Pomodoro times you set. It ends by itself when the hours are done, or earlier only if your mom allows it from her phone.";
+ $("lkModeH").textContent=v.md==="straight"?"One unbroken block. No breaks and no sessions, from start to finish.":"Focus sessions with short breaks in between, at times you set.";
+ document.querySelectorAll("#lkPreS button").forEach(b=>b.classList.toggle("on",+b.dataset.h===+v.h));
+ document.querySelectorAll("#lkPre button").forEach(b=>b.classList.toggle("on",+b.dataset.h===+v.h&&+b.dataset.n===+v.n&&+b.dataset.b===+v.b));
+ if(pl.err){P.innerHTML='<span style="color:#ff8a8a">'+esc(pl.err)+'</span>';G.disabled=true;return null}
+ G.disabled=false;const end=Date.now()+pl.total*6e4;
+ if(pl.mode==="straight"){P.innerHTML='<div><b>'+hmin(pl.total*6e4)+' straight, no breaks</b></div><div class="lk-bar"><i style="flex:1"></i></div><div style="color:var(--mu)">If you start now it ends at <b>'+clk(end)+'</b>.</div>';return pl}
+ P.innerHTML='<div><b>'+pl.n+' focus session'+(pl.n>1?"s":"")+' of '+pl.f+' min'+(pl.n>1?', '+(pl.n-1)+' break'+(pl.n>2?"s":"")+' of '+pl.b+' min':"")+'</b> = '+hmin(pl.total*6e4)+'</div>'
+  +'<div class="lk-bar">'+pl.ph.map(p=>'<i class="'+(p.k==="b"?"b":"")+'" style="flex:'+p.ms+'"></i>').join("")+'</div>'
+  +'<div style="color:var(--mu)">If you start now it ends at <b>'+clk(end)+'</b>.'+(pl.extra?' The last session is '+pl.extra+' min longer to fill the full time.':"")+'</div>';
+ return pl}
+["lkH","lkN","lkB"].forEach(id=>$(id).addEventListener("input",()=>{$("lkMsg").textContent="";drawPlan()}));
+$("lkMode").addEventListener("click",e=>{const b=e.target.closest("button[data-md]");if(!b)return;L.pref.md=b.dataset.md;save();$("lkMsg").textContent="";drawPlan()});
+$("lkPreS").addEventListener("click",e=>{const b=e.target.closest("button[data-h]");if(!b)return;$("lkH").value=b.dataset.h;$("lkMsg").textContent="";drawPlan()});
+$("lkPre").addEventListener("click",e=>{const b=e.target.closest("button[data-h]");if(!b)return;$("lkH").value=b.dataset.h;$("lkN").value=b.dataset.n;$("lkB").value=b.dataset.b;$("lkMsg").textContent="";drawPlan()});
+$("lkH").value=L.pref.h;$("lkN").value=L.pref.n;$("lkB").value=L.pref.b;
+$("lkQ").onclick=()=>{if(window.__sqHelp)window.__sqHelp("lockin")};
+$("lkGo").onclick=()=>{const pl=drawPlan();if(!pl)return;const m=mom(),M=$("lkMsg");
+ if(!m||!m.ok()){M.innerHTML='Set up your mom\'s phone first, so she can allow an early stop. <a href="#" id="lkSm" style="color:var(--xp)">Open Mom setup</a>';const a=$("lkSm");if(a)a.onclick=ev=>{ev.preventDefault();const b=document.querySelector('.mode button[data-m="alarm"]');if(b)b.click();const s=document.querySelector("#alSeg [data-pg=mom]");if(s)s.click()};return}
+ const SM=pl.mode==="straight";if(!confirm("Lock in for "+hmin(pl.total*6e4)+(SM?" straight, with no breaks":" ("+pl.n+" session"+(pl.n>1?"s":"")+")")+"?\n\nYou can't pause or stop it. Only your mom can allow an early stop, from her phone."))return;
+ const id=Date.now().toString(36),c={id,key:"lk"+id,start:Date.now(),total:pl.total*6e4,ph:pl.ph,h:pl.h,n:pl.n,b:pl.b,f:pl.f,mode:pl.mode||"pomo",pend:0,deny:0,min:0};
+ L.cur=c;L.pref=Object.assign(L.pref,{h:pl.h,md:c.mode},SM?{}:{n:pl.n,b:pl.b});save();lastIdx=-2;endOn=false;beep([660,880,1100]);
+ m.send(cap(m.name())+" has locked in for "+hmin(c.total)+(SM?" straight, with no breaks":": "+pl.n+" Pomodoro session"+(pl.n>1?"s":"")+" of "+pl.f+" min"+(pl.n>1?" with "+pl.b+"-minute breaks":""))+". It ends around "+clk(c.start+c.total)+". You can end it early with the button below, or you'll be asked if "+cap(m.name())+" requests it.","","","lock",0,"🔒 Lock-in started",[{action:"http",label:"🔓 End lock-in",url:m.url(),method:"POST",body:c.key+"|1",clear:true}]);
+ tick(true);render()};
+/* running state */
+let ov=null,pill=null,lastIdx=-2,endOn=false,ask=false;
+function build(){if(ov)return;ov=document.createElement("div");ov.id="lkOv";ov.hidden=true;ov.setAttribute("role","dialog");ov.setAttribute("aria-label","Lock-in");
+ ov.innerHTML='<div class="lo"><div class="lo-t" id="lkoT"></div><div class="lo-ring"><svg viewBox="0 0 100 100"><circle class="tr" cx="50" cy="50" r="45"/><circle class="pr" id="lkoPr" cx="50" cy="50" r="45" stroke-dasharray="282.74" stroke-dashoffset="282.74"/></svg><div class="lo-c"><div class="lo-time" id="lkoTm">00:00</div><div class="lo-lbl" id="lkoLb"></div></div></div><div class="lo-dots" id="lkoDt"></div><div class="lo-all"><i id="lkoAl" style="width:0"></i></div><div class="lo-s" id="lkoS"></div><div id="lkoBt"><button class="lo-b" id="lkoHide" type="button">☕ Hide during break</button><button class="lo-b" id="lkoAsk" type="button">🔓 Ask Mom to stop</button></div><div class="lo-ask" id="lkoAk" hidden><div class="lo-s"><b>Why do you need to stop?</b> Mom will see this and can allow it from her phone.</div><div style="margin-top:6px"><button class="lo-b" data-r="Not feeling well" type="button">Not feeling well</button><button class="lo-b" data-r="Emergency" type="button">Emergency</button><button class="lo-b" data-r="Other" type="button">Other</button></div><textarea id="lkoRs" rows="2" maxlength="160" placeholder="Add a few words (optional)"></textarea><div style="text-align:right"><button class="lo-b" id="lkoNo" type="button">Cancel</button><button class="lo-b p" id="lkoSend" type="button">Send to Mom</button></div></div><div class="lo-m" id="lkoM"></div></div>';
+ document.body.appendChild(ov);pill=document.createElement("button");pill.id="lkPill";pill.type="button";pill.hidden=true;document.body.appendChild(pill);
+ pill.onclick=()=>{if(L.cur){L.cur.min=0;save();tick(true)}};
+ $("lkoHide").onclick=()=>{if(L.cur){L.cur.min=1;save();tick(true)}};
+ $("lkoAsk").onclick=()=>{ask=!ask;$("lkoAk").hidden=!ask};
+ $("lkoNo").onclick=()=>{ask=false;$("lkoAk").hidden=true};
+ $("lkoAk").addEventListener("click",e=>{const b=e.target.closest("[data-r]");if(!b)return;document.querySelectorAll("#lkoAk [data-r]").forEach(x=>x.classList.toggle("on",x===b))});
+ $("lkoSend").onclick=async()=>{const c=L.cur,m=mom();if(!c||!m)return;const w=where(c,Date.now()),why=(document.querySelector("#lkoAk [data-r].on")||{}).dataset;
+  const reason=[why&&why.r,$("lkoRs").value.trim()].filter(Boolean).join(": ")||"No reason given";
+  $("lkoM").textContent="Sending to Mom…";
+  const ok=await m.send(cap(m.name())+" is asking to stop the lock-in early.\nDone so far: "+hmin(Math.min(w.e||0,c.total))+" of "+hmin(c.total)+(w.sess&&c.mode!=="straight"?" (session "+w.sess+" of "+c.n+")":"")+".\nReason: "+reason+"\n\nAllow it to stop now?","","","lock",0,"🔒 Stop request",[{action:"http",label:"✅ Allow stop",url:m.url(),method:"POST",body:c.key+"|1",clear:true},{action:"http",label:"❌ Keep going",url:m.url(),method:"POST",body:c.key+"|0",clear:true}]);
+  if(ok){c.pend=Date.now();c.deny=0;save();ask=false;$("lkoAk").hidden=true;$("lkoM").textContent=""}else $("lkoM").textContent="Couldn't reach Mom. Check your internet and try again."}}
+function tick(force){const c=L.cur;if(!c){if(!endOn&&ov){ov.hidden=true;if(pill)pill.hidden=true}return}
+ const w=where(c,Date.now());if(w.done){finish("done");return}
+ build();const f=w.p.k==="f";
+ if(w.i!==lastIdx){const first=lastIdx===-2;lastIdx=w.i;if(!f&&!first)c.min=0;
+  if(!first&&c.mode!=="straight"){if(f){beep([880,1100,1320]);speak("Focus session "+w.sess+" of "+c.n+". Lock in.");note("🔒 Focus session "+w.sess+" of "+c.n,"Back to work.")}
+   else{beep([660,880,660]);speak("Break time. "+Math.round(w.p.ms/6e4)+" minutes.");note("☕ Break time","Back to focus at "+clk(Date.now()+w.left))}}}
+ drive(f,false);
+ const show=f||!c.min;ov.hidden=!show;ov.className=f?"":"brk";pill.hidden=show;
+ const SM=c.mode==="straight";$("lkoT").textContent=f?(SM?"🔒 Locked in · Straight focus":"🔒 Locked in · Session "+w.sess+" of "+c.n):"☕ Break · "+Math.round(w.p.ms/6e4)+" min";
+ $("lkoTm").textContent=mmss(w.left);$("lkoLb").textContent=f?(SM?"left in your lock-in":"left in this session"):"Focus resumes at "+clk(Date.now()+w.left);
+ $("lkoPr").style.strokeDashoffset=String(282.74*(1-Math.min(1,w.into/w.p.ms)));
+ const doneN=f?w.sess-1:w.sess;let dots="";for(let j=1;j<=c.n;j++)dots+='<i class="'+(j<=doneN?"d":(f&&j===w.sess?"c":""))+'"></i>';$("lkoDt").innerHTML=SM?"":dots;
+ $("lkoAl").style.width=Math.min(100,w.e/c.total*100)+"%";
+ let s="Overall "+hmin(w.e)+" of "+hmin(c.total)+" · ends at "+clk(c.start+c.total);
+ if(c.pend)s+="<br>⏳ Asked Mom at "+clk(c.pend)+". Waiting for her answer.";else if(c.deny)s+="<br>❌ Mom said keep going ("+clk(c.deny)+").";
+ $("lkoS").innerHTML=s;$("lkoHide").style.display=f?"none":"";$("lkoAsk").disabled=!!(c.pend&&Date.now()-c.pend<18e4);
+ pill.textContent="☕ Break "+mmss(w.left)+" · tap to open";
+ draw(w,c)}
+function draw(w,c){const R=$("lkRun"),S=$("lkSet");if(!R)return;S.hidden=!!c;R.hidden=!c;if(!c)return;const f=w&&w.p&&w.p.k==="f";
+ R.innerHTML='<div class="lk-st">🔒 Lock-in is running</div><div class="lk-sub">'+(f?(c.mode==="straight"?"Focus · straight, no breaks":"Focus · session "+w.sess+" of "+c.n):"☕ Break")+' · '+mmss(w.left)+' left in this part<br>Overall '+hmin(w.e)+' of '+hmin(c.total)+' · ends at '+clk(c.start+c.total)+'</div><div class="lk-prog"><i style="width:'+Math.min(100,w.e/c.total*100)+'%"></i></div><button class="btn g" id="lkOpen" type="button">Open lock screen</button>';
+ const o=$("lkOpen");if(o)o.onclick=()=>{c.min=0;save();tick(true)}}
+function render(){const c=L.cur;drawPlan();if(!c){draw(null,null)}
+ const H=$("lkHist");H.innerHTML=L.hist.length?"<b>Recent lock-ins</b><br>"+L.hist.slice(0,4).map(x=>(x.res==="done"?"✅":"🔓")+(x.md==="straight"?" ⏱":" 🍅")+" "+new Date(x.start).toLocaleDateString([],{day:"numeric",month:"short"})+" · "+hmin(x.ms)+" of "+hmin(x.h*36e5)+(x.res==="done"?" · completed":" · ended with Mom's permission")).join("<br>"):""}
+function finish(res){const c=L.cur;if(!c)return;const now=Date.now(),ms=Math.min(c.total,now-c.start);
+ L.hist.unshift({id:c.id,start:c.start,end:now,h:c.h,n:c.n,res,ms,md:c.mode||"pomo"});L.hist=L.hist.slice(0,20);L.cur=null;save();drive(false,true);lastIdx=-2;
+ const m=mom();if(m){const N=cap(m.name());m.send(res==="done"?"✅ "+N+" completed the full lock-in: "+hmin(c.total)+(c.mode==="straight"?" straight.":" across "+c.n+" session"+(c.n>1?"s":"")+"."):"🔓 The lock-in ended with your permission after "+hmin(ms)+" of "+hmin(c.total)+".","","","lock",0,res==="done"?"✅ Lock-in complete":"🔓 Lock-in ended")}
+ build();endOn=true;ask=false;pill.hidden=true;ov.hidden=false;ov.className="done";
+ ov.innerHTML='<div class="lo"><div class="lo-t">'+(res==="done"?"Lock-in complete":"Lock-in ended")+'</div><div class="lo-ring"><svg viewBox="0 0 100 100"><circle class="tr" cx="50" cy="50" r="45"/><circle class="pr" cx="50" cy="50" r="45" stroke-dasharray="282.74" stroke-dashoffset="'+(res==="done"?0:282.74*(1-ms/c.total))+'"/></svg><div class="lo-c"><div style="font-size:64px">'+(res==="done"?"🎉":"🔓")+'</div><div class="lo-lbl">'+hmin(ms)+' studied</div></div></div><div class="lo-s">'+(res==="done"?"You locked in for the full "+hmin(c.total)+". Well done!":"Mom allowed the lock-in to stop. You studied "+hmin(ms)+" of "+hmin(c.total)+".")+'</div><button class="lo-b p" id="lkoClose" type="button">Close</button></div>';
+ beep(res==="done"?[880,1100,1320,1760]:[660,520]);if(res==="done")speak("Lock in complete. Well done.");note(res==="done"?"🎉 Lock-in complete":"🔓 Lock-in ended","");
+ $("lkoClose").onclick=()=>{endOn=false;ov.hidden=true;ov.remove();ov=null;pill&&pill.remove();pill=null};render()}
+/* bridges to the alarm module */
+window.__sqLockReply=(key,r)=>{const c=L.cur;if(!c||key!==c.key)return;if(r===1)finish("mom");else{c.pend=0;c.deny=Date.now();save();toast("❌ Mom said keep going");tick(true)}};
+window.__sqLockFocus=()=>{const c=L.cur;if(!c)return false;const w=where(c,Date.now());return !w.done&&w.p.k==="f"};
+render();tick(true);setInterval(()=>tick(false),500);
 })();
 </script>
 </body></html>
