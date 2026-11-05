@@ -1151,29 +1151,35 @@ Ray Optics L12–14|Optical Isomerism L1|Biotechnology Applications L3|Doubts + 
 Ray Optics L15|Optical Isomerism L2–4|Biotechnology Applications L4|Doubts + revision
 Electrostatic Potential L18; Current Electricity L16|Haloalkanes L19–20|Biotechnology Applications L1|Doubts + revision
 Ray Optics L15–16|Haloalkanes L21–22|Biotechnology Applications L2|Doubts + revision
-Ray Optics L17; AC L4|Alcohols L1–2|Biotechnology Applications L3|Doubts + revision
-AC L5–6|Alcohols L3–4|Biotechnology Applications L4|Doubts + revision
-AC L7–8|Alcohols L5–6|Biotechnology Applications L5|Doubts + revision
-EM Waves L1–2|Alcohols L7–8|Biotechnology Applications L6|Doubts + revision
-EM Waves L3; Wave Optics L1|Alcohols L9; Aldehydes L1|Evolution L1|Doubts + revision
-Wave Optics L2–3|Aldehydes L2–3|Evolution L2–3|Doubts + revision
-Wave Optics L4–5|Aldehydes L4–5|Evolution L4|Doubts + revision
-Wave Optics L6; Dual Nature L1|Aldehydes L6–7|Evolution L5–6|Doubts + revision
-Dual Nature L2–3|Aldehydes L8; Amines L1|Evolution L7|Doubts + revision
-Dual Nature L4–5|Amines L2–3|Evolution L8–9|Doubts + revision
-Dual Nature L6; Atoms L1|Biomolecules L1–2|Evolution L10|Doubts + revision
-Atoms L2–3|Biomolecules L3–4|Organisms & Populations L1–2|Doubts + revision
-Nuclei L1–2|Chemistry revision + PYQs|Organisms & Populations L3–4|Doubts + revision
-Nuclei L3–4|Chemistry revision + PYQs|Organisms & Populations L5–6|Doubts + revision
-Semiconductors L1–2|Chemistry revision + PYQs|Ecosystem L1|Doubts + revision
-Semiconductors L3–4|Chemistry revision + PYQs|Biodiversity L1–3|Doubts + revision
-Semiconductors L5; Physics revision|Chemistry revision + PYQs|Biology NCERT revision|Doubts + revision
+Ray Optics L17; AC L4|Chemistry revision + PYQs|Biology NCERT revision|Doubts + revision
+AC L5–6|Chemistry revision + PYQs|Biology NCERT revision|Doubts + revision
+AC L7–8|Chemistry revision + PYQs|Biology NCERT revision|Doubts + revision
+EM Waves L1–2|Chemistry revision + PYQs|Biology NCERT revision|Doubts + revision
+EM Waves L3; Wave Optics L1|Alcohols L1–2|Biotechnology Applications L1|Doubts + revision
+Wave Optics L2–3|Alcohols L3–4|Biotechnology Applications L2|Doubts + revision
+Wave Optics L4–5|Alcohols L5–6|Biotechnology Applications L3|Doubts + revision
+Wave Optics L6; Dual Nature L1|Alcohols L7–8|Biotechnology Applications L4|Doubts + revision
+Dual Nature L2–3|Alcohols L9; Aldehydes L1|Biotechnology Applications L5|Doubts + revision
+Dual Nature L4–5|Aldehydes L2–3|Biotechnology Applications L6|Doubts + revision
+Dual Nature L6; Atoms L1|Aldehydes L4–5|Evolution L1|Doubts + revision
+Atoms L2–3|Aldehydes L6–7|Evolution L2–3|Doubts + revision
+Nuclei L1–2|Aldehydes L8; Amines L1|Evolution L4|Doubts + revision
+Nuclei L3–4|Amines L2–3|Evolution L5–6|Doubts + revision
+Semiconductors L1–2|Biomolecules L1–2|Evolution L7|Doubts + revision
+Semiconductors L3–4|Biomolecules L3–4|Evolution L8–9|Doubts + revision
+Semiconductors L5; Physics revision|Chemistry revision + PYQs|Evolution L10|Doubts + revision
+Physics revision + PYQs|Chemistry revision + PYQs|Organisms & Populations L1–3|Doubts + revision
+Full Physics revision|Chemistry revision + PYQs|Organisms & Populations L4–6|Doubts + revision
+Physics revision + PYQs|Chemistry revision + PYQs|Ecosystem L1; Biodiversity L1–2|Doubts + revision
+Physics revision + PYQs|Chemistry revision + PYQs|Biodiversity L3|Doubts + revision
+Physics revision + PYQs|Chemistry revision + PYQs|Biology NCERT revision|Doubts + revision
+Physics revision + PYQs|Chemistry revision + PYQs|Biology NCERT revision|Doubts + revision
 Physics revision + PYQs|Organic Chemistry revision|Biology NCERT revision|Doubts + revision
-Full Physics revision|Full Chemistry revision|Biology MCQs + NCERT revision|Doubts + revision`.split("\n").map(r=>r.split("|"));
+Physics revision + PYQs|Full Chemistry revision|Biology MCQs + NCERT revision|Doubts + revision`.split("\n").map(r=>r.split("|"));
 const SS=[["3:30–4:45","Biology: 50 questions + NCERT recall","B"],["4:45–5:15","Exercise 🏃","S"],["5:15–7:00","Physics: 50 questions (PYQs / DPP)","P"],["7:30–8:45","Chemistry: 50 questions + NCERT & reactions","C"],["8:45–9:30","Active recall + mistake book","S"],["9:30–10:00","Prep tomorrow + wind down","S"]];
 const COL={P:"var(--P)",C:"var(--C)",B:"var(--B)",S:"var(--S)"},ICO={P:"⚡",C:"🧪",B:"🧬",S:"⭐"};
 const RANKS=["Rookie","Apprentice","Scholar","Topper","Rank Hunter","NEET Warrior","AIR 1 Energy"];
-const START=new Date(2026,8,30),N=52,$=id=>document.getElementById(id);
+const START=new Date(2026,8,30),N=58,$=id=>document.getElementById(id);
 let S={done:{},focus:0,sel:null},lastLv=0,seen={};
 try{S=Object.assign(S,JSON.parse(localStorage.getItem("sq")||"{}"))}catch(e){}
 const save=()=>{try{localStorage.setItem("sq",JSON.stringify(S))}catch(e){}};
