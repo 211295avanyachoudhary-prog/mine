@@ -1055,7 +1055,7 @@ setInterval(uiDraw,2000);uiDraw();
 <div class="wk-ctl"><button class="btn g" id="wkPrev" aria-label="Previous exercise">⏮ Back</button><button class="btn" id="wkGo">▶ Start workout</button><button class="btn g" id="wkNext" aria-label="Skip to next exercise">⏭ Skip</button></div>
 <button class="wk-rst" id="wkRst">Reset workout</button></div></div>
 <div class="sec">The 9 exercises · tap one to jump to it</div><div class="wk-list" id="wkList"></div>
-<div class="wk-tip">✓ Do this routine every day · ✓ Comfortable clothes and shoes · ✓ Stay hydrated · ✓ Stop if you feel pain, dizziness or unwell · Finishing the full 30 minutes ticks today's Exercise block.</div>
+<div class="wk-tip">✓ Do this routine every day · ✓ Comfortable clothes and shoes · ✓ Stay hydrated · ✓ Stop if you feel pain, dizziness or unwell ·</div>
 </div></div><div class="toast" id="ts"></div>
 <button id="fsb" aria-label="Open Aster"><i id="fsn"></i></button><div id="an" aria-live="polite"></div>
 <div id="fsp" data-v="c" role="dialog" aria-label="Aster"><div class="fh"><div class="fav" role="img" aria-label="Aster"></div><div><b>✦ Aster</b><small>● Here whenever you need me</small></div><button id="fcl" title="Clear chat only">Clear chat</button><button id="fx" aria-label="Close">✕</button></div>
@@ -1109,18 +1109,18 @@ Dual Nature L2–3|Alcohols L9; Aldehydes L1|Biotechnology Applications L5|Doubt
 Dual Nature L4–5|Aldehydes L2–3|Biotechnology Applications L6|Doubts + revision
 Dual Nature L6; Atoms L1|Aldehydes L4–5|Evolution L1|Doubts + revision
 Atoms L2–3|Aldehydes L6–7|Evolution L2–3|Doubts + revision
-Nuclei L1–2|Aldehydes L8; Amines L1|Evolution L4|Doubts + revision
-Nuclei L3–4|Amines L2–3|Evolution L5–6|Doubts + revision
-Semiconductors L1–2|Biomolecules L1–2|Evolution L7|Doubts + revision
-Semiconductors L3–4|Biomolecules L3–4|Evolution L8–9|Doubts + revision
-Semiconductors L5; Physics revision|Chemistry revision + PYQs|Evolution L10|Doubts + revision
-Physics revision + PYQs|Chemistry revision + PYQs|Organisms & Populations L1–3|Doubts + revision
-Full Physics revision|Chemistry revision + PYQs|Organisms & Populations L4–6|Doubts + revision
-Physics revision + PYQs|Chemistry revision + PYQs|Ecosystem L1; Biodiversity L1–2|Doubts + revision
-Physics revision + PYQs|Chemistry revision + PYQs|Biodiversity L3|Doubts + revision
-Physics revision + PYQs|Chemistry revision + PYQs|Biology NCERT revision|Doubts + revision
-Physics revision + PYQs|Chemistry revision + PYQs|Biology NCERT revision|Doubts + revision
-Physics revision + PYQs|Organic Chemistry revision|Biology NCERT revision|Doubts + revision
+Semiconductors L1–2; Semiconductors L3 (first half)|Alcohols L3–4|Molecular Basis of Inheritance — complete revision|Doubts + revision
+Semiconductors — finish lecture 3; Semiconductors L4|Alcohols L5–6; Alcohols L7 (first half)|Molecular Basis of Inheritance — 150 questions|Doubts + revision
+Dual Nature L1–2|Electrochemistry — complete revision|Ecosystem L1–2; Evolution L1 (first half)|Doubts + revision
+Dual Nature L3–4; Dual Nature L5 (first half)|Electrochemistry — 150 questions|Ecosystem L3; Evolution — finish lecture 1|Doubts + revision
+Current Electricity — complete revision|Alcohols — finish lecture 7; Alcohols L8–9|Ecosystem L4–5|Doubts + revision
+Current Electricity — 150 questions|Amines L1; Amines L2 (first half)|Principles of Inheritance and Variation — complete revision; Biotechnology Applications L1|Doubts + revision
+Dual Nature — finish lecture 5; Dual Nature L6; Atoms L1|Amines — finish lecture 2; Amines L3; Amines L4 (first half)|Principles of Inheritance and Variation — 150 questions|Doubts + revision
+Atoms L2; Atoms L3 (first half)|Amines — finish lecture 4; Biomolecules L1–2|Biotechnology Applications L2–3|Doubts + revision
+Atoms — finish lecture 3; Nuclei L1; Nuclei L2 (first half)|Chemical Kinetics — complete revision|Biotechnology Applications L4–5; Evolution L2 (first half)|Doubts + revision
+Nuclei — finish lecture 2; Nuclei L3–4|Chemical Kinetics — 150 questions|Biotechnology Applications L6; Evolution — finish lecture 2|Doubts + revision
+Ray Optics — complete revision|Aldehydes L1–2; Aldehydes L3 (first half)|Organisms & Populations L1–2|Doubts + revision
+Ray Optics — 150 questions|Aldehydes — finish lecture 3; Aldehydes L4|Organisms & Populations L3–4; Evolution L3 (first half)|Doubts + revision
 Physics revision + PYQs|Full Chemistry revision|Biology MCQs + NCERT revision|Doubts + revision`.split("\n").map(r=>r.split("|"));
 const SS=[["3:30–4:45","Biology: 50 questions + NCERT recall","B"],["4:45–5:15","Exercise 🏃","S"],["5:15–7:00","Physics: 50 questions (PYQs / DPP)","P"],["7:30–8:45","Chemistry: 50 questions + NCERT & reactions","C"],["8:45–9:30","Active recall + mistake book","S"],["9:30–10:00","Prep tomorrow + wind down","S"]];
 const COL={P:"var(--P)",C:"var(--C)",B:"var(--B)",S:"var(--S)"},ICO={P:"⚡",C:"🧪",B:"🧬",S:"⭐"};
@@ -1138,7 +1138,10 @@ const rev=false,lec=t=>!rev&&/ L\d/.test(t);
 return[["7:00–9:00",r[0],"P",lec(r[0])],["9:00–10:45",r[1],"C",lec(r[1])],["10:45–12:30",r[2],"B",lec(r[2])],["1:15–3:00",xt,xs,!rev&&/ L\d/.test(xt)]]
 .flatMap((b,k)=>{const ls=b[3]?splitLec(b[1]):[b[1]],n=ls.length,m=slotMin(b[0]);
 return ls.map((x,j)=>({id:i+"-"+k+(j?"_"+j:""),t:n>1&&m?fmtMin(m[0]+Math.round(m[1]*j/n/5)*5)+"–"+fmtMin(m[0]+Math.round(m[1]*(j+1)/n/5)*5):b[0],x,s:b[2],lec:b[3]&&/ L\d/.test(x),xp:b[3]&&/ L\d/.test(x)?50:35,slot:k,g:b[1],first:j==0}))})
-.concat(SS.map((b,k)=>({id:i+"-s"+k,t:b[0],x:b[1],s:b[2],lec:false,xp:30,slot:4+k,g:b[1],first:true})))}
+.concat(ssb(i))}
+/* test every 4th day (17, 21, 25 Nov): replaces the three 50-question blocks with one test; Exercise block removed */
+const TD=i=>[48,52,56].includes(i);
+function ssb(i){const t=TD(i);return SS.map((b,k)=>{if(/^Exercise/.test(b[1]))return null;if(t&&(k==2||k==3))return null;let x=b[1],tm=b[0],s=b[2],xp=30;if(t&&k==0){x="📝 Test: Physics + Chemistry + Biology (chapters covered so far)";tm="3:30–7:00";s="S";xp=80}if(t&&k==4)x="Test analysis + mistake book";return{id:i+"-s"+k,t:tm,x,s,lec:false,xp,slot:4+k,g:x,first:true}}).filter(Boolean)}
 /* Each lecture is its own block with its own XP. "Ray Optics L12–14" becomes L12, L13, L14; "A L1; B L2" becomes two blocks. */
 function splitLec(t){const o=[];t.split(";").forEach(p=>{p=p.trim();const m=p.match(/^(.*?)\s*L(\d+)(?:–(\d+))?$/);if(!m){o.push(p);return}const a=+m[2],b=m[3]?+m[3]:a;for(let n=a;n<=b;n++)o.push(m[1]+" L"+n)});return o}
 function slotMin(t){const m=t.match(/^(\d+):(\d+)–(\d+):(\d+)$/);if(!m)return null;const a=+m[1]*60+ +m[2];let e=+m[3]*60+ +m[4];while(e<=a)e+=720;return[a,e-a]}
@@ -1171,9 +1174,9 @@ const TIPS=["Active recall beats re-reading. Close the book and write what you r
 let tip=0;
 function tutor(s,d){const bl=blocks(S.sel),dn=bl.filter(b=>S.done[b.id]).length;
 if(todayIdx<0)return`Hey! Your quest starts 30 Sep, in ${-todayIdx} day${-todayIdx>1?"s":""}. Peek at the plan and get your notes ready.`;
-if(dn===0)return`New day, fresh XP. First up: ${bl[0].x} at ${bl[0].t}. Tap a block once you finish it.`;
+if(dn===0)return`New day, fresh XP. First up: ${bl[0].x}. Tap a block once you finish it.`;
 if(dn===bl.length)return`Every block cleared! +100 bonus XP. Streak is now ${s.st}. Rest well and see you tomorrow.`;
-const nx=bl.find(b=>!S.done[b.id]);return`${dn}/${bl.length} done. Next: ${nx.x} (${nx.t}). Keep the momentum going.`}
+const nx=bl.find(b=>!S.done[b.id]);return`${dn}/${bl.length} done. Next: ${nx.x}. Keep the momentum going.`}
 function render(){const s=stats(),lv=Math.floor(s.xp/400)+1,pr=(s.xp%400)/400;
 $("lvl").style.setProperty("--p",pr*360+"deg");$("lv").textContent=lv;$("rank").textContent=RANKS[Math.min(RANKS.length-1,lv-1)];
 $("xb").style.width=pr*100+"%";$("xt").textContent=`${s.xp} XP · ${400-s.xp%400} to level ${lv+1}`;
@@ -1183,7 +1186,7 @@ $("days").innerHTML=Array.from({length:N},(_,i)=>{const d=dt(i);return`<button c
 const sd=$("days").querySelector(".sel");if(sd&&!render.o){sd.scrollIntoView({inline:"center",block:"nearest"});render.o=1}
 $("dh").textContent=dt(S.sel).toLocaleDateString("en",{weekday:"long",day:"numeric",month:"long"});
 const bl=blocks(S.sel);let h="";bl.forEach((b,k)=>{if(b.slot===4)h+=`<div class="sec">After 3 PM: self-study only, no lectures</div>`;
-h+=`<button class="blk${S.done[b.id]?" done":""}" data-id="${b.id}" data-s="${b.s}" style="--c:${COL[b.s]}"><div class="ck">${S.done[b.id]?"✓":ICO[b.s]}</div><div><div class="tm">${b.t}</div><div class="tt">${b.x}</div></div><div class="xpv">+${b.xp} XP</div></button>`});
+h+=`<button class="blk${S.done[b.id]?" done":""}" data-id="${b.id}" data-s="${b.s}" style="--c:${COL[b.s]}"><div class="ck">${S.done[b.id]?"✓":ICO[b.s]}</div><div><div class="tt">${b.x}</div></div><div class="xpv">+${b.xp} XP</div></button>`});
 $("list").innerHTML=h;
 $("rings").innerHTML=[["P","Physics"],["C","Chemistry"],["B","Biology"]].map(([k,n])=>{const[a,b]=s.cnt[k],f=b?a/b:0;return`<div class="ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="32" stroke="var(--ln2)"/><circle class="fg" cx="40" cy="40" r="32" stroke="${COL[k]}" stroke-dasharray="201" stroke-dashoffset="${201*(1-f)}"/></svg><div><b>${n}</b></div><small style="color:var(--mu)">${a}/${b}</small></div>`}).join("");
 const bg=badges(s);$("bd").innerHTML=bg.map(b=>`<div class="badge${b[2]?" on":""}"><span>${b[0]}</span>${b[1]}<br><small>${b[2]?"Unlocked":"Locked"}</small></div>`).join("");
@@ -1315,7 +1318,7 @@ function handle(s){const now=new Date(),L=s.toLowerCase();
   if(/\b(is|on)\b/i.test(s)){const cat=(EVC.find(x=>x[0].test(s))||[0,""])[1];X.pend={t:"evt",text:s,cat};sv();return say("Sure! What's the exact date?")}}
  if(/\b(show|open|see|list)\b.*\breminders?\b/i.test(s)){view("r");return say("Here are your reminders.")}
  if(/\b(show|open|see|list)\b.*\bmemor/i.test(s)){view("m");return say("Here's what I remember.")}
- for(const r of TALK)if(r[0].test(s)){let a=pickR(r[1]);if(a=="__plan"){try{const n=blocks(S.sel).find(b=>!S.done[b.id]);a=n?`Next up: ${n.x} (${n.t}). One block at a time.`:"Everything's cleared for today. Nice work. Rest well."}catch(e){a="Start with one small thing."}}return say(a)}
+ for(const r of TALK)if(r[0].test(s)){let a=pickR(r[1]);if(a=="__plan"){try{const n=blocks(S.sel).find(b=>!S.done[b.id]);a=n?`Next up: ${n.x}. One block at a time.`:"Everything's cleared for today. Nice work. Rest well."}catch(e){a="Start with one small thing."}}return say(a)}
  say(pickR(["I'm here. Tell me what to remind you about, or something you'd like me to remember.","Got it. Want me to turn that into a reminder, or remember it?","I can set reminders, save dates and remember things for you. Just tell me naturally."]))}
 /* ---- reminders engine ---- */
 function native(r,d){if(!window.Notification||Notification.permission!="granted")return;try{const ic=(document.querySelector("link[rel=icon]")||{}).href,n=new Notification("✦ Aster",{body:`🔔 Reminder: ${r.title}\nIt's ${fT(new Date())}. Time!`,tag:"aster-"+r.id+"-"+d,icon:ic,requireInteraction:true});n.onclick=()=>{window.focus();n.close()}}catch(e){}}
