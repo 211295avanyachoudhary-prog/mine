@@ -819,9 +819,9 @@ html.lkfocus #sqNav button:not([data-m=quest]):not([data-m=zone])::after{content
 <ol class="stl" id="stl"></ol><div class="stn" id="stn"></div><div class="stn" id="brk"></div><ol id="brkl"></ol></div></div></div></div></div>
 <div class="sec">🔒 Lock-in</div>
 <div class="stm lkc" id="lkCard">
-<div class="lk-h"><b>Lock in and finish</b><button class="lk-q" id="lkQ" type="button" aria-label="How lock-in works" title="How lock-in works">?</button></div>
+<div class="lk-h"><b>Focus timer</b><button class="lk-q" id="lkQ" type="button" aria-label="How lock-in works" title="How lock-in works">?</button></div>
 <div id="lkSet">
-<div class="lk-seg" id="lkMode"><button type="button" data-md="pomo" class="on">🍅 Pomodoro</button><button type="button" data-md="straight">⏱ Straight hours</button></div>
+<div class="lk-seg" id="lkMode"><button type="button" data-md="pomo" class="on">🍅 Pomodoro</button><button type="button" data-md="straight">⏱ Timer</button></div>
 <div class="lk-modeh" id="lkModeH"></div>
 <div class="lk-g">
 <label>Hours<input id="lkH" type="number" inputmode="decimal" min="0.5" max="12" step="0.5" value="4"></label>
@@ -833,7 +833,7 @@ html.lkfocus #sqNav button:not([data-m=quest]):not([data-m=zone])::after{content
 <div class="lk-plan" id="lkPlan"></div>
 <div class="lk-msg" id="lkMsg"></div>
 <button class="btn lk-go" id="lkGo" type="button">🔒 Start lock-in</button>
-<div class="lk-rule" id="lkRule">Once it starts you can't pause or stop it. Breaks come only at the Pomodoro times you set. It ends by itself when the hours are done, or earlier only if your mom allows it from her phone.</div>
+<div class="lk-rule" id="lkRule">Focus sessions with short breaks at the times you set. You can stop any time.</div>
 </div>
 <div id="lkRun" hidden></div>
 <div class="lk-hist" id="lkHist"></div>
@@ -943,9 +943,9 @@ html.locked body>#alOv:not([hidden]){visibility:visible!important;pointer-events
 .alo .ao-msg{min-height:1.4em;font-size:clamp(15px,1.8vw,22px);font-weight:600}
 </style>
 <div class="al-top"><h2 class="al-h">👩 Mom</h2><button class="al-q" id="alQ" type="button" aria-label="Help: how everything works" title="How everything works">?</button></div>
-<p class="al-sub">Connect your mom's phone to chat with her and to let her approve an early stop in Lock-in. Tap the <b>?</b> button any time to see how it works.</p>
+<p class="al-sub">Connect your mom's phone to chat with her. Tap the <b>?</b> button any time to see how it works.</p>
 <div class="al-card" id="acCard"><div class="al-ch"><b>👩 Mom's check-ins</b><button class="al-q s" data-h="mom" type="button" aria-label="Help: Mom's check-ins">?</button></div>
-<div class="al-m" style="margin-bottom:10px">Your mom gets your messages and Lock-in stop requests on her phone, with buttons to answer. No account or phone number needed.</div>
+<div class="al-m" style="margin-bottom:10px">Your mom gets your messages on her phone and can reply. No account or phone number needed.</div>
 <div class="al-stp" id="stp1"><span class="al-n">1</span><div class="al-sb"><b>Create her channel</b><div class="al-lk"><span>Your name</span><input id="acN" type="text" maxlength="30" placeholder="e.g. Aanya" style="width:170px"><button class="btn" id="acMk" type="button">Create Mom's channel</button></div></div></div>
 <div class="al-stp" id="stp2"><span class="al-n">2</span><div class="al-sb"><b>Set up her phone</b><div class="al-m" style="line-height:1.6">On your mom's phone: install the free <b>ntfy</b> app → tap <b>+</b> → enter the topic name below → <b>Subscribe</b> → allow notifications.</div><div class="al-m" id="acInfo" style="margin-top:6px;line-height:1.9"></div></div></div>
 <div class="al-stp" id="stp3"><span class="al-n">3</span><div class="al-sb"><b>Send a test</b><div class="al-row" style="margin-top:4px"><button class="btn g" id="acTest" type="button">Send test to Mom</button></div><div class="al-m" id="acSt" style="margin-top:6px"></div></div></div>
@@ -1024,9 +1024,9 @@ function uiDraw(){g("stp1").classList.toggle("ok",!!A.topic);g("stp2").classList
 document.addEventListener("click",e=>{const c=e.target.closest("[data-copy]");if(!c||!A.topic)return;try{navigator.clipboard.writeText(A.topic).then(()=>{c.textContent="Copied ✓";setTimeout(()=>c.textContent="Copy",1800)},()=>prompt("Copy this topic name:",A.topic))}catch(x){prompt("Copy this topic name:",A.topic)}});
 /* help */
 const HELP=[
- ["mom","👩 Mom's channel","<p>Your mom's phone is used for two things: chatting with her, and letting her approve an early stop in Lock-in.</p><ol><li><b>Create her channel:</b> type your name and tap Create Mom's channel.</li><li><b>Set up her phone:</b> she installs the free <b>ntfy</b> app, taps +, types the topic name exactly, and subscribes. Use the WhatsApp link to send her the steps.</li><li><b>Send a test:</b> when she taps ✅ or ❌, step 2 and 3 turn green.</li></ol><div class='tip'>No account or phone number is needed, so it works even if you share a number. The topic name works like a password: share it only with your mom. Once the channel exists, disconnecting is allowed only between 10:30 PM and 12:00 AM.</div>"],
+ ["mom","👩 Mom's channel","<p>Your mom's phone is used to chat with her.</p><ol><li><b>Create her channel:</b> type your name and tap Create Mom's channel.</li><li><b>Set up her phone:</b> she installs the free <b>ntfy</b> app, taps +, types the topic name exactly, and subscribes. Use the WhatsApp link to send her the steps.</li><li><b>Send a test:</b> when she taps ✅ or ❌, step 2 and 3 turn green.</li></ol><div class='tip'>No account or phone number is needed, so it works even if you share a number. The topic name works like a password: share it only with your mom. Once the channel exists, disconnecting is allowed only between 10:30 PM and 12:00 AM.</div>"],
  ["chat","💬 Chat with Mom","<p>Type a message and tap <b>Send to Mom</b>. She gets a notification with three buttons: <b>💬 Reply</b> (opens a page where she can type), <b>👍 OK</b> and <b>📞 Call me</b>. Her answers appear in the chat on your laptop.</p>"],
- ["lockin","🔒 Lock-in","<p>Lock-in is a committed study block in the <b>Quest</b> tab, under the stopwatch and timer.</p><ol><li>Pick a mode. <b>🍅 Pomodoro</b>: enter the hours, how many sessions and the break length, and the card works out the focus length. <b>⏱ Straight hours</b>: enter just the hours, for one unbroken block with no breaks.</li><li>Tap <b>Start lock-in</b>. A slim lock bar stays at the top with the time left. You can still use the <b>to-do list, study media (study with me), books</b> and the <b>Zone</b>. The other tabs are locked while you focus. The study stopwatch runs by itself during focus and pauses during breaks.</li><li>Breaks come only at the planned times, with a beep and a voice. Every tab is open during a break, and the lock returns when it ends.</li><li>It ends by itself when the time is up.</li></ol><div class='tip'>You can stop early only with your mom's permission. Tap <b>Ask Mom to stop</b>, give a reason, and she gets a notification with <b>✅ Allow stop</b> and <b>❌ Keep going</b>. If she allows it, the lock-in ends automatically. She can also end it from the first notification she received. Mom's phone must be connected before you can start.</div>"],
+ ["lockin","🔒 Lock-in","<p>Lock-in is a simple focus timer in the <b>Quest</b> tab, under the stopwatch and timer.</p><ol><li>Pick a mode. <b>🍅 Pomodoro</b>: enter the hours, how many sessions and the break length, and the card works out the focus length. <b>⏱ Timer</b>: enter just the hours for one plain timer with no breaks.</li><li>Tap <b>Start lock-in</b>. A slim bar at the top shows the time left. The study stopwatch runs by itself during focus and pauses during breaks.</li><li>In Pomodoro mode you get a beep and a voice when a break starts and when focus resumes.</li><li>It ends by itself when the time is up, or tap <b>⏹ Stop</b> any time. The time you studied is saved.</li></ol>"],
  ["fix","🛠 Something isn't working?","<ul><li><b>Mom gets nothing:</b> check her ntfy app is subscribed to the exact topic name, and her phone's notifications are allowed for ntfy. Keep this page open on your laptop.</li><li><b>“Reconnecting…” message:</b> it's your internet. It reconnects by itself.</li></ul>"]];
 const hp=document.createElement("div");hp.id="alHelp";hp.hidden=true;hp.setAttribute("role","dialog");hp.setAttribute("aria-modal","true");hp.setAttribute("aria-label","How Mom's channel works");
 hp.innerHTML='<div class="hp"><div class="hh"><span>❓ How everything works</span><button class="hx" type="button" id="alHx">Close ✕</button></div><div class="hn">'+HELP.map(h=>'<button type="button" data-j="'+h[0]+'">'+h[1]+'</button>').join("")+'</div><div class="hb">'+HELP.map(h=>'<section id="hp-'+h[0]+'"><h3>'+h[1]+'</h3>'+h[2]+'</section>').join("")+'</div></div>';
@@ -2823,7 +2823,7 @@ mark();
 })();
 </script>
 <script>
-/* Lock-in: hours + Pomodoro plan; ends only when finished or when Mom allows it from her phone */
+/* Lock-in: simple Pomodoro and timer. Stop any time. */
 (function(){
 const $=id=>document.getElementById(id),KEY="sq_lockin_v1",p2=n=>String(n).padStart(2,"0");
 if(!$("lkCard"))return;
@@ -2836,7 +2836,6 @@ let L={cur:null,hist:[],pref:{h:4,n:8,b:5,md:"pomo"}};
 try{const o=JSON.parse(localStorage.getItem(KEY)||"null");if(o&&typeof o==="object")L=Object.assign(L,o)}catch(e){}
 L.hist=Array.isArray(L.hist)?L.hist:[];L.pref=Object.assign({h:4,n:8,b:5,md:"pomo"},L.pref||{});
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(L))}catch(e){}};
-const mom=()=>window.__sqMom||null;
 const toast=t=>{try{if(typeof window.toast==="function")window.toast(t);else{const e=$("ts");if(e){e.textContent=t;e.classList.add("on");setTimeout(()=>e.classList.remove("on"),4500)}}}catch(e){}};
 /* plan */
 function plan(h,n,b,md){h=+h;n=Math.round(+n);b=Math.round(+b);
@@ -2865,8 +2864,8 @@ function drive(focus,force){const n=Date.now();if(!force&&n-lastDrive<1500)retur
 const val=()=>({h:$("lkH").value,n:$("lkN").value,b:$("lkB").value,md:L.pref.md==="straight"?"straight":"pomo"});
 function drawPlan(){const v=val(),pl=plan(v.h,v.n,v.b,v.md),P=$("lkPlan"),G=$("lkGo");
  $("lkCard").dataset.md=v.md;document.querySelectorAll("#lkMode button").forEach(b=>b.classList.toggle("on",b.dataset.md===v.md));
- $("lkRule").textContent=v.md==="straight"?"Once it starts you can't pause or stop it, and there are no breaks. It ends by itself when the hours are done, or earlier only if your mom allows it from her phone.":"Once it starts you can't pause or stop it. Breaks come only at the Pomodoro times you set. It ends by itself when the hours are done, or earlier only if your mom allows it from her phone.";
- $("lkModeH").textContent=v.md==="straight"?"One unbroken block. No breaks and no sessions, from start to finish.":"Focus sessions with short breaks in between, at times you set.";
+ $("lkRule").textContent=v.md==="straight"?"A plain timer with no breaks. It ends by itself when the time is up. You can stop any time.":"Focus sessions with short breaks at the times you set. You can stop any time.";
+ $("lkModeH").textContent=v.md==="straight"?"One plain timer. No breaks and no sessions, from start to finish.":"Focus sessions with short breaks in between, at times you set.";
  document.querySelectorAll("#lkPreS button").forEach(b=>b.classList.toggle("on",+b.dataset.h===+v.h));
  document.querySelectorAll("#lkPre button").forEach(b=>b.classList.toggle("on",+b.dataset.h===+v.h&&+b.dataset.n===+v.n&&+b.dataset.b===+v.b));
  if(pl.err){P.innerHTML='<span style="color:#ff8a8a">'+esc(pl.err)+'</span>';G.disabled=true;return null}
@@ -2882,64 +2881,48 @@ $("lkPreS").addEventListener("click",e=>{const b=e.target.closest("button[data-h
 $("lkPre").addEventListener("click",e=>{const b=e.target.closest("button[data-h]");if(!b)return;$("lkH").value=b.dataset.h;$("lkN").value=b.dataset.n;$("lkB").value=b.dataset.b;$("lkMsg").textContent="";drawPlan()});
 $("lkH").value=L.pref.h;$("lkN").value=L.pref.n;$("lkB").value=L.pref.b;
 $("lkQ").onclick=()=>{if(window.__sqHelp)window.__sqHelp("lockin")};
-$("lkGo").onclick=()=>{const pl=drawPlan();if(!pl)return;const m=mom(),M=$("lkMsg");
- if(!m||!m.ok()){M.innerHTML='Set up your mom\'s phone first, so she can allow an early stop. <a href="#" id="lkSm" style="color:var(--xp)">Open Mom setup</a>';const a=$("lkSm");if(a)a.onclick=ev=>{ev.preventDefault();const b=document.querySelector('.mode button[data-m="alarm"]');if(b)b.click();const s=document.querySelector("#alSeg [data-pg=mom]");if(s)s.click()};return}
- const SM=pl.mode==="straight";if(!confirm("Lock in for "+hmin(pl.total*6e4)+(SM?" straight, with no breaks":" ("+pl.n+" session"+(pl.n>1?"s":"")+")")+"?\n\nYou can't pause or stop it. Only your mom can allow an early stop, from her phone."))return;
- const id=Date.now().toString(36),c={id,key:"lk"+id,start:Date.now(),total:pl.total*6e4,ph:pl.ph,h:pl.h,n:pl.n,b:pl.b,f:pl.f,mode:pl.mode||"pomo",pend:0,deny:0,min:0};
- L.cur=c;L.pref=Object.assign(L.pref,{h:pl.h,md:c.mode},SM?{}:{n:pl.n,b:pl.b});save();lastIdx=-2;endOn=false;beep([660,880,1100]);
- m.send(cap(m.name())+" has locked in for "+hmin(c.total)+(SM?" straight, with no breaks":": "+pl.n+" Pomodoro session"+(pl.n>1?"s":"")+" of "+pl.f+" min"+(pl.n>1?" with "+pl.b+"-minute breaks":""))+". It ends around "+clk(c.start+c.total)+". You can end it early with the button below, or you'll be asked if "+cap(m.name())+" requests it.","","","lock",0,"🔒 Lock-in started",[{action:"http",label:"🔓 End lock-in",url:m.url(),method:"POST",body:c.key+"|1",clear:true}]);
+$("lkGo").onclick=()=>{const pl=drawPlan();if(!pl)return;
+ const id=Date.now().toString(36),c={id,key:"lk"+id,start:Date.now(),total:pl.total*6e4,ph:pl.ph,h:pl.h,n:pl.n,b:pl.b,f:pl.f,mode:pl.mode||"pomo"};
+ L.cur=c;L.pref=Object.assign(L.pref,{h:pl.h,md:c.mode},pl.mode==="straight"?{}:{n:pl.n,b:pl.b});save();lastIdx=-2;endOn=false;beep([660,880,1100]);
  tick(true);render()};
 /* running state: a slim lock bar at the top. The study tools (to-do list, study media, books, Zone) stay open. */
 let bar=null,ro=null,lastIdx=-2,endOn=false,ask=false;
-const OPEN=["quest","zone"];
 const focusNow=()=>{const c=L.cur;if(!c)return false;const w=where(c,Date.now());return !w.done&&w.p.k==="f"};
 function setH(){document.documentElement.style.setProperty("--lkh",(bar?bar.offsetHeight:0)+"px")}
 function build(){if(bar)return;bar=document.createElement("div");bar.id="lkBar";bar.setAttribute("role","status");
- bar.innerHTML='<div class="lb-r"><div class="lb-tm" id="lkbTm">00:00</div><div class="lb-m"><div class="lb-t" id="lkbT"></div><div class="lb-s" id="lkbS"></div><div class="lb-all"><i id="lkbAl"></i></div></div><button type="button" class="lb-b" id="lkbAsk">🔓 Ask Mom</button></div><div class="lb-ask" id="lkbAk" hidden><div class="lb-q"><b>Why do you need to stop?</b> Mom sees this and can allow it from her phone.</div><div class="lb-ch"><button type="button" data-r="Not feeling well">Not feeling well</button><button type="button" data-r="Emergency">Emergency</button><button type="button" data-r="Other">Other</button></div><textarea id="lkbRs" rows="2" maxlength="160" placeholder="Add a few words (optional)"></textarea><div class="lb-act"><button type="button" id="lkbNo">Cancel</button><button type="button" id="lkbSend" class="p">Send to Mom</button></div><div class="lb-msg" id="lkbM"></div></div>';
+ bar.innerHTML='<div class="lb-r"><div class="lb-tm" id="lkbTm">00:00</div><div class="lb-m"><div class="lb-t" id="lkbT"></div><div class="lb-s" id="lkbS"></div><div class="lb-all"><i id="lkbAl"></i></div></div><button type="button" class="lb-b" id="lkbStop">⏹ Stop</button></div>';
  document.body.appendChild(bar);document.documentElement.classList.add("lkon");
  try{ro=new ResizeObserver(setH);ro.observe(bar)}catch(e){}setH();
- $("lkbAsk").onclick=()=>{ask=!ask;$("lkbAk").hidden=!ask};
- $("lkbNo").onclick=()=>{ask=false;$("lkbAk").hidden=true};
- $("lkbAk").addEventListener("click",e=>{const b=e.target.closest("[data-r]");if(!b)return;document.querySelectorAll("#lkbAk [data-r]").forEach(x=>x.classList.toggle("on",x===b))});
- $("lkbSend").onclick=async()=>{const c=L.cur,m=mom();if(!c||!m)return;const w=where(c,Date.now()),why=(document.querySelector("#lkbAk [data-r].on")||{}).dataset;
-  const reason=[why&&why.r,$("lkbRs").value.trim()].filter(Boolean).join(": ")||"No reason given";
-  $("lkbM").textContent="Sending to Mom…";
-  const ok=await m.send(cap(m.name())+" is asking to stop the lock-in early.\nDone so far: "+hmin(Math.min(w.e||0,c.total))+" of "+hmin(c.total)+(w.sess&&c.mode!=="straight"?" (session "+w.sess+" of "+c.n+")":"")+".\nReason: "+reason+"\n\nAllow it to stop now?","","","lock",0,"🔒 Stop request",[{action:"http",label:"✅ Allow stop",url:m.url(),method:"POST",body:c.key+"|1",clear:true},{action:"http",label:"❌ Keep going",url:m.url(),method:"POST",body:c.key+"|0",clear:true}]);
-  if(ok){c.pend=Date.now();c.deny=0;save();ask=false;$("lkbAk").hidden=true;$("lkbM").textContent=""}else $("lkbM").textContent="Couldn't reach Mom. Check your internet and try again."}}
+ $("lkbStop").onclick=stopNow}
+function stopNow(){if(!L.cur)return;if(confirm("Stop now? The time you have done so far is saved."))finish("stop")}
 function unbuild(){if(ro){ro.disconnect();ro=null}if(bar){bar.remove();bar=null}const d=document.documentElement;d.classList.remove("lkon","lkfocus");d.style.removeProperty("--lkh")}
-/* while focusing, only the study tabs can be opened */
-document.addEventListener("click",e=>{if(!focusNow())return;const b=e.target.closest(".mode button[data-m],#sqNav button[data-m]");if(!b||OPEN.includes(b.dataset.m))return;e.preventDefault();e.stopImmediatePropagation();toast("🔒 Locked in. Only the study tools are open: to-do list, study media, books and Zone.")},true);
 function tick(force){const c=L.cur;if(!c){if(!endOn)unbuild();return}
  const w=where(c,Date.now());if(w.done){finish("done");return}
  build();const f=w.p.k==="f",SM=c.mode==="straight";
- document.documentElement.classList.toggle("lkfocus",f);bar.classList.toggle("brk",!f);
- if(f){const on=document.querySelector(".mode button.on");if(on&&!OPEN.includes(on.dataset.m)){const q=document.querySelector('.mode button[data-m="quest"]');if(q)q.click()}}
+ bar.classList.toggle("brk",!f);
  if(w.i!==lastIdx){const first=lastIdx===-2;lastIdx=w.i;
   if(!first&&!SM){bar.classList.remove("flash");void bar.offsetWidth;bar.classList.add("flash");
    if(f){beep([880,1100,1320]);speak("Focus session "+w.sess+" of "+c.n+". Lock in.");note("🔒 Focus session "+w.sess+" of "+c.n,"Back to work.")}
    else{beep([660,880,660]);speak("Break time. "+Math.round(w.p.ms/6e4)+" minutes.");note("☕ Break time","Back to focus at "+clk(Date.now()+w.left))}}}
  drive(f,false);
  $("lkbTm").textContent=mmss(w.left);
- $("lkbT").textContent=f?(SM?"🔒 Straight focus":"🔒 Session "+w.sess+" of "+c.n):"☕ Break · back "+clk(Date.now()+w.left);
- let s=f?hmin(w.e)+" of "+hmin(c.total)+" · ends "+clk(c.start+c.total):"All tabs open during break";
- if(c.pend)s+=" · ⏳ Waiting for Mom";else if(c.deny)s+=" · ❌ Mom said keep going";
+ $("lkbT").textContent=f?(SM?"⏱ Timer":"🍅 Session "+w.sess+" of "+c.n):"☕ Break · back "+clk(Date.now()+w.left);
+ let s=f?hmin(w.e)+" of "+hmin(c.total)+" · ends "+clk(c.start+c.total):"Break";
  $("lkbS").textContent=s;$("lkbAl").style.width=Math.min(100,w.e/c.total*100)+"%";
- $("lkbAsk").disabled=!!(c.pend&&Date.now()-c.pend<18e4);
  draw(w,c)}
 function draw(w,c){const R=$("lkRun"),S=$("lkSet");if(!R)return;S.hidden=!!c;R.hidden=!c;if(!c)return;const f=w&&w.p&&w.p.k==="f";
- R.innerHTML='<div class="lk-st">🔒 Lock-in is running</div><div class="lk-sub">'+(f?(c.mode==="straight"?"Focus · straight, no breaks":"Focus · session "+w.sess+" of "+c.n):"☕ Break")+' · '+mmss(w.left)+' left in this part<br>Overall '+hmin(w.e)+' of '+hmin(c.total)+' · ends at '+clk(c.start+c.total)+'</div><div class="lk-prog"><i style="width:'+Math.min(100,w.e/c.total*100)+'%"></i></div><button class="btn g" id="lkOpen" type="button">🔓 Ask Mom to stop</button>';
- const o=$("lkOpen");if(o)o.onclick=()=>{ask=true;const k=$("lkbAk");if(k)k.hidden=false;window.scrollTo({top:0,behavior:"smooth"})}}
+ R.innerHTML='<div class="lk-st">🔒 Lock-in is running</div><div class="lk-sub">'+(f?(c.mode==="straight"?"Timer · no breaks":"Focus · session "+w.sess+" of "+c.n):"☕ Break")+' · '+mmss(w.left)+' left in this part<br>Overall '+hmin(w.e)+' of '+hmin(c.total)+' · ends at '+clk(c.start+c.total)+'</div><div class="lk-prog"><i style="width:'+Math.min(100,w.e/c.total*100)+'%"></i></div><button class="btn g" id="lkOpen" type="button">⏹ Stop</button>';
+ const o=$("lkOpen");if(o)o.onclick=stopNow}
 function render(){const c=L.cur;drawPlan();if(!c){draw(null,null)}
- const H=$("lkHist");H.innerHTML=L.hist.length?"<b>Recent lock-ins</b><br>"+L.hist.slice(0,4).map(x=>(x.res==="done"?"✅":"🔓")+(x.md==="straight"?" ⏱":" 🍅")+" "+new Date(x.start).toLocaleDateString([],{day:"numeric",month:"short"})+" · "+hmin(x.ms)+" of "+hmin(x.h*36e5)+(x.res==="done"?" · completed":" · ended with Mom's permission")).join("<br>"):""}
+ const H=$("lkHist");H.innerHTML=L.hist.length?"<b>Recent lock-ins</b><br>"+L.hist.slice(0,4).map(x=>(x.res==="done"?"✅":"⏹")+(x.md==="straight"?" ⏱":" 🍅")+" "+new Date(x.start).toLocaleDateString([],{day:"numeric",month:"short"})+" · "+hmin(x.ms)+" of "+hmin(x.h*36e5)+(x.res==="done"?" · completed":" · stopped early")).join("<br>"):""}
 function finish(res){const c=L.cur;if(!c)return;const now=Date.now(),ms=Math.min(c.total,now-c.start);
  L.hist.unshift({id:c.id,start:c.start,end:now,h:c.h,n:c.n,res,ms,md:c.mode||"pomo"});L.hist=L.hist.slice(0,20);L.cur=null;save();drive(false,true);lastIdx=-2;
- const m=mom();if(m){const N=cap(m.name());m.send(res==="done"?"✅ "+N+" completed the full lock-in: "+hmin(c.total)+(c.mode==="straight"?" straight.":" across "+c.n+" session"+(c.n>1?"s":"")+"."):"🔓 The lock-in ended with your permission after "+hmin(ms)+" of "+hmin(c.total)+".","","","lock",0,res==="done"?"✅ Lock-in complete":"🔓 Lock-in ended")}
  unbuild();endOn=true;ask=false;const ov=document.createElement("div");ov.id="lkOv";ov.className="done";document.body.appendChild(ov);
- ov.innerHTML='<div class="lo"><div class="lo-t">'+(res==="done"?"Lock-in complete":"Lock-in ended")+'</div><div class="lo-ring"><svg viewBox="0 0 100 100"><circle class="tr" cx="50" cy="50" r="45"/><circle class="pr" cx="50" cy="50" r="45" stroke-dasharray="282.74" stroke-dashoffset="'+(res==="done"?0:282.74*(1-ms/c.total))+'"/></svg><div class="lo-c"><div style="font-size:64px">'+(res==="done"?"🎉":"🔓")+'</div><div class="lo-lbl">'+hmin(ms)+' studied</div></div></div><div class="lo-s">'+(res==="done"?"You locked in for the full "+hmin(c.total)+". Well done!":"Mom allowed the lock-in to stop. You studied "+hmin(ms)+" of "+hmin(c.total)+".")+'</div><button class="lo-b p" id="lkoClose" type="button">Close</button></div>';
+ ov.innerHTML='<div class="lo"><div class="lo-t">'+(res==="done"?"Lock-in complete":"Lock-in ended")+'</div><div class="lo-ring"><svg viewBox="0 0 100 100"><circle class="tr" cx="50" cy="50" r="45"/><circle class="pr" cx="50" cy="50" r="45" stroke-dasharray="282.74" stroke-dashoffset="'+(res==="done"?0:282.74*(1-ms/c.total))+'"/></svg><div class="lo-c"><div style="font-size:64px">'+(res==="done"?"🎉":"⏹")+'</div><div class="lo-lbl">'+hmin(ms)+' studied</div></div></div><div class="lo-s">'+(res==="done"?"You locked in for the full "+hmin(c.total)+". Well done!":"You stopped early. You studied "+hmin(ms)+" of "+hmin(c.total)+".")+'</div><button class="lo-b p" id="lkoClose" type="button">Close</button></div>';
  beep(res==="done"?[880,1100,1320,1760]:[660,520]);if(res==="done")speak("Lock in complete. Well done.");note(res==="done"?"🎉 Lock-in complete":"🔓 Lock-in ended","");
  $("lkoClose").onclick=()=>{endOn=false;ov.remove()};render()}
 /* bridges to the Mom module */
-window.__sqLockReply=(key,r)=>{const c=L.cur;if(!c||key!==c.key)return;if(r===1)finish("mom");else{c.pend=0;c.deny=Date.now();save();toast("❌ Mom said keep going");tick(true)}};
+window.__sqLockReply=()=>{};
 window.__sqLockFocus=()=>{const c=L.cur;if(!c)return false;const w=where(c,Date.now());return !w.done&&w.p.k==="f"};
 render();tick(true);setInterval(()=>tick(false),500);
 })();
